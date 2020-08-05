@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.ReagentInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.ReagentInfo" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="REAGENT_NAME" property="reagentName" jdbcType="VARCHAR" />
+    <result column="REAGENT_NO" property="reagentNo" jdbcType="VARCHAR" />
+    <result column="EXPERIMENTAL_STAGE" property="experimentalStage" jdbcType="VARCHAR" />
+    <result column="REAGENT_BRAND" property="reagentBrand" jdbcType="VARCHAR" />
+    <result column="REAGENT_MODEL" property="reagentModel" jdbcType="VARCHAR" />
+    <result column="REAGENT_PRICE" property="reagentPrice" jdbcType="VARCHAR" />
+    <result column="REAGENT_FIRM" property="reagentFirm" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_PERSON" property="updatePerson" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="BATCH_NUMBER" property="batchNumber" jdbcType="VARCHAR" />
+    <result column="VALIDITY_TIME" property="validityTime" jdbcType="TIMESTAMP" />
+    <result column="REAGENT_TYPE" property="reagentType" jdbcType="VARCHAR" />
+    <result column="REAGENT_COUNT" property="reagentCount" jdbcType="DECIMAL" />
+    <result column="ORG_ID" property="orgId" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from REAGENT_INFO
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.clims.model.po.ReagentInfo" >
+    insert into REAGENT_INFO (ID, REAGENT_NAME, REAGENT_NO,
+    EXPERIMENTAL_STAGE, REAGENT_BRAND, REAGENT_MODEL,
+    REAGENT_PRICE, REAGENT_FIRM, REMARK,
+    CREATE_PERSON, CREATE_DATETIME, UPDATE_PERSON,
+    UPDATE_DATETIME, BATCH_NUMBER, VALIDITY_TIME,
+    REAGENT_TYPE, REAGENT_COUNT, ORG_ID)
+    values (#{id,jdbcType=VARCHAR}, #{reagentName,jdbcType=VARCHAR}, #{reagentNo,jdbcType=VARCHAR},
+    #{experimentalStage,jdbcType=VARCHAR}, #{reagentBrand,jdbcType=VARCHAR}, #{reagentModel,jdbcType=VARCHAR},
+    #{reagentPrice,jdbcType=VARCHAR}, #{reagentFirm,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR},
+    #{createPerson,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP}, #{updatePerson,jdbcType=VARCHAR},
+    #{updateDatetime,jdbcType=TIMESTAMP}, #{batchNumber,jdbcType=VARCHAR}, #{validityTime,jdbcType=TIMESTAMP},
+    #{reagentType,jdbcType=VARCHAR}, #{reagentCount,jdbcType=DECIMAL}, #{orgId,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.clims.model.po.ReagentInfo" >
+    update REAGENT_INFO
+    set REAGENT_NAME = #{reagentName,jdbcType=VARCHAR},
+    REAGENT_NO = #{reagentNo,jdbcType=VARCHAR},
+    EXPERIMENTAL_STAGE = #{experimentalStage,jdbcType=VARCHAR},
+    REAGENT_BRAND = #{reagentBrand,jdbcType=VARCHAR},
+    REAGENT_MODEL = #{reagentModel,jdbcType=VARCHAR},
+    REAGENT_PRICE = #{reagentPrice,jdbcType=VARCHAR},
+    REAGENT_FIRM = #{reagentFirm,jdbcType=VARCHAR},
+    REMARK = #{remark,jdbcType=VARCHAR},
+    CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+    CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+    UPDATE_PERSON = #{updatePerson,jdbcType=VARCHAR},
+    UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP},
+    BATCH_NUMBER = #{batchNumber,jdbcType=VARCHAR},
+    VALIDITY_TIME = #{validityTime,jdbcType=TIMESTAMP},
+    REAGENT_TYPE = #{reagentType,jdbcType=VARCHAR},
+    REAGENT_COUNT = #{reagentCount,jdbcType=DECIMAL},
+    ORG_ID = #{orgId,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+
+<!--修改最新的试剂盒信息-->
+  <update id="updateByReagentInfo" parameterType="com.bazl.clims.model.po.ReagentInfo" >
+    update REAGENT_INFO
+    set
+    BATCH_NUMBER = #{batchNumber,jdbcType=VARCHAR},
+    VALIDITY_TIME = #{validityTime,jdbcType=TIMESTAMP},
+    REAGENT_COUNT = #{reagentCount,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select ID, REAGENT_NAME, REAGENT_NO, EXPERIMENTAL_STAGE, REAGENT_BRAND, REAGENT_MODEL,
+    REAGENT_PRICE, REAGENT_FIRM, REMARK, CREATE_PERSON, CREATE_DATETIME, UPDATE_PERSON,
+    UPDATE_DATETIME, BATCH_NUMBER, VALIDITY_TIME, REAGENT_TYPE, REAGENT_COUNT, ORG_ID
+    from REAGENT_INFO
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectList" resultMap="BaseResultMap" parameterType="com.bazl.clims.model.po.ReagentInfo" >
+    select *
+    from REAGENT_INFO ri
+    where 1=1
+    <if test="experimentalStage != null and experimentalStage != ''">
+      and ri.EXPERIMENTAL_STAGE = #{experimentalStage,jdbcType=VARCHAR}
+    </if>
+    <if test="orgId != null and orgId != ''">
+      and ri.ORG_ID = #{orgId,jdbcType=VARCHAR}
+    </if>
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select ID, REAGENT_NAME, REAGENT_NO, EXPERIMENTAL_STAGE, REAGENT_BRAND, REAGENT_MODEL,
+    REAGENT_PRICE, REAGENT_FIRM, REMARK, CREATE_PERSON, CREATE_DATETIME, UPDATE_PERSON,
+    UPDATE_DATETIME, BATCH_NUMBER, VALIDITY_TIME, REAGENT_TYPE, REAGENT_COUNT, ORG_ID
+    from REAGENT_INFO
+  </select>
+
+  <insert id="addReagenInfo" parameterType="com.bazl.clims.model.po.ReagentInfo" >
+    insert into REAGENT_INFO (ID, REAGENT_NAME, REAGENT_NO,
+    EXPERIMENTAL_STAGE, REAGENT_BRAND, REAGENT_MODEL,
+    REAGENT_PRICE, REAGENT_FIRM, REMARK,
+    CREATE_PERSON, CREATE_DATETIME, UPDATE_PERSON,
+    UPDATE_DATETIME, BATCH_NUMBER, VALIDITY_TIME, ORG_ID
+    )
+    values (#{id,jdbcType=VARCHAR}, #{reagentName,jdbcType=VARCHAR}, #{reagentNo,jdbcType=VARCHAR},
+    #{experimentalStage,jdbcType=VARCHAR}, #{reagentBrand,jdbcType=VARCHAR}, #{reagentModel,jdbcType=VARCHAR},
+    #{reagentPrice,jdbcType=VARCHAR}, #{reagentFirm,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR},
+    #{createPerson,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP}, #{updatePerson,jdbcType=VARCHAR},
+    #{updateDatetime,jdbcType=TIMESTAMP}, #{batchNumber,jdbcType=VARCHAR}, #{validityTime,jdbcType=TIMESTAMP},
+    ORG_ID = #{orgId,jdbcType=VARCHAR})
+  </insert>
+  <select id="queryReagentInfoList" resultMap="BaseResultMap" >
+    select ID, REAGENT_NAME, REAGENT_NO, EXPERIMENTAL_STAGE, REAGENT_BRAND, REAGENT_MODEL,
+    REAGENT_PRICE, REAGENT_FIRM, REMARK, CREATE_PERSON, CREATE_DATETIME, UPDATE_PERSON,
+    UPDATE_DATETIME, BATCH_NUMBER, VALIDITY_TIME, ORG_ID
+    from REAGENT_INFO
+  </select>
+  <select id="selectByReagentName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select *
+    from REAGENT_INFO
+    where REAGENT_NAME = #{reagentName,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectPaginationList" parameterType="com.bazl.clims.model.po.ReagentInfo" resultMap="BaseResultMap">
+    select *
+    from REAGENT_INFO
+    <where>
+      <if test="orgId != null">
+        ORG_ID = #{orgId,jdbcType=VARCHAR}
+      </if>
+      <if test="reagentType != null">
+        and REAGENT_TYPE=#{reagentType,jdbcType=VARCHAR}
+      </if>
+      <if test="reagentName != null">
+        and REAGENT_NAME like CONCAT(CONCAT('%',#{reagentName,jdbcType=VARCHAR}),'%')
+      </if>
+      <if test="reagentNo != null">
+        and REAGENT_NO like CONCAT(CONCAT('%',#{reagentNo,jdbcType=VARCHAR}),'%')
+      </if>
+      <if test="experimentalStage != null">
+        and EXPERIMENTAL_STAGE = #{experimentalStage,jdbcType=VARCHAR}
+      </if>
+      <if test="reagentModel != null">
+        and REAGENT_MODEL like CONCAT(CONCAT('%',#{reagentModel,jdbcType=VARCHAR}),'%')
+      </if>
+    </where>
+  </select>
+
+  <select id="selectOrgId" resultMap="BaseResultMap" parameterType="com.bazl.clims.model.po.ReagentInfo">
+    select * from (
+    select rownum as rn, t.* from (
+      select *
+      from REAGENT_INFO
+      <where>
+        <if test="orgId != null">
+          ORG_ID = #{orgId,jdbcType=VARCHAR}
+        </if>
+        <if test="reagentType != null">
+          and REAGENT_TYPE=#{reagentType,jdbcType=VARCHAR}
+        </if>
+        <if test="reagentName != null">
+          and REAGENT_NAME like CONCAT(CONCAT('%',#{reagentName,jdbcType=VARCHAR}),'%')
+        </if>
+        <if test="reagentNo != null">
+          and REAGENT_NO like CONCAT(CONCAT('%',#{reagentNo,jdbcType=VARCHAR}),'%')
+        </if>
+        <if test="experimentalStage != null">
+          and EXPERIMENTAL_STAGE = #{experimentalStage,jdbcType=VARCHAR}
+        </if>
+        <if test="reagentModel != null">
+          and REAGENT_MODEL like CONCAT(CONCAT('%',#{reagentModel,jdbcType=VARCHAR}),'%')
+        </if>
+      </where>
+    order by REAGENT_NAME asc
+    ) t where rownum &lt;=#{rows}
+    ) where rn &gt;#{offset}
+  </select>
+
+  <select id="selectCount" parameterType="com.bazl.clims.model.po.ReagentInfo" resultType="int">
+    select count(*)
+    from REAGENT_INFO
+    <where>
+      <if test="orgId != null">
+        ORG_ID = #{orgId,jdbcType=VARCHAR}
+      </if>
+      <if test="reagentType != null">
+        and REAGENT_TYPE=#{reagentType,jdbcType=VARCHAR}
+      </if>
+      <if test="reagentName != null">
+        and REAGENT_NAME like CONCAT(CONCAT('%',#{reagentName,jdbcType=VARCHAR}),'%')
+      </if>
+      <if test="reagentNo != null">
+        and REAGENT_NO like CONCAT(CONCAT('%',#{reagentNo,jdbcType=VARCHAR}),'%')
+      </if>
+      <if test="experimentalStage != null">
+        and EXPERIMENTAL_STAGE = #{experimentalStage,jdbcType=VARCHAR}
+      </if>
+      <if test="reagentModel != null">
+        and REAGENT_MODEL like CONCAT(CONCAT('%',#{reagentModel,jdbcType=VARCHAR}),'%')
+      </if>
+    </where>
+  </select>
+
+</mapper>

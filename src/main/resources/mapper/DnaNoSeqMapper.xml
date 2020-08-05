@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bazl.clims.dao.SeqNoGenerateMapper">
+    <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.DnaNoSeq">
+        <result column="CODE" jdbcType="VARCHAR" property="code" />
+        <result column="CURRENT_VAL" jdbcType="VARCHAR" property="currentVal" />
+        <result column="NUM_INCREMENT" jdbcType="VARCHAR" property="numIncrement" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        CODE, CURRENT_VAL, NUM_INCREMENT
+    </sql>
+
+    <select id="selectNextVal" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select nextdnaval(#{code, jdbcType=VARCHAR})
+    </select>
+    <select id="selectByCode" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        CODE, CURRENT_VAL, NUM_INCREMENT
+        FROM  dna_no_seq WHERE CODE = #{code, jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteCode" parameterType="java.lang.String">
+        delete from dna_no_seq where CODE = #{code, jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.bazl.clims.model.po.DnaNoSeq">
+        insert into dna_no_seq (CODE) values (#{code,jdbcType=VARCHAR})
+    </insert>
+
+    <update id="returnCurrentValByCode" parameterType="java.lang.String">
+    update dna_no_seq
+
+    set CURRENT_VAL = CURRENT_VAL-1
+    where CODE = #{code,jdbcType=VARCHAR}
+    </update>
+    <update id="updateCurrentValByCode" parameterType="java.lang.String">
+        update dna_no_seq
+        set CURRENT_VAL = CURRENT_VAL+1
+        where CODE = #{code,jdbcType=VARCHAR}
+    </update>
+</mapper>

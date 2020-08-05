@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bazl.clims.dao.OrgInfoMapper">
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.OrgInfo">
+    <id column="ORG_ID" jdbcType="VARCHAR" property="orgId" />
+    <result column="PARENT_ID" jdbcType="VARCHAR" property="parentId" />
+    <result column="ORG_NAME" jdbcType="VARCHAR" property="orgName" />
+    <result column="ORG_CODE" jdbcType="VARCHAR" property="orgCode" />
+    <result column="ORG_LEVEL" jdbcType="VARCHAR" property="orgLevel" />
+    <result column="ORG_ADDRESS" jdbcType="VARCHAR" property="orgAddress" />
+    <result column="ORG_QUALIFICATION" jdbcType="VARCHAR" property="orgQualification" />
+    <result column="ORG_ZIP_CODE" jdbcType="VARCHAR" property="orgZipCode" />
+    <result column="ORG_PRINCIPAL_PHONE" jdbcType="VARCHAR" property="orgPrincipalPhone" />
+    <result column="ORG_PHONE_NUMBER" jdbcType="VARCHAR" property="orgPhoneNumber" />
+    <result column="ORG_CONTACT" jdbcType="VARCHAR" property="orgContact" />
+    <result column="ORG_CONTACT_PHONE" jdbcType="VARCHAR" property="orgContactPhone" />
+    <result column="RAMERK" jdbcType="VARCHAR" property="ramerk" />
+    <result column="ORG_SCIENCE" jdbcType="VARCHAR" property="orgScience" />
+    <result column="ORG_SCIENCE_PHONE" jdbcType="VARCHAR" property="orgSciencePhone" />
+    <result column="ORG_CERTIFICATEURL" jdbcType="VARCHAR" property="orgCertificateurl" />
+    <result column="ORG_CERTIFICATENAME" jdbcType="VARCHAR" property="orgCertificatename" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from ORG_INFO
+    where ORG_ID = #{orgId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.clims.model.po.OrgInfo">
+    insert into ORG_INFO (ORG_ID, PARENT_ID, ORG_NAME, 
+      ORG_CODE, ORG_LEVEL, ORG_ADDRESS, 
+      ORG_QUALIFICATION, ORG_ZIP_CODE, ORG_PRINCIPAL_PHONE, 
+      ORG_PHONE_NUMBER, ORG_CONTACT, ORG_CONTACT_PHONE, 
+      RAMERK)
+    values (#{orgId,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, #{orgName,jdbcType=VARCHAR}, 
+      #{orgCode,jdbcType=VARCHAR}, #{orgLevel,jdbcType=VARCHAR}, #{orgAddress,jdbcType=VARCHAR}, 
+      #{orgQualification,jdbcType=VARCHAR}, #{orgZipCode,jdbcType=VARCHAR}, #{orgPrincipalPhone,jdbcType=VARCHAR}, 
+      #{orgPhoneNumber,jdbcType=VARCHAR}, #{orgContact,jdbcType=VARCHAR}, #{orgContactPhone,jdbcType=VARCHAR}, 
+      #{ramerk,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.clims.model.po.OrgInfo">
+    update ORG_INFO
+    set PARENT_ID = #{parentId,jdbcType=VARCHAR},
+      ORG_NAME = #{orgName,jdbcType=VARCHAR},
+      ORG_CODE = #{orgCode,jdbcType=VARCHAR},
+      ORG_LEVEL = #{orgLevel,jdbcType=VARCHAR},
+      ORG_ADDRESS = #{orgAddress,jdbcType=VARCHAR},
+      ORG_QUALIFICATION = #{orgQualification,jdbcType=VARCHAR},
+      ORG_ZIP_CODE = #{orgZipCode,jdbcType=VARCHAR},
+      ORG_PRINCIPAL_PHONE = #{orgPrincipalPhone,jdbcType=VARCHAR},
+      ORG_PHONE_NUMBER = #{orgPhoneNumber,jdbcType=VARCHAR},
+      ORG_CONTACT = #{orgContact,jdbcType=VARCHAR},
+      ORG_CONTACT_PHONE = #{orgContactPhone,jdbcType=VARCHAR},
+      RAMERK = #{ramerk,jdbcType=VARCHAR}
+    where ORG_ID = #{orgId,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select ORG_ID, PARENT_ID, ORG_NAME, ORG_CODE, ORG_LEVEL, ORG_ADDRESS, ORG_QUALIFICATION, 
+    ORG_ZIP_CODE, ORG_PRINCIPAL_PHONE, ORG_PHONE_NUMBER, ORG_CONTACT, ORG_CONTACT_PHONE, 
+    RAMERK,ORG_SCIENCE,ORG_SCIENCE_PHONE,ORG_CERTIFICATEURL,ORG_CERTIFICATENAME
+    from ORG_INFO
+    where ORG_ID = #{orgId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select ORG_ID, PARENT_ID, ORG_NAME, ORG_CODE, ORG_LEVEL, ORG_ADDRESS, ORG_QUALIFICATION, 
+    ORG_ZIP_CODE, ORG_PRINCIPAL_PHONE, ORG_PHONE_NUMBER, ORG_CONTACT, ORG_CONTACT_PHONE, 
+    RAMERK
+    from ORG_INFO order by ORG_LEVEL asc, ORG_CODE asc
+  </select>
+
+  <select id="selectDelegateByParentsId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select ORG_ID, PARENT_ID, ORG_NAME, ORG_CODE, ORG_LEVEL, ORG_ADDRESS, ORG_QUALIFICATION,
+    ORG_ZIP_CODE, ORG_PRINCIPAL_PHONE, ORG_PHONE_NUMBER, ORG_CONTACT, ORG_CONTACT_PHONE,
+    RAMERK
+    from ORG_INFO
+    where parent_id = #{parentsId,jdbcType=VARCHAR}
+    ORDER BY ORG_CODE ASC
+  </select>
+
+  <select id="selectAcceptOrgList" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select ORG_ID, PARENT_ID, ORG_NAME, ORG_CODE, ORG_LEVEL, ORG_ADDRESS, ORG_QUALIFICATION,
+    ORG_ZIP_CODE, ORG_PRINCIPAL_PHONE, ORG_PHONE_NUMBER, ORG_CONTACT, ORG_CONTACT_PHONE,
+    RAMERK
+    from ORG_INFO
+    where ORG_LEVEL = '2'
+    ORDER BY ORG_CODE ASC
+  </select>
+
+  <select id="getUseridByOrgid" parameterType="java.lang.String" resultType="String">
+     SELECT  ORG_ID  FROM LOA_USER_INFO WHERE USER_ID = #{userId,jdbcType=VARCHAR}
+  </select>
+
+
+</mapper>

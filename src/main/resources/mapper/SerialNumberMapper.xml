@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bazl.clims.dao.SerialNumberMapper">
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.SerialNumber">
+    <result column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="TYPE_CODE" jdbcType="VARCHAR" property="typeCode" />
+    <result column="TYPE_VALUE" jdbcType="VARCHAR" property="typeValue" />
+    <result column="YEAR" jdbcType="VARCHAR" property="year" />
+    <result column="ORG_ID" jdbcType="VARCHAR" property="orgId" />
+    <result column="PREFIX" jdbcType="VARCHAR" property="prefix" />
+    <result column="DIGIT" jdbcType="INTEGER" property="digit" />
+  </resultMap>
+  <insert id="insert" parameterType="com.bazl.clims.model.po.SerialNumber">
+    insert into SERIAL_NUMBER (ID, TYPE_CODE, TYPE_VALUE, 
+      YEAR,ORG_ID)
+    values (#{id,jdbcType=VARCHAR}, #{typeCode,jdbcType=VARCHAR}, #{typeValue,jdbcType=VARCHAR}, 
+      #{year,jdbcType=VARCHAR},#{orgId,jdbcType=VARCHAR})
+  </insert>
+
+  <select id="selectNextVal" resultMap="BaseResultMap">
+    select ID, TYPE_CODE, TYPE_VALUE, YEAR,ORG_ID
+    from SERIAL_NUMBER
+    where TYPE_CODE = #{typeCode,jdbcType=VARCHAR}
+    and YEAR = #{year,jdbcType=VARCHAR}
+    <if test="orgId != null">
+        and ORG_ID = #{orgId,jdbcType=VARCHAR}
+    </if>
+    <if test="orgId == null">
+      and ORG_ID is null
+    </if>
+  </select>
+
+  <update id="update" parameterType="com.bazl.clims.model.po.SerialNumber">
+    update serial_number
+       set type_value = #{typeValue,jdbcType=VARCHAR}
+     where TYPE_CODE = #{typeCode,jdbcType=VARCHAR}
+    and ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <!--获取流水号-->
+  <select id="selectNextVals" resultMap="BaseResultMap">
+    select ID, TYPE_CODE, TYPE_VALUE, YEAR, ORG_ID, PREFIX, DIGIT
+    from SERIAL_NUMBER
+    where TYPE_CODE = #{typeCode,jdbcType=VARCHAR}
+    and ORG_ID = #{orgId,jdbcType=VARCHAR}
+  </select>
+  <!--修改流水号-->
+  <update id="updateYear" parameterType="com.bazl.clims.model.po.SerialNumber">
+    update serial_number
+    set YEAR = #{year,jdbcType=VARCHAR}
+    where TYPE_CODE = #{typeCode,jdbcType=VARCHAR}
+    and ORG_ID = #{orgId,jdbcType=VARCHAR}
+  </update>
+</mapper>

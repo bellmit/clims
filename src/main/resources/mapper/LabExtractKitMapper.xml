@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.LabExtractKitMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.LabExtractKit" >
+    <id column="KIT_ID" property="kitId" jdbcType="VARCHAR" />
+    <result column="BATCH_NUMBER" property="batchNumber" jdbcType="VARCHAR" />
+    <result column="TERM_OF_VALIDITY" property="termOfValidity" jdbcType="VARCHAR" />
+    <result column="PANELID" property="panelid" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from LAB_EXTRACT_KIT
+    where KIT_ID = #{kitId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.clims.model.po.LabExtractKit" >
+    insert into LAB_EXTRACT_KIT (KIT_ID, BATCH_NUMBER, TERM_OF_VALIDITY, PANELID)
+    values (#{kitId,jdbcType=VARCHAR}, #{batchNumber,jdbcType=VARCHAR}, #{termOfValidity,jdbcType=VARCHAR}, #{panelid,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.clims.model.po.LabExtractKit" >
+    update LAB_EXTRACT_KIT
+    set BATCH_NUMBER = #{batchNumber,jdbcType=VARCHAR},
+    TERM_OF_VALIDITY = #{termOfValidity,jdbcType=VARCHAR},
+    PANELID = #{panelid,jdbcType=VARCHAR}
+    where KIT_ID = #{kitId,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectPanelId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select *
+    from LAB_EXTRACT_KIT
+    where PANELID = #{panelid,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select *
+    from LAB_EXTRACT_KIT
+    where KIT_ID = #{kitId,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select *
+    from LAB_EXTRACT_KIT
+  </select>
+
+  <select id="selectPanelName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select kit.KIT_ID, kit.BATCH_NUMBER, kit.TERM_OF_VALIDITY, kit.PANELID
+    from LAB_EXTRACT_KIT kit
+    left join EQUIPMENT_NAME_INFO p on kit.PANELID = p.ID
+    where kit.PANELID = #{panelid,jdbcType=VARCHAR}
+  </select>
+</mapper>

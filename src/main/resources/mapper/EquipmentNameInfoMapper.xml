@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.EquipmentNameInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.EquipmentNameInfo" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="EQUIPMENT_TYPE_ID" property="equipmentTypeId" jdbcType="VARCHAR" />
+    <result column="EQUIPMENT_NO" property="equipmentNo" jdbcType="VARCHAR" />
+    <result column="EQUIPMENT_NAME" property="equipmentName" jdbcType="VARCHAR" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_PERSON" property="updatePerson" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="ORG_ID" property="orgId" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <resultMap id="VOBaseResultMap" type="com.bazl.clims.model.vo.EquipmentNameInfoVo">
+    <id column="ID" property="entity.id" jdbcType="VARCHAR" />
+    <result column="EQUIPMENT_TYPE_ID" property="entity.equipmentTypeId" jdbcType="VARCHAR" />
+    <result column="EQUIPMENT_NO" property="entity.equipmentNo" jdbcType="VARCHAR" />
+    <result column="EQUIPMENT_NAME" property="entity.equipmentName" jdbcType="VARCHAR" />
+    <result column="CREATE_PERSON" property="entity.createPerson" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="entity.createDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_PERSON" property="entity.updatePerson" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="entity.updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="ORG_ID" property="entity.orgId" jdbcType="VARCHAR" />
+    <!-- 业务字段 -->
+    <result column="EQUIPMENT_TYPE_NAME" property="equipmentTypeName" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from EQUIPMENT_NAME_INFO
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.clims.model.po.EquipmentNameInfo" >
+    insert into EQUIPMENT_NAME_INFO (ID, EQUIPMENT_TYPE_ID, EQUIPMENT_NO,
+      EQUIPMENT_NAME, CREATE_PERSON, CREATE_DATETIME,
+      UPDATE_PERSON, UPDATE_DATETIME, ORG_ID)
+    values (#{id,jdbcType=VARCHAR}, #{equipmentTypeId,jdbcType=VARCHAR}, #{equipmentNo,jdbcType=VARCHAR},
+      #{equipmentName,jdbcType=VARCHAR}, #{createPerson,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP},
+      #{updatePerson,jdbcType=VARCHAR}, #{updateDatetime,jdbcType=TIMESTAMP}, #{orgId,jdbcType=VARCHAR})
+  </insert>
+  <update id="update" parameterType="com.bazl.clims.model.po.EquipmentNameInfo" >
+    update EQUIPMENT_NAME_INFO
+    set EQUIPMENT_TYPE_ID = #{equipmentTypeId,jdbcType=VARCHAR},
+      EQUIPMENT_NO = #{equipmentNo,jdbcType=VARCHAR},
+      EQUIPMENT_NAME = #{equipmentName,jdbcType=VARCHAR},
+      CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+      UPDATE_PERSON = #{updatePerson,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP},
+      ORG_ID = #{orgId,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select *
+    from EQUIPMENT_NAME_INFO
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select *
+    from EQUIPMENT_NAME_INFO
+  </select>
+
+  <select id="selectEquipmentNo" resultMap="BaseResultMap" >
+    select *
+    from EQUIPMENT_NAME_INFO
+    where ID = #{equipmentNo,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectAllList" resultMap="BaseResultMap" >
+    select *
+    from EQUIPMENT_NAME_INFO
+  </select>
+
+  <select id="selectVOPaginationList" parameterType="com.bazl.clims.model.vo.EquipmentNameInfoVo"
+          resultMap="VOBaseResultMap">
+    select * from (
+    select rownum as rn, t.* from (
+    select eni.*, eti.EQUIPMENT_TYPE_NAME
+    from EQUIPMENT_NAME_INFO eni left join EQUIPMENT_TYPE_INFO eti on eni.EQUIPMENT_TYPE_ID = eti.id
+    <where>
+      <if test="_parameter != null">
+        <include refid="VO_Query_Where_Clause"/>
+      </if>
+      <if test="orderByClause != null">
+        order by ${orderByClause}
+      </if>
+    </where>
+    ) t where rownum &lt;=#{rows}
+    ) where rn &gt;#{offset}
+  </select>
+  <!--设备名称count-->
+  <select id="selectVOCount" parameterType="com.bazl.clims.model.vo.EquipmentNameInfoVo" resultType="int">
+    select count(*)
+    from EQUIPMENT_NAME_INFO eni left join EQUIPMENT_TYPE_INFO eti on eni.EQUIPMENT_TYPE_ID = eti.id
+    <where>
+      <if test="_parameter != null">
+        <include refid="VO_Query_Where_Clause"/>
+      </if>
+    </where>
+  </select>
+
+  <sql id="VO_Query_Where_Clause">
+    <if test="entity.orgId == null and entity.orgId !=''">
+      and eni.ORG_ID is null
+    </if>
+    <if test="entity.orgId != null and entity.orgId !=''">
+      and eni.ORG_ID = #{entity.orgId,jdbcType=VARCHAR}
+    </if>
+    <if test="entity.equipmentName != null">
+      and eni.EQUIPMENT_NAME like '%'||#{entity.equipmentName,jdbcType=VARCHAR}||'%'
+    </if>
+
+    <if test="entity.equipmentNo != null">
+      and eni.EQUIPMENT_NO like '%'||#{entity.equipmentNo,jdbcType=VARCHAR}||'%'
+    </if>
+    <if test="entity.equipmentTypeId != null">
+      and eni.EQUIPMENT_TYPE_ID like '%'||#{entity.equipmentTypeId,jdbcType=VARCHAR}||'%'
+    </if>
+  </sql>
+
+  <select id="selectEquipmentNameInfoListByTypeNo" parameterType="com.bazl.clims.model.po.EquipmentNameInfo" resultMap="BaseResultMap">
+    select eni.ID, eni.EQUIPMENT_TYPE_ID, eni.EQUIPMENT_NO, eni.EQUIPMENT_NAME, eni.CREATE_PERSON, eni.CREATE_DATETIME,
+    eni.UPDATE_PERSON, eni.UPDATE_DATETIME, eti.EQUIPMENT_TYPE_NAME as EQUIPMENT_TYPE_NAME
+    from EQUIPMENT_NAME_INFO eni
+    left join EQUIPMENT_TYPE_INFO eti on eti.ID = eni.EQUIPMENT_TYPE_ID
+    <where>
+      <if test="equipmentNo != null">
+        eni.EQUIPMENT_NO = #{equipmentNo,jdbcType=VARCHAR}
+      </if>
+
+      <if test="equipmentTypeNo != null">
+        and eti.EQUIPMENT_TYPE_NO = #{equipmentTypeNo,jdbcType=VARCHAR}
+      </if>
+      <if test="orgId == null">
+        and eni.ORG_ID is null
+      </if>
+      <if test="orgId != null and orgId != '' ">
+        and eni.ORG_ID = #{orgId,jdbcType=VARCHAR}
+      </if>
+      <if test="phase != null">
+        and eti.experimental_stage = #{phase}
+      </if>
+    </where>
+  </select>
+
+  <select id="selectList" resultMap="BaseResultMap" parameterType="String">
+    select eni.ID, eni.EQUIPMENT_TYPE_ID, eni.EQUIPMENT_NO, eni.EQUIPMENT_NAME, eni.CREATE_PERSON, eni.CREATE_DATETIME,
+    eni.UPDATE_PERSON, eni.UPDATE_DATETIME, eti.EQUIPMENT_TYPE_NAME as EQUIPMENT_TYPE_NAME
+    from EQUIPMENT_NAME_INFO eni
+    left join EQUIPMENT_TYPE_INFO eti on eti.ID = eni.EQUIPMENT_TYPE_ID
+    where eti.EXPERIMENTAL_STAGE = #{experimentalStage,jdbcType=VARCHAR}
+    <if test="orgId == null">
+      and eni.ORG_ID is null
+    </if>
+    <if test="orgId != null and orgId != '' ">
+      and eni.ORG_ID = #{orgId,jdbcType=VARCHAR}
+    </if>
+  </select>
+
+  <select id="selectEquipmentTypeId" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select *
+    from EQUIPMENT_NAME_INFO
+    where EQUIPMENT_TYPE_ID = #{id,jdbcType=VARCHAR}
+  </select>
+</mapper>

@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.LabSyInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.LabSyInfo" >
+    <id column="SY_ID" property="syId" jdbcType="VARCHAR" />
+    <result column="TASK_ID" property="taskId" jdbcType="VARCHAR" />
+    <result column="SY_NO" property="syNo" jdbcType="VARCHAR" />
+    <result column="BOARD_NO" property="boardNo" jdbcType="VARCHAR" />
+    <result column="SY_START_DATETIME" property="syStartDatetime" jdbcType="TIMESTAMP" />
+    <result column="SY_END_DATETIME" property="syEndDatetime" jdbcType="TIMESTAMP" />
+    <result column="SY_PERSON1" property="syPerson1" jdbcType="VARCHAR" />
+    <result column="SY_PERSON2" property="syPerson2" jdbcType="VARCHAR" />
+    <result column="SY_STRING" property="syString" jdbcType="VARCHAR" />
+    <result column="ELEC_INSTRUMENT" property="elecInstrument" jdbcType="VARCHAR" />
+    <result column="SAMPLE_COUNT" property="sampleCount" jdbcType="DECIMAL" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_PERSON" property="updatePerson" jdbcType="VARCHAR" />
+    <result column="PRODUCT" property="product" jdbcType="VARCHAR" />
+    <result column="FORMAMIDE" property="formamide" jdbcType="VARCHAR" />
+    <result column="INTERNAL_STANDARD_UL" property="internalStandardUl" jdbcType="VARCHAR" />
+    <result column="INTERNAL_STANDARD" property="internalStandard" jdbcType="VARCHAR" />
+    <result column="SY_STAGE" property="syStage" jdbcType="VARCHAR" />
+    <result column="ORG_ID" property="orgId" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <resultMap id="VOBaseResultMap" type="com.bazl.clims.model.vo.LabSyInfoVo" >
+    <id column="SY_ID" property="entity.syId" jdbcType="VARCHAR" />
+    <result column="TASK_ID" property="entity.taskId" jdbcType="VARCHAR" />
+    <result column="SY_NO" property="entity.syNo" jdbcType="VARCHAR" />
+    <result column="BOARD_NO" property="entity.boardNo" jdbcType="VARCHAR" />
+    <result column="SY_START_DATETIME" property="entity.syStartDatetime" jdbcType="TIMESTAMP" />
+    <result column="SY_END_DATETIME" property="entity.syEndDatetime" jdbcType="TIMESTAMP" />
+    <result column="SY_PERSON1" property="entity.syPerson1" jdbcType="VARCHAR" />
+    <result column="SY_PERSON2" property="entity.syPerson2" jdbcType="VARCHAR" />
+    <result column="SY_STRING" property="entity.syString" jdbcType="VARCHAR" />
+    <result column="ELEC_INSTRUMENT" property="entity.elecInstrument" jdbcType="VARCHAR" />
+    <result column="SAMPLE_COUNT" property="entity.sampleCount" jdbcType="DECIMAL" />
+    <result column="CREATE_DATETIME" property="entity.createDatetime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_PERSON" property="entity.createPerson" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="entity.updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_PERSON" property="entity.updatePerson" jdbcType="VARCHAR" />
+    <result column="PRODUCT" property="entity.product" jdbcType="VARCHAR" />
+    <result column="FORMAMIDE" property="entity.formamide" jdbcType="VARCHAR" />
+    <result column="INTERNAL_STANDARD_UL" property="entity.internalStandardUl" jdbcType="VARCHAR" />
+    <result column="INTERNAL_STANDARD" property="entity.internalStandard" jdbcType="VARCHAR" />
+    <result column="SY_STAGE" property="entity.syStage" jdbcType="VARCHAR" />
+    <result column="ORG_ID" property="entity.orgId" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from LAB_SY_INFO
+    where SY_ID = #{syId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.clims.model.po.LabSyInfo" >
+    insert into LAB_SY_INFO (SY_ID, TASK_ID, SY_NO, 
+      BOARD_NO, SY_START_DATETIME, SY_END_DATETIME, 
+      SY_PERSON1, SY_PERSON2, SY_STRING, 
+      ELEC_INSTRUMENT, SAMPLE_COUNT, CREATE_DATETIME, 
+      CREATE_PERSON, UPDATE_DATETIME, UPDATE_PERSON,
+      PRODUCT, FORMAMIDE, INTERNAL_STANDARD_UL,
+      INTERNAL_STANDARD,SY_STAGE,ORG_ID
+      )
+    values (#{syId,jdbcType=VARCHAR}, #{taskId,jdbcType=VARCHAR}, #{syNo,jdbcType=VARCHAR}, 
+      #{boardNo,jdbcType=VARCHAR}, #{syStartDatetime,jdbcType=TIMESTAMP}, #{syEndDatetime,jdbcType=TIMESTAMP}, 
+      #{syPerson1,jdbcType=VARCHAR}, #{syPerson2,jdbcType=VARCHAR}, #{syString,jdbcType=VARCHAR}, 
+      #{elecInstrument,jdbcType=VARCHAR}, #{sampleCount,jdbcType=DECIMAL}, #{createDatetime,jdbcType=TIMESTAMP}, 
+      #{createPerson,jdbcType=VARCHAR}, #{updateDatetime,jdbcType=TIMESTAMP}, #{updatePerson,jdbcType=VARCHAR},
+      #{product,jdbcType=VARCHAR}, #{formamide,jdbcType=VARCHAR}, #{internalStandardUl,jdbcType=VARCHAR},
+      #{internalStandard,jdbcType=VARCHAR},#{syStage,jdbcType=VARCHAR},#{orgId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.clims.model.po.LabSyInfo" >
+    update LAB_SY_INFO
+    set TASK_ID = #{taskId,jdbcType=VARCHAR},
+      SY_NO = #{syNo,jdbcType=VARCHAR},
+      BOARD_NO = #{boardNo,jdbcType=VARCHAR},
+      SY_START_DATETIME = #{syStartDatetime,jdbcType=TIMESTAMP},
+      SY_END_DATETIME = #{syEndDatetime,jdbcType=TIMESTAMP},
+      SY_PERSON1 = #{syPerson1,jdbcType=VARCHAR},
+      SY_PERSON2 = #{syPerson2,jdbcType=VARCHAR},
+      SY_STRING = #{syString,jdbcType=VARCHAR},
+      ELEC_INSTRUMENT = #{elecInstrument,jdbcType=VARCHAR},
+      SAMPLE_COUNT = #{sampleCount,jdbcType=DECIMAL},
+      CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+      CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP},
+      UPDATE_PERSON = #{updatePerson,jdbcType=VARCHAR},
+      PRODUCT = #{product,jdbcType=VARCHAR},
+      FORMAMIDE = #{formamide,jdbcType=VARCHAR},
+      INTERNAL_STANDARD_UL = #{internalStandardUl,jdbcType=VARCHAR},
+      INTERNAL_STANDARD = #{internalStandard,jdbcType=VARCHAR},
+      SY_STAGE = #{syStage,jdbcType=VARCHAR},
+      ORG_ID = #{orgId,jdbcType=VARCHAR}
+    where SY_ID = #{syId,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select *
+    from LAB_SY_INFO
+    where SY_ID = #{syId,jdbcType=VARCHAR} order by UPDATE_DATETIME desc
+  </select>
+
+  <select id="selectByTaskId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select *
+    from LAB_SY_INFO
+    where TASK_ID = #{taskId,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select *
+    from LAB_SY_INFO
+  </select>
+
+  <select id="selectList" resultMap="BaseResultMap" parameterType="com.bazl.clims.model.po.LabSyInfo">
+    select lsy.*
+    from LAB_SY_INFO lsy
+    where 1 = 1
+    <if test="boardNo != null">
+      and  lsy.BOARD_NO = #{boardNo,jdbcType=VARCHAR}
+    </if>
+  </select>
+
+  <select id="selectByBoarsNo" resultMap="BaseResultMap" parameterType="com.bazl.clims.model.po.LabSyInfo">
+    select sy.*
+    from LAB_SY_INFO sy
+    left join LAB_TASK_INFO task on task.TASK_ID = sy.TASK_ID
+    where task.EXTRACTION_MODE = '0' and task.TASK_STAGE = '3' and sy.SAMPLE_COUNT &gt; '0' and sy.SAMPLE_COUNT &lt; '88'
+    <if test="delegateOrgCode != null">
+      and task.DELEGATE_ORG_CODE = #{delegateOrgCode,jdbcType=VARCHAR}
+    </if>
+    <if test="delegateOrgCode == null">
+      and task.DELEGATE_ORG_CODE is null
+    </if>
+  </select>
+
+
+  <sql id="VO_Query_Where_Clauses">
+    <if test="entity.boardNo != null and entity.boardNo !=''">
+      and lsy.BOARD_NO like '%'||#{entity.boardNo,jdbcType=VARCHAR}||'%'
+    </if>
+    <if test="entity.syStage != null and entity.syStage !=''">
+      and lsy.SY_STAGE like '%'||#{entity.syStage,jdbcType=VARCHAR}||'%'
+    </if>
+    <if test="acceptStartDatetime != null">
+      and lsy.CREATE_DATETIME &gt;= #{acceptStartDatetime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="acceptEndDatetime != null">
+      and lsy.CREATE_DATETIME &lt;= #{acceptEndDatetime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="entity.orgId != null and entity.orgId !=''">
+      and lsy.ORG_ID = #{entity.orgId,jdbcType=VARCHAR}
+    </if>
+    <if test="entity.orgId == null">
+      and lsy.ORG_ID is null
+    </if>
+  </sql>
+
+  <select id="selectVOPaginationList" resultMap="VOBaseResultMap" parameterType="com.bazl.clims.model.vo.LabSyInfoVo">
+    select * from (
+    select rownum as rn, t.* from (
+    select * from LAB_SY_INFO lsy
+    where lsy.SY_STAGE is not null
+    <if test="_parameter != null">
+      <include refid="VO_Query_Where_Clauses"/>
+    </if>
+    order by CREATE_DATETIME DESC,length(lsy.SY_NO) asc, lsy.SY_NO asc
+    ) t where rownum &lt;=#{rows}
+    ) where rn &gt;#{offset}
+  </select>
+
+  <select id="selectVOCnt" parameterType="com.bazl.clims.model.vo.LabSyInfoVo" resultType="int">
+    select count(*) from LAB_SY_INFO lsy
+    where lsy.SY_STAGE is not null
+    <if test="_parameter != null">
+      <include refid="VO_Query_Where_Clauses"/>
+    </if>
+  </select>
+
+  <!--板号去重-->
+  <select id="selectRepeatingByBoarsNo" resultMap="BaseResultMap" parameterType="com.bazl.clims.model.po.LabSyInfo">
+    select *
+    from LAB_SY_INFO
+    <where>
+      <if test="orgId != null and orgId != ''">
+        ORG_ID = #{orgId,jdbcType=VARCHAR}
+      </if>
+      <if test="orgId == null or orgId == ''">
+        and ORG_ID is null
+      </if>
+      <if test="syStage != null and syStage != ''">
+        and SY_STAGE is not null
+      </if>
+      <if test="boardNo != null and boardNo != ''">
+        and BOARD_NO = #{boardNo,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+
+  <select id="selectByCaseId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select distinct lsi.* from LAB_SY_INFO lsi
+    left join LAB_SY_SAMPLE lss on lss.SY_ID = lsi.SY_ID
+    left join lims_sample_info_dna lsid on lsid.sample_id = lss.sample_id and lsid.delete_flag='0'
+    where lsid.case_id= #{caseId,jdbcType=VARCHAR}
+    order by lsi.CREATE_DATETIME asc
+  </select>
+</mapper>

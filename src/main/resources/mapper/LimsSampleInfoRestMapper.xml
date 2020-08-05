@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.LimsSampleInfoRestMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.LimsSampleInfoRest" >
+    <id column="SAMPLE_ID" property="sampleId" jdbcType="VARCHAR" />
+    <result column="PERSON_ID" property="personId" jdbcType="VARCHAR" />
+    <result column="CONSIGNMENT_ID" property="consignmentId" jdbcType="VARCHAR" />
+    <result column="CASE_ID" property="caseId" jdbcType="VARCHAR" />
+    <result column="SAMPLE_NO" property="sampleNo" jdbcType="VARCHAR" />
+    <result column="SAMPLE_NAME" property="sampleName" jdbcType="VARCHAR" />
+    <result column="SAMPLE_TYPE" property="sampleType" jdbcType="VARCHAR" />
+    <result column="DRUG_APPLY" property="drugApply" jdbcType="VARCHAR" />
+    <result column="LAST_USED_DATE" property="lastUsedDate" jdbcType="TIMESTAMP" />
+    <result column="FORENSICS_ADDRESS" property="forensicsAddress" jdbcType="VARCHAR" />
+    <result column="FORENSICS_DATETIME" property="forensicsDatetime" jdbcType="TIMESTAMP" />
+    <result column="PROVISION_FLAG" property="provisionFlag" jdbcType="VARCHAR" />
+    <result column="SAMPLE_COLOR" property="sampleColor" jdbcType="VARCHAR" />
+    <result column="SAMPLE_COUNT" property="sampleCount" jdbcType="DECIMAL" />
+    <result column="SAMPLE_TRAITS" property="sampleTraits" jdbcType="VARCHAR" />
+    <result column="MATERIAL" property="material" jdbcType="VARCHAR" />
+    <result column="SAMPLE_UNIT" property="sampleUnit" jdbcType="VARCHAR" />
+    <result column="SAMPLE_WEIGHT" property="sampleWeight" jdbcType="FLOAT" />
+    <result column="FIRST_RESULT" property="firstResult" jdbcType="VARCHAR" />
+    <result column="HOSPITAL" property="hospital" jdbcType="VARCHAR" />
+    <result column="TEST_ITEMS" property="testItems" jdbcType="VARCHAR" />
+    <result column="LINK_ID" property="linkId" jdbcType="VARCHAR" />
+    <result column="SAMPLE_PURPOSE" property="samplePurpose" jdbcType="VARCHAR" />
+    <result column="SAMPLE_STATUS" property="sampleStatus" jdbcType="VARCHAR" />
+    <result column="INSTORED_FLAG" property="instoredFlag" jdbcType="VARCHAR" />
+    <result column="SAMPLE_REMARK" property="sampleRemark" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_PERSON" property="updatePerson" jdbcType="VARCHAR" />
+    <result column="DELETE_FLAG" property="deleteFlag" jdbcType="VARCHAR" />
+    <result column="DELETE_DATETIME" property="deleteDatetime" jdbcType="TIMESTAMP" />
+    <result column="DELETE_PERSON" property="deletePerson" jdbcType="VARCHAR" />
+    <result column="DELETE_REASON" property="deleteReason" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from LIMS_SAMPLE_INFO_REST
+    where SAMPLE_ID = #{sampleId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.clims.model.po.LimsSampleInfoRest" >
+    insert into LIMS_SAMPLE_INFO_REST (SAMPLE_ID, PERSON_ID, CONSIGNMENT_ID, 
+      CASE_ID, SAMPLE_NO, SAMPLE_NAME, 
+      SAMPLE_TYPE, DRUG_APPLY, LAST_USED_DATE, 
+      FORENSICS_ADDRESS, FORENSICS_DATETIME, 
+      PROVISION_FLAG, SAMPLE_COLOR, SAMPLE_COUNT, 
+      SAMPLE_TRAITS, MATERIAL, SAMPLE_UNIT, 
+      SAMPLE_WEIGHT, FIRST_RESULT, HOSPITAL, 
+      TEST_ITEMS, LINK_ID, SAMPLE_PURPOSE, 
+      SAMPLE_STATUS, INSTORED_FLAG, SAMPLE_REMARK, 
+      CREATE_DATETIME, CREATE_PERSON, UPDATE_DATETIME, 
+      UPDATE_PERSON, DELETE_FLAG, DELETE_DATETIME, 
+      DELETE_PERSON, DELETE_REASON)
+    values (#{sampleId,jdbcType=VARCHAR}, #{personId,jdbcType=VARCHAR}, #{consignmentId,jdbcType=VARCHAR}, 
+      #{caseId,jdbcType=VARCHAR}, #{sampleNo,jdbcType=VARCHAR}, #{sampleName,jdbcType=VARCHAR}, 
+      #{sampleType,jdbcType=VARCHAR}, #{drugApply,jdbcType=VARCHAR}, #{lastUsedDate,jdbcType=TIMESTAMP}, 
+      #{forensicsAddress,jdbcType=VARCHAR}, #{forensicsDatetime,jdbcType=TIMESTAMP}, 
+      #{provisionFlag,jdbcType=VARCHAR}, #{sampleColor,jdbcType=VARCHAR}, #{sampleCount,jdbcType=DECIMAL}, 
+      #{sampleTraits,jdbcType=VARCHAR}, #{material,jdbcType=VARCHAR}, #{sampleUnit,jdbcType=VARCHAR}, 
+      #{sampleWeight,jdbcType=FLOAT}, #{firstResult,jdbcType=VARCHAR}, #{hospital,jdbcType=VARCHAR}, 
+      #{testItems,jdbcType=VARCHAR}, #{linkId,jdbcType=VARCHAR}, #{samplePurpose,jdbcType=VARCHAR}, 
+      #{sampleStatus,jdbcType=VARCHAR}, #{instoredFlag,jdbcType=VARCHAR}, #{sampleRemark,jdbcType=VARCHAR}, 
+      #{createDatetime,jdbcType=TIMESTAMP}, #{createPerson,jdbcType=VARCHAR}, #{updateDatetime,jdbcType=TIMESTAMP}, 
+      #{updatePerson,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=VARCHAR}, #{deleteDatetime,jdbcType=TIMESTAMP}, 
+      #{deletePerson,jdbcType=VARCHAR}, #{deleteReason,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.clims.model.po.LimsSampleInfoRest" >
+    update LIMS_SAMPLE_INFO_REST
+    set PERSON_ID = #{personId,jdbcType=VARCHAR},
+      CONSIGNMENT_ID = #{consignmentId,jdbcType=VARCHAR},
+      CASE_ID = #{caseId,jdbcType=VARCHAR},
+      SAMPLE_NO = #{sampleNo,jdbcType=VARCHAR},
+      SAMPLE_NAME = #{sampleName,jdbcType=VARCHAR},
+      SAMPLE_TYPE = #{sampleType,jdbcType=VARCHAR},
+      DRUG_APPLY = #{drugApply,jdbcType=VARCHAR},
+      LAST_USED_DATE = #{lastUsedDate,jdbcType=TIMESTAMP},
+      FORENSICS_ADDRESS = #{forensicsAddress,jdbcType=VARCHAR},
+      FORENSICS_DATETIME = #{forensicsDatetime,jdbcType=TIMESTAMP},
+      PROVISION_FLAG = #{provisionFlag,jdbcType=VARCHAR},
+      SAMPLE_COLOR = #{sampleColor,jdbcType=VARCHAR},
+      SAMPLE_COUNT = #{sampleCount,jdbcType=DECIMAL},
+      SAMPLE_TRAITS = #{sampleTraits,jdbcType=VARCHAR},
+      MATERIAL = #{material,jdbcType=VARCHAR},
+      SAMPLE_UNIT = #{sampleUnit,jdbcType=VARCHAR},
+      SAMPLE_WEIGHT = #{sampleWeight,jdbcType=FLOAT},
+      FIRST_RESULT = #{firstResult,jdbcType=VARCHAR},
+      HOSPITAL = #{hospital,jdbcType=VARCHAR},
+      TEST_ITEMS = #{testItems,jdbcType=VARCHAR},
+      LINK_ID = #{linkId,jdbcType=VARCHAR},
+      SAMPLE_PURPOSE = #{samplePurpose,jdbcType=VARCHAR},
+      SAMPLE_STATUS = #{sampleStatus,jdbcType=VARCHAR},
+      INSTORED_FLAG = #{instoredFlag,jdbcType=VARCHAR},
+      SAMPLE_REMARK = #{sampleRemark,jdbcType=VARCHAR},
+      CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+      CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP},
+      UPDATE_PERSON = #{updatePerson,jdbcType=VARCHAR},
+      DELETE_FLAG = #{deleteFlag,jdbcType=VARCHAR},
+      DELETE_DATETIME = #{deleteDatetime,jdbcType=TIMESTAMP},
+      DELETE_PERSON = #{deletePerson,jdbcType=VARCHAR},
+      DELETE_REASON = #{deleteReason,jdbcType=VARCHAR}
+    where SAMPLE_ID = #{sampleId,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select SAMPLE_ID, PERSON_ID, CONSIGNMENT_ID, CASE_ID, SAMPLE_NO, SAMPLE_NAME, SAMPLE_TYPE, 
+    DRUG_APPLY, LAST_USED_DATE, FORENSICS_ADDRESS, FORENSICS_DATETIME, PROVISION_FLAG, 
+    SAMPLE_COLOR, SAMPLE_COUNT, SAMPLE_TRAITS, MATERIAL, SAMPLE_UNIT, SAMPLE_WEIGHT, 
+    FIRST_RESULT, HOSPITAL, TEST_ITEMS, LINK_ID, SAMPLE_PURPOSE, SAMPLE_STATUS, INSTORED_FLAG, 
+    SAMPLE_REMARK, CREATE_DATETIME, CREATE_PERSON, UPDATE_DATETIME, UPDATE_PERSON, DELETE_FLAG, 
+    DELETE_DATETIME, DELETE_PERSON, DELETE_REASON
+    from LIMS_SAMPLE_INFO_REST
+    where SAMPLE_ID = #{sampleId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select SAMPLE_ID, PERSON_ID, CONSIGNMENT_ID, CASE_ID, SAMPLE_NO, SAMPLE_NAME, SAMPLE_TYPE, 
+    DRUG_APPLY, LAST_USED_DATE, FORENSICS_ADDRESS, FORENSICS_DATETIME, PROVISION_FLAG, 
+    SAMPLE_COLOR, SAMPLE_COUNT, SAMPLE_TRAITS, MATERIAL, SAMPLE_UNIT, SAMPLE_WEIGHT, 
+    FIRST_RESULT, HOSPITAL, TEST_ITEMS, LINK_ID, SAMPLE_PURPOSE, SAMPLE_STATUS, INSTORED_FLAG, 
+    SAMPLE_REMARK, CREATE_DATETIME, CREATE_PERSON, UPDATE_DATETIME, UPDATE_PERSON, DELETE_FLAG, 
+    DELETE_DATETIME, DELETE_PERSON, DELETE_REASON
+    from LIMS_SAMPLE_INFO_REST
+  </select>
+</mapper>

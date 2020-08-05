@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.FugitivesInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.FugitivesInfo" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="INVOLVED_NO" property="involvedNo" jdbcType="VARCHAR" />
+    <result column="INVOLVED_NAME" property="involvedName" jdbcType="VARCHAR" />
+    <result column="PERSON_NAME" property="personName" jdbcType="VARCHAR" />
+    <result column="PERSON_TYPE" property="personType" jdbcType="VARCHAR" />
+    <result column="PERSON_GENDER" property="personGender" jdbcType="VARCHAR" />
+    <result column="PERSON_AGE" property="personAge" jdbcType="VARCHAR" />
+    <result column="PERSON_CARD" property="personCard" jdbcType="VARCHAR" />
+    <result column="FUGITIVE_NO" property="fugitiveNo" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_PERSON" property="updatePerson" jdbcType="VARCHAR" />
+    <result column="DELETE_FLAG" property="deleteFlag" jdbcType="VARCHAR" />
+    <result column="DELETE_DATETIME" property="deleteDatetime" jdbcType="TIMESTAMP" />
+    <result column="DELETE_PERSON" property="deletePerson" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="VOBaseResultMap" type="com.bazl.clims.model.vo.FugitivesInfoVo" >
+    <id column="ID" property="entity.id" jdbcType="VARCHAR" />
+    <result column="INVOLVED_NO" property="entity.involvedNo" jdbcType="VARCHAR" />
+    <result column="INVOLVED_NAME" property="entity.involvedName" jdbcType="VARCHAR" />
+    <result column="PERSON_NAME" property="entity.personName" jdbcType="VARCHAR" />
+    <result column="PERSON_TYPE" property="entity.personType" jdbcType="VARCHAR" />
+    <result column="PERSON_GENDER" property="entity.personGender" jdbcType="VARCHAR" />
+    <result column="PERSON_AGE" property="entity.personAge" jdbcType="VARCHAR" />
+    <result column="PERSON_CARD" property="entity.personCard" jdbcType="VARCHAR" />
+    <result column="FUGITIVE_NO" property="entity.fugitiveNo" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="entity.createDatetime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_PERSON" property="entity.createPerson" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="entity.updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_PERSON" property="entity.updatePerson" jdbcType="VARCHAR" />
+    <result column="DELETE_FLAG" property="entity.deleteFlag" jdbcType="VARCHAR" />
+    <result column="DELETE_DATETIME" property="entity.deleteDatetime" jdbcType="TIMESTAMP" />
+    <result column="DELETE_PERSON" property="entity.deletePerson" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    ID, INVOLVED_NO, INVOLVED_NAME, PERSON_NAME, PERSON_TYPE,
+    PERSON_GENDER, PERSON_AGE, PERSON_CARD, FUGITIVE_NO,
+    CREATE_DATETIME, CREATE_PERSON, UPDATE_DATETIME,UPDATE_PERSON, DELETE_FLAG,
+    DELETE_DATETIME, DELETE_PERSON
+  </sql>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from FUGITIVES_INFO
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <sql id="VO_Query_Where_Clause">
+    <if test="entity.involvedNo != null and entity.involvedNo !=''">
+      and fi.INVOLVED_NO like '%'||#{entity.involvedNo,jdbcType=VARCHAR}||'%'
+    </if>
+    <if test="entity.involvedName != null and entity.involvedName !=''">
+      and fi.INVOLVED_NAME like '%'||#{entity.involvedName,jdbcType=VARCHAR}||'%'
+    </if>
+    <if test="entity.personName != null and entity.personName !=''">
+      and fi.PERSON_NAME like '%'||#{entity.personName,jdbcType=VARCHAR}||'%'
+    </if>
+    <if test="entity.personCard != null and entity.personCard !=''">
+      and fi.PERSON_CARD like '%'||#{entity.personCard,jdbcType=VARCHAR}||'%'
+    </if>
+    <if test="entity.fugitiveNo != null and entity.fugitiveNo !=''">
+      and fi.FUGITIVE_NO  like '%'||#{entity.fugitiveNo,jdbcType=VARCHAR}||'%'
+    </if>
+    <if test="entity.deleteFlag != null and entity.deleteFlag !=''">
+      and fi.DELETE_FLAG  = #{entity.deleteFlag,jdbcType=VARCHAR}
+    </if>
+  </sql>
+  <!--查询与补送list-->
+  <select id="selectVOList" parameterType="com.bazl.clims.model.vo.FugitivesInfoVo" resultMap="VOBaseResultMap">
+    select * from (
+    select rownum as rn, t.* from (
+    select fi.id, fi.INVOLVED_NO, fi.INVOLVED_NAME, fi.PERSON_NAME,
+    fi.PERSON_TYPE, fi.PERSON_GENDER, fi.PERSON_AGE, fi.PERSON_CARD,
+    fi.FUGITIVE_NO, fi.CREATE_DATETIME, fi.CREATE_PERSON,
+    di_1.dict_name as personTypeName,
+    di_2.dict_name as personGenderName
+    from FUGITIVES_INFO fi
+    left join dict_item di_1 on di_1.dict_code = fi.PERSON_TYPE and di_1.DICT_TYPE_CODE='PERSON_TYPE'
+    left join dict_item di_2 on di_2.dict_code = fi.PERSON_GENDER and di_2.DICT_TYPE_CODE='GENDER'
+    <where>
+      <if test="_parameter != null">
+        <include refid="VO_Query_Where_Clause"/>
+      </if>
+    </where>
+    order by fi.CREATE_DATETIME desc
+    ) t where  rownum &lt;=#{rows}
+    ) where rn &gt;#{offset}
+  </select>
+  <!--查询与补送count-->
+  <select id="selectVOCnt" parameterType="com.bazl.clims.model.vo.FugitivesInfoVo" resultType="int">
+    SELECT count(fi.id) from FUGITIVES_INFO fi
+    <where>
+    <if test="_parameter != null">
+      <include refid="VO_Query_Where_Clause"/>
+    </if>
+    </where>
+    order by fi.CREATE_DATETIME desc
+  </select>
+
+  <insert id="insert" parameterType="com.bazl.clims.model.po.FugitivesInfo" >
+    insert into FUGITIVES_INFO (ID, INVOLVED_NO, INVOLVED_NAME, PERSON_NAME,
+    PERSON_TYPE, PERSON_GENDER, PERSON_AGE, PERSON_CARD,
+      FUGITIVE_NO, CREATE_DATETIME, CREATE_PERSON
+      )
+    values (#{id,jdbcType=VARCHAR}, #{involvedNo,jdbcType=VARCHAR}, #{involvedName,jdbcType=VARCHAR},
+      #{personName,jdbcType=VARCHAR}, #{personType,jdbcType=VARCHAR},
+      #{personGender,jdbcType=VARCHAR}, #{personAge,jdbcType=VARCHAR}, #{personCard,jdbcType=VARCHAR},
+      #{fugitiveNo,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP}, #{createPerson,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.clims.model.po.FugitivesInfo" >
+    update FUGITIVES_INFO
+    set INVOLVED_NO = #{involvedNo,jdbcType=VARCHAR},
+      INVOLVED_NAME = #{involvedName,jdbcType=VARCHAR},
+      PERSON_NAME = #{personName,jdbcType=VARCHAR},
+      PERSON_TYPE = #{personType,jdbcType=VARCHAR},
+      PERSON_GENDER = #{personGender,jdbcType=VARCHAR},
+      PERSON_AGE = #{personAge,jdbcType=VARCHAR},
+      PERSON_CARD = #{personCard,jdbcType=VARCHAR},
+      FUGITIVE_NO = #{fugitiveNo,jdbcType=VARCHAR},
+      CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+      CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP},
+      UPDATE_PERSON = #{updatePerson,jdbcType=VARCHAR},
+      DELETE_FLAG = #{deleteFlag,jdbcType=VARCHAR},
+      DELETE_DATETIME = #{deleteDatetime,jdbcType=TIMESTAMP},
+      DELETE_PERSON = #{deletePerson,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <update id="deleteFugitivesInfo" parameterType="com.bazl.clims.model.po.FugitivesInfo" >
+    update FUGITIVES_INFO
+    set DELETE_FLAG = #{deleteFlag,jdbcType=VARCHAR},
+      DELETE_DATETIME = #{deleteDatetime,jdbcType=TIMESTAMP},
+      DELETE_PERSON = #{deletePerson,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select <include refid="Base_Column_List"/>
+    from FUGITIVES_INFO
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectFugitivesList" resultMap="VOBaseResultMap" parameterType="java.lang.String" >
+    select fi.id, fi.INVOLVED_NO, fi.INVOLVED_NAME, fi.PERSON_NAME, fi.PERSON_TYPE, fi.PERSON_GENDER, fi.PERSON_AGE, fi.PERSON_CARD,
+    fi.FUGITIVE_NO, fi.CREATE_DATETIME, fi.CREATE_PERSON,
+    di_1.dict_name as personTypeName,
+    di_2.dict_name as personGenderName
+    from FUGITIVES_INFO fi
+    left join dict_item di_1 on di_1.dict_code = fi.PERSON_TYPE and di_1.DICT_TYPE_CODE='PERSON_TYPE'
+    left join dict_item di_2 on di_2.dict_code = fi.PERSON_GENDER and di_2.DICT_TYPE_CODE='GENDER'
+    where fi.PERSON_NAME like '%'||#{searchFugitives}||'%'
+    union all
+    select fi.id, fi.PERSON_NAME, fi.PERSON_TYPE, fi.PERSON_GENDER, fi.PERSON_AGE, fi.PERSON_CARD,
+    fi.FUGITIVE_NO, fi.CREATE_DATETIME, fi.CREATE_PERSON,
+    di_1.dict_name as personTypeName,
+    di_2.dict_name as personGenderName
+    from FUGITIVES_INFO fi
+    left join dict_item di_1 on di_1.dict_code = fi.PERSON_TYPE and di_1.DICT_TYPE_CODE='PERSON_TYPE'
+    left join dict_item di_2 on di_2.dict_code = fi.PERSON_GENDER and di_2.DICT_TYPE_CODE='GENDER'
+    where fi.PERSON_CARD like '%'||#{searchFugitives}||'%'
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select <include refid="Base_Column_List"/>
+    from FUGITIVES_INFO
+  </select>
+
+  <select id="selectList" parameterType="com.bazl.clims.model.po.FugitivesInfo" resultMap="BaseResultMap">
+    select fi.id, fi.INVOLVED_NO, fi.INVOLVED_NAME, fi.PERSON_NAME, fi.PERSON_TYPE, fi.PERSON_GENDER, fi.PERSON_AGE, fi.PERSON_CARD,
+    fi.FUGITIVE_NO, fi.CREATE_DATETIME, fi.CREATE_PERSON
+    from FUGITIVES_INFO fi
+    <where>
+      <if test="_parameter != null">
+        <include refid="Query_Where_Clause"/>
+      </if>
+    </where>
+  </select>
+
+  <sql id="Query_Where_Clause">
+    <if test="personName != null and personName !=''">
+      and fi.PERSON_NAME = #{personName,jdbcType=VARCHAR}
+    </if>
+    <if test="personCard != null and personCard !=''">
+      and fi.PERSON_CARD = #{personCard,jdbcType=VARCHAR}
+    </if>
+    <if test="fugitiveNo != null and fugitiveNo !=''">
+      and fi.FUGITIVE_NO = #{fugitiveNo,jdbcType=VARCHAR}
+    </if>
+    <if test="deleteFlag != null and deleteFlag !=''">
+      and fi.DELETE_FLAG  = #{deleteFlag,jdbcType=VARCHAR}
+    </if>
+  </sql>
+</mapper>

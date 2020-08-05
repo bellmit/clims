@@ -1,0 +1,31 @@
+.layui-form-label {
+    float: left;
+    display: block;
+    padding: 9px 15px;
+    width: 80px;
+    font-weight: 400;
+    text-align: right;
+}
+
+i {
+    height: 36px;
+    line-height: 36px;
+}
+
+.layui-form-item .layui-input-inline {
+    float: left;
+    width: 190px;
+    margin-right: 10px;
+}
+
+p {
+    color: red;
+}
+
+.layui-form-radio {
+    line-height: 28px;
+    margin: 0px 10px 0 0;
+    padding-right: 10px;
+    cursor: pointer;
+    font-size: 0;
+}

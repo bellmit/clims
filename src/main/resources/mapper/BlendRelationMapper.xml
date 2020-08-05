@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.BlendRelationMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.BlendRelationResult" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="BLEND_ID" property="blendId" jdbcType="VARCHAR" />
+    <result column="CONTRIBUTION_NAME" property="contributionName" jdbcType="VARCHAR" />
+    <result column="CONTRIBUTION_NAME2" property="contributionName2" jdbcType="VARCHAR" />
+    <result column="TESTKIT_NAME" property="testkitName" jdbcType="VARCHAR" />
+    <result column="SAMPLE_NAME" property="sampleName" jdbcType="VARCHAR" />
+    <result column="SAMPLE_ID1" property="sampleId1" jdbcType="VARCHAR" />
+    <result column="SAMPLE_ID2" property="sampleId2" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <insert id="insert" parameterType="com.bazl.clims.model.po.BlendRelationResult" >
+    insert into BLEND_RELATION (ID, BLEND_ID,
+      CONTRIBUTION_NAME, CONTRIBUTION_NAME2,
+       TESTKIT_NAME,SAMPLE_NAME,SAMPLE_ID1,SAMPLE_ID2)
+    values (#{id,jdbcType=VARCHAR}, #{blendId,jdbcType=VARCHAR},
+      #{contributionName,jdbcType=VARCHAR}, #{contributionName2,jdbcType=VARCHAR},
+     #{testkitName,jdbcType=VARCHAR},#{sampleName,jdbcType=VARCHAR},#{sampleId1,jdbcType=VARCHAR},#{sampleId2,jdbcType=VARCHAR})
+  </insert>
+
+
+  <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select *
+    from BLEND_RELATION
+    where BLEND_ID = #{id,jdbcType=VARCHAR}
+  </select>
+
+  <update id="update" parameterType="com.bazl.clims.model.po.caseFtpUrl" >
+    update BLEND_RELATION
+    set BLEND_ID = #{blendId,jdbcType=VARCHAR},
+      CONTRIBUTION_NAME = #{contributionName,jdbcType=VARCHAR},
+      CONTRIBUTION_NAME2 = #{contributionName2,jdbcType=VARCHAR},
+      TESTKIT_NAME = #{testkitName,jdbcType=VARCHAR},
+      SAMPLE_NAME = #{sampleName,jdbcType=VARCHAR},
+      SAMPLE_ID1 = #{sampleId1,jdbcType=VARCHAR},
+      SAMPLE_ID2 = #{sampleId2,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

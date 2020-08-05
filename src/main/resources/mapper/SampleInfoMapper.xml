@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.SampleInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.SampleInfo" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="SAMPLE_TABLE_ID" property="sampleTableId" jdbcType="VARCHAR" />
+    <result column="EXTRACT_PLATE_ID" property="extractPlateId" jdbcType="VARCHAR" />
+    <result column="PCR_PLATE_ID" property="pcrPlateId" jdbcType="VARCHAR" />
+    <result column="SY_PLATE_ID" property="syPlateId" jdbcType="VARCHAR" />
+    <result column="SAMPLE_PLATE_SORT" property="samplePlateSort" jdbcType="VARCHAR" />
+    <result column="EXTRACT_PLATE_SORT" property="extractPlateSort" jdbcType="VARCHAR" />
+    <result column="PCR_PLATE_SORT" property="pcrPlateSort" jdbcType="VARCHAR" />
+    <result column="SY_PLATE_SORT" property="syPlateSort" jdbcType="VARCHAR" />
+    <result column="SAMPLE_LOCATION_SORT" property="sampleLocationSort" jdbcType="INTEGER" />
+    <result column="EXTRACT_LOCATION_SORT" property="extractLocationSort" jdbcType="INTEGER" />
+    <result column="PCR_LOCATION_SORT" property="pcrLocationSort" jdbcType="INTEGER" />
+    <result column="SY_LOCATION_SORT" property="syLocationSort" jdbcType="INTEGER" />
+    <result column="SAMPLE_PLATE_LOCATION" property="samplePlateLocation" jdbcType="VARCHAR" />
+    <result column="EXTRACT_PLATE_LOCATION" property="extractPlateLocation" jdbcType="VARCHAR" />
+    <result column="PCR_PLATE_LOCATION" property="pcrPlateLocation" jdbcType="VARCHAR" />
+    <result column="SY_PLATE_LOCATION" property="syPlateLocation" jdbcType="VARCHAR" />
+    <result column="CONFIRMATORY_METHOD" property="confirmatoryMethod" jdbcType="VARCHAR" />
+    <result column="PRE_EXPERIMENTAL_METHOD" property="preExperimentalMethod" jdbcType="VARCHAR" />
+    <result column="SAMPLE_TRANSFER_METHOD" property="sampleTransferMethod" jdbcType="VARCHAR" />
+    <result column="ELUTION" property="elution" jdbcType="VARCHAR" />
+    <result column="BOARD_NO" property="boardNo" jdbcType="VARCHAR" />
+    <result column="DELETE_FLAG" property="deleteFlag" jdbcType="VARCHAR" />
+    <result column="DELETE_DATETIME" property="deleteDatetime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="OPERATION_PERSON" property="operationPerson" jdbcType="VARCHAR" />
+    <result column="OPERATION_DATETIME" property="operationDatetime" jdbcType="TIMESTAMP" />
+    <result column="SAMPLE_PROPERTY" property="sampleProperty" jdbcType="VARCHAR" />
+    <result column="SAMPLE_NO" property="sampleNo" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <resultMap id="VOBaseResultMap" type="com.bazl.clims.model.vo.SampleInfoVo" >
+    <id column="ID" property="entity.id" jdbcType="VARCHAR" />
+    <result column="SAMPLE_TABLE_ID" property="entity.sampleTableId" jdbcType="VARCHAR" />
+    <result column="EXTRACT_PLATE_ID" property="entity.extractPlateId" jdbcType="VARCHAR" />
+    <result column="PCR_PLATE_ID" property="entity.pcrPlateId" jdbcType="VARCHAR" />
+    <result column="SY_PLATE_ID" property="entity.syPlateId" jdbcType="VARCHAR" />
+    <result column="SAMPLE_PLATE_SORT" property="entity.samplePlateSort" jdbcType="VARCHAR" />
+    <result column="EXTRACT_PLATE_SORT" property="entity.extractPlateSort" jdbcType="VARCHAR" />
+    <result column="PCR_PLATE_SORT" property="entity.pcrPlateSort" jdbcType="VARCHAR" />
+    <result column="SY_PLATE_SORT" property="entity.syPlateSort" jdbcType="VARCHAR" />
+    <result column="SAMPLE_LOCATION_SORT" property="entity.sampleLocationSort" jdbcType="INTEGER" />
+    <result column="EXTRACT_LOCATION_SORT" property="entity.extractLocationSort" jdbcType="INTEGER" />
+    <result column="PCR_LOCATION_SORT" property="entity.pcrLocationSort" jdbcType="INTEGER" />
+    <result column="SY_LOCATION_SORT" property="entity.syLocationSort" jdbcType="INTEGER" />
+    <result column="SAMPLE_PLATE_LOCATION" property="entity.samplePlateLocation" jdbcType="VARCHAR" />
+    <result column="EXTRACT_PLATE_LOCATION" property="entity.extractPlateLocation" jdbcType="VARCHAR" />
+    <result column="PCR_PLATE_LOCATION" property="entity.pcrPlateLocation" jdbcType="VARCHAR" />
+    <result column="SY_PLATE_LOCATION" property="entity.syPlateLocation" jdbcType="VARCHAR" />
+    <result column="CONFIRMATORY_METHOD" property="entity.confirmatoryMethod" jdbcType="VARCHAR" />
+    <result column="PRE_EXPERIMENTAL_METHOD" property="entity.preExperimentalMethod" jdbcType="VARCHAR" />
+    <result column="SAMPLE_TRANSFER_METHOD" property="entity.sampleTransferMethod" jdbcType="VARCHAR" />
+    <result column="ELUTION" property="entity.elution" jdbcType="VARCHAR" />
+    <result column="BOARD_NO" property="entity.boardNo" jdbcType="VARCHAR" />
+    <result column="DELETE_FLAG" property="entity.deleteFlag" jdbcType="VARCHAR" />
+    <result column="DELETE_DATETIME" property="entity.deleteDatetime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_PERSON" property="entity.createPerson" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="entity.createDatetime" jdbcType="TIMESTAMP" />
+    <result column="OPERATION_PERSON" property="entity.operationPerson" jdbcType="VARCHAR" />
+    <result column="OPERATION_DATETIME" property="entity.operationDatetime" jdbcType="TIMESTAMP" />
+    <result column="SAMPLE_PROPERTY" property="entity.sampleProperty" jdbcType="VARCHAR" />
+    <result column="SAMPLE_NO" property="entity.sampleNo" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from sample_info
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.clims.model.po.SampleInfo" >
+    insert into sample_info (ID, SAMPLE_TABLE_ID, EXTRACT_PLATE_ID,
+      PCR_PLATE_ID, SY_PLATE_ID, SAMPLE_PLATE_SORT, EXTRACT_PLATE_SORT, PCR_PLATE_SORT, SY_PLATE_SORT,
+      SAMPLE_LOCATION_SORT, EXTRACT_LOCATION_SORT, PCR_LOCATION_SORT,SY_LOCATION_SORT,
+      SAMPLE_PLATE_LOCATION, EXTRACT_PLATE_LOCATION, 
+      PCR_PLATE_LOCATION, SY_PLATE_LOCATION, CONFIRMATORY_METHOD, 
+      PRE_EXPERIMENTAL_METHOD, SAMPLE_TRANSFER_METHOD, 
+      ELUTION, BOARD_NO, CREATE_PERSON, 
+      CREATE_DATETIME, OPERATION_PERSON, OPERATION_DATETIME,
+      SAMPLE_PROPERTY, SAMPLE_NO)
+    values (#{id,jdbcType=VARCHAR},#{sampleTableId,jdbcType=VARCHAR}, #{extractPlateId,jdbcType=VARCHAR},
+      #{pcrPlateId,jdbcType=VARCHAR}, #{syPlateId,jdbcType=VARCHAR}, #{samplePlateSort,jdbcType=VARCHAR},
+      #{extractPlateSort,jdbcType=VARCHAR}, #{pcrPlateSort,jdbcType=VARCHAR}, #{syPlateSort,jdbcType=VARCHAR},
+      #{sampleLocationSort,jdbcType=INTEGER},#{extractLocationSort,jdbcType=INTEGER},
+      #{pcrLocationSort,jdbcType=INTEGER}, #{syLocationSort,jdbcType=VARCHAR},
+      #{samplePlateLocation,jdbcType=VARCHAR}, #{extractPlateLocation,jdbcType=VARCHAR},
+      #{pcrPlateLocation,jdbcType=VARCHAR}, #{syPlateLocation,jdbcType=VARCHAR}, #{confirmatoryMethod,jdbcType=VARCHAR}, 
+      #{preExperimentalMethod,jdbcType=VARCHAR}, #{sampleTransferMethod,jdbcType=VARCHAR}, 
+      #{elution,jdbcType=VARCHAR}, #{boardNo,jdbcType=VARCHAR}, #{createPerson,jdbcType=VARCHAR},
+      #{createDatetime,jdbcType=TIMESTAMP}, #{operationPerson,jdbcType=VARCHAR}, #{operationDatetime,jdbcType=TIMESTAMP},
+      #{sampleProperty,jdbcType=VARCHAR}, #{sampleNo,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.clims.model.po.SampleInfo" >
+    update sample_info
+    set SAMPLE_TABLE_ID = #{sampleTableId,jdbcType=VARCHAR},
+      EXTRACT_PLATE_ID = #{extractPlateId,jdbcType=VARCHAR},
+      PCR_PLATE_ID = #{pcrPlateId,jdbcType=VARCHAR},
+      SY_PLATE_ID = #{syPlateId,jdbcType=VARCHAR},
+      SAMPLE_PLATE_SORT = #{samplePlateSort,jdbcType=VARCHAR},
+      EXTRACT_PLATE_SORT = #{extractPlateSort,jdbcType=VARCHAR},
+      PCR_PLATE_SORT = #{pcrPlateSort,jdbcType=VARCHAR},
+      SY_PLATE_SORT = #{syPlateSort,jdbcType=VARCHAR},
+      SAMPLE_LOCATION_SORT = #{sampleLocationSort,jdbcType=INTEGER},
+      EXTRACT_LOCATION_SORT = #{extractLocationSort,jdbcType=INTEGER},
+      PCR_LOCATION_SORT = #{pcrLocationSort,jdbcType=INTEGER},
+      SY_LOCATION_SORT = #{syLocationSort,jdbcType=INTEGER},
+      SAMPLE_PLATE_LOCATION = #{samplePlateLocation,jdbcType=VARCHAR},
+      EXTRACT_PLATE_LOCATION = #{extractPlateLocation,jdbcType=VARCHAR},
+      PCR_PLATE_LOCATION = #{pcrPlateLocation,jdbcType=VARCHAR},
+      SY_PLATE_LOCATION = #{syPlateLocation,jdbcType=VARCHAR},
+      CONFIRMATORY_METHOD = #{confirmatoryMethod,jdbcType=VARCHAR},
+      PRE_EXPERIMENTAL_METHOD = #{preExperimentalMethod,jdbcType=VARCHAR},
+      SAMPLE_TRANSFER_METHOD = #{sampleTransferMethod,jdbcType=VARCHAR},
+      ELUTION = #{elution,jdbcType=VARCHAR},
+      BOARD_NO = #{boardNo,jdbcType=VARCHAR},
+      CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+      OPERATION_PERSON = #{operationPerson,jdbcType=VARCHAR},
+      OPERATION_DATETIME = #{operationDatetime,jdbcType=TIMESTAMP},
+      SAMPLE_PROPERTY = #{sampleProperty,jdbcType=VARCHAR},
+      SAMPLE_NO = #{sampleNo,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select *
+    from sample_info
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select *
+    from
+  </select>
+
+  <sql id="VO_Query_Where_Clause">
+    <if test="entity.id != null and entity.id != ''">
+      and si.ID=#{entity.id, jdbcType=VARCHAR}
+    </if>
+    <if test="entity.deleteFlag != null and entity.deleteFlag != ''">
+      and si.DELETE_FLAG=#{entity.deleteFlag, jdbcType=VARCHAR}
+    </if>
+    <if test="entity.boardNo != null and entity.boardNo != ''">
+      and si.BOARD_NO like CONCAT(CONCAT('%',#{entity.boardNo,jdbcType=VARCHAR}),'%')
+    </if>
+    <if test="entity.sampleNo != null and entity.sampleNo != ''">
+      and si.SAMPLE_NO like CONCAT(CONCAT('%',#{entity.sampleNo,jdbcType=VARCHAR}),'%')
+    </if>
+    <if test="entity.sampleTableId != null and entity.sampleTableId != ''">
+      and si.SAMPLE_TABLE_ID=#{entity.sampleTableId, jdbcType=VARCHAR}
+    </if>
+    <if test="entity.extractPlateId != null and entity.extractPlateId != ''">
+      and si.EXTRACT_PLATE_ID=#{entity.extractPlateId, jdbcType=VARCHAR}
+    </if>
+    <if test="entity.pcrPlateId != null and entity.pcrPlateId != ''">
+      and si.PCR_PLATE_ID=#{entity.pcrPlateId, jdbcType=VARCHAR}
+    </if>
+    <if test="entity.syPlateId != null and entity.syPlateId != ''">
+      and si.SY_PLATE_ID=#{entity.syPlateId, jdbcType=VARCHAR}
+    </if>
+    <if test="entity.createPerson != null and entity.createPerson != ''">
+      and si.CREATE_PERSON=#{entity.createPerson, jdbcType=VARCHAR}
+    </if>
+  </sql>
+
+  <select id="selectListVo" resultType="com.bazl.clims.model.vo.SampleInfoVo" resultMap="VOBaseResultMap">
+    SELECT
+    <if test="entity.sampleTableId != null and entity.sampleTableId != ''">
+      distinct SAMPLE_PLATE_SORT
+    </if>
+    <if test="entity.extractPlateId != null and entity.extractPlateId != ''">
+      distinct EXTRACT_PLATE_SORT
+    </if>
+    <if test="entity.pcrPlateId != null and entity.pcrPlateId != ''">
+      distinct PCR_PLATE_SORT
+    </if>
+    <if test="entity.syPlateId != null and entity.syPlateId != ''">
+      distinct SY_PLATE_SORT
+    </if>
+    from sample_info si
+    where 1=1 and si.DELETE_FLAG='0'
+    <if test="_parameter != null">
+      <include refid="VO_Query_Where_Clause"/>
+      <if test="entity.sampleTableId != null and entity.sampleTableId != ''">
+        order by si.SAMPLE_PLATE_SORT,si.CREATE_DATETIME asc
+      </if>
+      <if test="entity.extractPlateId != null and entity.extractPlateId != ''">
+        order by si.EXTRACT_PLATE_SORT,si.CREATE_DATETIME asc
+      </if>
+      <if test="entity.pcrPlateId != null and entity.pcrPlateId != ''">
+        order by si.PCR_PLATE_SORT,si.CREATE_DATETIME asc
+      </if>
+      <if test="entity.syPlateId != null and entity.syPlateId != ''">
+        order by si.SY_PLATE_SORT,si.CREATE_DATETIME asc
+      </if>
+    </if>
+  </select>
+
+  <select id="selectVoListBySampleInfo" resultType="com.bazl.clims.model.vo.SampleInfoVo" resultMap="VOBaseResultMap">
+    SELECT si.*,
+    di_1.DICT_NAME as confirmatoryMethodName,
+    di_2.DICT_NAME as preExperimentalMethodName,
+    di_3.DICT_NAME as sampleTransferMethodName,
+    di_4.DICT_NAME as elutionName,
+    di_5.DICT_NAME as samplePropertyName
+    from sample_info si
+    left join dict_item di_1 on di_1.DICT_CODE = si.CONFIRMATORY_METHOD and di_1.DICT_TYPE_CODE='CONFIRMATORY_METHOD'
+    left join dict_item di_2 on di_2.DICT_CODE = si.PRE_EXPERIMENTAL_METHOD and di_2.DICT_TYPE_CODE='PRE_EXPERIMENTAL_METHOD'
+    left join dict_item di_3 on di_3.DICT_CODE = si.SAMPLE_TRANSFER_METHOD and di_3.DICT_TYPE_CODE='SAMPLE_TRANSFER_METHOD'
+    left join dict_item di_4 on di_4.DICT_CODE = si.ELUTION and di_4.DICT_TYPE_CODE='ELUTION_DEFAULT'
+    left join dict_item di_5 on di_5.DICT_CODE = si.SAMPLE_PROPERTY and di_5.DICT_TYPE_CODE='SAMPLE_PROPERTY'
+    where 1=1 and si.DELETE_FLAG='0'
+    <if test="_parameter != null">
+      <include refid="VO_Query_Where_Clause"/>
+      order by si.CREATE_DATETIME asc
+    </if>
+  </select>
+
+  <select id="selectPaginationList" resultType="com.bazl.clims.model.vo.SampleInfoVo" resultMap="VOBaseResultMap">
+      select * from (
+      select rownum as rn, t.* from (
+    SELECT si.*,
+    di_1.DICT_NAME as confirmatoryMethodName,
+    di_2.DICT_NAME as preExperimentalMethodName,
+    di_3.DICT_NAME as sampleTransferMethodName,
+    di_4.DICT_NAME as elutionName,
+    di_5.DICT_NAME as samplePropertyName
+    from sample_info si
+    left join dict_item di_1 on di_1.DICT_CODE = si.CONFIRMATORY_METHOD and di_1.DICT_TYPE_CODE='CONFIRMATORY_METHOD'
+    left join dict_item di_2 on di_2.DICT_CODE = si.PRE_EXPERIMENTAL_METHOD and di_2.DICT_TYPE_CODE='PRE_EXPERIMENTAL_METHOD'
+    left join dict_item di_3 on di_3.DICT_CODE = si.SAMPLE_TRANSFER_METHOD and di_3.DICT_TYPE_CODE='SAMPLE_TRANSFER_METHOD'
+    left join dict_item di_4 on di_4.DICT_CODE = si.ELUTION and di_4.DICT_TYPE_CODE='ELUTION_DEFAULT'
+    left join dict_item di_5 on di_5.DICT_CODE = si.SAMPLE_PROPERTY and di_5.DICT_TYPE_CODE='SAMPLE_PROPERTY'
+    where 1=1 and si.DELETE_FLAG='0'
+    <if test="_parameter != null">
+      <include refid="VO_Query_Where_Clause"/>
+      order by si.CREATE_DATETIME asc
+        ) t where rownum &lt;=#{rows}
+        ) where rn &gt;#{offset}
+    </if>
+  </select>
+  <select id="selectCount" parameterType="com.bazl.clims.model.vo.SampleInfoVo" resultType="int">
+    SELECT count(*)
+    from sample_info si
+    where 1=1 and si.DELETE_FLAG='0'
+    <if test="_parameter != null">
+      <include refid="VO_Query_Where_Clause"/>
+      order by si.CREATE_DATETIME asc
+    </if>
+  </select>
+
+  <delete id="deleteFlagById" parameterType="java.lang.String">
+    update sample_info
+    set DELETE_FLAG='1', DELETE_DATETIME = sysdate
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+
+  <update id="updateBySampleTableId" parameterType="com.bazl.clims.model.po.SampleInfo" >
+    update sample_info
+    set EXTRACT_PLATE_ID = #{extractPlateId,jdbcType=VARCHAR}
+    where SAMPLE_TABLE_ID = #{sampleTableId,jdbcType=VARCHAR}
+  </update>
+
+  <update id="updateByExtractPlateId" parameterType="com.bazl.clims.model.po.SampleInfo" >
+    update sample_info
+    set PCR_PLATE_ID = #{pcrPlateId,jdbcType=VARCHAR}
+    where EXTRACT_PLATE_ID = #{extractPlateId,jdbcType=VARCHAR}
+  </update>
+
+  <update id="updateByPcrPlateId" parameterType="com.bazl.clims.model.po.SampleInfo" >
+    update sample_info
+    set SY_PLATE_ID = #{syPlateId,jdbcType=VARCHAR}
+    where PCR_PLATE_ID = #{pcrPlateId,jdbcType=VARCHAR}
+  </update>
+</mapper>

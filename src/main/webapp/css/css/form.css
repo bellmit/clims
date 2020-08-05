@@ -1,0 +1,101 @@
+.layui-form-label {
+    float: left;
+    display: block;
+    padding: 9px 15px;
+    width: 80px;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: right;
+}
+
+.layui-form-label.layui-form-left {
+    float: left;
+    padding-top: 9px;
+    position: relative;
+    text-align: left;
+    width: auto;
+}
+
+.layui-form-item {
+    margin-bottom: 0px;
+}
+
+.layui-form-left span {
+    position: absolute;
+    font-size: 25px;
+    color: red;
+    left: 0px;
+    top: 35%;
+}
+
+.layui-input {
+    background: #fafafa;
+    border-color: #e7e7e7;
+    color: #7a7a7a;
+    height: 36px;
+}
+
+.layui-form-radio>div {
+    color: #7a7a7a
+}
+
+.layui-form-radio>i:hover,
+.layui-form-radioed>i {
+    color: #00b39b;
+}
+
+.layui-form-item .layui-input-inline {
+    width: auto;
+}
+
+.layui-input-block.layui-input-top {
+    margin-left: 0px;
+    min-height: 36px;
+    padding-right: 50px;
+    padding-left: 15px;
+    position: relative;
+}
+
+.layui-input-top>span {
+    position: absolute;
+    font-size: 25px;
+    color: red;
+    left: 0px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.layui-form-label.layui-form-label-top {
+    float: none;
+    display: block;
+    padding: 0px 15px;
+    padding-top: 10px;
+    width: auto;
+    font-weight: 400;
+    line-height: 22px;
+    text-align: left;
+}
+
+.layui-form-checked[lay-skin=primary] i {
+    border-color: #00b39b;
+    background-color: #00b39b;
+    color: #fff;
+}
+
+
+/* 表格 */
+
+.layui-table thead tr {
+    background: #f2f5f4;
+}
+
+.layui-table th {
+    color: #000;
+    font-weight: 600;
+}
+
+.layui-table tbody tr:hover {
+    background: #fff;
+    box-shadow: 0px 0px 10px 5px #ebebeb;
+    color: #0091e9
+}

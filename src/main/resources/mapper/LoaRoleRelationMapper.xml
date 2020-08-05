@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.LoaRoleRelationMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.LoaRoleRelation" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="USER_ID" property="userId" jdbcType="VARCHAR" />
+    <result column="ROLE_ID" property="roleId" jdbcType="VARCHAR" />
+    <result column="role_level" property="roleLevel" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteloaRoleRelationByUserId" parameterType="java.lang.String" >
+    DELETE FROM LOA_ROLE_RELATION
+    WHERE USER_ID = #{userId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="addLoaRoleRelation">
+      INSERT INTO LOA_ROLE_RELATION (ID,USER_ID,ROLE_ID)VALUES (#{id,jdbcType=VARCHAR},#{userId,jdbcType=VARCHAR},#{roleId,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateloaRoleRelationByUserId">
+    UPDATE LOA_ROLE_RELATION SET ROLE_ID=#{roleId,jdbcType=VARCHAR} WHERE USER_ID = #{userId,jdbcType=VARCHAR}
+  </update>
+
+  <select id="listByUserId" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select lrr.ID, lrr.USER_ID, lrr.ROLE_ID ,lr.role_level from LOA_ROLE_RELATION lrr left join loa_role lr on lrr.role_id = lr.role_id
+    where lrr.USER_ID = #{userId,jdbcType=VARCHAR}
+  </select>
+
+
+</mapper>

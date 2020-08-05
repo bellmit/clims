@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.AmPersonalInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.AmPersonalInfo" >
+    <id column="PERSONAL_ID" property="personalId" jdbcType="VARCHAR" />
+    <result column="PICTURE" property="picture" jdbcType="VARCHAR" />
+    <result column="FULL_NAME" property="fullName" jdbcType="VARCHAR" />
+    <result column="GENDER" property="gender" jdbcType="VARCHAR" />
+    <result column="BORN_DATE" property="bornDate" jdbcType="TIMESTAMP" />
+    <result column="ID_CARD" property="idCard" jdbcType="VARCHAR" />
+    <result column="LEVEL" property="level" jdbcType="VARCHAR" />
+    <result column="RACE" property="race" jdbcType="VARCHAR" />
+    <result column="POLITICAL_OUTLOOK" property="politicalOutlook" jdbcType="VARCHAR" />
+    <result column="RESIDENCE ADDRESS" property="residenceAddress" jdbcType="VARCHAR" />
+    <result column="POSITION" property="position" jdbcType="VARCHAR" />
+    <result column="POLICE_NO" property="policeNo" jdbcType="VARCHAR" />
+    <result column="PAPERWORK_TYPE" property="paperworkType" jdbcType="VARCHAR" />
+    <result column="PAPERWORK_NO" property="paperworkNo" jdbcType="VARCHAR" />
+    <result column="PHONE_NUMBER" property="phoneNumber" jdbcType="VARCHAR" />
+    <result column="ORG_ID" property="orgId" jdbcType="VARCHAR" />
+    <result column="ORG_PHONE" property="orgPhone" jdbcType="VARCHAR" />
+    <result column="QUALIFICATION_LEVEL" property="qualificationLevel" jdbcType="VARCHAR" />
+    <result column="START_WORKING_HOURS" property="startWorkingHours" jdbcType="TIMESTAMP" />
+    <result column="ALARM_TIME" property="alarmTime" jdbcType="TIMESTAMP" />
+    <result column="HIGHEST_TITLE" property="highestTitle" jdbcType="VARCHAR" />
+    <result column="TITLE_GAIN_TIME" property="titleGainTime" jdbcType="TIMESTAMP" />
+    <result column="TITLE_VALIDITY" property="titleValidity" jdbcType="TIMESTAMP" />
+    <result column="TITLE_PICTURE" property="titlePicture" jdbcType="VARCHAR" />
+    <result column="WORK_NOW" property="workNow" jdbcType="VARCHAR" />
+    <result column="WORK_YEARS" property="workYears" jdbcType="VARCHAR" />
+    <result column="MAJOR_ADOPT_YEARS" property="majorAdoptYears" jdbcType="VARCHAR" />
+    <result column="MAJOR_ADOPT_SCORE" property="majorAdoptScore" jdbcType="VARCHAR" />
+    <result column="APPRAISER_APTITUDE" property="appraiserAptitude" jdbcType="VARCHAR" />
+    <!--业务字段-->
+    <result column="LOGIN_NAME" property="loginName" jdbcType="VARCHAR" />
+    <result column="LOGIN_PASSWORD" property="loginPassword" jdbcType="VARCHAR" />
+    <result column="ROLE_NAME" property="roleName" jdbcType="VARCHAR" />
+    <result column="ROLE_ID" property="roleId" jdbcType="VARCHAR" />
+    <result column="ACTIVE_FLAG" property="activeFlag" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <resultMap id="BaseResultMapVo" type="com.bazl.clims.model.vo.AmPersonalInfoVo" >
+    <id column="PERSONAL_ID" property="entity.personalId" jdbcType="VARCHAR" />
+    <result column="PICTURE" property="entity.picture" jdbcType="VARCHAR" />
+    <result column="FULL_NAME" property="entity.fullName" jdbcType="VARCHAR" />
+    <result column="GENDER" property="entity.gender" jdbcType="VARCHAR" />
+    <result column="BORN_DATE" property="entity.bornDate" jdbcType="TIMESTAMP" />
+    <result column="ID_CARD" property="entity.idCard" jdbcType="VARCHAR" />
+    <result column="LEVEL" property="entity.level" jdbcType="VARCHAR" />
+    <result column="RACE" property="entity.race" jdbcType="VARCHAR" />
+    <result column="POLITICAL_OUTLOOK" property="entity.politicalOutlook" jdbcType="VARCHAR" />
+    <result column="RESIDENCE ADDRESS" property="entity.residenceAddress" jdbcType="VARCHAR" />
+    <result column="POSITION" property="entity.position" jdbcType="VARCHAR" />
+    <result column="POLICE_NO" property="entity.policeNo" jdbcType="VARCHAR" />
+    <result column="PAPERWORK_TYPE" property="entity.paperworkType" jdbcType="VARCHAR" />
+    <result column="PAPERWORK_NO" property="entity.paperworkNo" jdbcType="VARCHAR" />
+    <result column="PHONE_NUMBER" property="entity.phoneNumber" jdbcType="VARCHAR" />
+    <result column="ORG_ID" property="entity.orgId" jdbcType="VARCHAR" />
+    <result column="ORG_PHONE" property="entity.orgPhone" jdbcType="VARCHAR" />
+    <result column="QUALIFICATION_LEVEL" property="entity.qualificationLevel" jdbcType="VARCHAR" />
+    <result column="START_WORKING_HOURS" property="entity.startWorkingHours" jdbcType="TIMESTAMP" />
+    <result column="ALARM_TIME" property="entity.alarmTime" jdbcType="TIMESTAMP" />
+    <result column="HIGHEST_TITLE" property="entity.highestTitle" jdbcType="VARCHAR" />
+    <result column="TITLE_GAIN_TIME" property="entity.titleGainTime" jdbcType="TIMESTAMP" />
+    <result column="TITLE_VALIDITY" property="entity.titleValidity" jdbcType="TIMESTAMP" />
+    <result column="TITLE_PICTURE" property="entity.titlePicture" jdbcType="VARCHAR" />
+    <result column="WORK_NOW" property="entity.workNow" jdbcType="VARCHAR" />
+    <result column="WORK_YEARS" property="entity.workYears" jdbcType="VARCHAR" />
+    <result column="MAJOR_ADOPT_YEARS" property="entity.majorAdoptYears" jdbcType="VARCHAR" />
+    <result column="MAJOR_ADOPT_SCORE" property="entity.majorAdoptScore" jdbcType="VARCHAR" />
+    <result column="APPRAISER_APTITUDE" property="entity.appraiserAptitude" jdbcType="VARCHAR" />
+    <result column="LOGIN_NAME" property="entity.loginName" jdbcType="VARCHAR" />
+    <result column="LOGIN_PASSWORD" property="entity.loginPassword" jdbcType="VARCHAR" />
+    <result column="ROLE_NAME" property="entity.roleName" jdbcType="VARCHAR" />
+    <result column="ROLE_ID" property="entity.roleId" jdbcType="VARCHAR" />
+    <result column="ACTIVE_FLAG" property="entity.activeFlag" jdbcType="VARCHAR" />
+    <!--业务字段-->
+    <result column="POSITION_NAME" property="positionName" jdbcType="VARCHAR" />
+    <result column="GENDER_NAME" property="genderName" jdbcType="VARCHAR" />
+
+  </resultMap>
+
+  <select id="queryAmPersonalInfoLIst" resultMap="BaseResultMap">
+      select * from Am_Personal_Info ap , Loa_User_Info lu, org_info o
+      <!--,LOA_ROLE_RELATION lrr , Loa_Role lr-->
+      where ap.personal_id = lu.personal_id and lu.org_id=o.org_id
+      <!--and lu.user_id =lrr.user_id and lrr.role_id = lr.role_id -->
+      <if test="orgId != null and orgId != ''">
+        and (lu.org_id = #{orgId,jdbcType=VARCHAR} or o.PARENT_ID = #{orgId,jdbcType=VARCHAR})
+      </if>
+      and lu.USER_TYPE='5'
+  </select>
+
+  <select id="selectByPersonalId" resultMap="BaseResultMap">
+    select * from Am_Personal_Info ap
+    where ap.PERSONAL_ID = #{personId,jdbcType=VARCHAR}
+  </select>
+
+  <select id="queryAmPersonalInfoVoList" resultMap="BaseResultMapVo">
+      select ap.*, lu.*,
+        <!--lrr.*, lr.*, -->
+        d.dict_name as POSITION_NAME, d1.dict_name as GENDER_NAME
+        from Am_Personal_Info ap
+        left join Loa_User_Info lu
+        on ap.personal_id = lu.personal_id
+      <!--
+        left join LOA_ROLE_RELATION lrr
+        on lu.user_id = lrr.user_id
+        left join Loa_Role lr
+        on lrr.role_id = lr.role_id
+      -->
+        left join dict_item d
+        on ap.position = d.dict_code
+        and d.dict_type_code = 'POSITION_LIST'
+        left join dict_item d1
+        on ap.gender = d1.dict_code
+        and d1.dict_type_code = 'GENDER'
+        <if test="_parameter != null">
+          <include refid="VO_Query_Where_Clause"/>
+        </if>
+  </select>
+  <select id="queryAmPersonalInfo" resultMap="BaseResultMap">
+      select * from Am_Personal_Info ap , Loa_User_Info lu
+       <!--,LOA_ROLE_RELATION lrr , Loa_Role lr-->
+      where ap.personal_id = lu.personal_id
+      <!--and lu.user_id =lrr.user_id and lrr.role_id = lr.role_id -->
+      and ap.personal_id=#{personalId}
+  </select>
+  <insert id="addAmPersonalInfo" parameterType="com.bazl.clims.model.po.AmPersonalInfo">
+    INSERT INTO Am_Personal_Info(
+    PERSONAL_ID,
+    FULL_NAME,
+    GENDER,
+    POSITION,
+    POLICE_NO,
+    PHONE_NUMBER,
+    ORG_PHONE
+    )VALUES (
+    #{personalId,jdbcType=VARCHAR},
+    #{fullName,jdbcType=VARCHAR},
+    #{gender,jdbcType=VARCHAR},
+    #{position,jdbcType=VARCHAR},
+    #{policeNo,jdbcType=VARCHAR},
+    #{phoneNumber,jdbcType=VARCHAR},
+    #{orgPhone,jdbcType=VARCHAR}
+    )
+  </insert>
+  <delete id="deleteAmPersonalInfo" parameterType="com.bazl.clims.model.po.AmPersonalInfo">
+    DELETE Am_Personal_Info where PERSONAL_ID=#{personalId,jdbcType=VARCHAR}
+  </delete>
+  <update id="updateAmPersonalInfo" parameterType="com.bazl.clims.model.po.AmPersonalInfo">
+    UPDATE Am_Personal_Info SET
+    FULL_NAME =#{fullName,jdbcType=VARCHAR},
+    GENDER=#{gender,jdbcType=VARCHAR},
+    POSITION= #{position,jdbcType=VARCHAR},
+    POLICE_NO=#{policeNo,jdbcType=VARCHAR},
+    PHONE_NUMBER= #{phoneNumber,jdbcType=VARCHAR},
+    ORG_PHONE=#{orgPhone,jdbcType=VARCHAR}
+    WHERE
+    PERSONAL_ID=#{personalId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateAmPersonalInfoById" parameterType="com.bazl.clims.model.po.AmPersonalInfo">
+    UPDATE Am_Personal_Info SET
+    POSITION= #{position,jdbcType=VARCHAR},
+    POLICE_NO=#{policeNo,jdbcType=VARCHAR},
+    PHONE_NUMBER= #{phoneNumber,jdbcType=VARCHAR},
+    ORG_PHONE=#{orgPhone,jdbcType=VARCHAR}
+    WHERE
+    PERSONAL_ID=#{personalId,jdbcType=VARCHAR}
+  </update>
+
+  <sql id="VO_Query_Where_Clause">
+    <where>
+      <if test="orgId != null and orgId != ''">
+        lu.org_id = #{orgId,jdbcType=VARCHAR}
+      </if>
+      and lu.USER_TYPE='4' and ap.WORK_NOW  LIKE '01%'
+    </where>
+  </sql>
+
+  <select id="queryAmPersonalInfoListOrgId" resultMap="BaseResultMap">
+    select ap.* from Am_Personal_Info ap , Loa_User_Info lu
+    where ap.personal_id = lu.personal_id and lu.USER_TYPE = '4'
+    <if test="orgId != null and orgId != ''">
+      and ap.org_id = #{orgId,jdbcType=VARCHAR}
+    </if>
+    <if test="orgId == null or orgId == ''">
+      and ap.org_id is null
+    </if>
+
+  </select>
+
+</mapper>

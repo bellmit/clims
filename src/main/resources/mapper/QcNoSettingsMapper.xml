@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.QcSettingsMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.QcNoSettings" >
+    <id column="ID" property="Id" jdbcType="VARCHAR" />
+    <result column="LAB_SERVER_NO" property="labServerNo" jdbcType="VARCHAR" />
+    <result column="LAB_SERVER_HEADER" property="labServerHeader" jdbcType="VARCHAR" />
+    <result column="DICT_CODE" property="dictCode" jdbcType="VARCHAR" />
+    <result column="BARCODE" property="barcode" jdbcType="VARCHAR" />
+
+  </resultMap>
+
+  <sql id="Base_column_List">
+    ID,LAB_SERVER_NO,LAB_SERVER_HEADER,DICT_CODE,BARCODE
+  </sql>
+
+<select id="selectByLab" parameterType="com.bazl.clims.model.po.QcNoSettings" resultMap="BaseResultMap">
+   select  <include refid="Base_column_List"/>
+   from QC_NO_SETTINGS
+   where LAB_SERVER_NO = #{labServerNo,jdbcType=VARCHAR}
+</select>
+
+</mapper>

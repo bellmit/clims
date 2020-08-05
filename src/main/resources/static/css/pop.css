@@ -1,0 +1,147 @@
+ .popBox .modal-content .modal-header {
+     border: none;
+     background: #f5f5f5
+ }
+ 
+ .popBox .modal-content .modal-header h4 {
+     text-align: center;
+     color: #007ef9;
+     font-size: 18px;
+     font-weight: 600;
+ }
+ 
+ .popBox .modal-content .modal-body .form-group {
+     margin-top: 10px;
+     margin-bottom: 0px;
+ }
+ 
+ .popBox .modal-content .modal-body .form-group:nth-child(1) {
+     margin-top: 0px;
+ }
+ 
+ .popBox .modal-content .modal-footer {
+     border: none;
+     text-align: center
+ }
+ 
+ .popBox .radio-inline {
+     margin-top: 0px;
+ }
+ 
+ .popBox .radio-sex {
+     margin-top: 0px;
+ }
+ 
+ .xsBox .modal-dialog {
+     width: 400px;
+     top: 2%;
+ }
+ 
+ .xsBox .modal-content .modal-body {
+     padding: 0px 50px;
+ }
+ 
+ .xsBox .modal-content .modal-body .form-group:nth-child(1) {
+     margin-top: 10px;
+ }
+ 
+ .xsBox .modal-content .modal-body .form-group label {
+     font-weight: 400;
+ }
+ 
+ .xsBox .modal-content .modal-footer {
+     padding: 15px 50px;
+ }
+ 
+ .smallBox .modal-dialog {
+     width: 480px;
+     top: 15%;
+ }
+ 
+ .smallBox .modal-content .modal-body {
+     padding: 47px 93px;
+     padding-bottom: 15px;
+ }
+ 
+ .smallBox .modal-content .modal-body .form-group:nth-child(1) {
+     margin-top: 0px;
+ }
+ 
+ .smallBox .modal-content .modal-body .form-control {
+     color: #333333;
+     font-weight: 600;
+ }
+ 
+ .smallBox .modal-content .modal-footer {
+     padding: 15px 93px;
+ }
+ 
+ .tips .modal-dialog {
+     width: 400px;
+     top: 15%;
+ }
+ 
+ .tips .modal-body {
+     text-align: center;
+     font-size: 20px;
+     color: #000;
+ }
+ 
+ .tips .modal-content .modal-body {
+     padding: 47px 85px;
+     padding-bottom: 15px;
+ }
+ 
+ .tips .modal-content .modal-footer {
+     padding: 15px 85px;
+ }
+ 
+ .bigBox .modal-dialog {
+     width: 720px;
+     top: 15%;
+ }
+ 
+ .bigBox .modal-content .modal-body {
+     padding: 0px 42px;
+ }
+ 
+ .bigBox .modal-content .modal-body .form-group:nth-child(1) {
+     margin-top: 10px;
+ }
+ 
+ .bigBox .modal-content .modal-body .form-group label {
+     font-weight: 400;
+ }
+ 
+ .bigBox .modal-content .modal-footer {
+     padding: 15px 42px;
+ }
+ 
+ .bigBox .modal-content .modal-footer button:nth-child(2) {
+     margin-right: 25px;
+ }
+ 
+ .saveBox .modal-dialog {
+     width: 630px;
+     top: 10%;
+ }
+ 
+ .saveBox .modal-content .modal-body {
+     padding: 0px 56px;
+ }
+ 
+ .saveBox .modal-content .modal-footer {
+     padding: 15px 56px;
+ }
+ 
+ .saveBox .modal-content .modal-body .form-group:nth-child(1) {
+     margin-top: 10px;
+ }
+ 
+ .saveBox .inputBox .col-md-12 {
+     padding: 0px;
+ }
+ 
+ .saveBox .inputBox .form-group label:nth-child(2) {
+     font-weight: 400;
+ }

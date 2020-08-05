@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.DictInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.DictInfo" >
+    <id column="DICT_INFO_ID" property="dictInfoId" jdbcType="VARCHAR" />
+    <result column="DICT_TYPE_CODE" property="dictTypeCode" jdbcType="VARCHAR" />
+    <result column="DICT_TYPE_NAME" property="dictTypeName" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from DICT_INFO
+    where DICT_INFO_ID = #{dictInfoId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.clims.model.DictInfo" >
+    insert into DICT_INFO (DICT_INFO_ID, DICT_TYPE_CODE, DICT_TYPE_NAME,
+    CREATE_DATETIME, CREATE_PERSON)
+    values (#{dictInfoId,jdbcType=VARCHAR}, #{dictTypeCode,jdbcType=VARCHAR}, #{dictTypeName,jdbcType=VARCHAR},
+    #{createDatetime,jdbcType=TIMESTAMP}, #{createPerson,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.clims.model.DictInfo" >
+    update DICT_INFO
+    set DICT_TYPE_CODE = #{dictTypeCode,jdbcType=VARCHAR},
+    DICT_TYPE_NAME = #{dictTypeName,jdbcType=VARCHAR},
+    CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+    CREATE_PERSON = #{createPerson,jdbcType=VARCHAR}
+    where DICT_INFO_ID = #{dictInfoId,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select DICT_INFO_ID, DICT_TYPE_CODE, DICT_TYPE_NAME, CREATE_DATETIME, CREATE_PERSON
+    from DICT_INFO
+    where DICT_INFO_ID = #{dictInfoId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select DICT_INFO_ID, DICT_TYPE_CODE, DICT_TYPE_NAME, CREATE_DATETIME, CREATE_PERSON
+    from DICT_INFO
+  </select>
+  <select id="selectByDictTypeCode" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select *
+    from DICT_INFO
+    where DICT_TYPE_CODE = #{dicttypecode,jdbcType=VARCHAR}
+  </select>
+</mapper>

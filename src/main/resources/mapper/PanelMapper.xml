@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.PanelMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.Panel" >
+    <id column="PANELID" property="panelid" jdbcType="VARCHAR" />
+    <result column="PANELNAME" property="panelname" jdbcType="VARCHAR" />
+    <result column="PRODUCER" property="producer" jdbcType="VARCHAR" />
+    <result column="VERSION" property="version" jdbcType="INTEGER" />
+    <result column="CREATETIME" property="createtime" jdbcType="DATE" />
+    <result column="COMMENTS" property="comments" jdbcType="VARCHAR" />
+    <collection property="labExtractKit" ofType="com.bazl.clims.model.po.LabExtractKit">
+      <result column="KIT_ID" property="kitId" jdbcType="VARCHAR" />
+      <result column="BATCH_NUMBER" property="batchNumber" jdbcType="VARCHAR" />
+      <result column="TERM_OF_VALIDITY" property="termOfValidity" jdbcType="VARCHAR" />
+      <result column="PANELID" property="panelid" jdbcType="VARCHAR" />
+    </collection>
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from PANEL
+    where PANELID = #{panelid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.clims.model.po.Panel" >
+    insert into PANEL (PANELID, PANELNAME, PRODUCER, VERSION, CREATETIME, COMMENTS)
+    values (#{panelid,jdbcType=VARCHAR}, #{panelname,jdbcType=VARCHAR}, #{producer,jdbcType=VARCHAR}, #{version,jdbcType=VARCHAR}, #{createtime,jdbcType=VARCHAR}, #{comments,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.clims.model.po.Panel" >
+    update PANEL
+    set PANELNAME = #{panelname,jdbcType=VARCHAR},
+    PRODUCER = #{producer,jdbcType=VARCHAR},
+    VERSION = #{version,jdbcType=VARCHAR},
+    CREATETIME = #{createtime,jdbcType=VARCHAR},
+    COMMENTS = #{comments,jdbcType=VARCHAR}
+    where PANELID = #{panelid,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select *
+    from PANEL p
+    where p.PANELID = #{panelid,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select *
+    from PANEL p
+  </select>
+</mapper>

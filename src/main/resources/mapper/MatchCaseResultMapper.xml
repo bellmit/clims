@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.MatchCaseResultMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.MatchCaseResult" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="CASE_ID" property="caseId" jdbcType="VARCHAR" />
+    <result column="GROUP_ID" property="groupId" jdbcType="VARCHAR" />
+    <result column="MATCH_TYPE" property="matchType" jdbcType="VARCHAR" />
+    <result column="SAMPLEA_ID" property="sampleaId" jdbcType="VARCHAR" />
+    <result column="SAMPLEB_ID" property="samplebId" jdbcType="VARCHAR" />
+    <result column="SAMPLEC_ID" property="samplecId" jdbcType="VARCHAR" />
+    <result column="SAMPLEA_NO" property="sampleaNo" jdbcType="VARCHAR" />
+    <result column="SAMPLEB_NO" property="samplebNo" jdbcType="VARCHAR" />
+    <result column="SAMPLEC_NO" property="samplecNo" jdbcType="VARCHAR" />
+    <result column="SAMPLEA_NAME" property="sampleaName" jdbcType="VARCHAR" />
+    <result column="SAMPLEB_NAME" property="samplebName" jdbcType="VARCHAR" />
+    <result column="SAMPLEC_NAME" property="samplecName" jdbcType="VARCHAR" />
+    <result column="SAME_COUNT" property="sameCount" jdbcType="DECIMAL" />
+    <result column="DIFF_COUNT" property="diffCount" jdbcType="DECIMAL" />
+    <result column="PROBABILITY" property="probability" jdbcType="FLOAT" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_PERSON" property="updatePerson" jdbcType="VARCHAR" />
+    <result column="DELETE_FLAG" property="deleteFlag" jdbcType="VARCHAR" />
+    <result column="DELETE_DATETIME" property="deleteDatetime" jdbcType="TIMESTAMP" />
+    <result column="DELETE_PERSON" property="deletePerson" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from MATCH_CASE_RESULT
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.clims.model.po.MatchCaseResult" >
+    insert into MATCH_CASE_RESULT (ID, CASE_ID, GROUP_ID, 
+      MATCH_TYPE, SAMPLEA_ID, SAMPLEB_ID, 
+      SAMPLEC_ID, SAMPLEA_NO, SAMPLEB_NO, 
+      SAMPLEC_NO, SAMPLEA_NAME, SAMPLEB_NAME, 
+      SAMPLEC_NAME, SAME_COUNT, DIFF_COUNT, 
+      PROBABILITY, CREATE_DATETIME, CREATE_PERSON, 
+      UPDATE_DATETIME, UPDATE_PERSON, DELETE_FLAG, 
+      DELETE_DATETIME, DELETE_PERSON)
+    values (#{id,jdbcType=VARCHAR}, #{caseId,jdbcType=VARCHAR}, #{groupId,jdbcType=VARCHAR}, 
+      #{matchType,jdbcType=VARCHAR}, #{sampleaId,jdbcType=VARCHAR}, #{samplebId,jdbcType=VARCHAR}, 
+      #{samplecId,jdbcType=VARCHAR}, #{sampleaNo,jdbcType=VARCHAR}, #{samplebNo,jdbcType=VARCHAR}, 
+      #{samplecNo,jdbcType=VARCHAR}, #{sampleaName,jdbcType=VARCHAR}, #{samplebName,jdbcType=VARCHAR}, 
+      #{samplecName,jdbcType=VARCHAR}, #{sameCount,jdbcType=DECIMAL}, #{diffCount,jdbcType=DECIMAL}, 
+      #{probability,jdbcType=FLOAT}, #{createDatetime,jdbcType=TIMESTAMP}, #{createPerson,jdbcType=VARCHAR}, 
+      #{updateDatetime,jdbcType=TIMESTAMP}, #{updatePerson,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=VARCHAR}, 
+      #{deleteDatetime,jdbcType=TIMESTAMP}, #{deletePerson,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.clims.model.po.MatchCaseResult" >
+    update MATCH_CASE_RESULT
+    set CASE_ID = #{caseId,jdbcType=VARCHAR},
+      GROUP_ID = #{groupId,jdbcType=VARCHAR},
+      MATCH_TYPE = #{matchType,jdbcType=VARCHAR},
+      SAMPLEA_ID = #{sampleaId,jdbcType=VARCHAR},
+      SAMPLEB_ID = #{samplebId,jdbcType=VARCHAR},
+      SAMPLEC_ID = #{samplecId,jdbcType=VARCHAR},
+      SAMPLEA_NO = #{sampleaNo,jdbcType=VARCHAR},
+      SAMPLEB_NO = #{samplebNo,jdbcType=VARCHAR},
+      SAMPLEC_NO = #{samplecNo,jdbcType=VARCHAR},
+      SAMPLEA_NAME = #{sampleaName,jdbcType=VARCHAR},
+      SAMPLEB_NAME = #{samplebName,jdbcType=VARCHAR},
+      SAMPLEC_NAME = #{samplecName,jdbcType=VARCHAR},
+      SAME_COUNT = #{sameCount,jdbcType=DECIMAL},
+      DIFF_COUNT = #{diffCount,jdbcType=DECIMAL},
+      PROBABILITY = #{probability,jdbcType=FLOAT},
+      CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+      CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP},
+      UPDATE_PERSON = #{updatePerson,jdbcType=VARCHAR},
+      DELETE_FLAG = #{deleteFlag,jdbcType=VARCHAR},
+      DELETE_DATETIME = #{deleteDatetime,jdbcType=TIMESTAMP},
+      DELETE_PERSON = #{deletePerson,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select ID, CASE_ID, GROUP_ID, MATCH_TYPE, SAMPLEA_ID, SAMPLEB_ID, SAMPLEC_ID, SAMPLEA_NO, 
+    SAMPLEB_NO, SAMPLEC_NO, SAMPLEA_NAME, SAMPLEB_NAME, SAMPLEC_NAME, SAME_COUNT, DIFF_COUNT, 
+    PROBABILITY, CREATE_DATETIME, CREATE_PERSON, UPDATE_DATETIME, UPDATE_PERSON, DELETE_FLAG, 
+    DELETE_DATETIME, DELETE_PERSON
+    from MATCH_CASE_RESULT
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select ID, CASE_ID, GROUP_ID, MATCH_TYPE, SAMPLEA_ID, SAMPLEB_ID, SAMPLEC_ID, SAMPLEA_NO, 
+    SAMPLEB_NO, SAMPLEC_NO, SAMPLEA_NAME, SAMPLEB_NAME, SAMPLEC_NAME, SAME_COUNT, DIFF_COUNT, 
+    PROBABILITY, CREATE_DATETIME, CREATE_PERSON, UPDATE_DATETIME, UPDATE_PERSON, DELETE_FLAG, 
+    DELETE_DATETIME, DELETE_PERSON
+    from MATCH_CASE_RESULT
+  </select>
+</mapper>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.CompareRelativeResultMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.CompareRelativeResult" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="CASE_ID" property="caseId" jdbcType="VARCHAR" />
+    <result column="PANEL_ID" property="panelId" jdbcType="VARCHAR" />
+    <result column="REFERENCE_ID" property="referenceId" jdbcType="VARCHAR" />
+    <result column="FATHER_SAMPLE_NO" property="fatherSampleNo" jdbcType="VARCHAR" />
+    <result column="MOTHER_SAMPLE_NO" property="motherSampleNo" jdbcType="VARCHAR" />
+    <result column="CHILD_SAMPLE_NO" property="childSampleNo" jdbcType="VARCHAR" />
+    <result column="COMPARE_GENE_SUM" property="compareGeneSum" jdbcType="DECIMAL" />
+    <result column="COMPARE_TOTAL_PROBABILITY" property="compareTotalProbability" jdbcType="VARCHAR" />
+    <result column="COMPARE_POPULATION_ID" property="comparePopulationId" jdbcType="VARCHAR" />
+    <result column="MATCH_LIMIT" property="matchLimit" jdbcType="DECIMAL" />
+    <result column="TOLERANCE" property="tolerance" jdbcType="DECIMAL" />
+    <result column="MATCH_MODE" property="matchMode" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_PERSON" property="updatePerson" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from COMPARE_RELATIVE_RESULT
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+
+  <delete id="deleteByCaseId" parameterType="java.lang.String" >
+    delete from COMPARE_RELATIVE_RESULT
+    where CASE_ID = #{caseId,jdbcType=VARCHAR}
+  </delete>
+
+  <insert id="insert" parameterType="com.bazl.clims.model.po.CompareRelativeResult" >
+    insert into COMPARE_RELATIVE_RESULT (ID, CASE_ID, PANEL_ID, 
+      REFERENCE_ID, FATHER_SAMPLE_NO, MOTHER_SAMPLE_NO, 
+      CHILD_SAMPLE_NO, COMPARE_GENE_SUM, COMPARE_TOTAL_PROBABILITY, 
+      COMPARE_POPULATION_ID, MATCH_LIMIT, TOLERANCE, MATCH_MODE,
+      CREATE_DATETIME, CREATE_PERSON, UPDATE_DATETIME, 
+      UPDATE_PERSON)
+    values (#{id,jdbcType=VARCHAR}, #{caseId,jdbcType=VARCHAR}, #{panelId,jdbcType=VARCHAR}, 
+      #{referenceId,jdbcType=VARCHAR}, #{fatherSampleNo,jdbcType=VARCHAR}, #{motherSampleNo,jdbcType=VARCHAR}, 
+      #{childSampleNo,jdbcType=VARCHAR}, #{compareGeneSum,jdbcType=DECIMAL}, #{compareTotalProbability,jdbcType=VARCHAR}, 
+      #{comparePopulationId,jdbcType=VARCHAR}, #{matchLimit,jdbcType=DECIMAL}, #{tolerance,jdbcType=DECIMAL}, #{matchMode,jdbcType=VARCHAR},
+      #{createDatetime,jdbcType=TIMESTAMP}, #{createPerson,jdbcType=VARCHAR}, #{updateDatetime,jdbcType=TIMESTAMP}, 
+      #{updatePerson,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.clims.model.po.CompareRelativeResult" >
+    update COMPARE_RELATIVE_RESULT
+    set CASE_ID = #{caseId,jdbcType=VARCHAR},
+      PANEL_ID = #{panelId,jdbcType=VARCHAR},
+      REFERENCE_ID = #{referenceId,jdbcType=VARCHAR},
+      FATHER_SAMPLE_NO = #{fatherSampleNo,jdbcType=VARCHAR},
+      MOTHER_SAMPLE_NO = #{motherSampleNo,jdbcType=VARCHAR},
+      CHILD_SAMPLE_NO = #{childSampleNo,jdbcType=VARCHAR},
+      COMPARE_GENE_SUM = #{compareGeneSum,jdbcType=DECIMAL},
+      COMPARE_TOTAL_PROBABILITY = #{compareTotalProbability,jdbcType=VARCHAR},
+      COMPARE_POPULATION_ID = #{comparePopulationId,jdbcType=VARCHAR},
+      MATCH_LIMIT = #{matchLimit,jdbcType=DECIMAL},
+      TOLERANCE = #{tolerance,jdbcType=DECIMAL},
+      MATCH_MODE = #{matchMode,jdbcType=VARCHAR},
+      CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+      CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP},
+      UPDATE_PERSON = #{updatePerson,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select *
+    from COMPARE_RELATIVE_RESULT
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select *
+    from COMPARE_RELATIVE_RESULT
+  </select>
+
+  <select id="selectListByCaseId" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select *
+    FROM COMPARE_RELATIVE_RESULT
+    where CASE_ID = #{caseId,jdbcType=VARCHAR}
+    order by CREATE_DATETIME asc
+  </select>
+</mapper>

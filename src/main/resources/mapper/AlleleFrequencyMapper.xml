@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.AlleleFrequencyMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.AlleleFrequency" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="RACE_ID" property="raceId" jdbcType="VARCHAR" />
+    <result column="RACE_NAME" property="raceName" jdbcType="VARCHAR" />
+    <result column="MARKER_NAME" property="markerName" jdbcType="VARCHAR" />
+    <result column="ALLELE_NAME" property="alleleName" jdbcType="VARCHAR" />
+    <result column="ALLELE_FREQUENCY" property="alleleFrequency" jdbcType="DECIMAL" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from ALLELE_FREQUENCY
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.clims.model.po.AlleleFrequency" >
+    insert into ALLELE_FREQUENCY (ID, RACE_ID, RACE_NAME, 
+      MARKER_NAME, ALLELE_NAME, ALLELE_FREQUENCY, 
+      CREATE_PERSON, CREATE_DATETIME)
+    values (#{id,jdbcType=VARCHAR}, #{raceId,jdbcType=VARCHAR}, #{raceName,jdbcType=VARCHAR}, 
+      #{markerName,jdbcType=VARCHAR}, #{alleleName,jdbcType=VARCHAR}, #{alleleFrequency,jdbcType=DECIMAL}, 
+      #{createPerson,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.clims.model.po.AlleleFrequency" >
+    update ALLELE_FREQUENCY
+    set RACE_ID = #{raceId,jdbcType=VARCHAR},
+      RACE_NAME = #{raceName,jdbcType=VARCHAR},
+      MARKER_NAME = #{markerName,jdbcType=VARCHAR},
+      ALLELE_NAME = #{alleleName,jdbcType=VARCHAR},
+      ALLELE_FREQUENCY = #{alleleFrequency,jdbcType=DECIMAL},
+      CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select ID, RACE_ID, RACE_NAME, MARKER_NAME, ALLELE_NAME, ALLELE_FREQUENCY, CREATE_PERSON, 
+    CREATE_DATETIME
+    from ALLELE_FREQUENCY
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select ID, RACE_ID, RACE_NAME, MARKER_NAME, ALLELE_NAME, ALLELE_FREQUENCY, CREATE_PERSON, 
+    CREATE_DATETIME
+    from ALLELE_FREQUENCY
+  </select>
+</mapper>

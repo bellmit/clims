@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.LabPcrInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.LabPcrInfo" >
+    <id column="PCR_ID" property="pcrId" jdbcType="VARCHAR" />
+    <result column="TASK_ID" property="taskId" jdbcType="VARCHAR" />
+    <result column="PCR_NO" property="pcrNo" jdbcType="VARCHAR" />
+    <result column="BOARD_NO" property="boardNo" jdbcType="VARCHAR" />
+    <result column="PCR_PROGRAM" property="pcrProgram" jdbcType="VARCHAR" />
+    <result column="PCR_INSTRUMENT" property="pcrInstrument" jdbcType="VARCHAR" />
+    <result column="PCR_SYSTEM" property="pcrSystem" jdbcType="VARCHAR" />
+    <result column="PCR_REAGENT" property="pcrReagent" jdbcType="VARCHAR" />
+    <result column="PCR_LOOP_COUNT" property="pcrLoopCount" jdbcType="DECIMAL" />
+    <result column="PCR_TEMPERATURE" property="pcrTemperature" jdbcType="VARCHAR" />
+    <result column="PCR_HUMIDITY" property="pcrHumidity" jdbcType="VARCHAR" />
+    <result column="PCR_START_DATETIME" property="pcrStartDatetime" jdbcType="TIMESTAMP" />
+    <result column="PCR_END_DATETIME" property="pcrEndDatetime" jdbcType="TIMESTAMP" />
+    <result column="PCR_PERSON1" property="pcrPerson1" jdbcType="VARCHAR" />
+    <result column="PCR_PERSON2" property="pcrPerson2" jdbcType="VARCHAR" />
+    <result column="SAMPLE_COUNT" property="sampleCount" jdbcType="DECIMAL" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_PERSON" property="updatePerson" jdbcType="VARCHAR" />
+    <result column="BATCHB" property="batchb" jdbcType="VARCHAR" />
+    <result column="VALIDITY" property="validity" jdbcType="VARCHAR" />
+    <result column="PCR_STAGE" property="pcrStage" jdbcType="VARCHAR" />
+    <result column="ORG_ID" property="orgId" jdbcType="VARCHAR" />
+    <!--业务字段-->
+    <result column="DELEGATE_ORG_CODE" property="delegateOrgCode" jdbcType="VARCHAR" />
+  </resultMap>
+
+
+
+  <resultMap id="VoBaseResultMap" type="com.bazl.clims.model.vo.LabPcrInfoVo" >
+    <id column="PCR_ID" property="entity.pcrId" jdbcType="VARCHAR" />
+    <result column="TASK_ID" property="entity.taskId" jdbcType="VARCHAR" />
+    <result column="PCR_NO" property="entity.pcrNo" jdbcType="VARCHAR" />
+    <result column="BOARD_NO" property="entity.boardNo" jdbcType="VARCHAR" />
+    <result column="PCR_PROGRAM" property="entity.pcrProgram" jdbcType="VARCHAR" />
+    <result column="PCR_INSTRUMENT" property="entity.pcrInstrument" jdbcType="VARCHAR" />
+    <result column="PCR_SYSTEM" property="entity.pcrSystem" jdbcType="VARCHAR" />
+    <result column="PCR_REAGENT" property="entity.pcrReagent" jdbcType="VARCHAR" />
+    <result column="PCR_LOOP_COUNT" property="entity.pcrLoopCount" jdbcType="DECIMAL" />
+    <result column="PCR_TEMPERATURE" property="entity.pcrTemperature" jdbcType="VARCHAR" />
+    <result column="PCR_HUMIDITY" property="entity.pcrHumidity" jdbcType="VARCHAR" />
+    <result column="PCR_START_DATETIME" property="entity.pcrStartDatetime" jdbcType="TIMESTAMP" />
+    <result column="PCR_END_DATETIME" property="entity.pcrEndDatetime" jdbcType="TIMESTAMP" />
+    <result column="PCR_PERSON1" property="entity.pcrPerson1" jdbcType="VARCHAR" />
+    <result column="PCR_PERSON2" property="entity.pcrPerson2" jdbcType="VARCHAR" />
+    <result column="SAMPLE_COUNT" property="entity.sampleCount" jdbcType="DECIMAL" />
+    <result column="CREATE_DATETIME" property="entity.createDatetime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_PERSON" property="entity.createPerson" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="entity.updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_PERSON" property="entity.updatePerson" jdbcType="VARCHAR" />
+    <result column="BATCHB" property="entity.batchb" jdbcType="VARCHAR" />
+    <result column="VALIDITY" property="entity.validity" jdbcType="VARCHAR" />
+    <result column="PCR_STAGE" property="entity.pcrStage" jdbcType="VARCHAR" />
+    <result column="ORG_ID" property="entity.orgId" jdbcType="VARCHAR" />
+    <!--业务字段-->
+    <result column="DELEGATE_ORG_CODE" property="entity.delegateOrgCode" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from LAB_PCR_INFO
+    where PCR_ID = #{pcrId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.clims.model.po.LabPcrInfo" >
+    insert into LAB_PCR_INFO (PCR_ID, TASK_ID, PCR_NO, 
+      BOARD_NO, PCR_PROGRAM, PCR_INSTRUMENT, 
+      PCR_SYSTEM, PCR_REAGENT, PCR_LOOP_COUNT, 
+      PCR_TEMPERATURE, PCR_HUMIDITY, PCR_START_DATETIME, 
+      PCR_END_DATETIME, PCR_PERSON1, PCR_PERSON2, 
+      SAMPLE_COUNT, CREATE_DATETIME, CREATE_PERSON, 
+      UPDATE_DATETIME, UPDATE_PERSON, BATCHB,
+      VALIDITY,PCR_STAGE,ORG_ID)
+    values (#{pcrId,jdbcType=VARCHAR}, #{taskId,jdbcType=VARCHAR}, #{pcrNo,jdbcType=VARCHAR},
+      #{boardNo,jdbcType=VARCHAR}, #{pcrProgram,jdbcType=VARCHAR}, #{pcrInstrument,jdbcType=VARCHAR},
+      #{pcrSystem,jdbcType=VARCHAR}, #{pcrReagent,jdbcType=VARCHAR}, #{pcrLoopCount,jdbcType=DECIMAL},
+      #{pcrTemperature,jdbcType=VARCHAR}, #{pcrHumidity,jdbcType=VARCHAR}, #{pcrStartDatetime,jdbcType=TIMESTAMP},
+      #{pcrEndDatetime,jdbcType=TIMESTAMP}, #{pcrPerson1,jdbcType=VARCHAR}, #{pcrPerson2,jdbcType=VARCHAR},
+      #{sampleCount,jdbcType=DECIMAL}, #{createDatetime,jdbcType=TIMESTAMP}, #{createPerson,jdbcType=VARCHAR},
+      #{updateDatetime,jdbcType=TIMESTAMP}, #{updatePerson,jdbcType=VARCHAR}, #{batchb,jdbcType=VARCHAR},
+      #{validity,jdbcType=VARCHAR},#{pcrStage,jdbcType=VARCHAR},#{orgId,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.clims.model.po.LabPcrInfo" >
+    update LAB_PCR_INFO
+    set TASK_ID = #{taskId,jdbcType=VARCHAR},
+      PCR_NO = #{pcrNo,jdbcType=VARCHAR},
+      BOARD_NO = #{boardNo,jdbcType=VARCHAR},
+      PCR_PROGRAM = #{pcrProgram,jdbcType=VARCHAR},
+      PCR_INSTRUMENT = #{pcrInstrument,jdbcType=VARCHAR},
+      PCR_SYSTEM = #{pcrSystem,jdbcType=VARCHAR},
+      PCR_REAGENT = #{pcrReagent,jdbcType=VARCHAR},
+      PCR_LOOP_COUNT = #{pcrLoopCount,jdbcType=DECIMAL},
+      PCR_TEMPERATURE = #{pcrTemperature,jdbcType=VARCHAR},
+      PCR_HUMIDITY = #{pcrHumidity,jdbcType=VARCHAR},
+      PCR_START_DATETIME = #{pcrStartDatetime,jdbcType=TIMESTAMP},
+      PCR_END_DATETIME = #{pcrEndDatetime,jdbcType=TIMESTAMP},
+      PCR_PERSON1 = #{pcrPerson1,jdbcType=VARCHAR},
+      PCR_PERSON2 = #{pcrPerson2,jdbcType=VARCHAR},
+      SAMPLE_COUNT = #{sampleCount,jdbcType=DECIMAL},
+      CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+      CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP},
+      UPDATE_PERSON = #{updatePerson,jdbcType=VARCHAR},
+      BATCHB = #{batchb,jdbcType=VARCHAR},
+      VALIDITY = #{validity,jdbcType=VARCHAR},
+      PCR_STAGE = #{pcrStage,jdbcType=VARCHAR},
+      ORG_ID = #{orgId,jdbcType=VARCHAR}
+    where PCR_ID = #{pcrId,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select *
+    from LAB_PCR_INFO
+    where PCR_ID = #{pcrId,jdbcType=VARCHAR} order by UPDATE_DATETIME desc
+  </select>
+
+  <select id="selectByTaskId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select *
+    from LAB_PCR_INFO
+    where TASK_ID = #{taskId,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectListBySampleId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select lpi.*
+    from LAB_PCR_INFO lpi
+    where lpi.PCR_ID in (select lps.PCR_ID from LAB_PCR_SAMPLE lps where lps.SAMPLE_ID = #{sampleId,jdbcType=VARCHAR})
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select *
+    from LAB_PCR_INFO
+  </select>
+
+  <select id="selectByBoarsNo" resultMap="BaseResultMap" parameterType="com.bazl.clims.model.po.LabPcrInfo">
+    select pcr.*,task.DELEGATE_ORG_CODE as DELEGATE_ORG_CODE
+    from LAB_PCR_INFO pcr
+    left join LAB_TASK_INFO task on task.TASK_ID = pcr.TASK_ID
+    where task.EXTRACTION_MODE = '0' and task.TASK_STAGE = '2' and pcr.SAMPLE_COUNT &gt; '0' and pcr.SAMPLE_COUNT &lt; '88'
+    <if test="delegateOrgCode != null">
+      and task.DELEGATE_ORG_CODE = #{delegateOrgCode,jdbcType=VARCHAR}
+    </if>
+    <if test="delegateOrgCode == null">
+      and task.DELEGATE_ORG_CODE is null
+    </if>
+  </select>
+
+  <select id="selectAllList" resultMap="BaseResultMap" parameterType="com.bazl.clims.model.po.LabPcrInfo" >
+    select *
+    from LAB_PCR_INFO
+    <where>
+      <if test="_parameter != null">
+        <include refid="VO_Query_Where_Clauses"/>
+      </if>
+    </where>
+    and PCR_NO is not null
+  </select>
+
+  <select id="selectRepeatingByBoarsNo" resultMap="BaseResultMap" parameterType="com.bazl.clims.model.po.LabPcrInfo">
+    select *
+    from LAB_PCR_INFO
+    <where>
+      <if test="orgId != null and orgId != ''">
+        ORG_ID = #{orgId,jdbcType=VARCHAR}
+      </if>
+      <if test="orgId == null or orgId == ''">
+        and ORG_ID is null
+      </if>
+      <if test="pcrStage != null and pcrStage != ''">
+        and PCR_STAGE is not null
+      </if>
+      <if test="boardNo != null and boardNo != ''">
+        and BOARD_NO = #{boardNo,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+
+
+  <select id="selectVoList" parameterType="com.bazl.clims.model.vo.LabPcrInfoVo" resultMap="VoBaseResultMap">
+    select * from (
+    select rownum as rn, t.* from (
+    select *
+    from LAB_PCR_INFO
+    where PCR_STAGE is not null
+    <if test="_parameter != null">
+      <include refid="VO_Query_Where_Clauses"/>
+    </if>
+    order by CREATE_DATETIME DESC
+    ) t where rownum &lt;=#{rows}
+    ) where rn &gt;#{offset}
+  </select>
+
+
+  <select id="selectVOCount" parameterType="com.bazl.clims.model.vo.LabPcrInfoVo" resultType="int">
+    select count(*)
+    from LAB_PCR_INFO
+    where PCR_STAGE is not null
+    <if test="_parameter != null">
+      <include refid="VO_Query_Where_Clauses"/>
+    </if>
+  </select>
+
+  <select id="selectByCaseId" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select distinct lpi.* from LAB_PCR_INFO lpi
+    left join LAB_PCR_SAMPLE lps on lps.PCR_ID = lpi.PCR_ID
+    left join lims_sample_info_dna lsid on lsid.sample_id = lps.sample_id and lsid.delete_flag='0'
+    where lsid.case_id= #{caseId,jdbcType=VARCHAR}
+    order by lpi.CREATE_DATETIME asc
+  </select>
+
+  <sql id="VO_Query_Where_Clauses">
+    <if test="entity.orgId != null and entity.orgId != ''">
+      and ORG_ID = #{entity.orgId,jdbcType=VARCHAR}
+    </if>
+    <if test="entity.boardNo != null">
+      and BOARD_NO like '%'||#{entity.boardNo,jdbcType=VARCHAR}||'%'
+    </if>
+    <if test="entity.pcrStage != null">
+      and PCR_STAGE like '%'||#{entity.pcrStage,jdbcType=VARCHAR}||'%'
+    </if>
+    <if test="acceptStartDatetime != null">
+      and CREATE_DATETIME &gt;= #{acceptStartDatetime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="acceptEndDatetime != null">
+      and CREATE_DATETIME &lt;= #{acceptEndDatetime,jdbcType=TIMESTAMP}
+    </if>
+  </sql>
+
+
+
+
+</mapper>

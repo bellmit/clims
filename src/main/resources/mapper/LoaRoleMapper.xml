@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.LoaRoleMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.LoaRole" >
+    <id column="ROLE_ID" property="roleId" jdbcType="VARCHAR" />
+    <result column="ROLE_NAME" property="roleName" jdbcType="VARCHAR" />
+    <result column="ROLE_LEVEL" property="roleLevel" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="queryLoaRole" resultMap="BaseResultMap" >
+    select ROLE_ID, ROLE_NAME, ROLE_LEVEL, CREATE_DATETIME, CREATE_PERSON
+    from LOA_ROLE
+  </select>
+  <select id="listRolesByUserId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select r.ROLE_ID, r.ROLE_NAME, r.ROLE_LEVEL, r.CREATE_DATETIME, r.CREATE_PERSON
+    from LOA_ROLE r left join LOA_ROLE_RELATION rr on r.ROLE_ID=rr.ROLE_ID
+    where rr.USER_ID = #{userId,jdbcType=VARCHAR}
+  </select>
+
+  <select id="listRolesByPersonalId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select lr.* from LOA_USER_INFO lu ,AM_PERSONAL_INFO a ,loa_role_relation lrr,loa_role lr  where lu.personal_id = a.personal_id and lu.user_id = lrr.user_id and  lrr.role_id = lr.role_id and lu.personal_id=#{personalId,jdbcType=VARCHAR}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from LOA_ROLE
+    where ROLE_ID = #{roleId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.clims.model.LoaRole" >
+    insert into LOA_ROLE (ROLE_ID, ROLE_NAME, ROLE_LEVEL,
+    CREATE_DATETIME, CREATE_PERSON)
+    values (#{roleId,jdbcType=VARCHAR}, #{roleName,jdbcType=VARCHAR}, #{roleLevel,jdbcType=VARCHAR},
+    #{createDatetime,jdbcType=TIMESTAMP}, #{createPerson,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.clims.model.LoaRole" >
+    update LOA_ROLE
+    set ROLE_NAME = #{roleName,jdbcType=VARCHAR},
+    ROLE_LEVEL = #{roleLevel,jdbcType=VARCHAR},
+    CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+    CREATE_PERSON = #{createPerson,jdbcType=VARCHAR}
+    where ROLE_ID = #{roleId,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select ROLE_ID, ROLE_NAME, ROLE_LEVEL, CREATE_DATETIME, CREATE_PERSON
+    from LOA_ROLE
+    where ROLE_ID = #{roleId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select ROLE_ID, ROLE_NAME, ROLE_LEVEL, CREATE_DATETIME, CREATE_PERSON
+    from LOA_ROLE
+  </select>
+
+  <!--点击编辑时候回显 权限的菜单的sql 也就是找出这个然后会选中 他本身有的菜单-->
+  <select id="selectMenuInfoByRoleId" resultType="java.lang.String">
+    select PERMISSION_ID
+    from LOA_PERMISSION_RELATION per
+    where per.role_id =#{loaRole.roleId}
+  </select>
+
+  <!--这个是添加权限 只是权限名字和级别-->
+<insert id="insertRoleInfo">
+  <selectKey order="BEFORE" resultType="string" keyProperty="loaRole.roleId">
+    select sys_guid() from dual
+  </selectKey>
+  insert into LOA_ROLE(ROLE_ID,ROLE_NAME,ROLE_LEVEL)
+  VALUES (#{loaRole.roleId},#{loaRole.roleName},#{loaRole.roleLevel})
+</insert>
+
+  <!--这里是删除 权限对应的菜单的sql-->
+<delete id="deleteOldMenus">
+  delete from LOA_PERMISSION_RELATION arp where ROLE_ID = #{amRole.roleId}
+    <if test="oldMenus.size() > 0">
+        and permission_id not IN
+          <foreach collection="oldMenus" close=")" separator="," open="(" item="item">
+            #{item}
+          </foreach>
+    </if>
+</delete>
+
+  <!--这是添加权限对应的菜单的sql-->
+<insert id="insertMenuInfo">
+    <selectKey order="BEFORE" resultType="String" keyProperty="id">
+      select sys_guid() from dual
+    </selectKey>
+    insert into LOA_PERMISSION_RELATION (ROLE_ID,PERMISSION_ID,ID)
+  VALUES (#{amRole.roleId},#{menuId},#{id})
+</insert>
+
+
+</mapper>

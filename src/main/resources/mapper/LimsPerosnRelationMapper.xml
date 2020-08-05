@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.LimsPerosnRelationMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.LimsPerosnRelation" >
+    <id column="RELATION_ID" property="relationId" jdbcType="VARCHAR" />
+    <result column="SOURCE_PERSON_ID" property="sourcePersonId" jdbcType="VARCHAR" />
+    <result column="TARGET_PERSON_ID" property="targetPersonId" jdbcType="VARCHAR" />
+    <result column="RELATION_TYPE" property="relationType" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_PERSON" property="updatePerson" jdbcType="VARCHAR" />
+
+    <result column="DELETE_FLAG" property="deleteFlag" jdbcType="VARCHAR" />
+    <result column="DELETE_DATETIME" property="deleteDatetime" jdbcType="TIMESTAMP" />
+    <result column="DELETE_PERSON" property="deletePerson" jdbcType="VARCHAR" />
+    <result column="DELETE_REASON" property="deleteReason" jdbcType="VARCHAR" />
+
+  </resultMap>
+
+  <insert id="insertPersonRelation" parameterType="com.bazl.clims.model.po.LimsPerosnRelation" >
+    insert into LIMS_PEROSN_RELATION (RELATION_ID, SOURCE_PERSON_ID, TARGET_PERSON_ID,
+      RELATION_TYPE, CREATE_DATETIME, CREATE_PERSON,
+      UPDATE_DATETIME, UPDATE_PERSON, DELETE_FLAG)
+    values (#{relationId,jdbcType=VARCHAR}, #{sourcePersonId,jdbcType=VARCHAR}, #{targetPersonId,jdbcType=VARCHAR},
+      #{relationType,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP}, #{createPerson,jdbcType=VARCHAR},
+      #{updateDatetime,jdbcType=TIMESTAMP}, #{updatePerson,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=VARCHAR})
+  </insert>
+
+    <update id="deleteBySourcePersonId" parameterType="com.bazl.clims.model.po.LimsPerosnRelation">
+      update LIMS_PEROSN_RELATION lpr set lpr.DELETE_FLAG = #{deleteFlag,jdbcType=VARCHAR}, lpr.DELETE_DATETIME = #{deleteDatetime,jdbcType=TIMESTAMP},
+        lpr.DELETE_PERSON = #{deletePerson,jdbcType=VARCHAR} where lpr.SOURCE_PERSON_ID = #{sourcePersonId,jdbcType=VARCHAR}
+    </update>
+
+  <select id="selectBySourcePersonId" parameterType="java.lang.String"  resultMap="BaseResultMap">
+      select * from LIMS_PEROSN_RELATION where SOURCE_PERSON_ID = #{sourcePersonId,jdbcType=VARCHAR}
+  </select>
+
+  <update id="updatePerosnRelation">
+    update LIMS_PEROSN_RELATION SET
+      RELATION_ID = #{relationId,jdbcType=VARCHAR},
+      SOURCE_PERSON_ID = #{sourcePersonId,jdbcType=VARCHAR},
+      TARGET_PERSON_ID = #{targetPersonId,jdbcType=VARCHAR},
+      RELATION_TYPE = #{relationType,jdbcType=VARCHAR},
+      CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+      CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP},
+      UPDATE_PERSON = #{updatePerson,jdbcType=VARCHAR},
+      DELETE_FLAG = #{deleteFlag,jdbcType=VARCHAR}
+      where SOURCE_PERSON_ID = #{sourcePersonId,jdbcType=VARCHAR}
+  </update>
+</mapper>

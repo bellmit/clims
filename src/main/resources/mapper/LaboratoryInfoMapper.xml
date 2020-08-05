@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.LaboratoryInfoMapper" >
+    <resultMap id="BaseResultMap" type="com.bazl.clims.model.LaboratoryInfo" >
+        <id column="ID" property="id" jdbcType="VARCHAR" />
+        <result column="LAB_NAME" property="labName" jdbcType="VARCHAR" />
+        <result column="LAB_TOTAL_CASE" property="labTatalCase" jdbcType="INTEGER" />
+        <result column="LAB_TEMPERATURE" property="labTemperature" jdbcType="VARCHAR" />
+        <result column="LAB_HUMIDITY" property="labHumidity" jdbcType="VARCHAR" />
+        <result column="LAB_SETUP_TIME" property="labSetupTime" jdbcType="VARCHAR" />
+        <result column="LAB_PERSONNEL" property="labPersonnel" jdbcType="VARCHAR" />
+        <result column="LAB_INTRODUCTION" property="labIntroduction" jdbcType="VARCHAR" />
+        <result column="ORG_ID" property="orgId" jdbcType="VARCHAR" />
+        <result column="IP_SEGMENT" property="ipSegment" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    ID,LAB_NAME,LAB_TOTAL_CASE,LAB_TEMPERATURE,LAB_HUMIDITY,LAB_SETUP_TIME,LAB_PERSONNEL,LAB_INTRODUCTION,ORG_ID,IP_SEGMENT
+    </sql>
+
+    <select id="queryList" resultMap="BaseResultMap">
+     SELECT
+     <include refid="Base_Column_List" />
+     from LABORATORY_INFO lab
+    </select>
+
+    <select id="queryByLab" parameterType="com.bazl.clims.model.LaboratoryInfo" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        from LABORATORY_INFO lab
+        <where>
+        <if test="orgId!=null and orgId!=''">
+            lab.ORG_ID=#{orgId,jdbcType=VARCHAR}
+        </if>
+        </where>
+    </select>
+    
+    <update id="updateLabInfo" parameterType="com.bazl.clims.model.LaboratoryInfo">
+    update LABORATORY_INFO set  LAB_PERSONNEL=#{labPersonnel,jdbcType=VARCHAR} where ORG_ID=#{orgId,jdbcType=VARCHAR}
+    </update>
+</mapper>

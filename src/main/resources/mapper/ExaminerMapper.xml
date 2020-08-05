@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.ExaminerMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.Examiner" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="INSPECTOR1" property="inspector1" jdbcType="VARCHAR" />
+    <result column="INSPECTOR2" property="inspector2" jdbcType="VARCHAR" />
+    <result column="INSPECTOR3" property="inspector3" jdbcType="VARCHAR" />
+    <result column="CASE_ID" property="caseId" jdbcType="VARCHAR" />
+    <result column="TITLEONE" property="titleOne" jdbcType="VARCHAR" />
+    <result column="TITLETWO" property="titleTwo" jdbcType="VARCHAR" />
+    <result column="TITLETHREE" property="titleThree" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insert" parameterType="com.bazl.clims.model.po.Examiner" >
+    insert into EXAMINER (ID, INSPECTOR1, INSPECTOR2, INSPECTOR3, CASE_ID，TITLEONE,TITLETWO,TITLETHREE)
+    values (
+    #{id,jdbcType=VARCHAR},
+    #{inspector1,jdbcType=VARCHAR},
+    #{inspector2,jdbcType=VARCHAR},
+    #{inspector3,jdbcType=VARCHAR},
+    #{caseId,jdbcType=VARCHAR},
+    #{titleOne,jdbcType=VARCHAR},
+    #{titleTwo,jdbcType=VARCHAR},
+    #{titleThree,jdbcType=VARCHAR}
+    )
+  </insert>
+  <select id="queryExaminer" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT  ID, INSPECTOR1, INSPECTOR2, INSPECTOR3, CASE_ID  FROM EXAMINER WHERE CASE_ID=#{caseId,jdbcType=VARCHAR}
+  </select>
+
+  <update id="update" parameterType="com.bazl.clims.model.po.Examiner" >
+    update EXAMINER
+    set
+      INSPECTOR1 = #{inspector1,jdbcType=VARCHAR},
+      INSPECTOR2 = #{inspector2,jdbcType=VARCHAR},
+      INSPECTOR3 = #{inspector3,jdbcType=VARCHAR},
+      TITLEONE = #{titleOne,jdbcType=VARCHAR},
+      TITLETWO = #{titleTwo,jdbcType=VARCHAR},
+      TITLETHREE = #{titleThree,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectListByCaseId" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select * from EXAMINER where CASE_ID = #{caseId,jdbcType=VARCHAR}
+  </select>
+</mapper>

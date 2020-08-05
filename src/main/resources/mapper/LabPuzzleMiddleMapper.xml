@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.LabPuzzleMiddleMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.LabPuzzleMiddle" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="TASK_ID" property="taskId" jdbcType="VARCHAR" />
+    <result column="PCR_ID" property="pcrId" jdbcType="VARCHAR" />
+    <result column="SY_ID" property="syId" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from LAB_PUZZLE_MIDDLE
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.clims.model.po.LabPuzzleMiddle" >
+    insert into LAB_PUZZLE_MIDDLE (ID, TASK_ID, PCR_ID,
+      SY_ID)
+    values (#{id,jdbcType=VARCHAR}, #{taskId,jdbcType=VARCHAR}, #{pcrId,jdbcType=VARCHAR},
+      #{syId,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.clims.model.po.LabPuzzleMiddle" >
+    update LAB_PUZZLE_MIDDLE
+    set TASK_ID = #{taskId,jdbcType=VARCHAR},
+    PCR_ID = #{pcrId,jdbcType=VARCHAR},
+    SY_ID = #{syId,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select ID, TASK_ID, PCR_ID, SY_ID
+    from LAB_PUZZLE_MIDDLE
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select ID, TASK_ID, PCR_ID, SY_ID
+    from LAB_PUZZLE_MIDDLE
+  </select>
+
+  <select id="selectByPcrId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select ID, TASK_ID, PCR_ID, SY_ID
+    from LAB_PUZZLE_MIDDLE
+    where PCR_ID = #{pcrId,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByTaskId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select ID, TASK_ID, PCR_ID, SY_ID
+    from LAB_PUZZLE_MIDDLE
+    where TASK_ID = #{taskId,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectBySyId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select ID, TASK_ID, PCR_ID, SY_ID
+    from LAB_PUZZLE_MIDDLE
+    where SY_ID = #{syId,jdbcType=VARCHAR}
+  </select>
+</mapper>

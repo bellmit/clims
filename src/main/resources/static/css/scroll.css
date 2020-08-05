@@ -1,0 +1,38 @@
+::-webkit-scrollbar {
+    /* 1 */
+    background: rgb(230, 232, 232);
+    width: 7px;
+    padding: 10px 0 0;
+    position: fixed;
+}
+
+::-webkit-scrollbar-button {
+    /* 2 */
+    background: rgb(230, 232, 232);
+}
+
+::-webkit-scrollbar-track {
+    /* 3 */
+    background: rgb(230, 232, 232);
+}
+
+::-webkit-scrollbar-track-piece {
+    /* 4 */
+    background: rgb(230, 232, 232);
+}
+
+::-webkit-scrollbar-thumb {
+    /*滚动头条*/
+    background: #cccccc;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-corner {
+    /* 6 */
+    background: rgb(230, 232, 232);
+}
+
+::-webkit-resizer {
+    /* 7 */
+    background: rgb(230, 232, 232);
+}

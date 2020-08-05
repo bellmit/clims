@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.SampleTableMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.SampleTable" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="EXTRACT_PLATE_ID" property="extractPlateId" jdbcType="VARCHAR" />
+    <result column="BOARD_NO" property="boardNo" jdbcType="VARCHAR" />
+    <result column="STATE" property="state" jdbcType="VARCHAR" />
+    <result column="IS_CREATE" property="isCreate" jdbcType="VARCHAR" />
+    <result column="HOLE_NUM" property="holeNum" jdbcType="VARCHAR" />
+    <result column="ELUTION_DEFAULT" property="elutionDefault" jdbcType="VARCHAR" />
+    <result column="EXTRACT_PLATE_NAME" property="extractPlateName" jdbcType="VARCHAR" />
+    <result column="INDEX_VALUE" property="indexValue" jdbcType="VARCHAR" />
+    <result column="DELETE_FLAG" property="deleteFlag" jdbcType="VARCHAR" />
+    <result column="DELETE_DATETIME" property="deleteDatetime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="OPERATION_PERSON" property="operationPerson" jdbcType="VARCHAR" />
+    <result column="OPERATION_DATETIME" property="operationDatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+  <resultMap id="VOBaseResultMap" type="com.bazl.clims.model.vo.SampleTableVo" >
+    <id column="ID" property="entity.id" jdbcType="VARCHAR" />
+    <result column="EXTRACT_PLATE_ID" property="entity.extractPlateId" jdbcType="VARCHAR" />
+    <result column="BOARD_NO" property="entity.boardNo" jdbcType="VARCHAR" />
+    <result column="STATE" property="entity.state" jdbcType="VARCHAR" />
+    <result column="IS_CREATE" property="entity.isCreate" jdbcType="VARCHAR" />
+    <result column="HOLE_NUM" property="entity.holeNum" jdbcType="VARCHAR" />
+    <result column="ELUTION_DEFAULT" property="entity.elutionDefault" jdbcType="VARCHAR" />
+    <result column="EXTRACT_PLATE_NAME" property="entity.extractPlateName" jdbcType="VARCHAR" />
+    <result column="INDEX_VALUE" property="entity.indexValue" jdbcType="VARCHAR" />
+    <result column="DELETE_FLAG" property="entity.deleteFlag" jdbcType="VARCHAR" />
+    <result column="DELETE_DATETIME" property="entity.deleteDatetime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_PERSON" property="entity.createPerson" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="entity.createDatetime" jdbcType="TIMESTAMP" />
+    <result column="OPERATION_PERSON" property="entity.operationPerson" jdbcType="VARCHAR" />
+    <result column="OPERATION_DATETIME" property="entity.operationDatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from sample_table
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.clims.model.po.SampleTable">
+    insert into sample_table (ID, EXTRACT_PLATE_ID, BOARD_NO,
+      HOLE_NUM, ELUTION_DEFAULT,
+      EXTRACT_PLATE_NAME, INDEX_VALUE, CREATE_PERSON, 
+      CREATE_DATETIME, OPERATION_PERSON, OPERATION_DATETIME
+      )
+    values (#{id,jdbcType=VARCHAR},#{extractPlateId,jdbcType=VARCHAR}, #{boardNo,jdbcType=VARCHAR},
+      #{holeNum,jdbcType=VARCHAR}, #{elutionDefault,jdbcType=VARCHAR},
+      #{extractPlateName,jdbcType=VARCHAR}, #{indexValue,jdbcType=VARCHAR}, #{createPerson,jdbcType=VARCHAR}, 
+      #{createDatetime,jdbcType=TIMESTAMP}, #{operationPerson,jdbcType=VARCHAR}, #{operationDatetime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.clims.model.po.SampleTable" >
+    update sample_table
+    set EXTRACT_PLATE_ID = #{extractPlateId,jdbcType=VARCHAR},
+      BOARD_NO = #{boardNo,jdbcType=VARCHAR},
+      STATE = #{state,jdbcType=VARCHAR},
+      IS_CREATE = #{isCreate,jdbcType=VARCHAR},
+      HOLE_NUM = #{holeNum,jdbcType=VARCHAR},
+      ELUTION_DEFAULT = #{elutionDefault,jdbcType=VARCHAR},
+      EXTRACT_PLATE_NAME = #{extractPlateName,jdbcType=VARCHAR},
+      INDEX_VALUE = #{indexValue,jdbcType=VARCHAR},
+      CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+      OPERATION_PERSON = #{operationPerson,jdbcType=VARCHAR},
+      OPERATION_DATETIME = #{operationDatetime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select *
+    from sample_table
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select *
+    from sample_table
+  </select>
+
+  <sql id="VO_Query_Where_Clause">
+    <if test="entity.deleteFlag != null and entity.deleteFlag != ''">
+      and st.DELETE_FLAG=#{entity.deleteFlag, jdbcType=VARCHAR}
+    </if>
+    <if test="entity.createPerson != null and entity.createPerson != ''">
+      and st.CREATE_PERSON=#{entity.createPerson, jdbcType=VARCHAR}
+    </if>
+    <if test="entity.boardNo != null and entity.boardNo != ''">
+      and st.BOARD_NO like CONCAT(CONCAT('%',#{entity.boardNo,jdbcType=VARCHAR}),'%')
+    </if>
+    <if test="entity.isCreate != null and entity.isCreate != ''">
+      and st.IS_CREATE=#{entity.isCreate, jdbcType=VARCHAR}
+    </if>
+    <if test="sampleNo != null and sampleNo != ''">
+      and st.ID in (select si.SAMPLE_TABLE_ID from sample_info si where si.SAMPLE_NO like CONCAT(CONCAT('%',#{sampleNo,jdbcType=VARCHAR}),'%'))
+    </if>
+  </sql>
+
+  <select id="selectPaginationList" resultType="com.bazl.clims.model.vo.SampleTableVo" resultMap="VOBaseResultMap">
+      select * from (
+      select rownum as rn, t.* from (
+    SELECT st.*,
+    di_1.DICT_NAME as elutionDefaultName
+    from sample_table st
+    left join dict_item di_1 on di_1.DICT_CODE = st.ELUTION_DEFAULT and di_1.DICT_TYPE_CODE='ELUTION_DEFAULT'
+    where 1=1 and st.DELETE_FLAG='0'
+    <if test="_parameter != null">
+      <include refid="VO_Query_Where_Clause"/>
+      order by st.CREATE_DATETIME desc
+        ) t where rownum &lt;=#{rows}
+        ) where rn &gt;#{offset}
+    </if>
+  </select>
+  <select id="selectCount" parameterType="com.bazl.clims.model.vo.SampleTableVo" resultType="int">
+    SELECT count(*)
+    from sample_table st
+    where 1=1 and st.DELETE_FLAG='0'
+    <if test="_parameter != null">
+      <include refid="VO_Query_Where_Clause"/>
+      order by st.CREATE_DATETIME desc
+    </if>
+  </select>
+
+  <delete id="deleteFlagById" parameterType="java.lang.String">
+    update sample_table
+    set DELETE_FLAG='1', DELETE_DATETIME = sysdate
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+
+</mapper>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.ErsApproveInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.ErsApproveInfo" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="REPORT_ID" property="reportId" jdbcType="VARCHAR" />
+    <result column="ORDER_NO" property="orderNo" jdbcType="VARCHAR" />
+    <result column="APPROVER_ID" property="approverId" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="APPROVE_DATETIME" property="approveDatetime" jdbcType="TIMESTAMP" />
+    <result column="TYPE" property="type" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_PERSON" property="updatePerson" jdbcType="VARCHAR" />
+    <result column="DELETE_FLAG" property="deleteFlag" jdbcType="VARCHAR" />
+    <result column="DELETE_DATETIME" property="deleteDatetime" jdbcType="TIMESTAMP" />
+    <result column="DELETE_PERSON" property="deletePerson" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from ERS_APPROVE_INFO
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.clims.model.po.ErsApproveInfo" >
+    insert into ERS_APPROVE_INFO (ID, REPORT_ID, ORDER_NO, 
+      APPROVER_ID, STATUS, APPROVE_DATETIME, 
+      TYPE, CREATE_DATETIME, CREATE_PERSON, 
+      UPDATE_DATETIME, UPDATE_PERSON, DELETE_FLAG, 
+      DELETE_DATETIME, DELETE_PERSON)
+    values (#{id,jdbcType=VARCHAR}, #{reportId,jdbcType=VARCHAR}, #{orderNo,jdbcType=VARCHAR}, 
+      #{approverId,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{approveDatetime,jdbcType=TIMESTAMP}, 
+      #{type,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP}, #{createPerson,jdbcType=VARCHAR}, 
+      #{updateDatetime,jdbcType=TIMESTAMP}, #{updatePerson,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=VARCHAR}, 
+      #{deleteDatetime,jdbcType=TIMESTAMP}, #{deletePerson,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.clims.model.po.ErsApproveInfo" >
+    update ERS_APPROVE_INFO
+    set REPORT_ID = #{reportId,jdbcType=VARCHAR},
+      ORDER_NO = #{orderNo,jdbcType=VARCHAR},
+      APPROVER_ID = #{approverId,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      APPROVE_DATETIME = #{approveDatetime,jdbcType=TIMESTAMP},
+      TYPE = #{type,jdbcType=VARCHAR},
+      CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+      CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP},
+      UPDATE_PERSON = #{updatePerson,jdbcType=VARCHAR},
+      DELETE_FLAG = #{deleteFlag,jdbcType=VARCHAR},
+      DELETE_DATETIME = #{deleteDatetime,jdbcType=TIMESTAMP},
+      DELETE_PERSON = #{deletePerson,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select ID, REPORT_ID, ORDER_NO, APPROVER_ID, STATUS, APPROVE_DATETIME, TYPE, CREATE_DATETIME, 
+    CREATE_PERSON, UPDATE_DATETIME, UPDATE_PERSON, DELETE_FLAG, DELETE_DATETIME, DELETE_PERSON
+    from ERS_APPROVE_INFO
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select ID, REPORT_ID, ORDER_NO, APPROVER_ID, STATUS, APPROVE_DATETIME, TYPE, CREATE_DATETIME, 
+    CREATE_PERSON, UPDATE_DATETIME, UPDATE_PERSON, DELETE_FLAG, DELETE_DATETIME, DELETE_PERSON
+    from ERS_APPROVE_INFO
+  </select>
+</mapper>

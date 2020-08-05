@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<!--下载路径 -->
+	<entry key="DownloadPath">d:\\download2\\</entry>
+
+	<!--压缩包名-->
+	<entry key="ZipName">myfile</entry>
+
+	<!--鉴定单位-->
+	<entry key="unitName">北京市顺义区公安司法鉴定中心</entry>
+	<!-- 证书编号 -->
+	<entry key="certificateNo">160006023716</entry>
+	<!-- 页脚地址 -->
+	<entry key="jdsAddress">北京市顺义区顺平西路10号</entry>
+	<!-- 鉴定书中委托单位前缀 -->
+	<entry key="certificateDelegateOrgName">北京市公安局顺义分局刑侦支队</entry>
+
+	<entry key="needIdentifyBookSn">false</entry>
+	<!--鉴定书路径-->
+	<entry key="identifyBookPath">d:\\identifyBookFile\\</entry>
+
+	<!--生成鉴定书文件夹-->
+	<entry key="rebuildPath">rebuildFile</entry>
+
+	<!--上传鉴定书文件夹-->
+	<entry key="uploadPath">uploadFile</entry>
+
+	<!--上传样本照片文件夹-->
+	<entry key="uploadPhotoPath">d:\uploadPhotoPath\</entry>
+
+	<!-- 民族 -->
+	<entry key="populationId">1</entry>
+	<entry key="populationName">中国汉族</entry>
+
+	<!--法医中心应用ip-->
+	<entry key="fyzvApplication">14.27.137.145</entry>
+	<!--东城分局应用ip-->
+	<entry key="dchApplication">10.11.79.175</entry>
+	<!--西城分局应用ip-->
+	<entry key="xchApplication">14.105.48.117</entry>
+	<!--朝阳分局应用ip-->
+	<entry key="chpApplication">14.112.37.65</entry>
+	<!--海淀分局应用ip-->
+	<entry key="hdApplication">10.11.239.224</entry>
+	<!--丰台分局应用ip-->
+	<entry key="ftApplication">14.128.8.112</entry>
+	<!--大兴分局应用ip-->
+	<entry key="dxApplication">14.184.66.120</entry>
+	<!--昌平分局应用ip-->
+	<entry key="chpApplication">14.55.43.91</entry>
+	<!--石景山分局应用ip-->
+	<entry key="shjshApplication">10.12.62.115</entry>
+	<!-- 查看比对结果PI-->
+	<entry key="analysisDNADatabaseCompareResultGroupPI">8</entry>
+	<!--是否有本地DNA库(中心为false)-->
+	<entry key="isHaveDNA">false</entry>
+	<!-- 分局自动上报DNA库数据队列开关 -->
+	<entry key="submitToDNATaskFlag">false</entry>
+	<entry key="basicInfoWebService">http://127.0.0.1:8080/DnaWebservice/services/basicInfo</entry>
+	<entry key="viewLibSamplesWebService">http://127.0.0.1:8080/DnaWebservice/services/viewLibSamples</entry>
+	<entry key="caseSampleLibService">http://127.0.0.1:8080/DnaWebservice/services/caseSampleLib</entry>
+	<!-- 入DNA库调用的WebService,配置本地DnaWebservice地址 -->
+	<entry key="submitInfoWebService">http://127.0.0.1:8080/DnaWebservice/services/submitInfo</entry>
+	<!-- 入DNA库调用的WebService,配置本地DnaWebservice地址 -->
+	<entry key="libMatchRecordWebService">http://127.0.0.1:8080/DnaWebservice/services/libMatch</entry>
+	<entry key="viewLibSamplesWebService">http://127.0.0.1:8080/DnaWebservice/services/viewLibSamples</entry>
+	<entry key="caseSampleLibService">http://127.0.0.1:8080/DnaWebservice/services/caseSampleLib</entry>
+	<entry key="xkAddress">10.13.58.99:9080/xckyservice</entry>
+
+	<!-- 上报DNA本地库信息查询 -->
+	<entry key="querySubmitToNationalDNALibServiceURL">http://127.0.0.1:8080/DnaDataService/SubmitToNationalDNALibService</entry>
+
+</properties>

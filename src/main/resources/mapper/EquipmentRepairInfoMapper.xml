@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.EquipmentRepairInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.EquipmentRepairInfo" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="EQUIPMENT_INFO_ID" property="equipmentInfoId" jdbcType="VARCHAR" />
+    <result column="EQUIPMENT_NAME_ID" property="equipmentNameId" jdbcType="VARCHAR" />
+    <result column="EQUIPMENT_REPAIR_PERSON" property="equipmentRepairPerson" jdbcType="VARCHAR" />
+    <result column="EQUIPMENT_REPAIR_TIME" property="equipmentRepairTime" jdbcType="TIMESTAMP" />
+    <result column="FAILURE_CAUSE" property="failureCause" jdbcType="VARCHAR" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+  <resultMap id="VOBaseResultMap" type="com.bazl.clims.model.vo.EquipmentRepairInfoVo">
+    <id column="ID" property="entity.id" jdbcType="VARCHAR" />
+    <result column="EQUIPMENT_INFO_ID" property="entity.equipmentInfoId" jdbcType="VARCHAR" />
+    <result column="EQUIPMENT_NAME_ID" property="entity.equipmentNameId" jdbcType="VARCHAR" />
+    <result column="EQUIPMENT_REPAIR_PERSON" property="entity.equipmentRepairPerson" jdbcType="VARCHAR" />
+    <result column="EQUIPMENT_REPAIR_TIME" property="entity.equipmentRepairTime" jdbcType="TIMESTAMP" />
+    <result column="FAILURE_CAUSE" property="entity.failureCause" jdbcType="VARCHAR" />
+    <result column="CREATE_PERSON" property="entity.createPerson" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="entity.createDatetime" jdbcType="TIMESTAMP" />
+    <!-- 业务字段 -->
+    <result column="EQUIPMENT_NO" property="equipmentNo" jdbcType="VARCHAR" />
+    <result column="EQUIPMENT_NAME" property="equipmentName" jdbcType="VARCHAR" />
+    <result column="EQUIPMENT_STATUS" property="equipmentStatus" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from EQUIPMENT_REPAIR_INFO
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.clims.model.po.EquipmentRepairInfo" >
+    insert into EQUIPMENT_REPAIR_INFO (ID, EQUIPMENT_INFO_ID, EQUIPMENT_NAME_ID,
+      EQUIPMENT_REPAIR_PERSON, EQUIPMENT_REPAIR_TIME, FAILURE_CAUSE, CREATE_PERSON, CREATE_DATETIME
+      )
+    values (#{id,jdbcType=VARCHAR}, #{equipmentInfoId,jdbcType=VARCHAR}, #{equipmentNameId,jdbcType=VARCHAR},
+      #{equipmentRepairPerson,jdbcType=VARCHAR}, #{equipmentRepairTime,jdbcType=TIMESTAMP}, #{failureCause,jdbcType=VARCHAR},
+      #{createPerson,jdbcType=VARCHAR},#{createDatetime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <update id="update" parameterType="com.bazl.clims.model.po.EquipmentRepairInfo" >
+    update EQUIPMENT_REPAIR_INFO
+    set EQUIPMENT_INFO_ID = #{equipmentInfoId,jdbcType=VARCHAR},
+      EQUIPMENT_NAME_ID = #{equipmentNameId,jdbcType=VARCHAR},
+      EQUIPMENT_REPAIR_PERSON = #{equipmentRepairPerson,jdbcType=VARCHAR},
+      EQUIPMENT_REPAIR_TIME = #{equipmentRepairTime,jdbcType=VARCHAR},
+      FAILURE_CAUSE = #{failureCause,jdbcType=VARCHAR},
+      CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      CREATE_DATETIME = #{createDatetime,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select *
+    from EQUIPMENT_REPAIR_INFO
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select *
+    from EQUIPMENT_REPAIR_INFO
+  </select>
+
+  <select id="selectVOPaginationList" parameterType="com.bazl.clims.model.vo.EquipmentRepairInfoVo"
+          resultMap="VOBaseResultMap">
+    select * from (
+    select rownum as rn, t.* from (
+    select eri.*, eni.EQUIPMENT_NO as EQUIPMENT_NO, eni.EQUIPMENT_NAME as EQUIPMENT_NAME, ei.EQUIPMENT_STATUS as EQUIPMENT_STATUS
+    from EQUIPMENT_REPAIR_INFO eri left join EQUIPMENT_INFO ei on eri.EQUIPMENT_INFO_ID = ei.id
+    left join EQUIPMENT_NAME_INFO eni on eri.EQUIPMENT_NAME_ID = eni.id
+    <where>
+      <if test="_parameter != null">
+        <include refid="VO_Query_Where_Clause"/>
+      </if>
+    </where>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    ) t where rownum &lt;=#{rows}
+    ) where rn &gt;#{offset}
+  </select>
+  <!--设备count-->
+  <select id="selectVOCount" parameterType="com.bazl.clims.model.vo.EquipmentRepairInfoVo" resultType="int">
+    select count(*)
+    from EQUIPMENT_REPAIR_INFO eri
+    <where>
+      <if test="_parameter != null">
+        <include refid="VO_Query_Where_Clause"/>
+      </if>
+    </where>
+  </select>
+
+  <sql id="VO_Query_Where_Clause">
+    <if test="entity.equipmentRepairPerson != null">
+      and eri.EQUIPMENT_REPAIR_PERSON like '%'||#{entity.equipmentRepairPerson,jdbcType=VARCHAR}||'%'
+    </if>
+  </sql>
+</mapper>

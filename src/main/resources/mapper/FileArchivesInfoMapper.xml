@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.FileArchivesInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.FileArchivesInfo" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="CASE_ID" property="caseId" jdbcType="VARCHAR" />
+    <result column="CONSIGNMENT_ID" property="consignmentId" jdbcType="VARCHAR" />
+    <result column="ARCHIVES_INFO_PATH" property="archivesInfoPath" jdbcType="VARCHAR" />
+    <result column="ARCHIVES_TYPE" property="archivesType" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_PERSON" property="updatePerson" jdbcType="VARCHAR" />
+    <result column="DELETE_FLAG" property="deleteFlag" jdbcType="VARCHAR" />
+    <result column="DELETE_DATETIME" property="deleteDatetime" jdbcType="TIMESTAMP" />
+    <result column="DELETE_PERSON" property="deletePerson" jdbcType="VARCHAR" />
+    <result column="DELETE_REASON" property="deleteReason" jdbcType="VARCHAR" />
+    <result column="ARCHIVES_INFO_PICTURE" property="archivesInfoPicture" jdbcType="CLOB" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from FILE_ARCHIVES_INFO
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.clims.model.po.FileArchivesInfo" >
+    insert into FILE_ARCHIVES_INFO (ID, CASE_ID, CONSIGNMENT_ID, 
+      ARCHIVES_INFO_PATH, ARCHIVES_TYPE, STATUS, 
+      CREATE_DATETIME, CREATE_PERSON, UPDATE_DATETIME, 
+      UPDATE_PERSON, DELETE_FLAG, DELETE_DATETIME, 
+      DELETE_PERSON, DELETE_REASON, ARCHIVES_INFO_PICTURE
+      )
+    values (#{id,jdbcType=VARCHAR}, #{caseId,jdbcType=VARCHAR}, #{consignmentId,jdbcType=VARCHAR}, 
+      #{archivesInfoPath,jdbcType=VARCHAR}, #{archivesType,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{createDatetime,jdbcType=TIMESTAMP}, #{createPerson,jdbcType=VARCHAR}, #{updateDatetime,jdbcType=TIMESTAMP}, 
+      #{updatePerson,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=VARCHAR}, #{deleteDatetime,jdbcType=TIMESTAMP}, 
+      #{deletePerson,jdbcType=VARCHAR}, #{deleteReason,jdbcType=VARCHAR}, #{archivesInfoPicture,jdbcType=CLOB}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.clims.model.po.FileArchivesInfo" >
+    update FILE_ARCHIVES_INFO
+    set CASE_ID = #{caseId,jdbcType=VARCHAR},
+      CONSIGNMENT_ID = #{consignmentId,jdbcType=VARCHAR},
+      ARCHIVES_INFO_PATH = #{archivesInfoPath,jdbcType=VARCHAR},
+      ARCHIVES_TYPE = #{archivesType,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+      CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP},
+      UPDATE_PERSON = #{updatePerson,jdbcType=VARCHAR},
+      DELETE_FLAG = #{deleteFlag,jdbcType=VARCHAR},
+      DELETE_DATETIME = #{deleteDatetime,jdbcType=TIMESTAMP},
+      DELETE_PERSON = #{deletePerson,jdbcType=VARCHAR},
+      DELETE_REASON = #{deleteReason,jdbcType=VARCHAR},
+      ARCHIVES_INFO_PICTURE = #{archivesInfoPicture,jdbcType=CLOB}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select ID, CASE_ID, CONSIGNMENT_ID, ARCHIVES_INFO_PATH, ARCHIVES_TYPE, STATUS, CREATE_DATETIME, 
+    CREATE_PERSON, UPDATE_DATETIME, UPDATE_PERSON, DELETE_FLAG, DELETE_DATETIME, DELETE_PERSON, 
+    DELETE_REASON, ARCHIVES_INFO_PICTURE
+    from FILE_ARCHIVES_INFO
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select ID, CASE_ID, CONSIGNMENT_ID, ARCHIVES_INFO_PATH, ARCHIVES_TYPE, STATUS, CREATE_DATETIME, 
+    CREATE_PERSON, UPDATE_DATETIME, UPDATE_PERSON, DELETE_FLAG, DELETE_DATETIME, DELETE_PERSON, 
+    DELETE_REASON, ARCHIVES_INFO_PICTURE
+    from FILE_ARCHIVES_INFO
+  </select>
+  <select id="queryFileLetter" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select ID, CASE_ID, CONSIGNMENT_ID, ARCHIVES_INFO_PATH, ARCHIVES_TYPE, STATUS, CREATE_DATETIME,
+    CREATE_PERSON, UPDATE_DATETIME, UPDATE_PERSON, DELETE_FLAG, DELETE_DATETIME, DELETE_PERSON,
+    DELETE_REASON, ARCHIVES_INFO_PICTURE
+    from FILE_ARCHIVES_INFO WHERE ARCHIVES_INFO_PATH='/proxy_img'   AND CASE_ID=#{caseId,jdbcType=VARCHAR}
+  </select>
+  <select id="queryEntrustBook" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select ID, CASE_ID, CONSIGNMENT_ID, ARCHIVES_INFO_PATH, ARCHIVES_TYPE, STATUS, CREATE_DATETIME,
+    CREATE_PERSON, UPDATE_DATETIME, UPDATE_PERSON, DELETE_FLAG, DELETE_DATETIME, DELETE_PERSON,
+    DELETE_REASON, ARCHIVES_INFO_PICTURE
+    from FILE_ARCHIVES_INFO WHERE ARCHIVES_INFO_PATH='/appoint_img'   AND CASE_ID=#{caseId,jdbcType=VARCHAR}
+  </select>
+
+</mapper>

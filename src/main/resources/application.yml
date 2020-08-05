@@ -1,0 +1,218 @@
+#内置服务端口配置  timeout 1m 是一分钟
+server:
+  port: 8081
+  servlet:
+      session:
+        timeout: 60m
+
+#SpringBoot配置
+spring:
+    #devtools热部署配置
+    devtools :
+        restart:
+            enabled: true
+            additional-paths: src/main/java
+            exclude: static/**,public/**,WEB-INF/**
+    #数据源配置
+    datasource:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: oracle.jdbc.driver.OracleDriver
+        #url: jdbc:oracle:thin:@localhost:1521:orcl
+        url: jdbc:oracle:thin:@192.168.1.121:1521:orcl
+        username: alims
+        password: alims
+        # 初始化大小，最小，最大
+        initialSize: 30
+        minIdle: 30
+        maxActive: 200
+        # 配置获取连接等待超时的时间
+        maxWait: 60000
+        # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+        timeBetweenEvictionRunsMillis: 60000
+        # 配置一个连接在池中最小生存的时间，单位是毫秒
+        minEvictableIdleTimeMillis: 300000
+        validationQuery: SELECT 1 FROM DUAL
+        testWhileIdle: true
+        testOnBorrow: false
+        testOnReturn: false
+    #使用jsp配置
+    mvc:
+        thymeleaf:
+            cache: false
+            enabled: false
+        view:
+            prefix: /WEB-INF/jsp/
+            suffix: .jsp
+    shiro:
+        properties:
+            authz: false
+        session-id-cookie:
+            http-only: false
+            name: yui2-token
+            maxAge: 2592000
+        session-dao:
+            #expire: 86400 选用globalSessionTimeout这个值
+            session-prefix: yui2-sid
+#        session-mgr:
+#            globalSessionTimeout: 1800000
+        shiro-db-realm:
+            authentication-caching-enabled: false
+            authorization-caching-enabled: false
+            authentication-cache-name: yui2-cache-authc
+            authorization-cache-name: yui2-cache-authz
+    #solr
+    data:
+        solr:
+            host: http://localhost:8080/solr/clims
+
+    freemarker:
+        allow-request-override: false
+        allow-session-override: false
+        cache: false
+        charset: UTF-8
+        check-template-location: true
+        content-type: text/html
+        enabled: true
+        expose-request-attributes: false
+        expose-session-attributes: false
+        expose-spring-macro-helpers: true
+        prefer-file-system-access: true
+        template-loader-path: classpath:/templates/*.ftl
+
+    redis:
+      host: 192.168.32.129
+      port: 6379
+      password:
+      jedis:
+        pool:
+          #最大连接数
+          max-active: 1024
+          #最大阻塞等待时间(负数表示没限制)
+          max-wait: 20000
+          #最大空闲
+          max-idle: 200
+          #最小空闲
+          min-idle: 10
+      #连接超时时间
+      timeout: 10000
+
+
+#    redis:
+#      host: localhost
+#      port: 6379
+#整合mybatis框架配置
+mybatis:
+    type-aliases-package: com.bazl.clims.model.po # 注意：对应实体类的路径
+    mapper-locations: classpath:mapper/*.xml
+    configuration:
+        log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+mapper:
+    mappers:
+        - com.bazl.clims.dao.BaseMapper
+    not-empty: false
+    identity: oracle
+
+#默认实验室对应的orgId
+defaultDnaLabOrgId: 110113000000
+defaultDnaLabName: 北京市顺义区公安司法鉴定中心
+
+#受控号，各实验室差异化配置
+#确认书
+querenshu_control_no: SYGJ-2019-CX11-E
+#补送确认书
+busong_querenshu_control_no: SYGJ-2019-CX11-F
+#预实验记录表
+yushiyan_control_no: SYGJ-2019-CX32-J
+#常规提取记录
+routine_extraction_records_no: SYGJ-2019-CX32-K
+#精斑提取记录
+seminal_extraction_no: SYGJ-2019-CX32-L
+#扩增记录
+amplified_records_no: SYGJ-2019-CX32-M
+#电泳记录
+electrophoretic_recording_no: SYGJ-2019-CX32-N
+#入库单
+warehouse_receipt_no: SYGJ-2019-CX32-P
+#实验室记录封皮
+laboratory_record_cover: SYGJ-2019-CX32-I
+#自动提取页面，生成电泳分离记录
+electrophoretic_automatic_no: SYGJ-2019-CX32-Q
+
+
+#以下为文件上传配置路径
+personImg: D:/ftpimg/person_img/
+sampleImg: D:/ftpimg/sample_img/
+proxyImg: D:/ftpimg/proxy_img/
+appointImg: D:/ftpimg/appoint_img/
+
+#以下为上传ftp所需配置
+ftpIp: 192.168.0.112
+ftpPort: 21
+ftpPersonImg: person_img
+ftpSampleImg: sample_img
+ftpProxyImg: proxy_img
+ftpAppointImg: appoint_img
+ftpUser: test
+ftpPassword: test
+ftpTomcat: 8087
+ftpFilePath: file
+ftpCaseFilePath: doc
+
+bendiFilePath: D:\\download2\\
+
+samplePhotosRootDir: D:\\samplePhotos\\
+
+#委托系统URL
+commissionSystemUrL: http://127.0.0.1:8082/
+#绩效考核URL
+commissionAssesUrL: http://127.0.0.1:8088/
+#检验过程URL
+inspectCourseUrl: 'http://192.168.1.138:70'
+
+#打印插件访问url
+#printUrl: http://192.168.43.37:927/PrintDoc?jquest=2342
+page: 1
+
+#shiro session失效时间  60000是一分钟  1800000是半小时
+shTime: 3600000
+
+#同一入库比对的匹配下限设置
+minSameCount: 13
+#亲缘入库比对的匹配下限设置
+RelativeMinSameCount: 13
+RelativeHalfDiffCount: 2
+PopulationId: 25
+
+#本案比对的匹配下限设置
+minSameCaseCount: 13
+minSameRelationCount: 13
+minSameMixCount: 13
+halfDiffCount: 1
+
+permission.menu.menuParentPId: '*'
+permission.menu.menuParentName: 菜单
+permission.menu.menuParentEdit: false
+
+#是否开启通知app 1=开启 0=关闭
+Is_App_Inform : 0
+Is_App_Url : 'http://20.1.11.52:5988/http/GA000Comm'
+
+#是否入本地库
+#顺义系统必须设置为true，否则会导致数据无法入库到北京全市本地库（edit by lizhihua)
+isInStorge: true
+labServerNo: 110113
+
+#本地库比对定时
+localComparTaskActived: false
+
+#法医中心版本=1, 顺义法医中心(0)
+limsEdition : 0
+
+#默认显示为检验人柴嘉\复核人为赵强\授权签字人审核为李学合
+inspector1 : 柴嘉
+inspector1Post : 法医师
+inspector2 : 赵强
+inspector2Post : 副主任法医师
+inspector3 : 李学合
+inspector3Post : 副主任法医师

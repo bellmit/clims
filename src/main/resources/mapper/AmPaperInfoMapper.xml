@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.AmPaperInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.AmPaperInfo" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="PERSONAL_ID" property="personalId" jdbcType="VARCHAR" />
+    <result column="PAPER_SUBJECT" property="paperSubject" jdbcType="VARCHAR" />
+    <result column="PAPER_CONTENT" property="paperContent" jdbcType="VARCHAR" />
+    <result column="PUBLISH_DATETIME" property="publishDatetime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_PERSON" property="updatePerson" jdbcType="VARCHAR" />
+    <result column="DELETE_FLAG" property="deleteFlag" jdbcType="VARCHAR" />
+    <result column="DELETE_DATETIME" property="deleteDatetime" jdbcType="TIMESTAMP" />
+    <result column="DELETE_PERSON" property="deletePerson" jdbcType="VARCHAR" />
+    <result column="PAPER_ISSUE" property="paperIssue" jdbcType="VARCHAR" />
+    <result column="ISSUE_NAME" property="issueName" jdbcType="VARCHAR" />
+    <result column="PAPER_KIND" property="paperKind" jdbcType="VARCHAR" />
+    <result column="PAPER_RANK" property="paperRank" jdbcType="VARCHAR" />
+    <result column="WRITER_ORDER" property="writerOrder" jdbcType="DECIMAL" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from AM_PAPER_INFO
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.clims.model.po.AmPaperInfo" >
+    insert into AM_PAPER_INFO (ID, PERSONAL_ID, PAPER_SUBJECT, 
+      PAPER_CONTENT, PUBLISH_DATETIME, CREATE_DATETIME, 
+      CREATE_PERSON, UPDATE_DATETIME, UPDATE_PERSON, 
+      DELETE_FLAG, DELETE_DATETIME, DELETE_PERSON, 
+      PAPER_ISSUE, ISSUE_NAME, PAPER_KIND, 
+      PAPER_RANK, WRITER_ORDER)
+    values (#{id,jdbcType=VARCHAR}, #{personalId,jdbcType=VARCHAR}, #{paperSubject,jdbcType=VARCHAR}, 
+      #{paperContent,jdbcType=VARCHAR}, #{publishDatetime,jdbcType=TIMESTAMP}, #{createDatetime,jdbcType=TIMESTAMP}, 
+      #{createPerson,jdbcType=VARCHAR}, #{updateDatetime,jdbcType=TIMESTAMP}, #{updatePerson,jdbcType=VARCHAR}, 
+      #{deleteFlag,jdbcType=VARCHAR}, #{deleteDatetime,jdbcType=TIMESTAMP}, #{deletePerson,jdbcType=VARCHAR}, 
+      #{paperIssue,jdbcType=VARCHAR}, #{issueName,jdbcType=VARCHAR}, #{paperKind,jdbcType=VARCHAR}, 
+      #{paperRank,jdbcType=VARCHAR}, #{writerOrder,jdbcType=DECIMAL})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.clims.model.po.AmPaperInfo" >
+    update AM_PAPER_INFO
+    set PERSONAL_ID = #{personalId,jdbcType=VARCHAR},
+      PAPER_SUBJECT = #{paperSubject,jdbcType=VARCHAR},
+      PAPER_CONTENT = #{paperContent,jdbcType=VARCHAR},
+      PUBLISH_DATETIME = #{publishDatetime,jdbcType=TIMESTAMP},
+      CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+      CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP},
+      UPDATE_PERSON = #{updatePerson,jdbcType=VARCHAR},
+      DELETE_FLAG = #{deleteFlag,jdbcType=VARCHAR},
+      DELETE_DATETIME = #{deleteDatetime,jdbcType=TIMESTAMP},
+      DELETE_PERSON = #{deletePerson,jdbcType=VARCHAR},
+      PAPER_ISSUE = #{paperIssue,jdbcType=VARCHAR},
+      ISSUE_NAME = #{issueName,jdbcType=VARCHAR},
+      PAPER_KIND = #{paperKind,jdbcType=VARCHAR},
+      PAPER_RANK = #{paperRank,jdbcType=VARCHAR},
+      WRITER_ORDER = #{writerOrder,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select ID, PERSONAL_ID, PAPER_SUBJECT, PAPER_CONTENT, PUBLISH_DATETIME, CREATE_DATETIME, 
+    CREATE_PERSON, UPDATE_DATETIME, UPDATE_PERSON, DELETE_FLAG, DELETE_DATETIME, DELETE_PERSON, 
+    PAPER_ISSUE, ISSUE_NAME, PAPER_KIND, PAPER_RANK, WRITER_ORDER
+    from AM_PAPER_INFO
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select ID, PERSONAL_ID, PAPER_SUBJECT, PAPER_CONTENT, PUBLISH_DATETIME, CREATE_DATETIME, 
+    CREATE_PERSON, UPDATE_DATETIME, UPDATE_PERSON, DELETE_FLAG, DELETE_DATETIME, DELETE_PERSON, 
+    PAPER_ISSUE, ISSUE_NAME, PAPER_KIND, PAPER_RANK, WRITER_ORDER
+    from AM_PAPER_INFO
+  </select>
+</mapper>

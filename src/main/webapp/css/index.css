@@ -1,0 +1,79 @@
+.layui-layout-admin .layui-logo {
+    font-weight: bold;
+    color: #fff;
+    font-size: 20px;
+}
+
+.layui-logo img {
+    width: 100px;
+    margin-top: -5px;
+    margin-right: 15px;
+    margin-left: 15px;
+}
+
+.layui-header .layui-layout-left {
+    left: 18%;
+}
+
+#content {
+    width: 100%;
+    height: 100%;
+}
+
+.layui-layout-admin .layui-body {
+    top: 60px;
+    bottom: 0px;
+    width: 89%;
+}
+
+.layui-layout-admin .layui-footer {
+    position: relative;
+    left: 0px;
+    right: 0;
+    bottom: 0;
+    height: 44px;
+    line-height: 44px;
+    padding: 0 15px;
+    background-color: #eee;
+}
+
+/*头部背景色*/
+.layui-layout-admin .layui-header {
+    background-color: #373f46;
+}
+
+/*侧边栏头部边框*/
+.layui-side-scroll {
+    box-sizing: border-box;
+    border-top: 1px solid #434d57;
+}
+
+/*侧边栏提示色*/
+.layui-nav-tree .layui-nav-bar {
+    width: 5px;
+    height: 0;
+    background-color: #4fc5b6;
+}
+
+.layui-nav-tree .layui-nav-child dd.layui-this, .layui-nav-tree .layui-nav-child dd.layui-this a, .layui-nav-tree .layui-this, .layui-nav-tree .layui-this > a, .layui-nav-tree .layui-this > a:hover {
+    background-color: #00b39b;
+    color: #fff;
+}
+
+/*头部*/
+.layui-nav .layui-this:after, .layui-nav-bar, .layui-nav-tree .layui-nav-itemed:after {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0;
+    height: 5px;
+    background-color: #4fc5b6;
+    transition: all .2s;
+    -webkit-transition: all .2s;
+}
+
+/*头部悬停*/
+.layui-nav .layui-nav-item a:hover, .layui-nav .layui-this a {
+    color: #fff;
+    font-weight: bold;
+}

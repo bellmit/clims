@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.AmTrainRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.AmTrainRecord" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="PERSONAL_ID" property="personalId" jdbcType="VARCHAR" />
+    <result column="TRAIN_START_DATETIME" property="trainStartDatetime" jdbcType="TIMESTAMP" />
+    <result column="TRAIN_END_DATETIME" property="trainEndDatetime" jdbcType="TIMESTAMP" />
+    <result column="TRAIN_ADDRESS" property="trainAddress" jdbcType="VARCHAR" />
+    <result column="TRAIN_CONTENT" property="trainContent" jdbcType="VARCHAR" />
+    <result column="TRAIN_SPEAKER" property="trainSpeaker" jdbcType="VARCHAR" />
+    <result column="TRAIN_LEVEL" property="trainLevel" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_PERSON" property="updatePerson" jdbcType="VARCHAR" />
+    <result column="DELETE_FLAG" property="deleteFlag" jdbcType="VARCHAR" />
+    <result column="DELETE_DATETIME" property="deleteDatetime" jdbcType="TIMESTAMP" />
+    <result column="DELETE_PERSON" property="deletePerson" jdbcType="VARCHAR" />
+    <result column="TRAINING_SUBJECT" property="trainingSubject" jdbcType="VARCHAR" />
+    <result column="TRAINING_PARTY" property="trainingParty" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from AM_TRAIN_RECORD
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.clims.model.po.AmTrainRecord" >
+    insert into AM_TRAIN_RECORD (ID, PERSONAL_ID, TRAIN_START_DATETIME, 
+      TRAIN_END_DATETIME, TRAIN_ADDRESS, TRAIN_CONTENT, 
+      TRAIN_SPEAKER, TRAIN_LEVEL, CREATE_DATETIME, 
+      CREATE_PERSON, UPDATE_DATETIME, UPDATE_PERSON, 
+      DELETE_FLAG, DELETE_DATETIME, DELETE_PERSON, 
+      TRAINING_SUBJECT, TRAINING_PARTY)
+    values (#{id,jdbcType=VARCHAR}, #{personalId,jdbcType=VARCHAR}, #{trainStartDatetime,jdbcType=TIMESTAMP}, 
+      #{trainEndDatetime,jdbcType=TIMESTAMP}, #{trainAddress,jdbcType=VARCHAR}, #{trainContent,jdbcType=VARCHAR}, 
+      #{trainSpeaker,jdbcType=VARCHAR}, #{trainLevel,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP}, 
+      #{createPerson,jdbcType=VARCHAR}, #{updateDatetime,jdbcType=TIMESTAMP}, #{updatePerson,jdbcType=VARCHAR}, 
+      #{deleteFlag,jdbcType=VARCHAR}, #{deleteDatetime,jdbcType=TIMESTAMP}, #{deletePerson,jdbcType=VARCHAR}, 
+      #{trainingSubject,jdbcType=VARCHAR}, #{trainingParty,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.clims.model.po.AmTrainRecord" >
+    update AM_TRAIN_RECORD
+    set PERSONAL_ID = #{personalId,jdbcType=VARCHAR},
+      TRAIN_START_DATETIME = #{trainStartDatetime,jdbcType=TIMESTAMP},
+      TRAIN_END_DATETIME = #{trainEndDatetime,jdbcType=TIMESTAMP},
+      TRAIN_ADDRESS = #{trainAddress,jdbcType=VARCHAR},
+      TRAIN_CONTENT = #{trainContent,jdbcType=VARCHAR},
+      TRAIN_SPEAKER = #{trainSpeaker,jdbcType=VARCHAR},
+      TRAIN_LEVEL = #{trainLevel,jdbcType=VARCHAR},
+      CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+      CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP},
+      UPDATE_PERSON = #{updatePerson,jdbcType=VARCHAR},
+      DELETE_FLAG = #{deleteFlag,jdbcType=VARCHAR},
+      DELETE_DATETIME = #{deleteDatetime,jdbcType=TIMESTAMP},
+      DELETE_PERSON = #{deletePerson,jdbcType=VARCHAR},
+      TRAINING_SUBJECT = #{trainingSubject,jdbcType=VARCHAR},
+      TRAINING_PARTY = #{trainingParty,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select ID, PERSONAL_ID, TRAIN_START_DATETIME, TRAIN_END_DATETIME, TRAIN_ADDRESS, 
+    TRAIN_CONTENT, TRAIN_SPEAKER, TRAIN_LEVEL, CREATE_DATETIME, CREATE_PERSON, UPDATE_DATETIME, 
+    UPDATE_PERSON, DELETE_FLAG, DELETE_DATETIME, DELETE_PERSON, TRAINING_SUBJECT, TRAINING_PARTY
+    from AM_TRAIN_RECORD
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select ID, PERSONAL_ID, TRAIN_START_DATETIME, TRAIN_END_DATETIME, TRAIN_ADDRESS, 
+    TRAIN_CONTENT, TRAIN_SPEAKER, TRAIN_LEVEL, CREATE_DATETIME, CREATE_PERSON, UPDATE_DATETIME, 
+    UPDATE_PERSON, DELETE_FLAG, DELETE_DATETIME, DELETE_PERSON, TRAINING_SUBJECT, TRAINING_PARTY
+    from AM_TRAIN_RECORD
+  </select>
+</mapper>

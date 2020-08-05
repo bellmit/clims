@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.ReviewQueueSampleMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.ReviewQueueSample" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="SAMPLE_ID" property="sampleId" jdbcType="VARCHAR" />
+    <result column="REVIEW_SAMPLE_STATUS" property="reviewSampleStatus" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_PERSON" property="updatePerson" jdbcType="VARCHAR" />
+    <result column="ORG_ID" property="orgId" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <resultMap id="VOBaseResultMap" type="com.bazl.clims.model.vo.ReviewQueueSampleVo">
+    <id column="ID" property="entity.id" jdbcType="VARCHAR" />
+    <result column="SAMPLE_ID" property="entity.sampleId" jdbcType="VARCHAR" />
+    <result column="REVIEW_SAMPLE_STATUS" property="entity.reviewSampleStatus" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="entity.createDatetime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_PERSON" property="entity.createPerson" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="entity.updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_PERSON" property="entity.updatePerson" jdbcType="VARCHAR" />
+    <result column="ORG_ID" property="entity.orgId" jdbcType="VARCHAR" />
+    <!-- 业务字段 -->
+    <result column="sample_no" property="sampleNo" jdbcType="VARCHAR" />
+    <result column="sample_name" property="sampleName" jdbcType="VARCHAR" />
+    <result column="sample_type_name" property="sampleTypeName" jdbcType="VARCHAR" />
+    <result column="sample_type" property="sampleType" jdbcType="VARCHAR" />
+
+  </resultMap>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from REVIEW_QUEUE_SAMPLE
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.clims.model.po.ReviewQueueSample" >
+    insert into REVIEW_QUEUE_SAMPLE (ID, SAMPLE_ID, REVIEW_SAMPLE_STATUS, 
+      CREATE_DATETIME, CREATE_PERSON, UPDATE_DATETIME, 
+      UPDATE_PERSON,ORG_ID)
+    values (#{id,jdbcType=VARCHAR}, #{sampleId,jdbcType=VARCHAR}, #{reviewSampleStatus,jdbcType=VARCHAR}, 
+      #{createDatetime,jdbcType=TIMESTAMP}, #{createPerson,jdbcType=VARCHAR}, #{updateDatetime,jdbcType=TIMESTAMP}, 
+      #{updatePerson,jdbcType=VARCHAR},#{orgId,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.clims.model.po.ReviewQueueSample" >
+    update REVIEW_QUEUE_SAMPLE
+    set SAMPLE_ID = #{sampleId,jdbcType=VARCHAR},
+      REVIEW_SAMPLE_STATUS = #{reviewSampleStatus,jdbcType=VARCHAR},
+      CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+      CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP},
+      <if test="orgId != null and orgId !=''">
+         ORG_ID = #{orgId,jdbcType=VARCHAR},
+      </if>
+      UPDATE_PERSON = #{updatePerson,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select ID, SAMPLE_ID, REVIEW_SAMPLE_STATUS, CREATE_DATETIME, CREATE_PERSON, UPDATE_DATETIME, 
+    UPDATE_PERSON
+    from REVIEW_QUEUE_SAMPLE
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select ID, SAMPLE_ID, REVIEW_SAMPLE_STATUS, CREATE_DATETIME, CREATE_PERSON, UPDATE_DATETIME, 
+    UPDATE_PERSON,ORG_ID
+    from REVIEW_QUEUE_SAMPLE
+  </select>
+
+  <!--查询待复检检材列表-->
+  <select id="selectVOPaginationList" parameterType="com.bazl.clims.model.vo.ReviewQueueSampleVo"
+          resultMap="VOBaseResultMap">
+    select * from (
+    select rownum as rn, t.* from (
+      select rqs.id as id, rqs.sample_id as sample_id,rqs.review_sample_status as review_sample_status,rqs.create_datetime as create_datetime,rqs.create_person as create_person,rqs.ORG_ID as ORG_ID,
+            rqs.update_datetime as update_datetime, rqs.update_person as update_person, lsid.sample_no as sample_no, lsid.sample_name as sample_name, di_1.dict_name as sample_type_name,di_1.dict_code as sample_type
+      from review_queue_sample rqs
+      left join lims_sample_info_dna lsid on rqs.sample_id = lsid.sample_id
+      left join dict_item di_1 on di_1.dict_code = lsid.SAMPLE_TYPE and di_1.DICT_TYPE_CODE='SAMPLE_TYPE'
+      where rqs.review_sample_status = '0' and lsid.delete_flag = '0'
+    <if test="_parameter != null">
+      <include refid="VO_Query_Where_Clause"/>
+    </if>
+    ) t where rownum &lt;=#{rows}
+    ) where rn &gt;#{offset}
+  </select>
+  <!--查询待复检检材列表count-->
+  <select id="selectReviewQueueSampleCount" parameterType="com.bazl.clims.model.vo.ReviewQueueSampleVo" resultType="int">
+    select count(*)
+    from review_queue_sample rqs
+    left join lims_sample_info_dna lsid on rqs.sample_id = lsid.sample_id
+    where rqs.review_sample_status = '0' and lsid.delete_flag = '0'
+    <if test="sampleNo != null and sampleNo != ''">
+      and lsid.SAMPLE_NO LIKE concat(concat('%',#{sampleNo,jdbcType=VARCHAR}),'%')
+    </if>
+    <if test="sampleName != null and sampleName != ''">
+      and lsid.SAMPLE_NAME LIKE concat(concat('%',#{sampleName,jdbcType=VARCHAR}),'%')
+    </if>
+    <if test="sampleType != null and sampleType != ''">
+      and lsid.SAMPLE_TYPE = #{sampleType,jdbcType=VARCHAR}
+    </if>
+    <if test="_parameter != null">
+      <include refid="VO_Query_Where_Clause"/>
+    </if>
+
+  </select>
+
+  <sql id="VO_Query_Where_Clause">
+    <if test="entity.orgId != null and entity.orgId !=''">
+      and rqs.ORG_ID = #{entity.orgId,jdbcType=VARCHAR}
+    </if>
+
+  </sql>
+
+  <update id="updateReviewSampleStatus" parameterType="com.bazl.clims.model.po.ReviewQueueSample">
+    update REVIEW_QUEUE_SAMPLE
+    set REVIEW_SAMPLE_STATUS = #{reviewSampleStatus,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <delete id="deleteByGeneId" parameterType="java.lang.String" >
+    delete from REVIEW_QUEUE_SAMPLE
+    where GENE_ID = #{geneId,jdbcType=VARCHAR}
+  </delete>
+  <select id="queryList" parameterType="com.bazl.clims.model.vo.ReviewQueueSampleVo" resultMap="VOBaseResultMap" >
+    select * from (
+    select rownum as rn, t.* from (
+    select rqs.id as id, rqs.sample_id as sample_id,rqs.review_sample_status as review_sample_status,rqs.create_datetime as create_datetime,rqs.create_person as create_person,
+    rqs.update_datetime as update_datetime, rqs.update_person as update_person, lsid.sample_no as sample_no, lsid.sample_name as sample_name, di_1.dict_name as sample_type_name,di_1.dict_code as sample_type
+    from review_queue_sample rqs
+    left join lims_sample_info_dna lsid on rqs.sample_id = lsid.sample_id
+    left join dict_item di_1 on di_1.dict_code = lsid.SAMPLE_TYPE and di_1.DICT_TYPE_CODE='SAMPLE_TYPE'
+    where rqs.review_sample_status = '0' and lsid.delete_flag = '0'
+    <if test="sampleNo != null and sampleNo != ''">
+      and lsid.SAMPLE_NO LIKE concat(concat('%',#{sampleNo,jdbcType=VARCHAR}),'%')
+    </if>
+    <if test="sampleName != null and sampleName != ''">
+      and lsid.SAMPLE_NAME LIKE concat(concat('%',#{sampleName,jdbcType=VARCHAR}),'%')
+    </if>
+    <if test="sampleType != null and sampleType != ''">
+      and lsid.SAMPLE_TYPE = #{sampleType,jdbcType=VARCHAR}
+    </if>
+    <if test="_parameter != null">
+      <include refid="VO_Query_Where_Clause"/>
+    </if>
+    ) t where rownum &lt;=#{rows}
+    ) where rn &gt;#{offset}
+  </select>
+</mapper>

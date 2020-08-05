@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.LimsEvidenceInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.LimsEvidenceInfo" >
+    <id column="EVIDENCE_ID" property="evidenceId" jdbcType="VARCHAR" />
+    <result column="CASE_ID" property="caseId" jdbcType="VARCHAR" />
+    <result column="CONSIGNMENT_ID" property="consignmentId" jdbcType="VARCHAR" />
+    <result column="EVIDENCE_NO" property="evidenceNo" jdbcType="VARCHAR" />
+    <result column="EVIDENCE_NAME" property="evidenceName" jdbcType="VARCHAR" />
+    <result column="EVIDENCE_TYPE" property="evidenceType" jdbcType="VARCHAR" />
+    <result column="EVIDENCE_COUNT" property="evidenceCount" jdbcType="DECIMAL" />
+    <result column="EVIDENCE_UNIT" property="evidenceUnit" jdbcType="VARCHAR" />
+    <result column="EVIDENCE_PACKING" property="evidencePacking" jdbcType="VARCHAR" />
+    <result column="EVIDENCE_TRAITS" property="evidenceTraits" jdbcType="VARCHAR" />
+    <result column="EVIDENCE_DESC" property="evidenceDesc" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_PERSON" property="updatePerson" jdbcType="VARCHAR" />
+    <result column="DELETE_FLAG" property="deleteFlag" jdbcType="VARCHAR" />
+    <result column="DELETE_DATETIME" property="deleteDatetime" jdbcType="TIMESTAMP" />
+    <result column="DELETE_PERSON" property="deletePerson" jdbcType="VARCHAR" />
+    <result column="DELETE_REASON" property="deleteReason" jdbcType="VARCHAR" />
+    <result column="EVIDENCE_REMARK" property="evidenceRemark" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from LIMS_EVIDENCE_INFO
+    where EVIDENCE_ID = #{evidenceId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.clims.model.po.LimsEvidenceInfo" >
+    insert into LIMS_EVIDENCE_INFO (EVIDENCE_ID, CASE_ID, CONSIGNMENT_ID, 
+      EVIDENCE_NO, EVIDENCE_NAME, EVIDENCE_TYPE, 
+      EVIDENCE_COUNT, EVIDENCE_UNIT, EVIDENCE_PACKING, 
+      EVIDENCE_TRAITS, EVIDENCE_DESC, CREATE_DATETIME, 
+      CREATE_PERSON, UPDATE_DATETIME, UPDATE_PERSON, 
+      DELETE_FLAG, DELETE_DATETIME, DELETE_PERSON, 
+      DELETE_REASON, EVIDENCE_REMARK)
+    values (#{evidenceId,jdbcType=VARCHAR}, #{caseId,jdbcType=VARCHAR}, #{consignmentId,jdbcType=VARCHAR}, 
+      #{evidenceNo,jdbcType=VARCHAR}, #{evidenceName,jdbcType=VARCHAR}, #{evidenceType,jdbcType=VARCHAR}, 
+      #{evidenceCount,jdbcType=DECIMAL}, #{evidenceUnit,jdbcType=VARCHAR}, #{evidencePacking,jdbcType=VARCHAR}, 
+      #{evidenceTraits,jdbcType=VARCHAR}, #{evidenceDesc,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP}, 
+      #{createPerson,jdbcType=VARCHAR}, #{updateDatetime,jdbcType=TIMESTAMP}, #{updatePerson,jdbcType=VARCHAR}, 
+      #{deleteFlag,jdbcType=VARCHAR}, #{deleteDatetime,jdbcType=TIMESTAMP}, #{deletePerson,jdbcType=VARCHAR}, 
+      #{deleteReason,jdbcType=VARCHAR}, #{evidenceRemark,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.clims.model.po.LimsEvidenceInfo" >
+    update LIMS_EVIDENCE_INFO
+    set CASE_ID = #{caseId,jdbcType=VARCHAR},
+      CONSIGNMENT_ID = #{consignmentId,jdbcType=VARCHAR},
+      EVIDENCE_NO = #{evidenceNo,jdbcType=VARCHAR},
+      EVIDENCE_NAME = #{evidenceName,jdbcType=VARCHAR},
+      EVIDENCE_TYPE = #{evidenceType,jdbcType=VARCHAR},
+      EVIDENCE_COUNT = #{evidenceCount,jdbcType=DECIMAL},
+      EVIDENCE_UNIT = #{evidenceUnit,jdbcType=VARCHAR},
+      EVIDENCE_PACKING = #{evidencePacking,jdbcType=VARCHAR},
+      EVIDENCE_TRAITS = #{evidenceTraits,jdbcType=VARCHAR},
+      EVIDENCE_DESC = #{evidenceDesc,jdbcType=VARCHAR},
+      CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+      CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP},
+      UPDATE_PERSON = #{updatePerson,jdbcType=VARCHAR},
+      DELETE_FLAG = #{deleteFlag,jdbcType=VARCHAR},
+      DELETE_DATETIME = #{deleteDatetime,jdbcType=TIMESTAMP},
+      DELETE_PERSON = #{deletePerson,jdbcType=VARCHAR},
+      DELETE_REASON = #{deleteReason,jdbcType=VARCHAR},
+      EVIDENCE_REMARK = #{evidenceRemark,jdbcType=VARCHAR}
+    where EVIDENCE_ID = #{evidenceId,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select EVIDENCE_ID, CASE_ID, CONSIGNMENT_ID, EVIDENCE_NO, EVIDENCE_NAME, EVIDENCE_TYPE, 
+    EVIDENCE_COUNT, EVIDENCE_UNIT, EVIDENCE_PACKING, EVIDENCE_TRAITS, EVIDENCE_DESC, 
+    CREATE_DATETIME, CREATE_PERSON, UPDATE_DATETIME, UPDATE_PERSON, DELETE_FLAG, DELETE_DATETIME, 
+    DELETE_PERSON, DELETE_REASON, EVIDENCE_REMARK
+    from LIMS_EVIDENCE_INFO
+    where EVIDENCE_ID = #{evidenceId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select EVIDENCE_ID, CASE_ID, CONSIGNMENT_ID, EVIDENCE_NO, EVIDENCE_NAME, EVIDENCE_TYPE, 
+    EVIDENCE_COUNT, EVIDENCE_UNIT, EVIDENCE_PACKING, EVIDENCE_TRAITS, EVIDENCE_DESC, 
+    CREATE_DATETIME, CREATE_PERSON, UPDATE_DATETIME, UPDATE_PERSON, DELETE_FLAG, DELETE_DATETIME, 
+    DELETE_PERSON, DELETE_REASON, EVIDENCE_REMARK
+    from LIMS_EVIDENCE_INFO
+  </select>
+</mapper>

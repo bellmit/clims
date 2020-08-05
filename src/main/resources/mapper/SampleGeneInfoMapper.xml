@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bazl.clims.dao.SampleGeneInfoMapper">
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.SampleGeneInfo">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="SAMPLE_GENE_ID" jdbcType="VARCHAR" property="sampleGeneId" />
+    <result column="LOCINUM" jdbcType="DECIMAL" property="locinum" />
+    <result column="IS_MIXTURE" jdbcType="DECIMAL" property="isMixture" />
+    <result column="IS_DETECTED" jdbcType="DECIMAL" property="isDetected" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from SAMPLE_GENE_INFO
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.clims.model.po.SampleGeneInfo">
+    insert into SAMPLE_GENE_INFO (ID, SAMPLE_GENE_ID, LOCINUM, 
+      IS_MIXTURE, IS_DETECTED)
+    values (#{id,jdbcType=VARCHAR}, #{sampleGeneId,jdbcType=VARCHAR}, #{locinum,jdbcType=DECIMAL}, 
+      #{isMixture,jdbcType=DECIMAL}, #{isDetected,jdbcType=DECIMAL})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.clims.model.po.SampleGeneInfo">
+    update SAMPLE_GENE_INFO
+    set SAMPLE_GENE_ID = #{sampleGeneId,jdbcType=VARCHAR},
+      LOCINUM = #{locinum,jdbcType=DECIMAL},
+      IS_MIXTURE = #{isMixture,jdbcType=DECIMAL},
+      IS_DETECTED = #{isDetected,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select ID, SAMPLE_GENE_ID, LOCINUM, IS_MIXTURE, IS_DETECTED
+    from SAMPLE_GENE_INFO
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select ID, SAMPLE_GENE_ID, LOCINUM, IS_MIXTURE, IS_DETECTED
+    from SAMPLE_GENE_INFO
+  </select>
+</mapper>

@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.LabTaskInfoMapper" >
+
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.LabTaskInfo" >
+    <id column="TASK_ID" property="taskId" jdbcType="VARCHAR" />
+    <result column="TASK_NO" property="taskNo" jdbcType="VARCHAR" />
+    <result column="BOARD_NO" property="boardNo" jdbcType="VARCHAR" />
+    <result column="TASK_STATUS" property="taskStatus" jdbcType="VARCHAR" />
+    <result column="TASK_STAGE" property="taskStage" jdbcType="VARCHAR" />
+    <result column="TASK_PERSON" property="taskPerson" jdbcType="VARCHAR" />
+    <result column="TASK_START_DATETIME" property="taskStartDatetime" jdbcType="TIMESTAMP" />
+    <result column="TASK_END_DATETIME" property="taskEndDatetime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_PERSON" property="updatePerson" jdbcType="VARCHAR" />
+    <result column="DELETE_FLAG" property="deleteFlag" jdbcType="VARCHAR" />
+    <result column="DELETE_DATETIME" property="deleteDatetime" jdbcType="TIMESTAMP" />
+    <result column="DELETE_PERSON" property="deletePerson" jdbcType="VARCHAR" />
+    <result column="INSPECTION_TYPE" property="inspectionType" jdbcType="VARCHAR" />
+    <result column="EXTRACTION_MODE" property="extractionMode" jdbcType="VARCHAR" />
+    <result column="DELEGATE_ORG_CODE" property="delegateOrgCode" jdbcType="VARCHAR" />
+    <result column="DELEGATE_ORG_NAME" property="delegateOrgName" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <resultMap id="VOBaseResultMap" type="com.bazl.clims.model.vo.LabTaskInfoVo" >
+    <id column="TASK_ID" property="entity.taskId" jdbcType="VARCHAR" />
+    <result column="TASK_NO" property="entity.taskNo" jdbcType="VARCHAR" />
+    <result column="BOARD_NO" property="entity.boardNo" jdbcType="VARCHAR" />
+    <result column="TASK_STATUS" property="entity.taskStatus" jdbcType="VARCHAR" />
+    <result column="TASK_STAGE" property="entity.taskStage" jdbcType="VARCHAR" />
+    <result column="TASK_PERSON" property="entity.taskPerson" jdbcType="VARCHAR" />
+    <result column="TASK_START_DATETIME" property="entity.taskStartDatetime" jdbcType="TIMESTAMP" />
+    <result column="TASK_END_DATETIME" property="entity.taskEndDatetime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_DATETIME" property="entity.createDatetime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_PERSON" property="entity.createPerson" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="entity.updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_PERSON" property="entity.updatePerson" jdbcType="VARCHAR" />
+    <result column="DELETE_FLAG" property="entity.deleteFlag" jdbcType="VARCHAR" />
+    <result column="DELETE_DATETIME" property="entity.deleteDatetime" jdbcType="TIMESTAMP" />
+    <result column="DELETE_PERSON" property="entity.deletePerson" jdbcType="VARCHAR" />
+    <result column="INSPECTION_TYPE" property="entity.inspectionType" jdbcType="VARCHAR" />
+    <result column="EXTRACTION_MODE" property="entity.extractionMode" jdbcType="VARCHAR" />
+    <result column="DELEGATE_ORG_CODE" property="entity.delegateOrgCode" jdbcType="VARCHAR" />
+    <result column="DELEGATE_ORG_NAME" property="entity.delegateOrgName" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from LAB_TASK_INFO
+    where TASK_ID = #{taskId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.clims.model.po.LabTaskInfo" >
+    insert into LAB_TASK_INFO (TASK_ID, TASK_NO, BOARD_NO, TASK_STATUS,
+      TASK_STAGE, TASK_PERSON, TASK_START_DATETIME, 
+      TASK_END_DATETIME, CREATE_DATETIME, CREATE_PERSON, 
+      UPDATE_DATETIME, UPDATE_PERSON, DELETE_FLAG, 
+      DELETE_DATETIME, DELETE_PERSON, INSPECTION_TYPE, EXTRACTION_MODE,
+      DELEGATE_ORG_CODE, DELEGATE_ORG_NAME)
+    values (#{taskId,jdbcType=VARCHAR}, #{taskNo,jdbcType= VARCHAR}, #{boardNo,jdbcType=VARCHAR}, #{taskStatus,jdbcType=VARCHAR},
+      #{taskStage,jdbcType=VARCHAR}, #{taskPerson,jdbcType=VARCHAR}, #{taskStartDatetime,jdbcType=TIMESTAMP}, 
+      #{taskEndDatetime,jdbcType=TIMESTAMP}, #{createDatetime,jdbcType=TIMESTAMP}, #{createPerson,jdbcType=VARCHAR}, 
+      #{updateDatetime,jdbcType=TIMESTAMP}, #{updatePerson,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=VARCHAR}, 
+      #{deleteDatetime,jdbcType=TIMESTAMP}, #{deletePerson,jdbcType=VARCHAR}, #{inspectionType,jdbcType=VARCHAR}, #{extractionMode,jdbcType=VARCHAR},
+      #{delegateOrgCode,jdbcType=VARCHAR}, #{delegateOrgName,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.clims.model.po.LabTaskInfo" >
+    update LAB_TASK_INFO
+    set TASK_NO = #{taskNo,jdbcType=VARCHAR},
+      BOARD_NO = #{boardNo,jdbcType=VARCHAR},
+      TASK_STATUS = #{taskStatus,jdbcType=VARCHAR},
+      TASK_STAGE = #{taskStage,jdbcType=VARCHAR},
+      TASK_PERSON = #{taskPerson,jdbcType=VARCHAR},
+      TASK_START_DATETIME = #{taskStartDatetime,jdbcType=TIMESTAMP},
+      TASK_END_DATETIME = #{taskEndDatetime,jdbcType=TIMESTAMP},
+      CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+      CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP},
+      UPDATE_PERSON = #{updatePerson,jdbcType=VARCHAR},
+      DELETE_FLAG = #{deleteFlag,jdbcType=VARCHAR},
+      DELETE_DATETIME = #{deleteDatetime,jdbcType=TIMESTAMP},
+      DELETE_PERSON = #{deletePerson,jdbcType=VARCHAR},
+      INSPECTION_TYPE = #{inspectionType,jdbcType=VARCHAR},
+      EXTRACTION_MODE = #{extractionMode,jdbcType=VARCHAR},
+      DELEGATE_ORG_CODE = #{delegateOrgCode,jdbcType=VARCHAR},
+      DELEGATE_ORG_NAME = #{delegateOrgName,jdbcType=VARCHAR}
+    where TASK_ID = #{taskId,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select *
+    from LAB_TASK_INFO
+    where TASK_ID = #{taskId,jdbcType=VARCHAR}
+  </select>
+
+  <sql id="VO_Query_Where_Clause">
+    <if test="entity.delegateOrgCode != null and entity.delegateOrgCode !='' ">
+      and lti.DELEGATE_ORG_CODE = #{entity.delegateOrgCode,jdbcType=VARCHAR}
+    </if>
+  </sql>
+
+  <!--<select id="selectAll" resultMap="VOBaseResultMap" parameterType="com.bazl.clims.model.vo.LabTaskInfoVo">-->
+    <!--select * from (-->
+    <!--select rownum as rn, t.* from (-->
+    <!--select lti.*-->
+    <!--from LAB_TASK_INFO lti-->
+    <!--<where>-->
+      <!--<if test="_parameter != null">-->
+        <!--<include refid="VO_Query_Where_Clause"/>-->
+      <!--</if>-->
+      <!--<if test="orderByClause != null">-->
+        <!--order by ${orderByClause}-->
+      <!--</if>-->
+    <!--</where>-->
+    <!--order by length(trim(lti.TASK_NO)) desc, lti.task_no desc-->
+    <!--) t where rownum &lt;=#{rows}-->
+    <!--) where rn &gt;#{offset}-->
+  <!--</select>-->
+  <select id="selectAll" resultMap="VOBaseResultMap" parameterType="com.bazl.clims.model.vo.LabTaskInfoVo">
+    select * from
+    (select rownum as rn, a.* from
+    (select distinct t.* from LAB_TASK_INFO t
+    left join lab_extract_info lei on lei.task_id = t.task_id
+    left join lab_extract_sample les on les.extract_id = lei.extract_id
+    left join lims_sample_info_dna lsid on lsid.sample_id = les.sample_id
+    left join LIMS_CASE_INFO lci on lci.case_id = lsid.case_id
+    where 1 = 1
+    <if test="entity.taskNo != null and entity.taskNo != ''">
+      and t.task_no like CONCAT(CONCAT('%',#{entity.taskNo}),'%')
+    </if>
+    <if test="entity.boardNo != null and entity.boardNo != ''">
+      and t.board_no like CONCAT(CONCAT('%',#{entity.boardNo}),'%')
+    </if>
+    <if test="entity.taskPerson != null and entity.taskPerson != ''">
+      and t.task_person = #{entity.taskPerson,jdbcType=VARCHAR}
+      or t.task_person = #{entity.taskPerson,jdbcType=VARCHAR}
+    </if>
+    <if test="entity.taskStartDatetime != null">
+      and t.task_start_datetime <![CDATA[>=]]> #{entity.taskStartDatetime, jdbcType=TIMESTAMP}
+    </if>
+    <if test="entity.taskEndDatetime != null">
+      and t.task_end_datetime <![CDATA[<=]]> #{entity.taskEndDatetime, jdbcType=TIMESTAMP}
+    </if>
+    <if test="entity.limsCaseInfo != null">
+      <if test="entity.limsCaseInfo.caseNo != null and entity.limsCaseInfo.caseNo != ''">
+        and lci.case_no like CONCAT(CONCAT('%',#{entity.limsCaseInfo.caseNo}),'%')
+      </if>
+    </if>
+    <if test="entity.limsSampleInfoDna != null">
+      <if test="entity.limsSampleInfoDna.sampleNo != null and entity.limsSampleInfoDna.sampleNo != ''">
+        and lsid.sample_no like CONCAT(CONCAT('%',#{entity.limsSampleInfoDna.sampleNo}),'%')
+      </if>
+    </if>
+    <if test="entity.delegateOrgCode != null and entity.delegateOrgCode != ''">
+      and t.DELEGATE_ORG_CODE = #{entity.delegateOrgCode}
+    </if>
+      order by t.create_datetime desc) a
+    where rownum <![CDATA[<=]]> #{rows})
+    where rn > #{offset}
+  </select>
+  <select id="selectLabTaskInfo" resultMap="BaseResultMap" parameterType="com.bazl.clims.model.po.LabTaskInfo">
+    select *
+    from LAB_TASK_INFO
+    where TASK_NO = #{taskNo,jdbcType=VARCHAR}
+    and BOARD_NO = #{boardNo,jdbcType=VARCHAR}
+    and TASK_PERSON = #{taskPerson,jdbcType=VARCHAR}
+    and TASK_START_DATETIME = #{taskStartDatetime, jdbcType=TIMESTAMP}
+    and TASK_END_DATETIME = #{taskEndDatetime, jdbcType=TIMESTAMP}
+  </select>
+
+  <select id="selectVOCount" parameterType="com.bazl.clims.model.vo.LabTaskInfoVo" resultType="int">
+    select count(distinct lti.TASK_ID) from LAB_TASK_INFO lti
+    left join lab_extract_info lei on lei.task_id = lti.task_id
+    left join lab_extract_sample les on les.extract_id = lei.extract_id
+    left join lims_sample_info_dna lsid on lsid.sample_id = les.sample_id
+    left join LIMS_CASE_INFO lci on lci.case_id = lsid.case_id
+    <where>
+      <if test="entity.taskNo != null and entity.taskNo != ''">
+        and lti.task_no like CONCAT(CONCAT('%',#{entity.taskNo}),'%')
+      </if>
+      <if test="entity.boardNo != null and entity.boardNo != ''">
+        and lti.board_no like CONCAT(CONCAT('%',#{entity.boardNo}),'%')
+      </if>
+      <if test="entity.taskPerson != null and entity.taskPerson != ''">
+        and lti.task_person = #{entity.taskPerson,jdbcType=VARCHAR}
+      </if>
+      <if test="entity.taskStartDatetime != null">
+        and lti.task_start_datetime <![CDATA[>=]]> #{entity.taskStartDatetime, jdbcType=TIMESTAMP}
+      </if>
+      <if test="entity.taskEndDatetime != null">
+        and lti.task_end_datetime <![CDATA[<=]]> #{entity.taskEndDatetime, jdbcType=TIMESTAMP}
+      </if>
+      <if test="entity.limsCaseInfo != null">
+        <if test="entity.limsCaseInfo.caseNo != null and entity.limsCaseInfo.caseNo != ''">
+          and lci.case_no like CONCAT(CONCAT('%',#{entity.limsCaseInfo.caseNo}),'%')
+        </if>
+      </if>
+      <if test="entity.limsSampleInfoDna != null">
+        <if test="entity.limsSampleInfoDna.sampleNo != null and entity.limsSampleInfoDna.sampleNo != ''">
+          and lsid.sample_no like CONCAT(CONCAT('%',#{entity.limsSampleInfoDna.sampleNo}),'%')
+        </if>
+      </if>
+      <if test="entity.delegateOrgCode != null and entity.delegateOrgCode != ''">
+        and lti.DELEGATE_ORG_CODE = #{entity.delegateOrgCode}
+      </if>
+      <if test="entity.delegateOrgCode == null">
+        and lti.DELEGATE_ORG_CODE is null
+      </if>
+      <if test="orderByClause != null">
+        order by ${orderByClause}
+      </if>
+    </where>
+  </select>
+</mapper>

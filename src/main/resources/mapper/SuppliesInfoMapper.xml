@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.SuppliesInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.SuppliesInfo" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="SUPPLIES_NAME" property="suppliesName" jdbcType="VARCHAR" />
+    <result column="SUPPLIES_NO" property="suppliesNo" jdbcType="VARCHAR" />
+    <result column="EXPERIMENTAL_STAGE" property="experimentalStage" jdbcType="VARCHAR" />
+    <result column="SUPPLIES_BRAND" property="suppliesBrand" jdbcType="VARCHAR" />
+    <result column="SUPPLIES_MODEL" property="suppliesModel" jdbcType="VARCHAR" />
+    <result column="SUPPLIES_PRICE" property="suppliesPrice" jdbcType="VARCHAR" />
+    <result column="SUPPLIES_FIRM" property="suppliesFirm" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_PERSON" property="updatePerson" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="ORG_ID" property="orgId" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from SUPPLIES_INFO
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.clims.model.po.SuppliesInfo" >
+    insert into SUPPLIES_INFO (ID, SUPPLIES_NAME, SUPPLIES_NO, 
+      EXPERIMENTAL_STAGE, SUPPLIES_BRAND, SUPPLIES_MODEL, 
+      SUPPLIES_PRICE, SUPPLIES_FIRM, REMARK, 
+      CREATE_PERSON, CREATE_DATETIME, UPDATE_PERSON, 
+      UPDATE_DATETIME, ORG_ID)
+    values (#{id,jdbcType=VARCHAR}, #{suppliesName,jdbcType=VARCHAR}, #{suppliesNo,jdbcType=VARCHAR}, 
+      #{experimentalStage,jdbcType=VARCHAR}, #{suppliesBrand,jdbcType=VARCHAR}, #{suppliesModel,jdbcType=VARCHAR}, 
+      #{suppliesPrice,jdbcType=VARCHAR}, #{suppliesFirm,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{createPerson,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP}, #{updatePerson,jdbcType=VARCHAR}, 
+      #{updateDatetime,jdbcType=TIMESTAMP}, #{orgId,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.clims.model.po.SuppliesInfo" >
+    update SUPPLIES_INFO
+    set SUPPLIES_NAME = #{suppliesName,jdbcType=VARCHAR},
+      SUPPLIES_NO = #{suppliesNo,jdbcType=VARCHAR},
+      EXPERIMENTAL_STAGE = #{experimentalStage,jdbcType=VARCHAR},
+      SUPPLIES_BRAND = #{suppliesBrand,jdbcType=VARCHAR},
+      SUPPLIES_MODEL = #{suppliesModel,jdbcType=VARCHAR},
+      SUPPLIES_PRICE = #{suppliesPrice,jdbcType=VARCHAR},
+      SUPPLIES_FIRM = #{suppliesFirm,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+      UPDATE_PERSON = #{updatePerson,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP},
+      ORG_ID = #{orgId,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select ID, SUPPLIES_NAME, SUPPLIES_NO, EXPERIMENTAL_STAGE, SUPPLIES_BRAND, SUPPLIES_MODEL, 
+    SUPPLIES_PRICE, SUPPLIES_FIRM, REMARK, CREATE_PERSON, CREATE_DATETIME, UPDATE_PERSON, 
+    UPDATE_DATETIME, ORG_ID
+    from SUPPLIES_INFO
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select ID, SUPPLIES_NAME, SUPPLIES_NO, EXPERIMENTAL_STAGE, SUPPLIES_BRAND, SUPPLIES_MODEL, 
+    SUPPLIES_PRICE, SUPPLIES_FIRM, REMARK, CREATE_PERSON, CREATE_DATETIME, UPDATE_PERSON, 
+    UPDATE_DATETIME, ORG_ID
+    from SUPPLIES_INFO
+  </select>
+
+  <select id="selectOrgId" resultMap="BaseResultMap" parameterType="com.bazl.clims.model.po.SuppliesInfo">
+    select *
+    from SUPPLIES_INFO
+    <where>
+      <if test="_parameter != null">
+        <include refid="VO_Query_Where_Clause"/>
+      </if>
+    </where>
+    order by SUPPLIES_NAME desc
+  </select>
+
+  <sql id="VO_Query_Where_Clause">
+      <if test="orgId == null " >
+        and ORG_ID is null
+      </if>
+      <if test="orgId != null">
+        and ORG_ID = #{orgId,jdbcType=VARCHAR}
+      </if>
+      <if test="suppliesName != null">
+        and SUPPLIES_NAME like CONCAT(CONCAT('%',#{suppliesName,jdbcType=VARCHAR}),'%')
+      </if>
+      <if test="suppliesNo != null">
+        and SUPPLIES_NO like CONCAT(CONCAT('%',#{suppliesNo,jdbcType=VARCHAR}),'%')
+      </if>
+      <if test="experimentalStage != null">
+        and EXPERIMENTAL_STAGE = #{experimentalStage,jdbcType=VARCHAR}
+      </if>
+      <if test="suppliesModel != null">
+        and SUPPLIES_MODEL like CONCAT(CONCAT('%',#{suppliesModel,jdbcType=VARCHAR}),'%')
+      </if>
+  </sql>
+</mapper>

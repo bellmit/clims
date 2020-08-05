@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.ComporeSameQueueMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.ComporeSameQueue" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="SAMPLE_ID" property="sampleId" jdbcType="VARCHAR" />
+    <result column="MATCH_MODE" property="matchMode" jdbcType="VARCHAR" />
+    <result column="MATCH_LIMIT" property="matchLimit" jdbcType="DECIMAL" />
+    <result column="TOLERANCE" property="tolerance" jdbcType="DECIMAL" />
+    <result column="LAB_SERVER_NO" property="labServerNo" jdbcType="VARCHAR" />
+    <result column="COMPARE_STATUS" property="compareStatus" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_PERSON" property="updatePerson" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <resultMap id="VOBaseResultMap" type="com.bazl.clims.model.vo.ComporeSameQueueVo" >
+    <id column="ID" property="entity.id" jdbcType="VARCHAR" />
+    <result column="SAMPLE_ID" property="entity.sampleId" jdbcType="VARCHAR" />
+    <result column="MATCH_MODE" property="entity.matchMode" jdbcType="VARCHAR" />
+    <result column="MATCH_LIMIT" property="entity.matchLimit" jdbcType="DECIMAL" />
+    <result column="TOLERANCE" property="entity.tolerance" jdbcType="DECIMAL" />
+    <result column="LAB_SERVER_NO" property="entity.labServerNo" jdbcType="VARCHAR" />
+    <result column="COMPARE_STATUS" property="entity.compareStatus" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="entity.createDatetime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_PERSON" property="entity.createPerson" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="entity.updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_PERSON" property="entity.updatePerson" jdbcType="VARCHAR" />
+
+    <result column="SAMPLE_NO" property="sampleNo" jdbcType="VARCHAR" />
+    <result column="SAMPLE_NAME" property="sampleName" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from COMPORE_SAME_QUEUE
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.clims.model.po.ComporeSameQueue" >
+    insert into COMPORE_SAME_QUEUE (ID, SAMPLE_ID, MATCH_MODE, 
+      MATCH_LIMIT, TOLERANCE, LAB_SERVER_NO, 
+      COMPARE_STATUS, CREATE_DATETIME, CREATE_PERSON, 
+      UPDATE_DATETIME, UPDATE_PERSON)
+    values (#{id,jdbcType=VARCHAR}, #{sampleId,jdbcType=VARCHAR}, #{matchMode,jdbcType=VARCHAR}, 
+      #{matchLimit,jdbcType=DECIMAL}, #{tolerance,jdbcType=DECIMAL}, #{labServerNo,jdbcType=VARCHAR}, 
+      #{compareStatus,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP}, #{createPerson,jdbcType=VARCHAR}, 
+      #{updateDatetime,jdbcType=TIMESTAMP}, #{updatePerson,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.clims.model.po.ComporeSameQueue" >
+    update COMPORE_SAME_QUEUE
+    set SAMPLE_ID = #{sampleId,jdbcType=VARCHAR},
+      MATCH_MODE = #{matchMode,jdbcType=VARCHAR},
+      MATCH_LIMIT = #{matchLimit,jdbcType=DECIMAL},
+      TOLERANCE = #{tolerance,jdbcType=DECIMAL},
+      LAB_SERVER_NO = #{labServerNo,jdbcType=VARCHAR},
+      COMPARE_STATUS = #{compareStatus,jdbcType=VARCHAR},
+      CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+      CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP},
+      UPDATE_PERSON = #{updatePerson,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select ID, SAMPLE_ID, MATCH_MODE, MATCH_LIMIT, TOLERANCE, LAB_SERVER_NO, COMPARE_STATUS, 
+    CREATE_DATETIME, CREATE_PERSON, UPDATE_DATETIME, UPDATE_PERSON
+    from COMPORE_SAME_QUEUE
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select ID, SAMPLE_ID, MATCH_MODE, MATCH_LIMIT, TOLERANCE, LAB_SERVER_NO, COMPARE_STATUS, 
+    CREATE_DATETIME, CREATE_PERSON, UPDATE_DATETIME, UPDATE_PERSON
+    from COMPORE_SAME_QUEUE
+  </select>
+
+  <select id="selectVOPaginationList" parameterType="com.bazl.clims.model.vo.ComporeSameQueueVo"
+          resultMap="VOBaseResultMap">
+    select * from (
+    select rownum as rn, t.* from (
+    select csq.*,
+    si.SAMPLE_LAB_NO as SAMPLE_NO,
+    si.SAMPLE_NAME as SAMPLE_NAME
+    from dna.COMPORE_SAME_QUEUE csq
+    left join dna.sample_info si on si.SAMPLE_ID = csq.SAMPLE_ID
+    where 1=1
+    <if test="_parameter != null">
+      <include refid="VO_Query_Where_Clause"/>
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    ) t where rownum &lt;=#{rows}
+    ) where rn &gt;#{offset}
+  </select>
+  <select id="selectVOCount" parameterType="com.bazl.clims.model.vo.ComporeSameQueueVo" resultType="int">
+    SELECT count(*) from
+    dna.COMPORE_SAME_QUEUE csq
+    left join dna.sample_info si on si.SAMPLE_ID = csq.SAMPLE_ID
+    where 1=1
+    <if test="_parameter != null">
+      <include refid="VO_Query_Where_Clause"/>
+    </if>
+  </select>
+
+  <sql id="VO_Query_Where_Clause">
+    <if test="sampleNo != null and sampleNo != ''">
+      and si.SAMPLE_LAB_NO like '%'||#{sampleNo,jdbcType=VARCHAR}||'%'
+    </if>
+    <if test="sampleName != null and sampleName != ''">
+      and si.SAMPLE_NAME like '%'||#{sampleName,jdbcType=VARCHAR}||'%'
+    </if>
+    <if test="entity.labServerNo != null and entity.labServerNo != ''">
+      and csq.LAB_SERVER_NO=#{entity.labServerNo,jdbcType=VARCHAR}
+    </if>
+  </sql>
+</mapper>

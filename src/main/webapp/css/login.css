@@ -1,0 +1,138 @@
+body {
+    background: url("../img/bg.png") no-repeat center;
+    background-size: cover;
+    position:relative;
+}
+
+/* 登录页面头部 */
+
+header {
+    width: 100%;
+    /* height: 13%; */
+    /* padding-left: 50px; */
+    color: #fff;
+    text-align: center;
+    margin-bottom: 24px;
+    /*padding-top: 150px;*/
+    /* float: left; */
+}
+
+header img {
+    /* float: left;
+    margin: 24px 20px 0px 0px; */
+    /* margin-top: 110px; */
+}
+
+main .layui-form-item {
+    margin: 25px 0;
+    clear: both;
+}
+
+header div {
+    font-size: 34px;
+    font-weight: bold;
+    text-shadow: black 2px 2px 0;
+}
+
+/* 登陆页面主体 */
+
+/*main {*/
+    /*width: 100%;*/
+    /*!*height: 64%;*!*/
+    /*position: relative;*/
+    /*box-sizing: border-box;*/
+    /*margin-top: 33px;*/
+/*}*/
+.loginBox{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-60%);
+
+    width: 100%;
+}
+ .login {
+    width: 23%;
+    /*height: 100%;*/
+    margin: 0 auto;
+    border-radius: 10px;
+    /* border: 1px solid #fff; */
+}
+
+ .login .login-form {
+    /* border: 1px solid #fff; */
+    /*height: 100%;*/
+    width: 100%;
+    text-align: center;
+    position: relative;
+    border-radius: 10px;
+    background: rgba(28, 72, 125, .6);
+     padding-bottom: 10px;
+}
+
+ .login .login-form p {
+    height: 49px;
+    line-height: 49px;
+    color: #fff;
+    font-size: 20px;
+}
+
+ .login .login-form .tite {
+    height: 70px;
+    line-height: 70px;
+    color: #fff;
+    font-size: 20px;
+    background: url("../img/line.png") no-repeat center;
+}
+
+.login .login-form .line {
+    width: 100%;
+    display: block;
+    border-top: 1px dashed #fff;
+    float: left;
+    margin-top: -24px;
+}
+
+ .user {
+    background-image: url("../img/yonghuming.png");
+    background-position: 5px;
+    background-repeat: no-repeat;
+    padding-left: 25px;
+}
+
+ .password {
+    background-image: url("../img/mima.png");
+    background-position: 5px;
+    background-repeat: no-repeat;
+    padding-left: 25px;
+}
+
+ .login .login-form .layui-form-label {
+    color: #fff;
+    text-align: left;
+    margin-left: 50px;
+}
+
+.login .login-form .layui-input-block {
+    margin: 0px 54px
+}
+
+.layui-form-checkbox[lay-skin=primary] span {
+    float: right;
+    padding-right: 15px;
+    line-height: 18px;
+    background: 0 0;
+    color: #fff;
+}
+
+footer {
+    width: 100%;
+    height: 30px;
+    background: url("../img/login-footer.png") no-repeat center;
+    background-size: cover;
+    position: absolute;
+    bottom: 0px;
+}
+
+.login-btn {
+    background-color: #3683df;
+}

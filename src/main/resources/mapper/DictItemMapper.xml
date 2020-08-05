@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.DictItemMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.DictItem" >
+    <id column="DICT_ITEM_ID" property="dictItemId" jdbcType="VARCHAR" />
+    <result column="DICT_INFO_ID" property="dictInfoId" jdbcType="VARCHAR" />
+    <result column="DICT_TYPE_CODE" property="dictTypeCode" jdbcType="VARCHAR" />
+    <result column="DICT_CODE" property="dictCode" jdbcType="VARCHAR" />
+    <result column="DICT_NAME" property="dictName" jdbcType="VARCHAR" />
+    <result column="DICT_DESC" property="dictDesc" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    di.DICT_ITEM_ID, di.DICT_INFO_ID, di.DICT_TYPE_CODE, di.DICT_CODE, di.DICT_NAME, di.DICT_DESC, di.CREATE_DATETIME, di.CREATE_PERSON
+  </sql>
+
+  <select id="selectListByDictCode" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from DICT_ITEM di
+    where di.DICT_CODE = #{dictCode,jdbcType=VARCHAR}
+    order by di.DICT_CODE ASC
+  </select>
+
+  <select id="selectAllCode" resultMap="BaseResultMap" >
+    select DICT_ITEM_ID, DICT_INFO_ID, DICT_TYPE_CODE, DICT_CODE, DICT_NAME, DICT_DESC,
+      CREATE_DATETIME, CREATE_PERSON
+    from DICT_ITEM order by DICT_CODE ASC
+  </select>
+
+  <select id="selectListByDictTypeCode" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from DICT_ITEM di
+    where di.DICT_TYPE_CODE = #{dictTypeCode,jdbcType=VARCHAR}
+    order by di.DICT_CODE ASC
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from DICT_ITEM
+    where DICT_ITEM_ID = #{dictItemId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.clims.model.DictItem" >
+    insert into DICT_ITEM (DICT_ITEM_ID, DICT_INFO_ID, DICT_TYPE_CODE,
+    DICT_CODE, DICT_NAME, DICT_DESC,
+    CREATE_DATETIME, CREATE_PERSON)
+    values (#{dictItemId,jdbcType=VARCHAR}, #{dictInfoId,jdbcType=VARCHAR}, #{dictTypeCode,jdbcType=VARCHAR},
+    #{dictCode,jdbcType=VARCHAR}, #{dictName,jdbcType=VARCHAR}, #{dictDesc,jdbcType=VARCHAR},
+    #{createDatetime,jdbcType=TIMESTAMP}, #{createPerson,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.clims.model.DictItem" >
+    update DICT_ITEM
+    set DICT_INFO_ID = #{dictInfoId,jdbcType=VARCHAR},
+    DICT_TYPE_CODE = #{dictTypeCode,jdbcType=VARCHAR},
+    DICT_CODE = #{dictCode,jdbcType=VARCHAR},
+    DICT_NAME = #{dictName,jdbcType=VARCHAR},
+    DICT_DESC = #{dictDesc,jdbcType=VARCHAR},
+    CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+    CREATE_PERSON = #{createPerson,jdbcType=VARCHAR}
+    where DICT_ITEM_ID = #{dictItemId,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select DICT_ITEM_ID, DICT_INFO_ID, DICT_TYPE_CODE, DICT_CODE, DICT_NAME, DICT_DESC,
+    CREATE_DATETIME, CREATE_PERSON
+    from DICT_ITEM
+    where DICT_ITEM_ID = #{dictItemId,jdbcType=VARCHAR}
+  </select>
+
+
+</mapper>

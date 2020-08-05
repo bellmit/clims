@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.PersonDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.PersonDetail" >
+    <id column="PERSON_DETAIL_ID" property="personDetailId" jdbcType="VARCHAR" />
+    <result column="PERSON_NO" property="personNo" jdbcType="VARCHAR" />
+    <result column="FINGERPRINT_NO" property="fingerprintNo" jdbcType="VARCHAR" />
+    <result column="PERSON_NAME" property="personName" jdbcType="VARCHAR" />
+    <result column="PERSON_ALIAS" property="personAlias" jdbcType="VARCHAR" />
+    <result column="PERSON_TYPE" property="personType" jdbcType="VARCHAR" />
+    <result column="PERSON_GENDER" property="personGender" jdbcType="VARCHAR" />
+    <result column="PEROSN_AGE" property="perosnAge" jdbcType="INTEGER" />
+    <result column="PERSON_HEIGHT" property="personHeight" jdbcType="REAL" />
+    <result column="PERSON_WEIGHT" property="personWeight" jdbcType="REAL" />
+    <result column="PERSON_BODY_FEATURE" property="personBodyFeature" jdbcType="VARCHAR" />
+    <result column="ID_CARD_FLAG" property="idCardFlag" jdbcType="VARCHAR" />
+    <result column="PERSON_ID_CARD" property="personIdCard" jdbcType="VARCHAR" />
+    <result column="NO_ID_CARD_DESC" property="noIdCardDesc" jdbcType="VARCHAR" />
+    <result column="PERSON_CURRENT_ADDRESS" property="personCurrentAddress" jdbcType="VARCHAR" />
+    <result column="PERSON_RESIDENCE_ADDRESS" property="personResidenceAddress" jdbcType="VARCHAR" />
+    <result column="PERSON_RACE" property="personRace" jdbcType="VARCHAR" />
+    <result column="PERSON_NATIONALITY" property="personNationality" jdbcType="VARCHAR" />
+    <result column="EXIST_FLAG" property="existFlag" jdbcType="VARCHAR" />
+    <result column="PERSON_BORN_DATE" property="personBornDate" jdbcType="TIMESTAMP" />
+    <result column="PERSON_DEATH_DATE" property="personDeathDate" jdbcType="TIMESTAMP" />
+    <result column="PERSON_FRONT_PICTURE" property="personFrontPicture" jdbcType="VARCHAR" />
+    <result column="PERSON_SIDE_PICTURE" property="personSidePicture" jdbcType="VARCHAR" />
+    <result column="PERSON_REMARK" property="personRemark" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_PERSON" property="updatePerson" jdbcType="VARCHAR" />
+    <result column="DELETE_FLAG" property="deleteFlag" jdbcType="VARCHAR" />
+    <result column="DELETE_DATETIME" property="deleteDatetime" jdbcType="TIMESTAMP" />
+    <result column="DELETE_PERSON" property="deletePerson" jdbcType="VARCHAR" />
+    <result column="DELETE_REASON" property="deleteReason" jdbcType="VARCHAR" />
+    <result column="PERSON_FRONT_PICTURE_PATH" property="personFrontPicturePath" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    PERSON_DETAIL_ID, PERSON_NO, FINGERPRINT_NO, PERSON_NAME, PERSON_ALIAS, PERSON_TYPE, PERSON_GENDER, PEROSN_AGE, PERSON_HEIGHT, PERSON_WEIGHT,
+    PERSON_BODY_FEATURE, ID_CARD_FLAG, PERSON_ID_CARD, NO_ID_CARD_DESC, PERSON_CURRENT_ADDRESS, PERSON_RESIDENCE_ADDRESS, PERSON_RACE, PERSON_NATIONALITY,
+    EXIST_FLAG, PERSON_BORN_DATE, PERSON_DEATH_DATE, PERSON_FRONT_PICTURE, PERSON_SIDE_PICTURE, PERSON_REMARK, CREATE_DATETIME, CREATE_PERSON, UPDATE_DATETIME,
+    UPDATE_PERSON, DELETE_FLAG, DELETE_DATETIME, DELETE_PERSON, DELETE_REASON, PERSON_FRONT_PICTURE_PATH
+  </sql>
+
+  <select id="selectById" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" />
+    from PERSON_DETAIL
+    where PERSON_DETAIL_ID = #{personDetailId,jdbcType=VARCHAR}
+  </select>
+
+  <update id="updatePersonDetail1" parameterType="com.bazl.clims.model.po.PersonDetail">
+    UPDATE PERSON_DETAIL
+      SET PERSON_NO=#{personNo,jdbcType=VARCHAR},
+          FINGERPRINT_NO=#{fingerprintNo,jdbcType=VARCHAR},
+          PERSON_NAME=#{personName,jdbcType=VARCHAR},
+          PERSON_ALIAS=#{personAlias,jdbcType=VARCHAR},
+          PERSON_TYPE=#{personType,jdbcType=VARCHAR},
+          PERSON_GENDER=#{personGender,jdbcType=VARCHAR},
+          PEROSN_AGE=#{perosnAge,jdbcType=INTEGER},
+          PERSON_HEIGHT=#{personHeight,jdbcType=REAL},
+          PERSON_WEIGHT=#{personWeight,jdbcType=REAL},
+          PERSON_BODY_FEATURE=#{personBodyFeature,jdbcType=VARCHAR},
+          ID_CARD_FLAG=#{idCardFlag,jdbcType=VARCHAR},
+          PERSON_ID_CARD=#{personIdCard,jdbcType=VARCHAR},
+          NO_ID_CARD_DESC=#{noIdCardDesc,jdbcType=VARCHAR},
+          PERSON_CURRENT_ADDRESS=#{personCurrentAddress,jdbcType=VARCHAR},
+          PERSON_RESIDENCE_ADDRESS=#{personResidenceAddress,jdbcType=VARCHAR},
+          PERSON_RACE=#{personRace,jdbcType=VARCHAR},
+          PERSON_NATIONALITY=#{personNationality,jdbcType=VARCHAR},
+          EXIST_FLAG=#{existFlag,jdbcType=VARCHAR},
+          PERSON_BORN_DATE=#{personBornDate,jdbcType=TIMESTAMP},
+          PERSON_DEATH_DATE=#{personDeathDate,jdbcType=TIMESTAMP},
+          PERSON_FRONT_PICTURE=#{personFrontPicture,jdbcType=VARCHAR},
+          PERSON_SIDE_PICTURE=#{personSidePicture,jdbcType=VARCHAR},
+          PERSON_REMARK=#{personRemark,jdbcType=VARCHAR},
+          CREATE_DATETIME=#{createDatetime,jdbcType=TIMESTAMP},
+          CREATE_PERSON=#{createPerson,jdbcType=VARCHAR},
+          UPDATE_DATETIME=#{updateDatetime,jdbcType=TIMESTAMP},
+          UPDATE_PERSON=#{updatePerson,jdbcType=VARCHAR},
+          DELETE_FLAG=#{deleteFlag,jdbcType=VARCHAR},
+          DELETE_DATETIME=#{deleteDatetime,jdbcType=TIMESTAMP},
+          DELETE_PERSON=#{deletePerson,jdbcType=VARCHAR},
+          DELETE_REASON=#{deleteReason,jdbcType=VARCHAR}
+      WHERE PERSON_DETAIL_ID = #{personDetailId,jdbcType=VARCHAR}
+  </update>
+
+    <delete id="deleteByDetailId" parameterType="java.lang.String">
+        DELETE from PERSON_DETAIL where PERSON_DETAIL_ID = #{personDetailId,jdbcType=VARCHAR}
+    </delete>
+
+    <select id="selectByDetailId" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List" />
+        from PERSON_DETAIL
+        where PERSON_DETAIL_ID = #{personDetailId,jdbcType=VARCHAR}
+    </select>
+</mapper>

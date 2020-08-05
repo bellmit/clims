@@ -1,0 +1,264 @@
+     .form-control {
+         border-color: #d4d4d4;
+         box-shadow: none;
+     }
+     
+     .form-control[disabled],
+     .form-control[readonly],
+     fieldset[disabled] .form-control {
+         background-color: #fff;
+         opacity: 1;
+     }
+     
+     .required {
+         color: #f64e44;
+         font-size: 20px;
+         font-weight: 600;
+         position: absolute;
+         left: -13px;
+         top: 40%;
+     }
+     
+     .inputBox {
+         border-bottom: 1px dashed #e8e8e8;
+         margin-bottom: 15px;
+     }
+     
+     .form-control::-webkit-input-placeholder {
+         color: #d4d4d4;
+     }
+     /* 使用webkit内核的浏览器 */
+     
+     .form-control:-moz-placeholder {
+         color: #d4d4d4;
+     }
+     /* Firefox版本4-18 */
+     
+     .form-control::-moz-placeholder {
+         color: #d4d4d4;
+     }
+     /* Firefox版本19+ */
+     
+     .form-control:-ms-input-placeholder {
+         color: #d4d4d4;
+     }
+     /* IE浏览器 */
+     
+     .select {
+         width: 100%;
+         height: 34px;
+         position: relative;
+     }
+     
+     select {
+         border: none;
+         outline: none;
+         width: 100%;
+         height: 40px;
+         line-height: 40px;
+         appearance: none;
+         -webkit-appearance: none;
+         -moz-appearance: none;
+         padding-left: 60px;
+         color: #d4d4d4;
+     }
+     
+     .select:after {
+         content: "";
+         width: 12px;
+         height: 12px;
+         border-bottom: 2px solid #d0d0d0;
+         border-right: 2px solid #d0d0d0;
+         transform: rotate(45deg);
+         position: absolute;
+         right: 20px;
+         top: 0%;
+         pointer-events: none;
+         margin-top: 8px;
+     }
+     
+     select:invalid {
+         /*color: #d4d4d4;*/
+     }
+     
+     .rdo {
+         margin-top: 11px;
+         width: 20px;
+         height: 0px;
+         background-color: #000;
+         margin-right: 30px;
+         border-radius: 50%;
+         position: relative;
+     }
+     
+     .rdo:before,
+     .rdo:after {
+         content: '';
+         display: block;
+         position: absolute;
+         border-radius: 50%;
+         transition: .3s ease;
+     }
+     
+     .rdo:before {
+         top: -3px;
+         left: -22.5px;
+         width: 18px;
+         height: 18px;
+         background-color: #fff;
+         border: 1px solid #e6e6e6;
+     }
+     
+     .rdo:after {
+         background-color: #e6e6e6;
+         top: 50%;
+         left: 0px;
+         width: 12px;
+         height: 12px;
+         margin-left: -19px;
+     }
+     
+     .rdo:checked:after {
+         top: 50%;
+         left: 0px;
+         width: 12px;
+         height: 12px;
+         background-color: #1f83db;
+         margin-left: -19px;
+     }
+     
+     .rdo:checked:before {
+         border-color: #1f83db;
+     }
+     
+     .sex {
+         margin-top: 11px;
+         width: 20px;
+         height: 0px;
+         background-color: #000;
+         margin-right: 30px;
+         border-radius: 50%;
+         position: relative;
+     }
+     
+     .sex:before {
+         content: '';
+         display: block;
+         position: absolute;
+         width: 21px;
+         height: 21px;
+         transition: .3s ease;
+         background-image: url("../img/icon.png");
+         background-repeat: no-repeat;
+         color: transparent;
+         top: -4px;
+     }
+     
+     .sexman:before {
+         background-position: -172px -26px;
+     }
+     
+     .sexman:checked:before {
+         background-position: -172px -70px;
+     }
+     
+     .sexwoman:before {
+         background-position: -172px -112px;
+     }
+     
+     .sexwoman:checked:before {
+         background-position: -172px -155px;
+     }
+
+     .isRefuse {
+         width: 27px;
+         height: 27px;
+         background: url("../img/icon1.png") no-repeat;
+         background-position: -238px -23px;
+         cursor: pointer;
+     }
+
+     .isRefuse.active {
+         background-position: -237px -115px;
+     }
+
+     .isRetain {
+         width: 27px;
+         height: 27px;
+         background: url("../img/icon1.png") no-repeat;
+         background-position: -238px -159px;
+         cursor: pointer;
+     }
+
+     .isRetain.active {
+         background-position: -238px -67px;
+     }
+
+
+     
+     .custom-control-input {
+         position: absolute;
+         z-index: -1;
+         opacity: 0;
+     }
+     
+     .custom-control-label::before {
+         position: absolute;
+         top: 0.25rem;
+         left: 0;
+         display: block;
+         width: 1.5rem;
+         height: 1.5rem;
+         pointer-events: none;
+         content: "";
+         -webkit-user-select: none;
+         -moz-user-select: none;
+         -ms-user-select: none;
+         user-select: none;
+         background-color: #dee2e6;
+         background-image: url('../img/check.svg');
+     }
+     
+     .custom-checkbox .custom-control-input:checked~.custom-control-label::before {
+         background-color: #007bff;
+     }
+     
+     .custom-control-input:checked~.custom-control-label::before {
+         color: #fff;
+         background-color: #007bff;
+     }
+     
+     .custom-checkbox .custom-control-label::before {
+         border-radius: 0.25rem;
+     }
+     
+     .custom-control-label::after {
+         position: absolute;
+         top: 0.25rem;
+         left: 0;
+         display: block;
+         width: 1.5rem;
+         height: 1.5rem;
+         content: "";
+         background-repeat: no-repeat;
+         background-position: center center;
+         background-size: 50% 50%;
+     }
+     
+     .custom-control-label {
+         margin-bottom: 0;
+         font-weight: 400;
+         float: left;
+         display: inline-block;
+         position: relative;
+         padding-left: 25px;
+     }
+     
+     .panel-heading .checkbox-inline,
+     .panel-heading .radio-inline {
+         padding-left: 0px;
+     }
+     
+     .radio-inline {
+         margin-left: 60px !important;
+     }

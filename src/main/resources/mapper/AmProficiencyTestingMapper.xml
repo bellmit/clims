@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.AmProficiencyTestingMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.AmProficiencyTesting" >
+    <result column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="TESTING_YEAR" property="testingYear" jdbcType="VARCHAR" />
+    <result column="TESTING_MAJOR" property="testingMajor" jdbcType="VARCHAR" />
+    <result column="TESTING_DATETIME" property="testingDatetime" jdbcType="TIMESTAMP" />
+    <result column="TESTING_ORGANIZER" property="testingOrganizer" jdbcType="VARCHAR" />
+    <result column="TESTING_PERSON" property="testingPerson" jdbcType="VARCHAR" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="UPDATE_PERSON" property="updatePerson" jdbcType="VARCHAR" />
+    <result column="DELETE_PERSON" property="deletePerson" jdbcType="VARCHAR" />
+    <result column="DELETE_DATETIME" property="deleteDatetime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <insert id="insert" parameterType="com.bazl.clims.model.po.AmProficiencyTesting" >
+    insert into AM_PROFICIENCY_TESTING (ID, TESTING_YEAR, TESTING_MAJOR, 
+      TESTING_DATETIME, TESTING_ORGANIZER, TESTING_PERSON, 
+      CREATE_PERSON, UPDATE_PERSON, DELETE_PERSON, 
+      DELETE_DATETIME, CREATE_DATETIME, UPDATE_DATETIME
+      )
+    values (#{id,jdbcType=VARCHAR}, #{testingYear,jdbcType=VARCHAR}, #{testingMajor,jdbcType=VARCHAR}, 
+      #{testingDatetime,jdbcType=TIMESTAMP}, #{testingOrganizer,jdbcType=VARCHAR}, #{testingPerson,jdbcType=VARCHAR}, 
+      #{createPerson,jdbcType=VARCHAR}, #{updatePerson,jdbcType=VARCHAR}, #{deletePerson,jdbcType=VARCHAR}, 
+      #{deleteDatetime,jdbcType=TIMESTAMP}, #{createDatetime,jdbcType=TIMESTAMP}, #{updateDatetime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select ID, TESTING_YEAR, TESTING_MAJOR, TESTING_DATETIME, TESTING_ORGANIZER, TESTING_PERSON, 
+    CREATE_PERSON, UPDATE_PERSON, DELETE_PERSON, DELETE_DATETIME, CREATE_DATETIME, UPDATE_DATETIME
+    from AM_PROFICIENCY_TESTING
+  </select>
+</mapper>

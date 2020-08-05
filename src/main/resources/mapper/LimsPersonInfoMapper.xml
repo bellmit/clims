@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.LimsPersonInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.LimsPersonInfo" >
+    <id column="PERSON_ID" property="personId" jdbcType="VARCHAR" />
+    <result column="CASE_ID" property="caseId" jdbcType="VARCHAR" />
+    <result column="CONSIGNMENT_ID" property="consignmentId" jdbcType="VARCHAR" />
+    <result column="PERSON_NO" property="personNo" jdbcType="VARCHAR" />
+    <result column="FINGERPRINT_NO" property="fingerprintNo" jdbcType="VARCHAR" />
+    <result column="PERSON_NAME" property="personName" jdbcType="VARCHAR" />
+    <result column="PERSON_TYPE" property="personType" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_PERSON" property="updatePerson" jdbcType="VARCHAR" />
+    <result column="DELETE_FLAG" property="deleteFlag" jdbcType="VARCHAR" />
+    <result column="DELETE_DATETIME" property="deleteDatetime" jdbcType="TIMESTAMP" />
+    <result column="DELETE_PERSON" property="deletePerson" jdbcType="VARCHAR" />
+    <result column="DELETE_REASON" property="deleteReason" jdbcType="VARCHAR" />
+    <result column="PERSON_REMARK" property="personRemark" jdbcType="VARCHAR" />
+    <result column="PERSON_DETAIL_ID" property="personDetailId" jdbcType="VARCHAR" />
+
+    <result column="PERSON_GENDER" property="personGender" jdbcType="VARCHAR" />
+    <result column="PEROSN_AGE" property="perosnAge" jdbcType="INTEGER" />
+    <result column="PERSON_HEIGHT" property="personHeight" jdbcType="REAL" />
+    <result column="PERSON_WEIGHT" property="personWeight" jdbcType="REAL" />
+    <result column="ID_CARD_FLAG" property="idCardFlag" jdbcType="VARCHAR" />
+    <result column="PERSON_ID_CARD" property="personIdCard" jdbcType="VARCHAR" />
+    <result column="NO_ID_CARD_DESC" property="noIdCardDesc" jdbcType="VARCHAR" />
+    <result column="PERSON_CURRENT_ADDRESS" property="personCurrentAddress" jdbcType="VARCHAR" />
+    <result column="PERSON_FRONT_PICTURE" property="personFrontPicture" jdbcType="VARCHAR" />
+    <result column="PERSON_FRONT_PICTURE_PATH" property="personFrontPicturePath" jdbcType="VARCHAR" />
+    <result column="RELATION_TYPE" property="relationType" jdbcType="VARCHAR" />
+    <result column="target_person_id" property="targetPersonId" jdbcType="VARCHAR" />
+    <result column="person_type_name" property="personTypeName" jdbcType="VARCHAR" />
+    <result column="RELATION_TYPE_NAME" property="relationTypeName" jdbcType="VARCHAR" />
+    <result column="PERSON_GENDER_NAME" property="personGenderName" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    PERSON_ID, CASE_ID, CONSIGNMENT_ID, PERSON_NO, FINGERPRINT_NO, PERSON_NAME, PERSON_TYPE, CREATE_DATETIME, CREATE_PERSON, UPDATE_DATETIME,
+    UPDATE_PERSON, DELETE_FLAG, DELETE_DATETIME, DELETE_PERSON, DELETE_REASON, PERSON_REMARK, PERSON_DETAIL_ID
+  </sql>
+
+  <select id="selectById" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" />
+    from LIMS_PERSON_INFO
+    where PERSON_ID = #{personId,jdbcType=VARCHAR}
+  </select>
+
+  <!--<select id="selectPersonInfoById" parameterType="java.lang.String" resultMap="BaseResultMap">-->
+    <!--select <include refid="Base_Column_List" />, (select lpr.relation_type from LIMS_PEROSN_RELATION lpr  where person_id = lpr.source_person_id and rownum = 1) as relation_type,-->
+    <!--(select pd.PERSON_GENDER from PERSON_DETAIL pd  where PERSON_DETAIL_ID = pd.PERSON_DETAIL_ID and rownum = 1) as PERSON_GENDER-->
+    <!--from LIMS_PERSON_INFO-->
+    <!--where PERSON_ID = #{personId,jdbcType=VARCHAR}-->
+  <!--</select>-->
+
+
+  <select id="selectPersonInfoById" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select lpi.PERSON_ID, lpi.CASE_ID, lpi.CONSIGNMENT_ID, lpi.PERSON_NO, lpi.FINGERPRINT_NO, lpi.PERSON_NAME, lpi.PERSON_TYPE, lpi.CREATE_DATETIME, lpi.CREATE_PERSON, lpi.UPDATE_DATETIME,
+    lpi.UPDATE_PERSON, lpi.DELETE_FLAG, lpi.DELETE_DATETIME, lpi.DELETE_PERSON, lpi.DELETE_REASON, lpi.PERSON_REMARK, lpi.PERSON_DETAIL_ID, lpr.relation_type as relation_type,
+   pd.PERSON_GENDER as PERSON_GENDER, di_1.dict_name as person_type_name
+    from LIMS_PERSON_INFO lpi
+    left join dict_item di_1 on lpi.person_type = di_1.dict_code and di_1.DICT_TYPE_CODE='PERSON_TYPE'
+    left join LIMS_PEROSN_RELATION lpr on lpi.person_id = lpr.source_person_id and rownum = 1
+    left join PERSON_DETAIL pd on lpi.PERSON_DETAIL_ID = pd.PERSON_DETAIL_ID and rownum = 1
+    where lpi.PERSON_ID = #{personId,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectListByConsignmentId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" />
+    from LIMS_PERSON_INFO
+    where CONSIGNMENT_ID = #{consignmentId,jdbcType=VARCHAR}
+  </select>
+
+  <!--添加人员信息-->
+  <insert id="insertPersonInfo" parameterType="com.bazl.clims.model.po.LimsPersonInfo" >
+    insert into LIMS_PERSON_INFO (PERSON_ID, CASE_ID, CONSIGNMENT_ID,
+      PERSON_NO, FINGERPRINT_NO, PERSON_NAME,
+      PERSON_TYPE, CREATE_DATETIME, CREATE_PERSON,
+      UPDATE_DATETIME, UPDATE_PERSON, DELETE_FLAG,
+      DELETE_DATETIME, DELETE_PERSON, DELETE_REASON,
+      PERSON_REMARK, PERSON_DETAIL_ID)
+    values (#{personId,jdbcType=VARCHAR}, #{caseId,jdbcType=VARCHAR}, #{consignmentId,jdbcType=VARCHAR},
+      #{personNo,jdbcType=VARCHAR}, #{fingerprintNo,jdbcType=VARCHAR}, #{personName,jdbcType=VARCHAR},
+      #{personType,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP}, #{createPerson,jdbcType=VARCHAR},
+      #{updateDatetime,jdbcType=TIMESTAMP}, #{updatePerson,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=VARCHAR},
+      #{deleteDatetime,jdbcType=TIMESTAMP}, #{deletePerson,jdbcType=VARCHAR}, #{deleteReason,jdbcType=VARCHAR},
+      #{personRemark,jdbcType=VARCHAR}, #{personDetailId,jdbcType=VARCHAR})
+  </insert>
+  <!--添加样本信息-->
+  <insert id="insertPersonDetail" parameterType="com.bazl.clims.model.po.PersonDetail" >
+    insert into PERSON_DETAIL (
+    PERSON_DETAIL_ID, PERSON_NO, FINGERPRINT_NO,
+    PERSON_NAME, PERSON_ALIAS, PERSON_TYPE,
+    PERSON_GENDER, PEROSN_AGE, PERSON_HEIGHT,
+    PERSON_WEIGHT, PERSON_BODY_FEATURE, ID_CARD_FLAG,
+    PERSON_ID_CARD, NO_ID_CARD_DESC, PERSON_CURRENT_ADDRESS,
+    PERSON_RESIDENCE_ADDRESS, PERSON_RACE, PERSON_NATIONALITY, EXIST_FLAG, PERSON_BORN_DATE, PERSON_DEATH_DATE, PERSON_FRONT_PICTURE, PERSON_SIDE_PICTURE,
+    PERSON_REMARK, CREATE_DATETIME, CREATE_PERSON, UPDATE_DATETIME, UPDATE_PERSON, DELETE_FLAG, DELETE_DATETIME, DELETE_PERSON, DELETE_REASON, PERSON_FRONT_PICTURE_PATH)
+    values (#{personDetailId,jdbcType=VARCHAR}, #{personNo,jdbcType=VARCHAR}, #{fingerprintNo,jdbcType=VARCHAR},
+    #{personName,jdbcType=VARCHAR}, #{personAlias,jdbcType=VARCHAR}, #{personType,jdbcType=VARCHAR},
+    #{personGender,jdbcType=VARCHAR}, #{perosnAge,jdbcType=INTEGER}, #{personHeight,jdbcType=REAL},
+    #{personWeight,jdbcType=REAL}, #{personBodyFeature,jdbcType=VARCHAR}, #{idCardFlag,jdbcType=VARCHAR},
+    #{personIdCard,jdbcType=VARCHAR}, #{noIdCardDesc,jdbcType=VARCHAR}, #{personCurrentAddress,jdbcType=VARCHAR},
+    #{personResidenceAddress,jdbcType=VARCHAR}, #{personRace,jdbcType=VARCHAR}, #{personNationality,jdbcType=VARCHAR}, #{existFlag,jdbcType=VARCHAR}, #{personBornDate,jdbcType=TIMESTAMP},
+    #{personDeathDate,jdbcType=TIMESTAMP}, #{personFrontPicture,jdbcType=VARCHAR}, #{personSidePicture,jdbcType=VARCHAR}, #{personRemark,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP},
+    #{createPerson,jdbcType=VARCHAR}, #{updateDatetime,jdbcType=TIMESTAMP}, #{updatePerson,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=VARCHAR}, #{deleteDatetime,jdbcType=TIMESTAMP}, #{deletePerson,jdbcType=VARCHAR},
+    #{deleteReason,jdbcType=VARCHAR}, #{personFrontPicturePath,jdbcType=VARCHAR})
+  </insert>
+
+  <update id="updatePersonInfo" parameterType="com.bazl.clims.model.po.PersonDetail" >
+    update LIMS_PERSON_INFO
+    set CASE_ID = #{caseId,jdbcType=VARCHAR},
+      CONSIGNMENT_ID = #{consignmentId,jdbcType=VARCHAR},
+      PERSON_NO = #{personNo,jdbcType=VARCHAR},
+      FINGERPRINT_NO = #{fingerprintNo,jdbcType=VARCHAR},
+      PERSON_NAME = #{personName,jdbcType=VARCHAR},
+      PERSON_TYPE = #{personType,jdbcType=VARCHAR},
+      CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+      CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP},
+      UPDATE_PERSON = #{updatePerson,jdbcType=VARCHAR},
+      DELETE_FLAG = #{deleteFlag,jdbcType=VARCHAR},
+      DELETE_DATETIME = #{deleteDatetime,jdbcType=TIMESTAMP},
+      DELETE_PERSON = #{deletePerson,jdbcType=VARCHAR},
+      DELETE_REASON = #{deleteReason,jdbcType=VARCHAR},
+      PERSON_REMARK = #{personRemark,jdbcType=VARCHAR},
+      PERSON_DETAIL_ID = #{personDetailId,jdbcType=VARCHAR}
+    where PERSON_ID = #{personId,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectByCaseId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select *
+      from lims_person_info lpi
+      left join person_detail pd
+        on lpi.person_detail_id = pd.person_detail_id
+      left join LIMS_PEROSN_RELATION lpr
+        on lpi.person_id = lpr.source_person_id
+        where lpi.delete_flag = '0'
+        and pd.delete_flag = '0'
+        and lpr.delete_flag = '0'
+  </select>
+
+  <update id="deleteByCaseIdAndConsignmentId" parameterType="com.bazl.clims.model.po.LimsPersonInfo">
+    update lims_person_info lpi set lpi.delete_flag = #{deleteFlag,jdbcType=VARCHAR}, lpi.DELETE_DATETIME = #{deleteDatetime,jdbcType=TIMESTAMP},
+      lpi.DELETE_PERSON = #{deletePerson,jdbcType=VARCHAR} where lpi.CASE_ID = #{caseId,jdbcType=VARCHAR} and lpi.CONSIGNMENT_ID = #{consignmentId,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectByCaseIdAndConsignmentId" resultMap="BaseResultMap" parameterType="com.bazl.clims.model.po.LimsPersonInfo" >
+    select lpi.*, lpr.relation_type as relation_type, lpr.target_person_id as target_person_id, di_2.dict_name as PERSON_GENDER_NAME,
+      pd.PEROSN_AGE as PEROSN_AGE, pd.PERSON_HEIGHT as PERSON_HEIGHT, pd.PERSON_WEIGHT as PERSON_WEIGHT, pd.ID_CARD_FLAG as ID_CARD_FLAG, pd.PERSON_ID_CARD as PERSON_ID_CARD, pd.NO_ID_CARD_DESC as NO_ID_CARD_DESC,
+      pd.PERSON_CURRENT_ADDRESS as PERSON_CURRENT_ADDRESS, pd.PERSON_FRONT_PICTURE as PERSON_FRONT_PICTURE, pd.PERSON_FRONT_PICTURE_PATH as PERSON_FRONT_PICTURE_PATH, pd.PERSON_GENDER as PERSON_GENDER,
+      di_3.dict_name as RELATION_TYPE_NAME, di_1.dict_name as person_type_name
+    from lims_person_info lpi
+    left join person_detail pd
+        on lpi.person_detail_id = pd.person_detail_id
+    left join LIMS_PEROSN_RELATION lpr
+        on lpi.person_id = lpr.source_person_id
+    left join dict_item di_1 on lpi.person_type = di_1.dict_code and di_1.DICT_TYPE_CODE='PERSON_TYPE'
+    left join dict_item di_2 on pd.PERSON_GENDER = di_2.dict_code and di_2.DICT_TYPE_CODE = 'GENDER'
+    left join dict_item di_3 on lpr.RELATION_TYPE = di_3.dict_code and di_3.DICT_TYPE_CODE = 'RELATION_TYPE'
+    where lpi.delete_flag = '0' and pd.delete_flag = '0' and lpr.delete_flag = '0'
+      and lpi.CASE_ID = #{caseId,jdbcType=VARCHAR} and
+      lpi.CONSIGNMENT_ID = #{consignmentId,jdbcType=VARCHAR}
+  </select>
+
+  <delete id="deleteByPersonId" parameterType="java.lang.String">
+    DELETE from lims_person_info lpi where lpi.PERSON_ID = #{personId,jdbcType=VARCHAR}
+  </delete>
+
+  <select id="selectAuditByCaseId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select lpi.*, pd.PERSON_GENDER as PERSON_GENDER, pd.PERSON_ID_CARD as PERSON_ID_CARD
+    from lims_person_info lpi
+    left join person_detail pd on lpi.person_detail_id = pd.person_detail_id
+    where lpi.delete_flag = '0' and pd.delete_flag = '0'
+    and lpi.PERSON_ID in (select lsid.LINK_ID from LIMS_SAMPLE_INFO_DNA lsid
+    where lsid.case_id=#{caseId,jdbcType=VARCHAR} and lsid.delete_flag = '0')
+  </select>
+
+  <select id="selectPersonInfoBySampleNo" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select lpi.* from LIMS_PERSON_INFO lpi
+    left join lims_sample_info_dna lsid on lsid.link_id = lpi.person_id
+    where lsid.delete_flag = '0' and lsid.sample_flag = '1' and lsid.sample_no=#{sampleNo,jdbcType=VARCHAR}
+  </select>
+
+
+  <select id="selectPersonInfoListData" resultType="com.bazl.clims.model.vo.LimsPersonInfoVo" resultMap="BaseResultMap">
+    select * from (
+      select rownum as rn, t.* from (
+              select lpl.person_id,lpl.case_id,lpl.person_name,null as person_gender , lpl.person_type,null  as person_id_card,lpl.create_person,lpl.create_datetime,lpl.update_person,lpl.update_datetime
+               from G_PERSON_INFO lpl
+       ) t where rownum &lt;=#{rows}
+    ) where rn &gt;#{offset}
+  </select>
+</mapper>

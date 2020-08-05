@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.CaseFtpUrlMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.caseFtpUrl" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="CASE_ID" property="caseId" jdbcType="VARCHAR" />
+    <result column="TYPE" property="type" jdbcType="DECIMAL" />
+    <result column="FTP_URL" property="ftpUrl" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from CASE_FTPURL
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.clims.model.po.caseFtpUrl" >
+    insert into CASE_FTPURL (ID, CASE_ID, TYPE, 
+      FTP_URL)
+    values (#{id,jdbcType=VARCHAR}, #{caseId,jdbcType=VARCHAR}, #{type,jdbcType=DECIMAL}, 
+      #{ftpUrl,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.clims.model.po.caseFtpUrl" >
+    update CASE_FTPURL
+    set CASE_ID = #{caseId,jdbcType=VARCHAR},
+      TYPE = #{type,jdbcType=DECIMAL},
+      FTP_URL = #{ftpUrl,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select ID, CASE_ID, TYPE, FTP_URL
+    from CASE_FTPURL
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select ID, CASE_ID, TYPE, FTP_URL
+    from CASE_FTPURL
+  </select>
+
+  <select id="findCaseIdByTyye" resultMap="BaseResultMap" parameterType="com.bazl.clims.model.po.caseFtpUrl">
+      select ID,CASE_ID,TYPE,FTP_URL
+      from CASE_FTPURL
+      where CASE_ID = #{caseId,jdbcType=VARCHAR}
+      and TYPE = #{type,jdbcType=VARCHAR}
+   </select>
+
+
+</mapper>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.UseInstrumentsMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.UseInstruments" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="METHOD_NAME" property="methodName" jdbcType="VARCHAR" />
+    <result column="LEAVE" property="leave" jdbcType="VARCHAR" />
+    <result column="LEAVETWO" property="leavetwo" jdbcType="VARCHAR" />
+    <result column="BATH" property="bath" jdbcType="VARCHAR" />
+    <result column="BATHTWO" property="bathtwo" jdbcType="VARCHAR" />
+    <result column="DRY" property="dry" jdbcType="VARCHAR" />
+    <result column="DRYTWO" property="drytwo" jdbcType="VARCHAR" />
+    <result column="SHAKE" property="shake" jdbcType="VARCHAR" />
+    <result column="EARTHQUAKE" property="earthquake" jdbcType="VARCHAR" />
+    <result column="ORG_CODE" property="orgCode" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from USE_INSTRUMENTS
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.clims.model.po.UseInstruments" >
+    insert into USE_INSTRUMENTS (ID, METHOD_NAME, LEAVE, 
+      LEAVETWO, BATH, BATHTWO, 
+      DRY, DRYTWO, SHAKE, 
+      EARTHQUAKE)
+    values (#{id,jdbcType=VARCHAR}, #{methodName,jdbcType=VARCHAR}, #{leave,jdbcType=VARCHAR}, 
+      #{leavetwo,jdbcType=VARCHAR}, #{bath,jdbcType=VARCHAR}, #{bathtwo,jdbcType=VARCHAR}, 
+      #{dry,jdbcType=VARCHAR}, #{drytwo,jdbcType=VARCHAR}, #{shake,jdbcType=VARCHAR}, 
+      #{earthquake,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.clims.model.po.UseInstruments" >
+    update USE_INSTRUMENTS
+    set METHOD_NAME = #{methodName,jdbcType=VARCHAR},
+      LEAVE = #{leave,jdbcType=VARCHAR},
+      LEAVETWO = #{leavetwo,jdbcType=VARCHAR},
+      BATH = #{bath,jdbcType=VARCHAR},
+      BATHTWO = #{bathtwo,jdbcType=VARCHAR},
+      DRY = #{dry,jdbcType=VARCHAR},
+      DRYTWO = #{drytwo,jdbcType=VARCHAR},
+      SHAKE = #{shake,jdbcType=VARCHAR},
+      EARTHQUAKE = #{earthquake,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select ID, METHOD_NAME, LEAVE, LEAVETWO, BATH, BATHTWO, DRY, DRYTWO, SHAKE, EARTHQUAKE,ORG_CODE
+    from USE_INSTRUMENTS
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select ID, METHOD_NAME, LEAVE, LEAVETWO, BATH, BATHTWO, DRY, DRYTWO, SHAKE, EARTHQUAKE,ORG_CODE
+    from USE_INSTRUMENTS
+  </select>
+  <select id="findByExtractMentod" resultMap="BaseResultMap" parameterType="com.bazl.clims.model.po.UseInstruments">
+    select ID, METHOD_NAME, LEAVE, LEAVETWO, BATH, BATHTWO, DRY, DRYTWO, SHAKE, EARTHQUAKE,ORG_CODE
+    from USE_INSTRUMENTS
+    where METHOD_NAME = #{methodName,jdbcType=VARCHAR} and ORG_CODE = #{orgCode,jdbcType=VARCHAR}
+  </select>
+</mapper>

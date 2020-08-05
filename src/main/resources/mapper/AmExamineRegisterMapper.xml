@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.AmExamineRegisterMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.AmExamineRegister" >
+    <result column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="BRANCH_NAME" property="branchName" jdbcType="VARCHAR" />
+    <result column="OFFICE_STAFF" property="officeStaff" jdbcType="VARCHAR" />
+    <result column="EXISTING_PROBLEM" property="existingProblem" jdbcType="VARCHAR" />
+    <result column="DEDUCT_FRACTION" property="deductFraction" jdbcType="DECIMAL" />
+    <result column="PROBLEMTYPES" property="problemtypes" jdbcType="VARCHAR" />
+    <result column="PERSONAL_ID" property="personalId" jdbcType="VARCHAR" />
+    <result column="PERSONAL_NAME" property="personalName" jdbcType="VARCHAR" />
+    <result column="ENTERING_TIME" property="enteringTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <insert id="insert" parameterType="com.bazl.clims.model.po.AmExamineRegister" >
+    insert into AM_EXAMINE_REGISTER (ID, BRANCH_NAME, OFFICE_STAFF, 
+      EXISTING_PROBLEM, DEDUCT_FRACTION, PROBLEMTYPES, 
+      PERSONAL_ID, PERSONAL_NAME, ENTERING_TIME
+      )
+    values (#{id,jdbcType=VARCHAR}, #{branchName,jdbcType=VARCHAR}, #{officeStaff,jdbcType=VARCHAR}, 
+      #{existingProblem,jdbcType=VARCHAR}, #{deductFraction,jdbcType=DECIMAL}, #{problemtypes,jdbcType=VARCHAR}, 
+      #{personalId,jdbcType=VARCHAR}, #{personalName,jdbcType=VARCHAR}, #{enteringTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select ID, BRANCH_NAME, OFFICE_STAFF, EXISTING_PROBLEM, DEDUCT_FRACTION, PROBLEMTYPES, 
+    PERSONAL_ID, PERSONAL_NAME, ENTERING_TIME
+    from AM_EXAMINE_REGISTER
+  </select>
+</mapper>

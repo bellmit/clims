@@ -1,0 +1,237 @@
+body {
+    background: #f4f4f4;
+}
+
+.layui-card {
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+.layui-card-header {
+    border: 1px solid #e8e8e8;
+    padding-left: 0px
+}
+
+.layui-card-header h4 {
+    margin-left: 15px;
+    border-left: 5px solid;
+    height: 60%;
+    line-height: 26.2px;
+    padding-left: 10px;
+    margin-top: 10px;
+    font-weight: 600;
+    display: inline-block
+}
+
+.layui-card-header>.layui-btn {
+    height: auto;
+    padding: 0 25px;
+    border-radius: 100px;
+    line-height: 30px;
+    margin-left: 10px;
+}
+
+.layui-card-header-green h4 {
+    border-color: #00b39b;
+    color: #00b39b
+}
+
+.layui-card-header-blue h4 {
+    border-color: #0091e9;
+    color: #0091e9;
+}
+
+.layui-card-header-yellow h4 {
+    border-color: #ffb802;
+    color: #ffb802;
+}
+
+.layui-card-header-red h4 {
+    border-color: #ff5951;
+    color: #ff5951;
+}
+
+.tips {
+    box-shadow: 0px 0px 11px 4px #e2f4f1;
+    border: 1px solid #75d0c2;
+    position: relative;
+    background: #fff;
+    padding: 10px;
+    padding-bottom: 30px;
+    margin-bottom: 20px;
+}
+
+.tips .triangle {
+    position: absolute;
+    top: -19px;
+    left: 42%;
+}
+
+.flexBox {
+    padding: 10px;
+    background: #fff;
+    transition: all 0.5s;
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    z-index: 1;
+    box-shadow: 0px 0px 10px 5px #ebebeb;
+}
+
+.flexBox li {
+    float: left;
+    width: 110px;
+    padding: 10px 0;
+    color: #cccccc;
+    border: 1px solid #cccccc;
+    border-radius: 100px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.flexBox li:hover {
+    color: #fff;
+    border: 1px solid #00b39b;
+    background: #00b39b
+}
+
+.flexBox .liActive {
+    color: #fff !important;
+    border: 1px solid #00b39b !important;
+    background: #00b39b !important;
+}
+
+.flexBox li+li {
+    margin-left: 10px;
+}
+
+.imgBox {
+    display: inline-block;
+    width: 126px;
+    float: left;
+    margin-right: 10px;
+    position: relative;
+}
+
+.imgBox>button {
+    border: 2px dashed #e7e7e7;
+    color: #e7e7e7;
+    background: #fff;
+    width: 126px;
+    height: 126px;
+    cursor: pointer;
+}
+
+.imgBox>i {
+    position: absolute;
+    right: -10px;
+    top: -9px;
+    color: #666;
+    background: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.imgBox>img {
+    width: 126px;
+    height: 126px;
+    margin-bottom: 5px;
+}
+
+.layui-input-inline>p {
+    height: 38px;
+    line-height: 38px;
+}
+
+.layui-input-inline>p>span {
+    display: inline-block;
+    height: 38px;
+    line-height: 38px;
+}
+
+.totalCost {
+    font-size: 20px;
+    color: #CC3300;
+    font-weight: 600;
+}
+header .layui-col-md2:nth-child(4n-1) > div {
+    background: #f5f9ff;
+    color: #3c88ff;
+    box-shadow: 5px 5px 5px #ddf0fd;
+    height: 95px;
+    line-height: 95px;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+header .layui-col-md2:nth-child(4n-2) > div {
+    background: #fefaf2;
+    color: #e59700;
+    box-shadow: 5px 5px 5px #fcf2dd;
+    height: 95px;
+    line-height: 95px;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+header .layui-col-md2:nth-child(4n-3) > div {
+    background: #fdf5f5;
+    color: #d23838;
+    box-shadow: 5px 5px 5px #fae8e8;
+    height: 95px;
+    line-height: 95px;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+header .layui-col-md2:nth-child(4n-4) > div {
+    background: #f3fbfa;
+    color: #00b39b;
+    box-shadow: 5px 5px 5px #dff4f1;
+    height: 95px;
+    line-height: 95px;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+header .layui-col-md2:nth-child(4n-1) > div:hover {
+    background: #e2edff;
+}
+
+header .layui-col-md2:nth-child(4n-1) > div.this {
+    background: #3c88ff;
+    color: #fff;
+}
+
+header .layui-col-md2:nth-child(4n-2) > div:hover {
+    background: #fbf0d9;
+
+}
+
+header .layui-col-md2:nth-child(4n-2) > div.this {
+    background: #e59700;
+    color: #fff;
+}
+
+header .layui-col-md2:nth-child(4n-3) > div:hover{
+    background: #ffe6e6;
+}
+
+header .layui-col-md2:nth-child(4n-3) > div.this{
+    background: #ff5a56;
+    color: #fff;
+}
+
+header .layui-col-md2:nth-child(4n-4) > div:hover {
+    background: #ddf4f0;
+}
+
+header .layui-col-md2:nth-child(4n-4) > div.this{
+    background: #1bb29b;
+    color: #fff;
+}

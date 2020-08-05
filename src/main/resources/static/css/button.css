@@ -1,0 +1,283 @@
+.btn.active,
+.btn:active {
+    background-image: none;
+    outline: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.btn-lang {
+    padding: 10px 42px;
+}
+
+.btn.focus,
+.btn:focus,
+.btn:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+.btn-blue {
+    color: #fff;
+    background: #296fff;
+    border: 1px solid #296fff;
+}
+
+.btn-blue-border {
+    color: #296fff;
+    background: #fff;
+    border: 1px solid #296fff;
+}
+
+.btn-blue-border.focus,
+.btn-blue-border:focus,
+.btn-blue-border:hover {
+    color: #296fff;
+    text-decoration: none;
+}
+
+.btn-gray {
+    color: #fff;
+    background: #dcdcdc;
+    border: 1px solid #dcdcdc;
+}
+
+.btn-gray-border {
+    color: #dcdcdc;
+    background: #fff;
+    border: 1px solid #dcdcdc;
+}
+
+.btn-gray-border.focus,
+.btn-gray-border:focus,
+.btn-gray-border:hover {
+    color: #dcdcdc;
+    text-decoration: none;
+}
+
+.btn-yellow {
+    color: #fff;
+    background: #ffb802;
+    border: 1px solid #ffb802;
+}
+.btn-yellow-border{
+    color: #ffb802;
+    background: #fff;
+    border: 1px solid #ffb802;
+}
+
+.btn-yellow-border.focus,
+.btn-yellow-border:focus,
+.btn-yellow-border:hover {
+    color: #ffb802;
+    text-decoration: none;
+}
+
+.btn-font {
+    background: transparent;
+    border: none;
+    outline: none;
+}
+
+.btn-font + .btn-font {
+    margin-left: 10px;
+}
+
+.btn-font-gray {
+    color: #b3b3b3;
+}
+
+.btn-green {
+    color: #fff;
+    background: #30bda8;
+    border: 1px solid #30bda8;
+}
+
+.btn-red {
+    color: #fff;
+    background: #f65c52;
+    border: 1px solid #f65c52;
+}
+.btn-red {
+    color: #fff;
+    background: #f65c52;
+    border: 1px solid #f65c52;
+}
+.btn-red-border {
+    color: #f65c52;
+    background: #fff;
+    border: 1px solid #f65c52;
+}
+.btn-font-green {
+    color: #30bda8;
+}
+
+.btn-font-blue {
+    color: #296fff
+}
+
+.btn-font-red {
+    color: #f65c52
+}
+
+.btn-font-yellow {
+    color: #ffb802
+}
+
+.btn-icon {
+    background: transparent;
+    background-image: url("../img/icon.png");
+    background-repeat: no-repeat;
+    color: transparent;
+    border: none;
+    outline: none;
+}
+
+.btn-icon-bianji-blue {
+    background-position: -34px -70px;
+}
+
+.btn-icon-bianji-gray {
+    background-position: -34px -26px;
+}
+
+.btn-icon-bianji-yellow {
+    background-position: -34px -112px;
+}
+
+.btn-icon-bianji-red {
+    background-position: -34px -154px;
+}
+
+.btn-icon-chakan-blue {
+    background-position: -34px -237px;
+}
+
+.btn-icon-chakan-gray {
+    background-position: -34px -193px;
+}
+
+.btn-icon-chakan-yellow {
+    background-position: -34px -278px;
+}
+
+.btn-icon-chakan-red {
+    background-position: -34px -321px;
+}
+
+.btn-icon-chakan-blue-bg {
+    background-position: -12px -237px;
+}
+
+.btn-icon-shanchu-gray {
+    background-position: -98px -26px;
+}
+
+.btn-icon-shanchu-red {
+    background-position: -98px -69px;
+}
+
+.btn-icon-borderBianji-gray {
+    background-position: -98px -107px;
+}
+
+.btn-icon-borderBianji-blue {
+    background-position: -98px -152px;
+}
+
+.btn-icon-news-blue {
+    background-position: -98px -237px;
+}
+
+.btn-icon-news-gray {
+    background-position: -98px -194px;
+}
+
+.btn-icon-news-yellow {
+    background-position: -98px -279px;
+}
+
+.btn-icon-news-red {
+    background-position: -98px -321px;
+}
+
+.btn-icon-man-blue {
+    background-position: -167px -70px;
+}
+
+.btn-icon-man-gray {
+    background-position: -167px -26px;
+}
+
+.btn-icon-woman-gray {
+    background-position: -167px -115px;
+}
+
+.btn-icon-woman-red {
+    background-position: -167px -157px;
+}
+
+.btn-icon-busong-yellow {
+    background-position: -167px -193px;
+}
+
+.btn-icon-addBusong-blue {
+    background-position: -167px -237px;
+}
+
+.btn-icon-jinyong-yellow {
+    background-position: -167px -321px;
+}
+
+.btn-icon-jinyong-gray {
+    background-position: -167px -280px;
+}
+
+.btn-icon-dayin-red {
+    background-image: url("../img/icon1.png");
+    background-position: -150px -323px;
+}
+
+.btn-icon-split-yellow {
+    background-position: -229px -27px;
+}
+
+.btn-icon + .btn-icon {
+    margin-left: 15px;
+}
+
+.btn-icon:hover {
+    background-image: none;
+}
+
+.btn-icon-gray:hover {
+    color: #b3b3b3;
+}
+
+.btn-icon-blue:hover {
+    color: #296fff
+}
+
+.btn-icon-red:hover {
+    color: #f65c52
+}
+
+.btn-icon-yellow:hover {
+    color: #ffb802
+}
+
+.btn-icon-bg {
+    padding: 5px 14px;
+    font-size: 17px;
+    text-align: center;
+}
+
+.btn-box {
+    background: #fff;
+    margin-left: -30px;
+    margin-right: -30px;
+    line-height: 42px;
+    padding: 8px 0px;
+    text-align: right;
+    margin-top: 20px;
+}

@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.ReagentOutgoInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.ReagentOutgoInfo" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="REAGENT_ID" property="reagentId" jdbcType="VARCHAR" />
+    <result column="RECORD_TYPE" property="recordType" jdbcType="VARCHAR" />
+    <result column="STORAGE_NUM" property="storageNum" jdbcType="VARCHAR" />
+    <result column="STORAGE_PERSON" property="storagePerson" jdbcType="VARCHAR" />
+    <result column="STORAGE_DATETIME" property="storageDatetime" jdbcType="TIMESTAMP" />
+    <result column="EFFECTIVE_DATETIME" property="effectiveDatetime" jdbcType="TIMESTAMP" />
+    <result column="STORAGE_REMARK" property="storageRemark" jdbcType="VARCHAR" />
+    <result column="BARCODE" property="barcode" jdbcType="VARCHAR" />
+    <result column="ORG_ID" property="orgId" jdbcType="VARCHAR" />
+    <result column="BATCH_NUMBER" property="batchNumber" jdbcType="VARCHAR" />
+
+      <!--业务字段-->
+      <result column="REAGENT_NAME" property="reagentName" jdbcType="VARCHAR" />
+      <result column="REAGENT_NO" property="reagentNo" jdbcType="VARCHAR" />
+      <result column="EXPERIMENTAL_STAGE" property="experimentalStage" jdbcType="VARCHAR" />
+      <result column="REAGENT_BRAND" property="reagentBrand" jdbcType="VARCHAR" />
+      <result column="REAGENT_MODEL" property="reagentModel" jdbcType="VARCHAR" />
+      <result column="REAGENT_PRICE" property="reagentPrice" jdbcType="VARCHAR" />
+      <result column="REAGENT_FIRM" property="reagentFirm" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from REAGENT_OUTGO_INFO
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.clims.model.po.ReagentOutgoInfo" >
+    insert into REAGENT_OUTGO_INFO (ID, REAGENT_ID, RECORD_TYPE,
+    STORAGE_NUM, STORAGE_PERSON, STORAGE_DATETIME,
+    EFFECTIVE_DATETIME, STORAGE_REMARK, BARCODE,
+    REAGENT_NAME, ORG_ID,BATCH_NUMBER)
+    values (#{id,jdbcType=VARCHAR}, #{reagentId,jdbcType=VARCHAR}, #{recordType,jdbcType=VARCHAR},
+    #{storageNum,jdbcType=VARCHAR}, #{storagePerson,jdbcType=VARCHAR}, #{storageDatetime,jdbcType=TIMESTAMP},
+    #{effectiveDatetime,jdbcType=TIMESTAMP}, #{storageRemark,jdbcType=VARCHAR}, #{barcode,jdbcType=VARCHAR},
+    #{reagentName,jdbcType=VARCHAR}, #{orgId,jdbcType=VARCHAR},#{batchNumber,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.clims.model.po.ReagentOutgoInfo" >
+    update REAGENT_OUTGO_INFO
+    set REAGENT_ID = #{reagentId,jdbcType=VARCHAR},
+    RECORD_TYPE = #{recordType,jdbcType=VARCHAR},
+    STORAGE_NUM = #{storageNum,jdbcType=VARCHAR},
+    STORAGE_PERSON = #{storagePerson,jdbcType=VARCHAR},
+    STORAGE_DATETIME = #{storageDatetime,jdbcType=TIMESTAMP},
+    EFFECTIVE_DATETIME = #{effectiveDatetime,jdbcType=TIMESTAMP},
+    STORAGE_REMARK = #{storageRemark,jdbcType=VARCHAR},
+    BARCODE = #{barcode,jdbcType=VARCHAR},
+    REAGENT_NAME = #{reagentName,jdbcType=VARCHAR},
+    ORG_ID = #{orgId,jdbcType=VARCHAR},
+    BATCH_NUMBER = #{batchNumber,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <!--修改试剂名称-->
+  <update id="updateByReagentOutgoInfo" parameterType="com.bazl.clims.model.po.ReagentOutgoInfo" >
+    update REAGENT_OUTGO_INFO
+    set REAGENT_NAME = #{reagentName,jdbcType=VARCHAR}
+    where REAGENT_ID = #{reagentId,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select ID, REAGENT_ID, RECORD_TYPE, STORAGE_NUM, STORAGE_PERSON, STORAGE_DATETIME,
+    EFFECTIVE_DATETIME, STORAGE_REMARK, BARCODE, REAGENT_NAME, ORG_ID,BATCH_NUMBER
+    from REAGENT_OUTGO_INFO
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select ID, REAGENT_ID, RECORD_TYPE, STORAGE_NUM, STORAGE_PERSON, STORAGE_DATETIME,
+    EFFECTIVE_DATETIME, STORAGE_REMARK, BARCODE, REAGENT_NAME, ORG_ID,BATCH_NUMBER
+    from REAGENT_OUTGO_INFO
+  </select>
+  <select id="selectByRecordType" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select *
+    from REAGENT_OUTGO_INFO
+    where RECORD_TYPE = #{recordType,jdbcType=VARCHAR}
+      <if test="orgId != null">
+          and ORG_ID = #{orgId,jdbcType=VARCHAR}
+      </if>
+      <if test="orgId == null " >
+          and ORG_ID is null
+      </if>
+  </select>
+    <!--原来的排序字段STORAGE_DATETIME-->
+  <select id="selectInList" parameterType="com.bazl.clims.model.po.ReagentOutgoInfo" resultMap="BaseResultMap">
+    select * from (
+    select rownum as rn, t.* from (
+        select *
+        from REAGENT_OUTGO_INFO
+        <where>
+            RECORD_TYPE = '0'
+            <if test="_parameter != null">
+                <include refid="VO_Query_Where_Clause"/>
+            </if>
+        </where>
+      order by REAGENT_NAME DESC
+      ) t where rownum &lt;=#{rows}
+      ) where rn &gt;#{offset}
+  </select>
+
+  <!--查询入库数量-->
+  <select id="selectCount" parameterType="com.bazl.clims.model.po.ReagentOutgoInfo" resultType="int">
+      select count(*)
+      from REAGENT_OUTGO_INFO
+      <where>
+          <if test="_parameter != null">
+              <include refid="VO_Query_Where_Clause"/>
+              <if test="recordType != null">
+                  and RECORD_TYPE = #{recordType,jdbcType=VARCHAR}
+              </if>
+          </if>
+      </where>
+  </select>
+
+  <select id="selectOutList" parameterType="com.bazl.clims.model.po.ReagentOutgoInfo" resultMap="BaseResultMap">
+    select * from (
+    select rownum as rn, t.* from (
+        select *
+        from REAGENT_OUTGO_INFO
+        <where>
+          RECORD_TYPE = '1'
+            <if test="_parameter != null">
+                <include refid="VO_Query_Where_Clause"/>
+            </if>
+        </where>
+    ) t where rownum &lt;=#{rows}
+    ) where rn &gt;#{offset}
+  </select>
+
+  <select id="selectOutInList" parameterType="com.bazl.clims.model.po.ReagentOutgoInfo" resultMap="BaseResultMap">
+    select * from (
+    select rownum as rn, t.* from (
+        select *
+        from REAGENT_OUTGO_INFO
+        <where>
+            <if test="_parameter != null">
+                <include refid="VO_Query_Where_Clause"/>
+                <if test="recordType != null">
+                    and RECORD_TYPE = #{recordType,jdbcType=VARCHAR}
+                </if>
+            </if>
+        </where>
+    ) t where rownum &lt;=#{rows}
+    ) where rn &gt;#{offset}
+  </select>
+
+    <sql id="VO_Query_Where_Clause">
+        <if test="orgId != null">
+            and ORG_ID = #{orgId,jdbcType=VARCHAR}
+        </if>
+        <if test="orgId == null " >
+            and ORG_ID is null
+        </if>
+        <if test="barcode != null">
+            and BARCODE=#{barcode,jdbcType=VARCHAR}
+        </if>
+        <if test="storagePerson != null">
+            and STORAGE_PERSON like '%'||#{storagePerson,jdbcType=VARCHAR}||'%'
+        </if>
+        <if test="storageDatetime != null">
+            and STORAGE_DATETIME like '%'||#{storageDatetime,jdbcType=VARCHAR}||'%'
+        </if>
+        <if test="reagentName != null">
+            and REAGENT_NAME like '%'||#{reagentName,jdbcType=VARCHAR}||'%'
+        </if>
+        <if test="storageDatetimeStart != null">
+            and STORAGE_DATETIME &gt;=#{storageDatetimeStart, jdbcType=TIMESTAMP}
+        </if>
+        <if test="storageDatetimeEnd != null">
+            and STORAGE_DATETIME &lt;=#{storageDatetimeEnd, jdbcType=TIMESTAMP}
+        </if>
+    </sql>
+
+    <select id="selectOrgId" resultMap="BaseResultMap" parameterType="com.bazl.clims.model.po.ReagentOutgoInfo">
+        select *
+        from REAGENT_OUTGO_INFO
+        <where>
+            <if test="orgId != null">
+                ORG_ID = #{orgId,jdbcType=VARCHAR}
+            </if>
+            <if test="orgId == null " >
+                and ORG_ID is null
+            </if>
+        </where>
+    </select>
+
+    <select id="selectByStorageNum" resultMap="BaseResultMap" parameterType="com.bazl.clims.model.po.ReagentOutgoInfo">
+        select rea.STORAGE_NUM as STORAGE_NUM,pd.REAGENT_NAME as REAGENT_NAME,pd.REAGENT_NO as REAGENT_NO,
+        pd.EXPERIMENTAL_STAGE as EXPERIMENTAL_STAGE,pd.REAGENT_BRAND as REAGENT_BRAND,pd.REAGENT_MODEL as REAGENT_MODEL,
+        pd.REAGENT_PRICE as REAGENT_PRICE,pd.REAGENT_FIRM as REAGENT_FIRM
+        from REAGENT_OUTGO_INFO rea
+        left join REAGENT_INFO pd on rea.REAGENT_ID = pd.id
+        <where>
+            rea.RECORD_TYPE = '0'
+            <if test="orgId != null">
+                and rea.ORG_ID = #{orgId,jdbcType=VARCHAR}
+            </if>
+            <if test="orgId == null " >
+                and rea.ORG_ID is null
+            </if>
+            <if test="reagentName != null">
+                and pd.REAGENT_NAME like '%'||#{reagentName,jdbcType=VARCHAR}||'%'
+            </if>
+            <if test="reagentNo != null">
+                and pd.REAGENT_NO like '%'||#{reagentNo,jdbcType=VARCHAR}||'%'
+            </if>
+            <if test="reagentModel != null">
+                and pd.REAGENT_MODEL like '%'||#{reagentModel,jdbcType=VARCHAR}||'%'
+            </if>
+            <if test="experimentalStage != null">
+                and pd.EXPERIMENTAL_STAGE =#{experimentalStage, jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </select>
+
+
+    <select id="selectreagentOutgoList" resultMap="BaseResultMap" parameterType="com.bazl.clims.model.po.ReagentOutgoInfo">
+        select *
+        from REAGENT_OUTGO_INFO
+        <where>
+            <if test="orgId != null">
+                ORG_ID = #{orgId,jdbcType=VARCHAR}
+            </if>
+            <if test="reagentId != null " >
+                and REAGENT_ID = #{reagentId,jdbcType=VARCHAR}
+            </if>
+        </where>
+        order by EFFECTIVE_DATETIME DESC
+    </select>
+
+</mapper>

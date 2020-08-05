@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.EquipmentTypeInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.EquipmentTypeInfo" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="EQUIPMENT_TYPE_NAME" property="equipmentTypeName" jdbcType="VARCHAR" />
+    <result column="EQUIPMENT_TYPE_NO" property="equipmentTypeNo" jdbcType="VARCHAR" />
+    <result column="EXPERIMENTAL_STAGE" property="experimentalStage" jdbcType="VARCHAR" />
+    <result column="USE_BLUE_WARN" property="useBlueWarn" jdbcType="VARCHAR" />
+    <result column="USE_RED_WARN" property="useRedWarn" jdbcType="VARCHAR" />
+    <result column="REPAIR_BLUE_WARN" property="repairBlueWarn" jdbcType="VARCHAR" />
+    <result column="REPAIR_RED_WARN" property="repairRedWarn" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_PERSON" property="updatePerson" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="ORG_ID" property="orgId" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <resultMap id="VOBaseResultMap" type="com.bazl.clims.model.vo.EquipmentTypeInfoVo">
+    <id column="ID" property="entity.id" jdbcType="VARCHAR" />
+    <result column="EQUIPMENT_TYPE_NAME" property="entity.equipmentTypeName" jdbcType="VARCHAR" />
+    <result column="EQUIPMENT_TYPE_NO" property="entity.equipmentTypeNo" jdbcType="VARCHAR" />
+    <result column="EXPERIMENTAL_STAGE" property="entity.experimentalStage" jdbcType="VARCHAR" />
+    <result column="USE_BLUE_WARN" property="entity.useBlueWarn" jdbcType="VARCHAR" />
+    <result column="USE_RED_WARN" property="entity.useRedWarn" jdbcType="VARCHAR" />
+    <result column="REPAIR_BLUE_WARN" property="entity.repairBlueWarn" jdbcType="VARCHAR" />
+    <result column="REPAIR_RED_WARN" property="entity.repairRedWarn" jdbcType="VARCHAR" />
+    <result column="REMARK" property="entity.remark" jdbcType="VARCHAR" />
+    <result column="CREATE_PERSON" property="entity.createPerson" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="entity.createDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_PERSON" property="entity.updatePerson" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="entity.updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="ORG_ID" property="entity.orgId" jdbcType="VARCHAR" />
+    <!-- 业务字段 -->
+    <result column="EXPERIMENTAL_STAGE_NAME" property="experimentalStageName" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from EQUIPMENT_TYPE_INFO
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.clims.model.po.EquipmentTypeInfo" >
+    insert into EQUIPMENT_TYPE_INFO (ID, EQUIPMENT_TYPE_NAME, EQUIPMENT_TYPE_NO,
+      EXPERIMENTAL_STAGE, USE_BLUE_WARN, USE_RED_WARN,
+      REPAIR_BLUE_WARN, REPAIR_RED_WARN, REMARK, CREATE_PERSON, CREATE_DATETIME,
+      UPDATE_PERSON, UPDATE_DATETIME, ORG_ID)
+    values (#{id,jdbcType=VARCHAR}, #{equipmentTypeName,jdbcType=VARCHAR}, #{equipmentTypeNo,jdbcType=VARCHAR},
+      #{experimentalStage,jdbcType=VARCHAR}, #{useBlueWarn,jdbcType=VARCHAR}, #{useRedWarn,jdbcType=VARCHAR},
+      #{repairBlueWarn,jdbcType=VARCHAR}, #{repairRedWarn,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{createPerson,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP},
+      #{updatePerson,jdbcType=VARCHAR}, #{updateDatetime,jdbcType=TIMESTAMP}, #{orgId,jdbcType=VARCHAR})
+  </insert>
+  <update id="update" parameterType="com.bazl.clims.model.po.EquipmentTypeInfo" >
+    update EQUIPMENT_TYPE_INFO
+    set EQUIPMENT_TYPE_NAME = #{equipmentTypeName,jdbcType=VARCHAR},
+      EQUIPMENT_TYPE_NO = #{equipmentTypeNo,jdbcType=VARCHAR},
+      EXPERIMENTAL_STAGE = #{experimentalStage,jdbcType=VARCHAR},
+      USE_BLUE_WARN = #{useBlueWarn,jdbcType=VARCHAR},
+      USE_RED_WARN = #{useRedWarn,jdbcType=VARCHAR},
+      REPAIR_BLUE_WARN = #{repairBlueWarn,jdbcType=VARCHAR},
+      REPAIR_RED_WARN = #{repairRedWarn,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+      UPDATE_PERSON = #{updatePerson,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP},
+      ORG_ID = #{orgId,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select *
+    from EQUIPMENT_TYPE_INFO
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectAllList" resultMap="BaseResultMap" >
+    select *
+    from EQUIPMENT_TYPE_INFO
+  </select>
+
+  <select id="selectEquipmentNo" resultMap="BaseResultMap" >
+    select *
+    from EQUIPMENT_TYPE_INFO
+    where EQUIPMENT_TYPE_NO = #{equipmentTypeNo,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectList" resultMap="BaseResultMap" parameterType="com.bazl.clims.model.po.EquipmentTypeInfo">
+    select eti.ID, eti.EQUIPMENT_TYPE_NAME, eti.EQUIPMENT_TYPE_NO,eti.EXPERIMENTAL_STAGE, eti.USE_BLUE_WARN, eti.USE_RED_WARN,
+    eti.REPAIR_BLUE_WARN, eti.REPAIR_RED_WARN, eti.REMARK, eti.CREATE_PERSON, eti.CREATE_DATETIME,eti.UPDATE_PERSON,
+    eti.UPDATE_DATETIME, eti.ORG_ID, eni.EQUIPMENT_NAME as EQUIPMENT_NAME
+    from EQUIPMENT_TYPE_INFO eti
+    left join EQUIPMENT_NAME_INFO eni on eti.ID = eni.EQUIPMENT_TYPE_ID
+    where eni.ORG_ID = #{orgId,jdbcType=VARCHAR}
+    <if test="experimentalStage != null and experimentalStage != '' ">
+      and eti.EXPERIMENTAL_STAGE = #{experimentalStage,jdbcType=VARCHAR}
+    </if>
+  </select>
+
+  <select id="selectVOPaginationList" parameterType="com.bazl.clims.model.vo.EquipmentTypeInfoVo"
+          resultMap="VOBaseResultMap">
+    select * from (
+    select rownum as rn, t.* from (
+    select eti.*, di_1.dict_name as EXPERIMENTAL_STAGE_NAME
+    from EQUIPMENT_TYPE_INFO eti left join dict_item di_1 on di_1.dict_code = eti.EXPERIMENTAL_STAGE and di_1.DICT_TYPE_CODE='EXPERIMENTAL_STAGE'
+    <where>
+      <if test="_parameter != null">
+        <include refid="VO_Query_Where_Clause"/>
+      </if>
+      <if test="orderByClause != null">
+        order by ${orderByClause}
+      </if>
+    </where>
+    ) t where rownum &lt;=#{rows}
+    ) where rn &gt;#{offset}
+  </select>
+  <!--设备类型count-->
+  <select id="selectVOCount" parameterType="com.bazl.clims.model.vo.EquipmentTypeInfoVo" resultType="int">
+    select count(*)
+    from EQUIPMENT_TYPE_INFO eti
+    where 1=1
+    <if test="_parameter != null">
+      <include refid="VO_Query_Where_Clause"/>
+    </if>
+  </select>
+
+  <select id="selectBy" resultMap="BaseResultMap">
+    select *
+    from EQUIPMENT_TYPE_INFO where org_id=#{orgId,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectLabEquipmentTypeList" resultMap="BaseResultMap" parameterType="com.bazl.clims.model.po.EquipmentTypeInfo">
+    select eti.ID, eti.EQUIPMENT_TYPE_NAME, eti.EQUIPMENT_TYPE_NO, eti.EXPERIMENTAL_STAGE, eti.USE_BLUE_WARN, eti.USE_RED_WARN,
+    eti.REPAIR_BLUE_WARN, eti.REPAIR_RED_WARN, eti.REMARK,eti.CREATE_PERSON,eti.CREATE_DATETIME,eti.UPDATE_PERSON,eti.UPDATE_DATETIME,eti.ORG_ID
+    from EQUIPMENT_TYPE_INFO eti
+    <where>
+      <if test="orgId != null and orgId != '' ">
+        eti.ORG_ID = #{orgId,jdbcType=VARCHAR}
+      </if>
+      <if test="experimentalStage != null">
+        and eti.experimental_stage = #{experimentalStage}
+      </if>
+      <if test="orgId == null">
+        and eti.ORG_ID is null
+      </if>
+
+    </where>
+
+  </select>
+  <select id="selectEquipmentById" resultMap="BaseResultMap">
+     select *
+    from EQUIPMENT_TYPE_INFO where ID=#{id,jdbcType=VARCHAR}
+  </select>
+
+
+  <sql id="VO_Query_Where_Clause">
+    <if test="entity.orgId != null and entity.orgId !=''">
+      and eti.ORG_ID = #{entity.orgId,jdbcType=VARCHAR}
+    </if>
+    <if test="entity.orgId == null">
+      and eti.ORG_ID is null
+    </if>
+    <if test="entity.equipmentTypeName != null">
+      and eti.EQUIPMENT_TYPE_NAME like '%'||#{entity.equipmentTypeName,jdbcType=VARCHAR}||'%'
+    </if>
+  </sql>
+
+
+
+
+</mapper>

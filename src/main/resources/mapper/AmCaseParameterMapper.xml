@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.AmCaseParameterMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.AmCaseParameter" >
+    <result column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="CASE_NO" property="caseNo" jdbcType="VARCHAR" />
+    <result column="ENTRUSTING_PARTY" property="entrustingParty" jdbcType="VARCHAR" />
+    <result column="CASE_ENTRUST" property="caseEntrust" jdbcType="VARCHAR" />
+    <result column="ENTRUST_NAME" property="entrustName" jdbcType="VARCHAR" />
+    <result column="CASE_SEX" property="caseSex" jdbcType="VARCHAR" />
+    <result column="CASE_AGE" property="caseAge" jdbcType="VARCHAR" />
+    <result column="CASE_CASEDATE" property="caseCasedate" jdbcType="TIMESTAMP" />
+    <result column="CASE_SITE" property="caseSite" jdbcType="VARCHAR" />
+    <result column="CASE_NATURE" property="caseNature" jdbcType="VARCHAR" />
+    <result column="CASE_REMARK" property="caseRemark" jdbcType="VARCHAR" />
+    <result column="CASE_ACCEPTANCE" property="caseAcceptance" jdbcType="VARCHAR" />
+    <result column="CASE_DECLINED" property="caseDeclined" jdbcType="VARCHAR" />
+    <result column="CASE_ACCEPTANCE_DATE" property="caseAcceptanceDate" jdbcType="TIMESTAMP" />
+    <result column="EXPERT_CONCLUSION" property="expertConclusion" jdbcType="VARCHAR" />
+    <result column="CASE_PRINCIPAL" property="casePrincipal" jdbcType="VARCHAR" />
+    <result column="COME_APPRAISAL_DATE" property="comeAppraisalDate" jdbcType="TIMESTAMP" />
+    <result column="TAKES_APPRAISAL_DATE" property="takesAppraisalDate" jdbcType="TIMESTAMP" />
+    <result column="DNA_NO" property="dnaNo" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_PERSON" property="updatePerson" jdbcType="VARCHAR" />
+    <result column="DELETE_DATETIME" property="deleteDatetime" jdbcType="TIMESTAMP" />
+    <result column="DELETE_PERSON" property="deletePerson" jdbcType="VARCHAR" />
+    <result column="CODE" property="code" jdbcType="VARCHAR" />
+    <result column="ORG_ID" property="orgId" jdbcType="VARCHAR" />
+    <result column="ORG_NAME" property="orgName" jdbcType="VARCHAR" />
+    <result column="PERSONAL_ID" property="personalId" jdbcType="VARCHAR" />
+    <result column="WHETHER_TO_ENTRUST" property="whetherToEntrust" jdbcType="VARCHAR" />
+    <result column="AUTHORIZED_AGENCY" property="authorizedAgency" jdbcType="VARCHAR" />
+    <result column="SCENE_NA" property="sceneNa" jdbcType="VARCHAR" />
+    <result column="CASE_ACCEPTANCE_NUMBER" property="caseAcceptanceNumber" jdbcType="VARCHAR" />
+    <result column="CERTIFICATE_TYPE" property="certificateType" jdbcType="VARCHAR" />
+    <result column="CERTIFICATE_NUMBER" property="certificateNumber" jdbcType="VARCHAR" />
+    <result column="PROVISIONAL_CONCLUSION" property="provisionalConclusion" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insert" parameterType="com.bazl.clims.model.po.AmCaseParameter" >
+    insert into AM_CASE_PARAMETER (ID, CASE_NO, ENTRUSTING_PARTY, 
+      CASE_ENTRUST, ENTRUST_NAME, CASE_SEX, 
+      CASE_AGE, CASE_CASEDATE, CASE_SITE, 
+      CASE_NATURE, CASE_REMARK, CASE_ACCEPTANCE, 
+      CASE_DECLINED, CASE_ACCEPTANCE_DATE, EXPERT_CONCLUSION, 
+      CASE_PRINCIPAL, COME_APPRAISAL_DATE, TAKES_APPRAISAL_DATE, 
+      DNA_NO, CREATE_DATETIME, CREATE_PERSON, 
+      UPDATE_DATETIME, UPDATE_PERSON, DELETE_DATETIME, 
+      DELETE_PERSON, CODE, ORG_ID, 
+      ORG_NAME, PERSONAL_ID, WHETHER_TO_ENTRUST, 
+      AUTHORIZED_AGENCY, SCENE_NA, CASE_ACCEPTANCE_NUMBER, 
+      CERTIFICATE_TYPE, CERTIFICATE_NUMBER, PROVISIONAL_CONCLUSION
+      )
+    values (#{id,jdbcType=VARCHAR}, #{caseNo,jdbcType=VARCHAR}, #{entrustingParty,jdbcType=VARCHAR}, 
+      #{caseEntrust,jdbcType=VARCHAR}, #{entrustName,jdbcType=VARCHAR}, #{caseSex,jdbcType=VARCHAR}, 
+      #{caseAge,jdbcType=VARCHAR}, #{caseCasedate,jdbcType=TIMESTAMP}, #{caseSite,jdbcType=VARCHAR}, 
+      #{caseNature,jdbcType=VARCHAR}, #{caseRemark,jdbcType=VARCHAR}, #{caseAcceptance,jdbcType=VARCHAR}, 
+      #{caseDeclined,jdbcType=VARCHAR}, #{caseAcceptanceDate,jdbcType=TIMESTAMP}, #{expertConclusion,jdbcType=VARCHAR}, 
+      #{casePrincipal,jdbcType=VARCHAR}, #{comeAppraisalDate,jdbcType=TIMESTAMP}, #{takesAppraisalDate,jdbcType=TIMESTAMP}, 
+      #{dnaNo,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP}, #{createPerson,jdbcType=VARCHAR}, 
+      #{updateDatetime,jdbcType=TIMESTAMP}, #{updatePerson,jdbcType=VARCHAR}, #{deleteDatetime,jdbcType=TIMESTAMP}, 
+      #{deletePerson,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{orgId,jdbcType=VARCHAR}, 
+      #{orgName,jdbcType=VARCHAR}, #{personalId,jdbcType=VARCHAR}, #{whetherToEntrust,jdbcType=VARCHAR}, 
+      #{authorizedAgency,jdbcType=VARCHAR}, #{sceneNa,jdbcType=VARCHAR}, #{caseAcceptanceNumber,jdbcType=VARCHAR}, 
+      #{certificateType,jdbcType=VARCHAR}, #{certificateNumber,jdbcType=VARCHAR}, #{provisionalConclusion,jdbcType=VARCHAR}
+      )
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select ID, CASE_NO, ENTRUSTING_PARTY, CASE_ENTRUST, ENTRUST_NAME, CASE_SEX, CASE_AGE, 
+    CASE_CASEDATE, CASE_SITE, CASE_NATURE, CASE_REMARK, CASE_ACCEPTANCE, CASE_DECLINED, 
+    CASE_ACCEPTANCE_DATE, EXPERT_CONCLUSION, CASE_PRINCIPAL, COME_APPRAISAL_DATE, TAKES_APPRAISAL_DATE, 
+    DNA_NO, CREATE_DATETIME, CREATE_PERSON, UPDATE_DATETIME, UPDATE_PERSON, DELETE_DATETIME, 
+    DELETE_PERSON, CODE, ORG_ID, ORG_NAME, PERSONAL_ID, WHETHER_TO_ENTRUST, AUTHORIZED_AGENCY, 
+    SCENE_NA, CASE_ACCEPTANCE_NUMBER, CERTIFICATE_TYPE, CERTIFICATE_NUMBER, PROVISIONAL_CONCLUSION
+    from AM_CASE_PARAMETER
+  </select>
+</mapper>

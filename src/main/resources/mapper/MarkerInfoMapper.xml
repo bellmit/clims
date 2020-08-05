@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.MarkerInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.MarkerInfo" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="PANEL_ID" property="panelId" jdbcType="VARCHAR" />
+    <result column="MARKER_NAME" property="markerName" jdbcType="VARCHAR" />
+    <result column="MARKER_ALIAS" property="markerAlias" jdbcType="VARCHAR" />
+    <result column="MARKER_ORDER" property="markerOrder" jdbcType="DECIMAL" />
+    <result column="MARKER_DESC" property="markerDesc" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from MARKER_INFO
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.clims.model.po.MarkerInfo" >
+    insert into MARKER_INFO (ID, PANEL_ID, MARKER_NAME, 
+      MARKER_ALIAS, MARKER_ORDER, MARKER_DESC
+      )
+    values (#{id,jdbcType=VARCHAR}, #{panelId,jdbcType=VARCHAR}, #{markerName,jdbcType=VARCHAR}, 
+      #{markerAlias,jdbcType=VARCHAR}, #{markerOrder,jdbcType=DECIMAL}, #{markerDesc,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.clims.model.po.MarkerInfo" >
+    update MARKER_INFO
+    set PANEL_ID = #{panelId,jdbcType=VARCHAR},
+      MARKER_NAME = #{markerName,jdbcType=VARCHAR},
+      MARKER_ALIAS = #{markerAlias,jdbcType=VARCHAR},
+      MARKER_ORDER = #{markerOrder,jdbcType=DECIMAL},
+      MARKER_DESC = #{markerDesc,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select ID, PANEL_ID, MARKER_NAME, MARKER_ALIAS, MARKER_ORDER, MARKER_DESC
+    from MARKER_INFO
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select ID, PANEL_ID, MARKER_NAME, MARKER_ALIAS, MARKER_ORDER, MARKER_DESC
+    from MARKER_INFO
+  </select>
+</mapper>

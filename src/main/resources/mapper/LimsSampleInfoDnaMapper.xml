@@ -1,0 +1,715 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.LimsSampleInfoDnaMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.LimsSampleInfoDna" >
+    <id column="SAMPLE_ID" property="sampleId" jdbcType="VARCHAR" />
+    <result column="CONSIGNMENT_ID" property="consignmentId" jdbcType="VARCHAR" />
+    <result column="CASE_ID" property="caseId" jdbcType="VARCHAR" />
+    <result column="EVIDENCE_ID" property="evidenceId" jdbcType="VARCHAR" />
+    <result column="SAMPLE_NO" property="sampleNo" jdbcType="VARCHAR" />
+    <result column="SAMPLE_NAME" property="sampleName" jdbcType="VARCHAR" />
+    <result column="SAMPLE_TYPE" property="sampleType" jdbcType="VARCHAR" />
+    <result column="SAMPLE_DESC" property="sampleDesc" jdbcType="VARCHAR" />
+    <result column="SAMPLE_PACKING" property="samplePacking" jdbcType="VARCHAR" />
+    <result column="SAMPLE_CARRIER" property="sampleCarrier" jdbcType="VARCHAR" />
+    <result column="EXTRACT_DATETIME" property="extractDatetime" jdbcType="TIMESTAMP" />
+    <result column="EXTRACT_PERSON" property="extractPerson" jdbcType="VARCHAR" />
+    <result column="EXTRACT_METHOD" property="extractMethod" jdbcType="VARCHAR" />
+    <result column="EXTRACT_PART" property="extractPart" jdbcType="VARCHAR" />
+    <result column="SAMPLE_FLAG" property="sampleFlag" jdbcType="VARCHAR" />
+    <result column="LINK_ID" property="linkId" jdbcType="VARCHAR" />
+    <result column="SAMPLE_PURPOSE" property="samplePurpose" jdbcType="VARCHAR" />
+    <result column="SAMPLE_STATUS" property="sampleStatus" jdbcType="VARCHAR" />
+    <result column="INSTORED_FLAG" property="instoredFlag" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_PERSON" property="updatePerson" jdbcType="VARCHAR" />
+    <result column="DELETE_FLAG" property="deleteFlag" jdbcType="VARCHAR" />
+    <result column="DELETE_DATETIME" property="deleteDatetime" jdbcType="TIMESTAMP" />
+    <result column="DELETE_PERSON" property="deletePerson" jdbcType="VARCHAR" />
+    <result column="DELETE_REASON" property="deleteReason" jdbcType="VARCHAR" />
+    <result column="SAMPLE_REMARK" property="sampleRemark" jdbcType="VARCHAR" />
+    <result column="SAMPLE_DNA_PICTURE" property="sampleDnaPicture" jdbcType="VARCHAR" />
+    <result column="SAMPLE_DNA_PICTURE_PATH" property="sampleDnaPicturePath" jdbcType="VARCHAR" />
+    <result column="SAMPLE_TYPE_NAME" property="sampleTypeName" jdbcType="VARCHAR" />
+    <result column="EXTRACT_METHOD_NAME" property="extractMethodName" jdbcType="VARCHAR" />
+    <result column="SAMPLE_PACKING_NAME" property="samplePackingName" jdbcType="VARCHAR" />
+    <result column="PRE_METHOD1_RESULT" property="preMethod1Result" jdbcType="VARCHAR" />
+    <result column="PRE_METHOD2_RESULT" property="preMethod2Result" jdbcType="VARCHAR" />
+    <result column="PRE_METHOD3_RESULT" property="preMethod3Result" jdbcType="VARCHAR" />
+    <result column="IS_RETAIN" property="isRetain" jdbcType="VARCHAR" />
+    <result column="REFUSE_REASON" property="refuseReason" jdbcType="VARCHAR" />
+    <result column="SAMPLE_MATERIAL_PICTURE" property="sampleMaterialPicture" jdbcType="VARCHAR" />
+    <result column="SAMPLE_MATERIAL_PICTURE_PATH" property="sampleMaterialPicturePath" jdbcType="VARCHAR" />
+    <result column="INSTORED_TYPE" property="instoredType" jdbcType="VARCHAR" />
+    <result column="INSTORED_DATETIME" property="instoredDatetime" jdbcType="TIMESTAMP" />
+    <result column="INSTORED_PERSON" property="instoredPerson" jdbcType="VARCHAR" />
+    <result column="EVIDENCE_NO" property="evidenceNo" jdbcType="VARCHAR" />
+    <result column="GJK_SYS_NO" property="gjkSYSNo" jdbcType="VARCHAR" />
+    <result column="CORE_TAKEN_STATS" property="coreTakenStats" jdbcType="VARCHAR" />
+    <result column="CORE_VICTIM_STATS" property="coreVictimStats" jdbcType="VARCHAR" />
+    <result column="EVIDENCE_SERIAL_NO" property="evidenceSerialNo" jdbcType="INTEGER" />
+
+  </resultMap>
+
+
+  <resultMap id="VOBaseResultMap" type="com.bazl.clims.model.vo.LimsSampleInfoDnaVo">
+    <id column="SAMPLE_ID" property="entity.sampleId" jdbcType="VARCHAR" />
+    <result column="CONSIGNMENT_ID" property="entity.consignmentId" jdbcType="VARCHAR" />
+    <result column="CASE_ID" property="entity.caseId" jdbcType="VARCHAR" />
+    <result column="EVIDENCE_ID" property="entity.evidenceId" jdbcType="VARCHAR" />
+    <result column="SAMPLE_NO" property="entity.sampleNo" jdbcType="VARCHAR" />
+    <result column="SAMPLE_NAME" property="entity.sampleName" jdbcType="VARCHAR" />
+    <result column="SAMPLE_TYPE" property="entity.sampleType" jdbcType="VARCHAR" />
+    <result column="SAMPLE_DESC" property="entity.sampleDesc" jdbcType="VARCHAR" />
+    <result column="SAMPLE_PACKING" property="entity.samplePacking" jdbcType="VARCHAR" />
+    <result column="SAMPLE_CARRIER" property="entity.sampleCarrier" jdbcType="VARCHAR" />
+    <result column="EXTRACT_DATETIME" property="entity.extractDatetime" jdbcType="TIMESTAMP" />
+    <result column="EXTRACT_PERSON" property="entity.extractPerson" jdbcType="VARCHAR" />
+    <result column="EXTRACT_METHOD" property="entity.extractMethod" jdbcType="VARCHAR" />
+    <result column="EXTRACT_PART" property="entity.extractPart" jdbcType="VARCHAR" />
+    <result column="SAMPLE_FLAG" property="entity.sampleFlag" jdbcType="VARCHAR" />
+    <result column="LINK_ID" property="entity.linkId" jdbcType="VARCHAR" />
+    <result column="SAMPLE_PURPOSE" property="entity.samplePurpose" jdbcType="VARCHAR" />
+    <result column="SAMPLE_STATUS" property="entity.sampleStatus" jdbcType="VARCHAR" />
+    <result column="INSTORED_FLAG" property="entity.instoredFlag" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="entity.createDatetime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_PERSON" property="entity.createPerson" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="entity.updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_PERSON" property="entity.updatePerson" jdbcType="VARCHAR" />
+    <result column="DELETE_FLAG" property="entity.deleteFlag" jdbcType="VARCHAR" />
+    <result column="DELETE_DATETIME" property="entity.deleteDatetime" jdbcType="TIMESTAMP" />
+    <result column="DELETE_PERSON" property="entity.deletePerson" jdbcType="VARCHAR" />
+    <result column="DELETE_REASON" property="entity.deleteReason" jdbcType="VARCHAR" />
+    <result column="SAMPLE_REMARK" property="entity.sampleRemark" jdbcType="VARCHAR" />
+    <result column="SAMPLE_DNA_PICTURE" property="entity.sampleDnaPicture" jdbcType="VARCHAR" />
+    <result column="SAMPLE_DNA_PICTURE_PATH" property="entity.sampleDnaPicturePath" jdbcType="VARCHAR" />
+    <result column="SAMPLE_TYPE_NAME" property="entity.sampleTypeName" jdbcType="VARCHAR" />
+    <result column="EXTRACT_METHOD_NAME" property="entity.extractMethodName" jdbcType="VARCHAR" />
+    <result column="SAMPLE_PACKING_NAME" property="entity.samplePackingName" jdbcType="VARCHAR" />
+    <result column="PRE_METHOD1_RESULT" property="entity.preMethod1Result" jdbcType="VARCHAR" />
+    <result column="PRE_METHOD2_RESULT" property="entity.preMethod2Result" jdbcType="VARCHAR" />
+    <result column="PRE_METHOD3_RESULT" property="entity.preMethod3Result" jdbcType="VARCHAR" />
+    <result column="IS_RETAIN" property="entity.isRetain" jdbcType="VARCHAR" />
+    <result column="REFUSE_REASON" property="entity.refuseReason" jdbcType="VARCHAR" />
+    <result column="SAMPLE_MATERIAL_PICTURE" property="entity.sampleMaterialPicture" jdbcType="VARCHAR" />
+    <result column="SAMPLE_MATERIAL_PICTURE_PATH" property="entity.sampleMaterialPicturePath" jdbcType="VARCHAR" />
+    <result column="INSTORED_TYPE" property="entity.instoredType" jdbcType="VARCHAR" />
+    <result column="GJK_SYS_NO" property="entity.gjkSYSNo" jdbcType="VARCHAR" />
+    <result column="BOARD_POSITION" property="boardPosition" jdbcType="VARCHAR" />
+    <result column="accept_org_id" property="acceptOrgId" jdbcType="VARCHAR" />
+    <result column="EVIDENCE_SERIAL_NO" property="entity.evidenceSerialNo" jdbcType="INTEGER" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    SAMPLE_ID, CONSIGNMENT_ID, CASE_ID, EVIDENCE_ID, SAMPLE_NO, SAMPLE_NAME, SAMPLE_TYPE, SAMPLE_DESC, SAMPLE_PACKING,
+    SAMPLE_CARRIER, EXTRACT_DATETIME, EXTRACT_PERSON, EXTRACT_METHOD, EXTRACT_PART, SAMPLE_FLAG,
+    LINK_ID, SAMPLE_PURPOSE, SAMPLE_STATUS, INSTORED_FLAG, CREATE_DATETIME, CREATE_PERSON,
+    UPDATE_DATETIME, UPDATE_PERSON, DELETE_FLAG, DELETE_DATETIME, DELETE_PERSON, DELETE_REASON,
+    SAMPLE_REMARK, SAMPLE_DNA_PICTURE, SAMPLE_DNA_PICTURE_PATH, PRE_METHOD1_RESULT,PRE_METHOD2_RESULT,
+    PRE_METHOD3_RESULT,IS_RETAIN, REFUSE_REASON, SAMPLE_MATERIAL_PICTURE, SAMPLE_MATERIAL_PICTURE_PATH,
+    INSTORED_TYPE, INSTORED_DATETIME, INSTORED_PERSON,CORE_TAKEN_STATS,CORE_VICTIM_STATS,EVIDENCE_SERIAL_NO
+  </sql>
+
+  <select id="selectById" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" />
+    from LIMS_SAMPLE_INFO_DNA
+    where SAMPLE_ID = #{sampleId,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectChuanBinBySampleId" parameterType="com.bazl.clims.model.vo.LimsSampleInfoDnaVo" resultMap="BaseResultMap">
+    select t.sample_id,
+    t.consignment_id,
+    t.case_id,
+    t.evidence_id,
+    t.sample_no,
+    t.sample_name,
+    t.sample_type,
+    t.sample_desc,
+    t.sample_packing,
+    t.sample_carrier,
+    t.extract_datetime,
+    t.extract_person,
+    t.extract_method,
+    t.extract_part,
+    t.sample_flag,
+    t.link_id,
+    t.sample_purpose,
+    t.sample_status,
+    t.instored_flag,
+    t.create_datetime
+    from LIMS_SAMPLE_INFO_DNA  t
+    where
+    exists (select 1 from lims_consignment_info lci
+    where t.consignment_id = lci.consignment_id
+    <if test="acceptOrgId != null">
+      and lci.ACCEPT_ORG_ID=#{acceptOrgId,jdbcType=VARCHAR}
+    </if>
+    )
+    <if test="entity.sampleId != null">
+      and t.SAMPLE_ID = #{entity.sampleId,jdbcType=VARCHAR}
+    </if>
+
+
+  </select>
+
+  <select id="selectByConsignmentId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select lsid.*
+    from LIMS_SAMPLE_INFO_DNA lsid
+    where lsid.DELETE_FLAG = '0' and lsid.CONSIGNMENT_ID = #{consignmentId,jdbcType=VARCHAR}
+    order by lsid.SAMPLE_FLAG asc, lsid.SAMPLE_NO asc
+  </select>
+
+  <select id="selectList" parameterType="com.bazl.clims.model.po.LimsSampleInfoDna"  resultMap="BaseResultMap">
+    select lsid.*,
+    di_1.dict_name as instoredTypeName
+    from LIMS_SAMPLE_INFO_DNA lsid
+    left join dict_item di_1 on lsid.instored_type = di_1.dict_code and di_1.DICT_TYPE_CODE='INSTORED_TYPE'
+    where lsid.DELETE_FLAG = '0'
+    <if test="_parameter != null">
+      <include refid="Query_Where_Clause"/>
+    </if>
+  </select>
+
+  <sql id="Query_Where_Clause">
+    <if test="caseId != null">
+      and lsid.CASE_ID = #{caseId,jdbcType=VARCHAR}
+    </if>
+    <if test="consignmentId != null">
+      and lsid.CONSIGNMENT_ID = #{consignmentId,jdbcType=VARCHAR}
+    </if>
+    <if test="instoredFlag != null">
+      and lsid.INSTORED_FLAG = #{instoredFlag,jdbcType=VARCHAR}
+    </if>
+  </sql>
+
+  <select id="selectListByCaseIdInstored" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select lsid.*
+    from LIMS_SAMPLE_INFO_DNA lsid
+    where lsid.DELETE_FLAG = '0'
+    and lsid.INSTORED_FLAG = '1'
+    and lsid.case_id = #{caseId,jdbcType=VARCHAR}
+    and lsid.GJK_SYS_NO is not null
+  </select>
+
+  <select id="selectVoList" parameterType="com.bazl.clims.model.vo.LimsSampleInfoDnaVo"  resultMap="VOBaseResultMap">
+    select lsid.*
+    from LIMS_SAMPLE_INFO_DNA lsid
+    where lsid.DELETE_FLAG = '0'
+    <if test="_parameter != null">
+      <include refid="VO_Query_Where_Clause"/>
+    </if>
+  </select>
+
+  <select id="selectNotDetected" parameterType="java.lang.String"  resultMap="VOBaseResultMap">
+    select t.*, t.rowid from LIMS_SAMPLE_INFO_DNA t
+    where t.sample_id not in (select lsg.sample_id from lims_sample_gene lsg where lsg.case_id = #{caseId,jdbcType=VARCHAR} and lsg.AUDIT_STATUS ='1'
+    and lsg.delete_flag = '0')
+    and t.case_id = #{caseId,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectSampleInfos" parameterType="java.lang.String"  resultMap="VOBaseResultMap">
+    select t.*, t.rowid from LIMS_SAMPLE_INFO_DNA t
+    where t.delete_flag = '0'
+    and t.instored_flag = '1'
+    and t.case_id = #{caseId,jdbcType=VARCHAR}
+  </select>
+
+  <sql id="VO_Query_Where_Clause">
+    <if test="entity.caseId != null">
+      and lsid.CASE_ID = #{entity.caseId,jdbcType=VARCHAR}
+    </if>
+  </sql>
+
+  <select id="selectSampleInfoDnaById" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select lsid.*,
+    di_1.dict_name as SAMPLE_TYPE_NAME
+    from LIMS_SAMPLE_INFO_DNA lsid
+    left join dict_item di_1 on lsid.sample_type = di_1.dict_code and di_1.DICT_TYPE_CODE='SAMPLE_TYPE'
+    where lsid.SAMPLE_ID = #{sampleId,jdbcType=VARCHAR}
+    and lsid.DELETE_FLAG='0'
+  </select>
+
+  <select id="selectListByConsignmentId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from LIMS_SAMPLE_INFO_DNA lsi
+    where lsi.CONSIGNMENT_ID=#{consignmentId,jdbcType=VARCHAR} and lsi.DELETE_FLAG='0' and lsi.SAMPLE_STATUS !='04' order by length(lsi.SAMPLE_NO) asc, lsi.SAMPLE_NO asc
+  </select>
+
+
+  <select id="selectSampleListByConsignmentId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from LIMS_SAMPLE_INFO_DNA lsi
+    where lsi.CONSIGNMENT_ID=#{consignmentId,jdbcType=VARCHAR} and lsi.DELETE_FLAG='0' and lsi.SAMPLE_STATUS !='04' and lsi.IS_RETAIN ='1' order by length(lsi.SAMPLE_NO) asc, lsi.SAMPLE_NO asc
+  </select>
+
+  <select id="isStoredBySampleId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select *
+    from LIMS_SAMPLE_INFO_DNA lsi
+    where lsi.SAMPLE_ID = #{sampleId,jdbcType=VARCHAR}
+    and lsi.DELETE_FLAG='0' and lsi.INSTORED_FLAG='1'
+  </select>
+
+  <select id="selectsampleListRefuseConsignmentId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from LIMS_SAMPLE_INFO_DNA lsi
+    where lsi.CONSIGNMENT_ID=#{consignmentId,jdbcType=VARCHAR}
+    and lsi.DELETE_FLAG='0' and lsi.SAMPLE_STATUS !='04' and lsi.SAMPLE_FLAG='0' order by length(lsi.SAMPLE_NO) asc, lsi.SAMPLE_NO asc
+  </select>
+
+  <select id="selectPersonListRefuseConsignmentId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from LIMS_SAMPLE_INFO_DNA lsi
+    where lsi.CONSIGNMENT_ID=#{consignmentId,jdbcType=VARCHAR}
+    and lsi.DELETE_FLAG='0' and lsi.SAMPLE_STATUS !='04' and lsi.SAMPLE_FLAG='1' order by length(lsi.SAMPLE_NO) asc, lsi.SAMPLE_NO asc
+  </select>
+
+  <insert id="insertSampleInfoDna" parameterType="com.bazl.clims.model.po.LimsSampleInfoDna" >
+    insert into LIMS_SAMPLE_INFO_DNA (SAMPLE_ID, CONSIGNMENT_ID, CASE_ID,
+    EVIDENCE_ID, SAMPLE_NO, SAMPLE_NAME,
+    SAMPLE_TYPE, SAMPLE_DESC, SAMPLE_PACKING,
+    SAMPLE_CARRIER, EXTRACT_DATETIME, EXTRACT_PERSON,
+    EXTRACT_METHOD, EXTRACT_PART, SAMPLE_FLAG,
+    LINK_ID, SAMPLE_PURPOSE, SAMPLE_STATUS,
+    INSTORED_FLAG, CREATE_DATETIME, CREATE_PERSON,
+    UPDATE_DATETIME, UPDATE_PERSON, DELETE_FLAG,
+    DELETE_DATETIME, DELETE_PERSON, DELETE_REASON,
+    SAMPLE_REMARK, SAMPLE_DNA_PICTURE, SAMPLE_DNA_PICTURE_PATH,
+    PRE_METHOD1_RESULT,PRE_METHOD2_RESULT,PRE_METHOD3_RESULT,IS_RETAIN,
+    REFUSE_REASON, SAMPLE_MATERIAL_PICTURE, SAMPLE_MATERIAL_PICTURE_PATH,CORE_TAKEN_STATS,CORE_VICTIM_STATS,EVIDENCE_SERIAL_NO
+    )
+    values (#{sampleId,jdbcType=VARCHAR}, #{consignmentId,jdbcType=VARCHAR}, #{caseId,jdbcType=VARCHAR},
+    #{evidenceId,jdbcType=VARCHAR}, #{sampleNo,jdbcType=VARCHAR}, #{sampleName,jdbcType=VARCHAR},
+    #{sampleType,jdbcType=VARCHAR}, #{sampleDesc,jdbcType=VARCHAR}, #{samplePacking,jdbcType=VARCHAR},
+    #{sampleCarrier,jdbcType=VARCHAR}, #{extractDatetime,jdbcType=TIMESTAMP}, #{extractPerson,jdbcType=VARCHAR},
+    #{extractMethod,jdbcType=VARCHAR}, #{extractPart,jdbcType=VARCHAR}, #{sampleFlag,jdbcType=VARCHAR},
+    #{linkId,jdbcType=VARCHAR}, #{samplePurpose,jdbcType=VARCHAR}, #{sampleStatus,jdbcType=VARCHAR},
+    #{instoredFlag,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP}, #{createPerson,jdbcType=VARCHAR},
+    #{updateDatetime,jdbcType=TIMESTAMP}, #{updatePerson,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=VARCHAR},
+    #{deleteDatetime,jdbcType=TIMESTAMP}, #{deletePerson,jdbcType=VARCHAR}, #{deleteReason,jdbcType=VARCHAR},
+    #{sampleRemark,jdbcType=VARCHAR}, #{sampleDnaPicture,jdbcType=VARCHAR}, #{sampleDnaPicturePath,jdbcType=VARCHAR},
+    #{preMethod1Result,jdbcType=VARCHAR},#{preMethod2Result,jdbcType=VARCHAR},#{preMethod3Result,jdbcType=VARCHAR},
+    #{isRetain,jdbcType=VARCHAR}, #{refuseReason,jdbcType=VARCHAR}, #{sampleMaterialPicture,jdbcType=VARCHAR}, #{sampleMaterialPicturePath,jdbcType=VARCHAR},
+    #{coreTakenStats,jdbcType=VARCHAR},#{coreVictimStats,jdbcType=VARCHAR},#{evidenceSerialNo,jdbcType=INTEGER}
+    )
+  </insert>
+
+  <update id="updateSampleInfoDna" parameterType="com.bazl.clims.model.po.LimsSampleInfoDna" >
+    update LIMS_SAMPLE_INFO_DNA
+    set CONSIGNMENT_ID = #{consignmentId,jdbcType=VARCHAR},
+    CASE_ID = #{caseId,jdbcType=VARCHAR},
+    EVIDENCE_ID = #{evidenceId,jdbcType=VARCHAR},
+    SAMPLE_NO = #{sampleNo,jdbcType=VARCHAR},
+    SAMPLE_NAME = #{sampleName,jdbcType=VARCHAR},
+    SAMPLE_TYPE = #{sampleType,jdbcType=VARCHAR},
+    SAMPLE_DESC = #{sampleDesc,jdbcType=VARCHAR},
+    SAMPLE_PACKING = #{samplePacking,jdbcType=VARCHAR},
+    SAMPLE_CARRIER = #{sampleCarrier,jdbcType=VARCHAR},
+    EXTRACT_DATETIME = #{extractDatetime,jdbcType=TIMESTAMP},
+    EXTRACT_PERSON = #{extractPerson,jdbcType=VARCHAR},
+    EXTRACT_METHOD = #{extractMethod,jdbcType=VARCHAR},
+    EXTRACT_PART = #{extractPart,jdbcType=VARCHAR},
+    SAMPLE_FLAG = #{sampleFlag,jdbcType=VARCHAR},
+    LINK_ID = #{linkId,jdbcType=VARCHAR},
+    SAMPLE_PURPOSE = #{samplePurpose,jdbcType=VARCHAR},
+    SAMPLE_STATUS = #{sampleStatus,jdbcType=VARCHAR},
+    INSTORED_FLAG = #{instoredFlag,jdbcType=VARCHAR},
+    CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+    CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+    UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP},
+    UPDATE_PERSON = #{updatePerson,jdbcType=VARCHAR},
+    DELETE_FLAG = #{deleteFlag,jdbcType=VARCHAR},
+    DELETE_DATETIME = #{deleteDatetime,jdbcType=TIMESTAMP},
+    DELETE_PERSON = #{deletePerson,jdbcType=VARCHAR},
+    DELETE_REASON = #{deleteReason,jdbcType=VARCHAR},
+    SAMPLE_REMARK = #{sampleRemark,jdbcType=VARCHAR},
+    PRE_METHOD1_RESULT = #{preMethod1Result,jdbcType=VARCHAR},
+    PRE_METHOD2_RESULT = #{preMethod2Result,jdbcType=VARCHAR},
+    PRE_METHOD3_RESULT = #{preMethod3Result,jdbcType=VARCHAR},
+    IS_RETAIN = #{isRetain,jdbcType=VARCHAR},
+    REFUSE_REASON = #{refuseReason,jdbcType=VARCHAR},
+    SAMPLE_MATERIAL_PICTURE = #{sampleMaterialPicture,jdbcType=VARCHAR},
+    SAMPLE_MATERIAL_PICTURE_PATH = #{sampleMaterialPicturePath,jdbcType=VARCHAR},
+    CORE_TAKEN_STATS = #{coreTakenStats,jdbcType=VARCHAR},
+    CORE_VICTIM_STATS = #{coreVictimStats,jdbcType=VARCHAR},
+    EVIDENCE_SERIAL_NO = #{evidenceSerialNo,jdbcType=INTEGER}
+    where SAMPLE_ID = #{sampleId,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectByCaseIdAndWz" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select lsid.EXTRACT_METHOD, lsid.SAMPLE_PACKING, lsid.SAMPLE_TYPE, lsid.SAMPLE_ID, lsid.CONSIGNMENT_ID, lsid.CASE_ID, lsid.EVIDENCE_ID, lsid.SAMPLE_NO, lsid.SAMPLE_NAME,
+    di_1.dict_name as SAMPLE_TYPE_NAME, lsid.SAMPLE_DESC, di_2.dict_name as SAMPLE_PACKING_NAME, lsid.SAMPLE_CARRIER,
+    lsid.EXTRACT_DATETIME, lsid.EXTRACT_PERSON, di_3.dict_name as EXTRACT_METHOD_NAME, lsid.EXTRACT_PART, lsid.SAMPLE_FLAG, lsid.LINK_ID, lsid.SAMPLE_PURPOSE, lsid.SAMPLE_STATUS,
+    lsid.INSTORED_FLAG, lsid.CREATE_DATETIME, lsid.CREATE_PERSON, lsid.UPDATE_DATETIME, lsid.UPDATE_PERSON, lsid.DELETE_FLAG, lsid.DELETE_DATETIME, lsid.DELETE_PERSON, lsid.DELETE_REASON,
+    lsid.SAMPLE_REMARK, lsid.SAMPLE_DNA_PICTURE, lsid.SAMPLE_DNA_PICTURE_PATH, lsid.PRE_METHOD1_RESULT, lsid.PRE_METHOD2_RESULT, lsid.PRE_METHOD3_RESULT, lsid.IS_RETAIN,
+    lsid.REFUSE_REASON, lsid.SAMPLE_MATERIAL_PICTURE, lsid.SAMPLE_MATERIAL_PICTURE_PATH, lsid.EVIDENCE_NO,
+    lsid.CORE_TAKEN_STATS,lsid.CORE_VICTIM_STATS,lsid.EVIDENCE_SERIAL_NO
+    from LIMS_SAMPLE_INFO_DNA lsid
+    left join dict_item di_1 on lsid.sample_type = di_1.dict_code and di_1.DICT_TYPE_CODE='SAMPLE_TYPE'
+    left join dict_item di_2 on lsid.SAMPLE_PACKING = di_2.dict_code and di_2.DICT_TYPE_CODE = 'PACK_METHOD'
+    left join dict_item di_3 on lsid.EXTRACT_METHOD = di_3.dict_code and di_3.DICT_TYPE_CODE = 'EXTRACT_METHOD'
+    where case_id =  #{caseId,jdbcType=VARCHAR} and delete_flag = '0' and SAMPLE_FLAG = '0'
+    and CONSIGNMENT_ID =  #{consignmentId,jdbcType=VARCHAR}
+	order by lsid.CREATE_DATETIME,lsid.EVIDENCE_SERIAL_NO asc
+  </select>
+
+  <select id="selectByCaseIdAndRy" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select lsid.EXTRACT_METHOD, lsid.SAMPLE_PACKING, lsid.SAMPLE_TYPE, lsid.SAMPLE_ID, lsid.CONSIGNMENT_ID, lsid.CASE_ID, lsid.EVIDENCE_ID, lsid.SAMPLE_NO, lsid.SAMPLE_NAME, di_1.dict_name as SAMPLE_TYPE_NAME, lsid.SAMPLE_DESC,
+        di_2.dict_name as SAMPLE_PACKING_NAME, lsid.SAMPLE_CARRIER,
+        lsid.EXTRACT_DATETIME, lsid.EXTRACT_PERSON, di_3.dict_name as EXTRACT_METHOD_NAME, lsid.EXTRACT_PART, lsid.SAMPLE_FLAG, lsid.LINK_ID, lsid.SAMPLE_PURPOSE, lsid.SAMPLE_STATUS,
+        lsid.INSTORED_FLAG, lsid.CREATE_DATETIME, lsid.CREATE_PERSON, lsid.UPDATE_DATETIME, lsid.UPDATE_PERSON, lsid.DELETE_FLAG, lsid.DELETE_DATETIME, lsid.DELETE_PERSON, lsid.DELETE_REASON,
+        lsid.SAMPLE_REMARK, lsid.SAMPLE_DNA_PICTURE, lsid.SAMPLE_DNA_PICTURE_PATH, lsid.PRE_METHOD1_RESULT, lsid.PRE_METHOD2_RESULT, lsid.PRE_METHOD3_RESULT, lsid.IS_RETAIN,
+        lsid.REFUSE_REASON,lsid.CORE_TAKEN_STATS,lsid.CORE_VICTIM_STATS,lsid.EVIDENCE_SERIAL_NO
+      from LIMS_SAMPLE_INFO_DNA lsid
+      left join dict_item di_1 on lsid.sample_type = di_1.dict_code and di_1.DICT_TYPE_CODE='SAMPLE_TYPE'
+      left join dict_item di_2 on lsid.SAMPLE_PACKING = di_2.dict_code and di_2.DICT_TYPE_CODE = 'PACK_METHOD'
+      left join dict_item di_3 on lsid.EXTRACT_METHOD = di_3.dict_code and di_3.DICT_TYPE_CODE = 'EXTRACT_METHOD'
+     where lsid.case_id =  #{caseId,jdbcType=VARCHAR} and lsid.delete_flag = '0' and lsid.SAMPLE_FLAG = '1'
+    and lsid.CONSIGNMENT_ID =  #{consignmentId,jdbcType=VARCHAR} order by lsid.CREATE_DATETIME,lsid.SAMPLE_NAME asc
+  </select>
+
+  <select id="selectSampleCountByCaseId" resultType="int" parameterType="com.bazl.clims.model.po.LimsSampleInfoDna" >
+    select count(distinct lsid.sample_no) from LIMS_SAMPLE_INFO_DNA lsid
+    where lsid.case_id =  #{caseId,jdbcType=VARCHAR}
+    and lsid.delete_flag = '0'
+    and lsid.SAMPLE_FLAG = #{sampleFlag,jdbcType=VARCHAR}
+    and lsid.sample_no is not null
+  </select>
+
+  <update id="deleteByCaseIdAndConsignmentId" parameterType="com.bazl.clims.model.po.LimsSampleInfoDna">
+    update LIMS_SAMPLE_INFO_DNA set DELETE_FLAG = #{deleteFlag,jdbcType=VARCHAR}, DELETE_DATETIME = #{deleteDatetime,jdbcType=TIMESTAMP},
+      DELETE_PERSON = #{deletePerson,jdbcType=VARCHAR} where CONSIGNMENT_ID =  #{consignmentId,jdbcType=VARCHAR} and
+      CASE_ID = #{caseId,jdbcType=VARCHAR}
+  </update>
+
+  <delete id="deleteBySampleId" parameterType="java.lang.String">
+    DELETE from LIMS_SAMPLE_INFO_DNA where SAMPLE_ID = #{sampleId,jdbcType=VARCHAR}
+  </delete>
+
+  <select id="selectByCaseId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select lsid.*,
+    di.dict_name as SAMPLE_TYPE_NAME
+    from LIMS_SAMPLE_INFO_DNA lsid
+    left join dict_item di on di.dict_code = lsid.SAMPLE_TYPE and di.DICT_TYPE_CODE='SAMPLE_TYPE'
+    where lsid. CASE_ID = #{caseId,jdbcType=VARCHAR} and lsid.delete_flag = '0'
+    and (lsid.SAMPLE_STATUS = '02' or lsid.SAMPLE_STATUS = '03')
+    order by lsid.SAMPLE_FLAG asc, lsid.SAMPLE_NO asc
+  </select>
+
+  <select id="selectCount" resultType="int" parameterType="java.lang.String">
+    select count(t.SAMPLE_ID)
+    from LIMS_SAMPLE_INFO_DNA t left join lims_consignment_info lci on t.consignment_id=lci.consignment_id
+    where t.delete_flag = '0'
+    <if test="acceptOrgId != null">
+      and lci.ACCEPT_ORG_ID = #{acceptOrgId, jdbcType=VARCHAR}
+    </if>
+  </select>
+
+  <select id="selectNotCount" resultType="int" parameterType="java.lang.String">
+    select count(t.SAMPLE_ID)
+    from LIMS_SAMPLE_INFO_DNA t left join lims_consignment_info lci on t.consignment_id=lci.consignment_id
+    where t.delete_flag = '0' and t.sample_status = '01'
+    <if test="acceptOrgId != null">
+      and lci.ACCEPT_ORG_ID = #{acceptOrgId, jdbcType=VARCHAR}
+    </if>
+  </select>
+
+  <select id="selectCountGroupSampleType" parameterType="java.lang.String" resultType="java.util.Map">
+    select d.dict_name as name,nvl(t1.cnt,0) as value from dict_item d left join (
+    select t.sample_type, count(t.sample_id) as cnt
+    from Lims_Sample_Info_Dna t left join lims_consignment_info lci on t.consignment_id=lci.consignment_id
+    where t.delete_flag = '0' and (t.SAMPLE_STATUS = '02' or t.SAMPLE_STATUS = '03')
+    <if test="acceptOrgId != null">
+      and lci.ACCEPT_ORG_ID = #{acceptOrgId, jdbcType=VARCHAR}
+    </if>
+    group by t.sample_type) t1 on d.dict_code=t1.sample_type
+    where d.dict_type_code='SAMPLE_TYPE'
+    order by d.dict_code asc
+  </select>
+
+  <select id="selectMaxSampleNoByCaseId" parameterType="java.lang.String" resultType="string">
+    select max(to_number(substr(sample_no,instr(sample_no,'-',-1)+1))) as sampleNo  from lims_sample_info_dna where case_id = #{caseId,jdbcType=VARCHAR} and SAMPLE_FLAG = '0'
+  </select>
+
+  <select id="selectByCaseNo" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select lsid.SAMPLE_TYPE, lsid.SAMPLE_ID, lsid.CONSIGNMENT_ID, lsid.CASE_ID, lsid.EVIDENCE_ID, lsid.SAMPLE_NO, lsid.SAMPLE_NAME, di_1.dict_name as SAMPLE_TYPE_NAME
+    from LIMS_SAMPLE_INFO_DNA lsid
+    left join dict_item di_1 on lsid.sample_type = di_1.dict_code and di_1.DICT_TYPE_CODE='SAMPLE_TYPE'
+    where lsid.consignment_id in (
+      select lci.consignment_id from LIMS_CONSIGNMENT_INFO lci
+      left join LIMS_CASE_INFO ci on lci.case_id = ci.case_id
+      where ci.CASE_NO = #{caseNo,jdbcType=VARCHAR} and ci.delete_flag = '0' and (lci.status = '02' or lci.status = '03')
+    ) and lsid.delete_flag = '0' and (lsid.SAMPLE_STATUS = '02' or lsid.SAMPLE_STATUS = '03')
+</select>
+
+  <select id="selectBySampleNo" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select lsid.*, di_1.dict_name as SAMPLE_TYPE_NAME
+    from LIMS_SAMPLE_INFO_DNA lsid
+    left join dict_item di_1 on lsid.sample_type = di_1.dict_code and di_1.DICT_TYPE_CODE='SAMPLE_TYPE'
+    where lsid.SAMPLE_NO = #{sampleNo,jdbcType=VARCHAR} and lsid.delete_flag='0' and lsid.SAMPLE_STATUS in ('02','03')
+  </select>
+
+  <select id="selectBySampleNoAlreadyStorage" parameterType="java.lang.String" resultMap="BaseResultMap">
+     select lsid.*, di_1.dict_name as SAMPLE_TYPE_NAME
+    from LIMS_SAMPLE_INFO_DNA lsid
+    left join dict_item di_1 on lsid.sample_type = di_1.dict_code and di_1.DICT_TYPE_CODE='SAMPLE_TYPE'
+    where lsid.SAMPLE_NO = #{sampleNo,jdbcType=VARCHAR} and lsid.delete_flag='0' and lsid.INSTORED_FLAG='1' and lsid.SAMPLE_STATUS in ('02','03')
+  </select>
+
+  <select id="selectBySampleNameAndConsignmentId" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" />
+    from LIMS_SAMPLE_INFO_DNA lsid
+    where lsid.SAMPLE_NAME = #{sampleName,jdbcType=VARCHAR} and lsid.CONSIGNMENT_ID = #{consignmentId,jdbcType=VARCHAR} and lsid.delete_flag='0'
+  </select>
+
+  <!--入库比对样本列表查询分页-->
+  <select id="selectByCaseIdAndRyPagination" parameterType="com.bazl.clims.model.vo.LimsSampleInfoDnaVo"
+          resultMap="VOBaseResultMap">
+    select * from (
+    select rownum as rn, t.* from (
+    select lsid.EXTRACT_METHOD, lsid.SAMPLE_PACKING, lsid.SAMPLE_TYPE, lsid.SAMPLE_ID, lsid.CONSIGNMENT_ID, lsid.CASE_ID, lsid.EVIDENCE_ID, lsid.SAMPLE_NO, lsid.SAMPLE_NAME, di_1.dict_name as SAMPLE_TYPE_NAME, lsid.SAMPLE_DESC,
+    di_2.dict_name as SAMPLE_PACKING_NAME, lsid.SAMPLE_CARRIER,
+    lsid.EXTRACT_DATETIME, lsid.EXTRACT_PERSON, di_3.dict_name as EXTRACT_METHOD_NAME, lsid.EXTRACT_PART, lsid.SAMPLE_FLAG, lsid.LINK_ID, lsid.SAMPLE_PURPOSE, lsid.SAMPLE_STATUS,
+    lsid.INSTORED_FLAG, lsid.CREATE_DATETIME, lsid.CREATE_PERSON, lsid.UPDATE_DATETIME, lsid.UPDATE_PERSON, lsid.DELETE_FLAG, lsid.DELETE_DATETIME, lsid.DELETE_PERSON, lsid.DELETE_REASON,
+    lsid.SAMPLE_REMARK, lsid.SAMPLE_DNA_PICTURE, lsid.SAMPLE_DNA_PICTURE_PATH, lsid.PRE_METHOD1_RESULT, lsid.PRE_METHOD2_RESULT, lsid.PRE_METHOD3_RESULT, lsid.IS_RETAIN,
+    lsid.REFUSE_REASON, di_4.dict_name as INSTORED_TYPE, lsg.BOARD_POSITION as BOARD_POSITION from LIMS_SAMPLE_INFO_DNA lsid
+    left join LIMS_SAMPLE_GENE lsg on lsg.SAMPLE_ID = lsid.SAMPLE_ID
+    left join dict_item di_1 on lsid.sample_type = di_1.dict_code and di_1.DICT_TYPE_CODE='SAMPLE_TYPE'
+    left join dict_item di_2 on lsid.SAMPLE_PACKING = di_2.dict_code and di_2.DICT_TYPE_CODE = 'PACK_METHOD'
+    left join dict_item di_3 on lsid.EXTRACT_METHOD = di_3.dict_code and di_3.DICT_TYPE_CODE = 'EXTRACT_METHOD'
+    left join dict_item di_4 on lsid.INSTORED_TYPE = di_4.dict_code and di_4.DICT_TYPE_CODE = 'INSTORED_TYPE'
+    where lsid.case_id =  #{entity.caseId,jdbcType=VARCHAR} and lsid.delete_flag = '0' and lsid.SAMPLE_FLAG = '1'
+    and lsid.CONSIGNMENT_ID =  #{entity.consignmentId,jdbcType=VARCHAR}
+    order by lsid.CREATE_DATETIME asc
+    ) t where rownum &lt;=#{rows}
+    ) where rn &gt;#{offset}
+  </select>
+  <!--入库比对样本列表查询count-->
+  <select id="selectByCaseIdAndRyCount" parameterType="com.bazl.clims.model.vo.LimsSampleInfoDnaVo" resultType="int">
+    select count(*) from LIMS_SAMPLE_INFO_DNA lsid left join LIMS_SAMPLE_GENE lsg on lsg.SAMPLE_ID = lsid.SAMPLE_ID
+    where lsid.case_id =  #{entity.caseId,jdbcType=VARCHAR} and lsid.delete_flag = '0' and lsid.SAMPLE_FLAG = '1'
+    and lsid.CONSIGNMENT_ID =  #{entity.consignmentId,jdbcType=VARCHAR} order by lsid.CREATE_DATETIME asc
+  </select>
+
+  <update id="updateInstoredFlag" parameterType="com.bazl.clims.model.po.LimsSampleInfoDna" >
+    update LIMS_SAMPLE_INFO_DNA
+    set
+    INSTORED_FLAG = #{instoredFlag,jdbcType=VARCHAR},
+    INSTORED_TYPE = #{instoredType,jdbcType=VARCHAR},
+    INSTORED_DATETIME = #{instoredDatetime,jdbcType=TIMESTAMP},
+    INSTORED_PERSON = #{instoredPerson,jdbcType=VARCHAR}
+    where SAMPLE_ID = #{sampleId,jdbcType=VARCHAR}
+  </update>
+
+  <update id="updatePre" parameterType="com.bazl.clims.model.po.LimsSampleInfoDna" >
+    update LIMS_SAMPLE_INFO_DNA
+    set
+    PRE_METHOD1_RESULT = #{preMethod1Result,jdbcType=VARCHAR},
+    PRE_METHOD2_RESULT = #{preMethod2Result,jdbcType=VARCHAR},
+    PRE_METHOD3_RESULT = #{preMethod3Result,jdbcType=TIMESTAMP}
+    where SAMPLE_ID = #{sampleId,jdbcType=VARCHAR}
+  </update>
+
+
+  <update id="updateSamples" parameterType="com.bazl.clims.model.po.LimsSampleInfoDna" >
+    update LIMS_SAMPLE_INFO_DNA
+    set
+    RELATION_SAMPLE_NO = #{relationSampleNo,jdbcType=VARCHAR},
+    IS_RELATION = #{isRelation,jdbcType=VARCHAR}
+    where SAMPLE_NO = #{sampleNo,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectBySampleId" resultMap="BaseResultMap">
+    select * from LIMS_SAMPLE_INFO_DNA lsid where SAMPLE_ID = #{sampleId,jdbcType=VARCHAR} and delete_flag = '0'
+  </select>
+
+  <!--获取审核基因通过检材-->
+  <!--<select id="selectSampleDnaByCaseId" resultType="com.bazl.clims.model.po.LimsSampleInfoDna">-->
+  <!--select lsid.SAMPLE_ID, lsid.EXTRACT_METHOD, lsid.SAMPLE_PACKING, lsid.SAMPLE_TYPE,  lsid.CONSIGNMENT_ID, lsid.CASE_ID, lsid.EVIDENCE_ID, lsid.SAMPLE_NO, lsid.SAMPLE_NAME, lsid.SAMPLE_DESC,-->
+  <!--lsid.SAMPLE_CARRIER,lsid.EXTRACT_DATETIME, lsid.EXTRACT_PERSON, lsid.EXTRACT_PART, lsid.SAMPLE_FLAG, lsid.LINK_ID, lsid.SAMPLE_PURPOSE, lsid.SAMPLE_STATUS,-->
+  <!--lsid.INSTORED_FLAG, lsid.CREATE_DATETIME, lsid.CREATE_PERSON, lsid.UPDATE_DATETIME, lsid.UPDATE_PERSON, lsid.DELETE_FLAG, lsid.DELETE_DATETIME, lsid.DELETE_PERSON, lsid.DELETE_REASON,-->
+  <!--lsid.SAMPLE_REMARK, lsid.SAMPLE_DNA_PICTURE, lsid.SAMPLE_DNA_PICTURE_PATH, lsid.PRE_METHOD1_RESULT, lsid.PRE_METHOD2_RESULT, lsid.PRE_METHOD3_RESULT, lsid.IS_RETAIN,lsid.REFUSE_REASON-->
+  <!--from LIMS_SAMPLE_INFO_DNA lsid-->
+  <!--where  lsid.case_id=#{caseId,jdbcType=VARCHAR} and lsid.delete_flag = '0'-->
+  <!--and (lsid.SAMPLE_STATUS = '02' or lsid.SAMPLE_STATUS = '03')-->
+  <!--order by lsid.SAMPLE_FLAG asc, lsid.SAMPLE_NO asc-->
+  <!--</select>-->
+
+  <select id="selectSampleDnaByCaseId"  resultMap="BaseResultMap">
+     select lsid.*
+    from LIMS_SAMPLE_INFO_DNA lsid left join match_audited_gene mag on lsid.SAMPLE_ID = mag.SAMPLE_ID
+    where  lsid.case_id=#{caseId,jdbcType=VARCHAR} and lsid.delete_flag = '0'
+    and (lsid.SAMPLE_STATUS = '02' or lsid.SAMPLE_STATUS = '03') and mag.SAMPLE_ID is not null
+    order by lsid.SAMPLE_FLAG asc, lsid.SAMPLE_NO asc
+  </select>
+  <select id="selectMatchCaseId" resultMap="BaseResultMap">
+    select lsid.*
+    from LIMS_SAMPLE_INFO_DNA lsid
+    where lsid. CASE_ID = #{caseId,jdbcType=VARCHAR} and lsid.delete_flag = '0'
+    and (lsid.SAMPLE_STATUS = '02' or lsid.SAMPLE_STATUS = '03') and lsid.sample_flag='0'
+    order by lsid.SAMPLE_FLAG asc, lsid.SAMPLE_NO asc
+  </select>
+
+  <!--统计受理检材数-->
+  <select id="selectAcceptCount" parameterType="com.bazl.clims.model.vo.LimsCaseInfoVo" resultType="int">
+    select count (*)
+    from(
+    select distinct lsid.sample_id from LIMS_SAMPLE_INFO_DNA lsid
+    left join LIMS_CONSIGNMENT_INFO lci on lsid.consignment_id = lci.consignment_id
+    left join LIMS_CASE_INFO lc on lc.CASE_ID = lci.CASE_ID
+    where lci.DELETE_FLAG='0' and (lsid.SAMPLE_STATUS = '02' or lsid.SAMPLE_STATUS = '03')
+    <if test="_parameter != null">
+      <if test="acceptorId != null">
+        and lci.ACCEPTOR_ID = #{acceptorId,jdbcType=VARCHAR}
+      </if>
+      <if test="acceptOrgId != null">
+        and lci.ACCEPT_ORG_ID = #{acceptOrgId,jdbcType=VARCHAR}
+      </if>
+      <if test="acceptStartDatetime != null">
+        and lci.ACCEPT_DATETIME &gt;= #{acceptStartDatetime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="acceptEndDatetime != null">
+        and lci.ACCEPT_DATETIME &lt;= #{acceptEndDatetime,jdbcType=TIMESTAMP}
+      </if>
+
+      <if test="entity.caseProperty != null">
+        and lc.CASE_PROPERTY = #{entity.caseProperty,jdbcType=VARCHAR}
+      </if>
+
+    </if>
+    )
+  </select>
+  <!--统计已复核检材数-->
+  <select id="selectAuditCount" parameterType="com.bazl.clims.model.vo.LimsCaseInfoVo" resultType="int">
+    select count (*)
+    from (
+    select distinct lsid.sample_id from LIMS_SAMPLE_INFO_DNA lsid
+    left join LIMS_SAMPLE_GENE lsg on lsg.sample_id = lsid.sample_id
+    left join LIMS_CONSIGNMENT_INFO lci on lsg.consignment_id = lci.consignment_id
+    left join LIMS_CASE_INFO lc on lc.CASE_ID = lci.CASE_ID
+    where lsg.audit_status = '1' and lci.DELETE_FLAG='0'
+    and (lsid.SAMPLE_STATUS = '02' or lsid.SAMPLE_STATUS = '03')
+    <if test="_parameter != null">
+      <if test="acceptorId != null">
+        and lci.ACCEPTOR_ID = #{acceptorId,jdbcType=VARCHAR}
+      </if>
+      <if test="acceptOrgId != null">
+        and lci.ACCEPT_ORG_ID = #{acceptOrgId,jdbcType=VARCHAR}
+      </if>
+      <if test="acceptStartDatetime != null">
+        and lci.ACCEPT_DATETIME &gt;= #{acceptStartDatetime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="acceptEndDatetime != null">
+        and lci.ACCEPT_DATETIME &lt;= #{acceptEndDatetime,jdbcType=TIMESTAMP}
+      </if>
+
+      <if test="entity.caseProperty != null">
+        and lc.CASE_PROPERTY = #{entity.caseProperty,jdbcType=VARCHAR}
+      </if>
+
+    </if> )
+  </select>
+  <!--统计已入库检材-->
+  <!--<select id="selectInstoredSampleCount" parameterType="com.bazl.clims.model.vo.LimsCaseInfoVo" resultType="int">-->
+  <!--select count(distinct lsid.sample_id)-->
+  <!--from LIMS_SAMPLE_INFO_DNA lsid-->
+  <!--left join LIMS_CONSIGNMENT_INFO lci on lci.consignment_id = lsid.consignment_id-->
+  <!--where lci.DELETE_FLAG='0' and lsid.instored_flag = '1'-->
+  <!--and (lsid.SAMPLE_STATUS = '02' or lsid.SAMPLE_STATUS = '03')-->
+  <!--<if test="_parameter != null">-->
+  <!--<if test="acceptorId != null">-->
+  <!--and lci.ACCEPTOR_ID = #{acceptorId,jdbcType=VARCHAR}-->
+  <!--</if>-->
+  <!--&lt;!&ndash;<if test="acceptStartDatetime != null">&ndash;&gt;-->
+  <!--&lt;!&ndash;and lci.ACCEPT_DATETIME &gt;= #{acceptStartDatetime,jdbcType=TIMESTAMP}&ndash;&gt;-->
+  <!--&lt;!&ndash;</if>&ndash;&gt;-->
+  <!--&lt;!&ndash;<if test="acceptEndDatetime != null">&ndash;&gt;-->
+  <!--&lt;!&ndash;and lci.ACCEPT_DATETIME &lt;= #{acceptEndDatetime,jdbcType=TIMESTAMP}&ndash;&gt;-->
+  <!--&lt;!&ndash;</if>&ndash;&gt;-->
+  <!--<if test="acceptStartDatetime != null">-->
+  <!--and lsid.INSTORED_DATETIME &gt;= #{acceptStartDatetime,jdbcType=TIMESTAMP}-->
+  <!--</if>-->
+  <!--<if test="acceptEndDatetime != null">-->
+  <!--and lsid.INSTORED_DATETIME &lt;= #{acceptEndDatetime,jdbcType=TIMESTAMP}-->
+  <!--</if>-->
+  <!--</if>-->
+  <!--</select>-->
+
+  <select id="selectInstoredSampleCount" parameterType="com.bazl.clims.model.vo.LimsCaseInfoVo" resultType="int">
+    select count(distinct lsid.sample_id)
+    from LIMS_SAMPLE_INFO_DNA lsid
+    left join LIMS_CASE_INFO lci on lci.case_id = lsid.case_id
+    where lci.DELETE_FLAG='0' and lsid.instored_flag = '1'
+    and (lsid.SAMPLE_STATUS = '02' or lsid.SAMPLE_STATUS = '03')
+    <if test="_parameter != null">
+      <if test="acceptorId != null">
+        and lci.FIRST_CHECKER = #{acceptorId,jdbcType=VARCHAR}
+      </if>
+      <!--<if test="acceptStartDatetime != null">-->
+      <!--and lci.ACCEPT_DATETIME &gt;= #{acceptStartDatetime,jdbcType=TIMESTAMP}-->
+      <!--</if>-->
+      <!--<if test="acceptEndDatetime != null">-->
+      <!--and lci.ACCEPT_DATETIME &lt;= #{acceptEndDatetime,jdbcType=TIMESTAMP}-->
+      <!--</if>-->
+      <if test="acceptStartDatetime != null">
+        and lsid.INSTORED_DATETIME &gt;= #{acceptStartDatetime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="acceptEndDatetime != null">
+        and lsid.INSTORED_DATETIME &lt;= #{acceptEndDatetime,jdbcType=TIMESTAMP}
+      </if>
+
+      <if test="entity.caseProperty != null">
+        and lci.CASE_PROPERTY = #{entity.caseProperty,jdbcType=VARCHAR}
+      </if>
+
+    </if>
+  </select>
+
+  <select id="selectAccept" parameterType="com.bazl.clims.model.vo.LimsCaseInfoVo" resultMap="BaseResultMap">
+    select distinct lsid.sample_id,lsid.sample_type from LIMS_SAMPLE_INFO_DNA lsid
+    left join LIMS_CONSIGNMENT_INFO lci on lsid.consignment_id = lci.consignment_id
+    left join LIMS_CASE_INFO lc on lc.case_id = lci.case_id
+    where lci.DELETE_FLAG='0' and (lsid.SAMPLE_STATUS = '02' or lsid.SAMPLE_STATUS = '03')
+    <if test="_parameter != null">
+      <if test="acceptorId != null">
+        and lci.ACCEPTOR_ID = #{acceptorId,jdbcType=VARCHAR}
+      </if>
+      <if test="acceptStartDatetime != null">
+        and lci.ACCEPT_DATETIME &gt;= #{acceptStartDatetime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="acceptEndDatetime != null">
+        and lci.ACCEPT_DATETIME &lt;= #{acceptEndDatetime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="entity.caseProperty != null">
+        and lc.CASE_PROPERTY = #{entity.caseProperty,jdbcType=VARCHAR}
+      </if>
+    </if>
+  </select>
+
+  <select id="selectAuditSampleByCaseId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select lsid.*
+    from LIMS_SAMPLE_INFO_DNA lsid
+    where lsid.case_id=#{caseId,jdbcType=VARCHAR} and lsid.delete_flag = '0'
+  </select>
+
+  <select id="selectSampleInfoListData" resultType="com.bazl.clims.model.vo.LimsCaseInfoVo" resultMap="BaseResultMap">
+    select * from (
+      select rownum as rn, t.* from (
+        select lsid.*
+        from LIMS_SAMPLE_INFO_DNA lsid
+        where lsid.delete_flag = '0'
+      ) t where rownum &lt;=#{rows}
+    ) where rn &gt;#{offset}
+  </select>
+
+  <select id="selectCaseInfoListData" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select sample_id, consignment_id, case_id, evidence_id, sample_no, sample_name, sample_type, sample_desc, sample_packing, sample_carrier,
+    extract_person, extract_method, extract_part, sample_flag, link_id, sample_purpose, sample_status, instored_flag
+    from LIMS_SAMPLE_INFO_DNA where EVIDENCE_NO = #{evidenceNo, jdbcType=VARCHAR} and DELETE_FLAG = '0'
+  </select>
+</mapper>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.ProgramRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.ProgramRecord" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="PROGRAM_TYPE" property="programType" jdbcType="VARCHAR" />
+    <result column="PROGRAM_NAME" property="programName" jdbcType="VARCHAR" />
+    <result column="PROGRAM_DESC" property="programDesc" jdbcType="VARCHAR" />
+    <result column="DEVICE_TYPE" property="deviceType" jdbcType="VARCHAR" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="OPERATION_PERSON" property="operationPerson" jdbcType="VARCHAR" />
+    <result column="OPERATION_DATETIME" property="operationDatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from program_record
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.clims.model.po.ProgramRecord" >
+    insert into program_record (ID, PROGRAM_TYPE, PROGRAM_NAME,
+      PROGRAM_DESC, DEVICE_TYPE, CREATE_PERSON,
+      CREATE_DATETIME, OPERATION_PERSON, OPERATION_DATETIME
+      )
+    values (#{id,jdbcType=VARCHAR},#{programType,jdbcType=VARCHAR}, #{programName,jdbcType=VARCHAR},
+      #{programDesc,jdbcType=VARCHAR}, #{deviceType,jdbcType=VARCHAR}, #{createPerson,jdbcType=VARCHAR}, 
+      #{createDatetime,jdbcType=TIMESTAMP}, #{operationPerson,jdbcType=VARCHAR}, #{operationDatetime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.clims.model.po.ProgramRecord" >
+    update program_record
+    set PROGRAM_TYPE = #{programType,jdbcType=VARCHAR},
+      PROGRAM_NAME = #{programName,jdbcType=VARCHAR},
+      PROGRAM_DESC = #{programDesc,jdbcType=VARCHAR},
+      DEVICE_TYPE = #{deviceType,jdbcType=VARCHAR},
+      CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+      OPERATION_PERSON = #{operationPerson,jdbcType=VARCHAR},
+      OPERATION_DATETIME = #{operationDatetime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select *
+    from program_record
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select *
+    from program_record
+  </select>
+</mapper>

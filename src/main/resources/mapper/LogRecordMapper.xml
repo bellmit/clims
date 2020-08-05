@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.LogRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.LogRecordInfo" >
+    <id column="LOG_ID" property="logId" jdbcType="VARCHAR" />
+    <result column="DATA_CONTENT" property="dataContent" jdbcType="CLOB" />
+    <result column="URL" property="url" jdbcType="VARCHAR" />
+    <result column="CODE" property="code" jdbcType="VARCHAR" />
+    <result column="OPERATOR" property="operator" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="VARCHAR" />
+    <result column="CALLBACK" property="callback" jdbcType="CLOB" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from LOG_RECORD
+    where LOG_ID = #{logId}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.clims.model.po.LogRecordInfo" >
+    insert into LOG_RECORD (LOG_ID, DATA_CONTENT, URL, 
+      CODE, OPERATOR, CREATE_DATETIME, 
+      CALLBACK)
+    values (#{logId}, #{dataContent,jdbcType=CLOB}, #{url},
+      #{code}, #{operator}, #{createDatetime}, 
+      #{callback,jdbcType=CLOB})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.clims.model.po.LogRecordInfo" >
+    update LOG_RECORD
+    set DATA_CONTENT = #{dataContent,jdbcType=CLOB},
+      URL = #{url},
+      CODE = #{code},
+      OPERATOR = #{operator},
+      CREATE_DATETIME = #{createDatetime},
+      CALLBACK = #{callback,jdbcType=CLOB}
+    where LOG_ID = #{logId}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select LOG_ID, DATA_CONTENT, URL, CODE, OPERATOR, CREATE_DATETIME, CALLBACK
+    from LOG_RECORD
+    where LOG_ID = #{logId}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select LOG_ID, DATA_CONTENT, URL, CODE, OPERATOR, CREATE_DATETIME, CALLBACK
+    from LOG_RECORD
+  </select>
+</mapper>

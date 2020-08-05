@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.ExperimentalParameterMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.ExperimentalParameter" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="PANEL_NAME" property="panelName" jdbcType="VARCHAR" />
+    <result column="EXPERIMENTAL_STAGE" property="experimentalStage" jdbcType="VARCHAR" />
+    <result column="EXPERIMENTAL_TYPE" property="experimentalType" jdbcType="VARCHAR" />
+    <result column="PARAMETER_NAME" property="parameterName" jdbcType="VARCHAR" />
+    <result column="ORG_ID" property="orgId" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_PERSON" property="updatePerson" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="PARAMETER_VALUE" property="parameterValue" jdbcType="CLOB" />
+  </resultMap>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from EXPERIMENTAL_PARAMETER
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+
+  <insert id="insert" parameterType="com.bazl.clims.model.po.ExperimentalParameter" >
+    insert into EXPERIMENTAL_PARAMETER (ID, PANEL_NAME, EXPERIMENTAL_STAGE, 
+      EXPERIMENTAL_TYPE, PARAMETER_NAME, ORG_ID, 
+      REMARK, CREATE_PERSON, CREATE_DATETIME,
+      PARAMETER_VALUE
+      )
+    values (#{id,jdbcType=VARCHAR}, #{panelName,jdbcType=VARCHAR}, #{experimentalStage,jdbcType=VARCHAR}, 
+      #{experimentalType,jdbcType=VARCHAR}, #{parameterName,jdbcType=VARCHAR}, #{orgId,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{createPerson,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP}, 
+      #{parameterValue,jdbcType=CLOB}
+      )
+  </insert>
+
+  <update id="updateByPrimaryKey" parameterType="com.bazl.clims.model.po.ExperimentalParameter" >
+    update EXPERIMENTAL_PARAMETER
+    set PANEL_NAME = #{panelName,jdbcType=VARCHAR},
+      EXPERIMENTAL_STAGE = #{experimentalStage,jdbcType=VARCHAR},
+      EXPERIMENTAL_TYPE = #{experimentalType,jdbcType=VARCHAR},
+      PARAMETER_NAME = #{parameterName,jdbcType=VARCHAR},
+      ORG_ID = #{orgId,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      UPDATE_PERSON = #{updatePerson,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP},
+      PARAMETER_VALUE = #{parameterValue,jdbcType=CLOB}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select ID, PANEL_NAME, EXPERIMENTAL_STAGE, EXPERIMENTAL_TYPE, PARAMETER_NAME, ORG_ID, 
+    REMARK, CREATE_PERSON, CREATE_DATETIME, UPDATE_PERSON, UPDATE_DATETIME, PARAMETER_VALUE
+    from EXPERIMENTAL_PARAMETER
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select ID, PANEL_NAME, EXPERIMENTAL_STAGE, EXPERIMENTAL_TYPE, PARAMETER_NAME, ORG_ID, 
+    REMARK, CREATE_PERSON, CREATE_DATETIME, UPDATE_PERSON, UPDATE_DATETIME, PARAMETER_VALUE
+    from EXPERIMENTAL_PARAMETER
+  </select>
+
+  <select id="selectList" resultMap="BaseResultMap" parameterType="com.bazl.clims.model.po.ExperimentalParameter" >
+    select *
+    from EXPERIMENTAL_PARAMETER ep
+    where 1 = 1
+    <if test="_parameter != null">
+      <if test="panelName != null">
+        and ep.PANEL_NAME = #{panelName,jdbcType=VARCHAR}
+      </if>
+      <if test="experimentalStage != null">
+        and ep.EXPERIMENTAL_STAGE = #{experimentalStage,jdbcType=VARCHAR}
+      </if>
+      <if test="experimentalType != null">
+        and ep.EXPERIMENTAL_TYPE = #{experimentalType,jdbcType=VARCHAR}
+      </if>
+      <if test="parameterName != null">
+        and ep.PARAMETER_NAME = #{parameterName,jdbcType=VARCHAR}
+      </if>
+      <if test="orgId != null">
+        and ep.ORG_ID = #{orgId,jdbcType=VARCHAR}
+      </if>
+    </if>
+  </select>
+
+
+
+  <select id="selectListValue" resultMap="BaseResultMap" parameterType="com.bazl.clims.model.po.ExperimentalParameter">
+    select *
+    from EXPERIMENTAL_PARAMETER ep
+    where 1 = 1 and ep.REMARK = '2' and ep.EXPERIMENTAL_TYPE='PCR_SYSTEM'
+    <if test="_parameter != null">
+      <if test="panelName != null">
+        and ep.PANEL_NAME = #{panelName,jdbcType=VARCHAR}
+      </if>
+      <if test="experimentalStage != null">
+        and ep.EXPERIMENTAL_STAGE = #{experimentalStage,jdbcType=VARCHAR}
+      </if>
+      <if test="parameterName != null">
+        and ep.PARAMETER_NAME = #{parameterName,jdbcType=VARCHAR}
+      </if>
+      <if test="orgId != null">
+        and ep.ORG_ID = #{orgId,jdbcType=VARCHAR}
+      </if>
+    </if>
+
+  </select>
+</mapper>

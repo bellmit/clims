@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="clims:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="clims.war">
+      <element id="artifact" artifact-name="clims:war exploded" />
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.LoaPermissionMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.LoaPermission" >
+    <id column="PERMISSION_ID" property="permissionId" jdbcType="VARCHAR" />
+    <result column="PERMISSION_NAME" property="permissionName" jdbcType="VARCHAR" />
+    <result column="PERMISSION_LINK" property="permissionLink" jdbcType="VARCHAR" />
+    <result column="ROOT_FLAG" property="rootFlag" jdbcType="VARCHAR" />
+    <result column="PARENT_ID" property="parentId" jdbcType="VARCHAR" />
+    <result column="ACTIVE_FLAG" property="activeFlag" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from LOA_PERMISSION
+    where PERMISSION_ID = #{permissionId,jdbcType=VARCHAR} and SUBSYSTEM_FLAG = '3'
+  </delete>
+  <insert id="insert" parameterType="com.bazl.clims.model.LoaPermission" >
+    insert into LOA_PERMISSION (PERMISSION_ID, PERMISSION_NAME, PERMISSION_LINK, 
+      ROOT_FLAG, PARENT_ID, ACTIVE_FLAG, 
+      CREATE_DATETIME, CREATE_PERSON)
+    values (#{permissionId,jdbcType=VARCHAR}, #{permissionName,jdbcType=VARCHAR}, #{permissionLink,jdbcType=VARCHAR}, 
+      #{rootFlag,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, #{activeFlag,jdbcType=VARCHAR}, 
+      #{createDatetime,jdbcType=TIMESTAMP}, #{createPerson,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.clims.model.LoaPermission" >
+    update LOA_PERMISSION
+    set PERMISSION_NAME = #{permissionName,jdbcType=VARCHAR},
+      PERMISSION_LINK = #{permissionLink,jdbcType=VARCHAR},
+      ROOT_FLAG = #{rootFlag,jdbcType=VARCHAR},
+      PARENT_ID = #{parentId,jdbcType=VARCHAR},
+      ACTIVE_FLAG = #{activeFlag,jdbcType=VARCHAR},
+      CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+      CREATE_PERSON = #{createPerson,jdbcType=VARCHAR}
+    where PERMISSION_ID = #{permissionId,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select PERMISSION_ID, PERMISSION_NAME, PERMISSION_LINK, ROOT_FLAG, PARENT_ID, ACTIVE_FLAG, 
+    CREATE_DATETIME, CREATE_PERSON
+    from LOA_PERMISSION
+    where PERMISSION_ID = #{permissionId,jdbcType=VARCHAR} and DELETE_FLAG='0' and SUBSYSTEM_FLAG = '3' order by length(order_no) asc, order_no asc
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select PERMISSION_ID, PERMISSION_NAME, PERMISSION_LINK, ROOT_FLAG, PARENT_ID, ACTIVE_FLAG, 
+    CREATE_DATETIME, CREATE_PERSON
+    from LOA_PERMISSION
+    where DELETE_FLAG='0' and SUBSYSTEM_FLAG = '3' order by length(order_no) asc, ORDER_NO asc
+  </select>
+  <select id="listByRoleId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select p.PERMISSION_ID, p.PERMISSION_NAME, p.PERMISSION_LINK, p.ROOT_FLAG, p.PARENT_ID, p.ACTIVE_FLAG,
+    p.CREATE_DATETIME, p.CREATE_PERSON
+    from LOA_PERMISSION p left join LOA_PERMISSION_RELATION pr on p.PERMISSION_ID=pr.PERMISSION_ID
+    where pr.ROLE_ID = #{roleId,jdbcType=VARCHAR} and p.DELETE_FLAG='0'  and SUBSYSTEM_FLAG = '3' order by length(order_no) asc, p.order_no asc
+  </select>
+
+
+  <select id="selectPermissionByParentId" resultType="com.bazl.clims.model.TreeData">
+    select PERMISSION_ID as id,PERMISSION_NAME as name,PERMISSION_LINK as tree_url,ORDER_NO as orderNo from LOA_PERMISSION
+    where
+    <choose>
+        <when test="parentId == null">
+          parent_Id is null
+        </when>
+        <otherwise>
+          parent_Id = #{parentId}
+        </otherwise>
+    </choose>
+    and delete_flag != '1' and SUBSYSTEM_FLAG = '3'
+    <choose>
+      <when test="parentId == null">
+        order by length(order_no) asc, order_no asc
+      </when>
+      <otherwise>
+        order by PERMISSION_ID
+      </otherwise>
+    </choose>
+  </select>
+
+  <insert id="insertPermission" >
+    <selectKey keyProperty="permission.permissionId" resultType="string" order="BEFORE">
+      select sys_guid() FROM dual
+    </selectKey>
+    insert into LOA_PERMISSION (PERMISSION_ID, PERMISSION_NAME, PERMISSION_LINK, ACTIVE_FLAG,ROOT_FLAG,DELETE_FLAG,SUBSYSTEM_FLAG,ORDER_NO,PARENT_ID)
+    values (#{permission.permissionId,jdbcType=VARCHAR},#{permission.permissionName,jdbcType=VARCHAR},#{permission.permissionLink,jdbcType=VARCHAR},#{permission.activeFlag,jdbcType=VARCHAR},
+    #{permission.rootFlag,jdbcType=VARCHAR},#{permission.deleteflag,jdbcType=VARCHAR},#{permission.subsystemFlag,jdbcType=VARCHAR},#{permission.orderNo,jdbcType=VARCHAR},
+    <choose>
+      <when test="permission.parentId != null">
+        #{permission.parentId}
+      </when>
+      <otherwise>
+        null
+      </otherwise>
+    </choose>
+    )
+  </insert>
+
+  <update id="updatePermission">
+    update LOA_PERMISSION
+    set PERMISSION_NAME = #{permission.permissionName,jdbcType=VARCHAR},
+    PERMISSION_LINK = #{permission.permissionLink,jdbcType=VARCHAR},
+    ORDER_NO = #{permission.orderNo,jdbcType=VARCHAR}
+    where permission_id = #{permission.permissionId}
+    <choose>
+      <when test="permission.parentId != null">
+        and parent_Id = #{permission.parentId}
+      </when>
+      <otherwise>
+        and parent_Id is null
+      </otherwise>
+    </choose>
+  </update>
+
+
+  <update id="delPermission">
+    update LOA_PERMISSION
+    set DELETE_FLAG = '1' where permission_id = #{permission.permissionId}
+  </update>
+
+
+  <select id="selectBy" parameterType="java.lang.String" resultType="com.bazl.clims.model.LoaPermission" >
+select p.permission_id as permissionId,p.permission_name as permissionName,p.permission_link as permissionLink,p.root_flag as rootFlag,
+p.parent_id as parentId,p.active_flag as activeFlag,p.delete_flag as deleteflag,p.order_no as orderNo,
+p.CREATE_PERSON as createPerson,p.SUBSYSTEM_FLAG as subsystemFlag,
+pr.id as sid,pr.role_id as roleId
+  from LOA_PERMISSION P
+    inner join Loa_Permission_Relation pr
+    on p.permission_id = pr.permission_id
+    where pr.role_id = #{roleId,jdbcType=VARCHAR} and p.delete_flag='0' and p.subsystem_flag='3' order by length(order_no) asc, p.order_no asc
+  </select>
+
+
+</mapper>

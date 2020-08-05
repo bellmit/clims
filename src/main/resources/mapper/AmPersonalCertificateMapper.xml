@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.AmPersonalCertificateMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.AmPersonalCertificate" >
+    <result column="CERTIFICATE_ID" property="certificateId" jdbcType="VARCHAR" />
+    <result column="PERSONAL_ID" property="personalId" jdbcType="VARCHAR" />
+    <result column="CERTIFICATE_SN" property="certificateSn" jdbcType="VARCHAR" />
+    <result column="CERTIFICATE_ISSUEDBY" property="certificateIssuedby" jdbcType="VARCHAR" />
+    <result column="CERTIFICATE_STARTTIME" property="certificateStarttime" jdbcType="TIMESTAMP" />
+    <result column="CERTIFICATE_ENDTIME" property="certificateEndtime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="UPDATE_PERSON" property="updatePerson" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="DELETE_PERSON" property="deletePerson" jdbcType="VARCHAR" />
+    <result column="DELETE_DATETIME" property="deleteDatetime" jdbcType="TIMESTAMP" />
+    <result column="CERTIFICATE_PICTUREURL" property="certificatePictureurl" jdbcType="VARCHAR" />
+    <result column="CERTIFICATE_NAME" property="certificateName" jdbcType="VARCHAR" />
+    <result column="CERTIFICATE_PICTURE" property="certificatePicture" jdbcType="CLOB" />
+  </resultMap>
+  <insert id="insert" parameterType="com.bazl.clims.model.po.AmPersonalCertificate" >
+    insert into AM_PERSONAL_CERTIFICATE (CERTIFICATE_ID, PERSONAL_ID, CERTIFICATE_SN, 
+      CERTIFICATE_ISSUEDBY, CERTIFICATE_STARTTIME, 
+      CERTIFICATE_ENDTIME, CREATE_DATETIME, 
+      CREATE_PERSON, UPDATE_PERSON, UPDATE_DATETIME, 
+      DELETE_PERSON, DELETE_DATETIME, CERTIFICATE_PICTUREURL, 
+      CERTIFICATE_NAME, CERTIFICATE_PICTURE)
+    values (#{certificateId,jdbcType=VARCHAR}, #{personalId,jdbcType=VARCHAR}, #{certificateSn,jdbcType=VARCHAR}, 
+      #{certificateIssuedby,jdbcType=VARCHAR}, #{certificateStarttime,jdbcType=TIMESTAMP}, 
+      #{certificateEndtime,jdbcType=TIMESTAMP}, #{createDatetime,jdbcType=TIMESTAMP}, 
+      #{createPerson,jdbcType=VARCHAR}, #{updatePerson,jdbcType=VARCHAR}, #{updateDatetime,jdbcType=TIMESTAMP}, 
+      #{deletePerson,jdbcType=VARCHAR}, #{deleteDatetime,jdbcType=TIMESTAMP}, #{certificatePictureurl,jdbcType=VARCHAR}, 
+      #{certificateName,jdbcType=VARCHAR}, #{certificatePicture,jdbcType=CLOB})
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select CERTIFICATE_ID, PERSONAL_ID, CERTIFICATE_SN, CERTIFICATE_ISSUEDBY, CERTIFICATE_STARTTIME, 
+    CERTIFICATE_ENDTIME, CREATE_DATETIME, CREATE_PERSON, UPDATE_PERSON, UPDATE_DATETIME, 
+    DELETE_PERSON, DELETE_DATETIME, CERTIFICATE_PICTUREURL, CERTIFICATE_NAME, CERTIFICATE_PICTURE
+    from AM_PERSONAL_CERTIFICATE
+  </select>
+</mapper>

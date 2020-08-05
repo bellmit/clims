@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.PoliceExperienceMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.PoliceExperience" >
+    <result column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="PERSONAL_ID" property="personalId" jdbcType="VARCHAR" />
+    <result column="START_TIME" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="END_TIME" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="WHERE_WORK" property="whereWork" jdbcType="VARCHAR" />
+    <result column="DUTIES" property="duties" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insert" parameterType="com.bazl.clims.model.po.PoliceExperience" >
+    insert into POLICE_EXPERIENCE (ID, PERSONAL_ID, START_TIME, 
+      END_TIME, WHERE_WORK, DUTIES
+      )
+    values (#{id,jdbcType=VARCHAR}, #{personalId,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, 
+      #{endTime,jdbcType=TIMESTAMP}, #{whereWork,jdbcType=VARCHAR}, #{duties,jdbcType=VARCHAR}
+      )
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select ID, PERSONAL_ID, START_TIME, END_TIME, WHERE_WORK, DUTIES
+    from POLICE_EXPERIENCE
+  </select>
+</mapper>

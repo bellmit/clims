@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.MatchRelativeResultMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.MatchRelativeResult" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="GROUP_ID" property="groupId" jdbcType="VARCHAR" />
+    <result column="MATCH_TYPE" property="matchType" jdbcType="VARCHAR" />
+    <result column="SAMPLEA_ID" property="sampleaId" jdbcType="VARCHAR" />
+    <result column="SAMPLEB_ID" property="samplebId" jdbcType="VARCHAR" />
+    <result column="SAMPLEC_ID" property="samplecId" jdbcType="VARCHAR" />
+    <result column="SAMPLEA_NO" property="sampleaNo" jdbcType="VARCHAR" />
+    <result column="SAMPLEB_NO" property="samplebNo" jdbcType="VARCHAR" />
+    <result column="SAMPLEC_NO" property="samplecNo" jdbcType="VARCHAR" />
+    <result column="SAMPLEA_NAME" property="sampleaName" jdbcType="VARCHAR" />
+    <result column="SAMPLEB_NAME" property="samplebName" jdbcType="VARCHAR" />
+    <result column="SAMPLEC_NAME" property="samplecName" jdbcType="VARCHAR" />
+    <result column="CASEA_ID" property="caseaId" jdbcType="VARCHAR" />
+    <result column="CASEB_ID" property="casebId" jdbcType="VARCHAR" />
+    <result column="CASEA_NAME" property="caseaName" jdbcType="VARCHAR" />
+    <result column="CASEB_NAME" property="casebName" jdbcType="VARCHAR" />
+    <result column="SAME_COUNT" property="sameCount" jdbcType="INTEGER" />
+    <result column="DIFF_COUNT" property="diffCount" jdbcType="INTEGER" />
+    <result column="PROBABILITY" property="probability" jdbcType="FLOAT" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_PERSON" property="updatePerson" jdbcType="VARCHAR" />
+    <result column="DELETE_FLAG" property="deleteFlag" jdbcType="VARCHAR" />
+    <result column="DELETE_DATETIME" property="deleteDatetime" jdbcType="TIMESTAMP" />
+    <result column="DELETE_PERSON" property="deletePerson" jdbcType="VARCHAR" />
+    <result column="MATCH_STRING" property="matchString" jdbcType="VARCHAR" />
+    <result column="PROBABILITY_M" property="probabilityM" jdbcType="FLOAT" />
+    <result column="MATCH_STRING_M" property="matchStringM" jdbcType="VARCHAR" />
+    <result column="PROBABILITY_F" property="probabilityF" jdbcType="FLOAT" />
+    <result column="MATCH_STRING_F" property="matchStringF" jdbcType="VARCHAR" />
+
+    <result column="FIRST_CHECKER" property="firstChecker" jdbcType="VARCHAR" />
+    <result column="INSTORED_TYPE" property="instoredType" jdbcType="VARCHAR" />
+    <result column="samplea_type" property="sampleaType" jdbcType="VARCHAR" />
+    <result column="sampleb_type" property="samplebType" jdbcType="VARCHAR" />
+    <result column="compare_status" property="compareStatus" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <resultMap id="VOBaseResultMap" type="com.bazl.clims.model.vo.MatchRelativeResultVo" >
+    <id column="ID" property="entity.id" jdbcType="VARCHAR" />
+    <result column="GROUP_ID" property="entity.groupId" jdbcType="VARCHAR" />
+    <result column="MATCH_TYPE" property="entity.matchType" jdbcType="VARCHAR" />
+    <result column="SAMPLEA_ID" property="entity.sampleaId" jdbcType="VARCHAR" />
+    <result column="SAMPLEB_ID" property="entity.samplebId" jdbcType="VARCHAR" />
+    <result column="SAMPLEC_ID" property="entity.samplecId" jdbcType="VARCHAR" />
+    <result column="SAMPLEA_NO" property="entity.sampleaNo" jdbcType="VARCHAR" />
+    <result column="SAMPLEB_NO" property="entity.samplebNo" jdbcType="VARCHAR" />
+    <result column="SAMPLEC_NO" property="entity.samplecNo" jdbcType="VARCHAR" />
+    <result column="SAMPLEA_NAME" property="entity.sampleaName" jdbcType="VARCHAR" />
+    <result column="SAMPLEB_NAME" property="entity.samplebName" jdbcType="VARCHAR" />
+    <result column="SAMPLEC_NAME" property="entity.samplecName" jdbcType="VARCHAR" />
+    <result column="CASEA_ID" property="entity.caseaId" jdbcType="VARCHAR" />
+    <result column="CASEB_ID" property="entity.casebId" jdbcType="VARCHAR" />
+    <result column="CASEA_NAME" property="entity.caseaName" jdbcType="VARCHAR" />
+    <result column="CASEB_NAME" property="entity.casebName" jdbcType="VARCHAR" />
+    <result column="SAME_COUNT" property="entity.sameCount" jdbcType="INTEGER" />
+    <result column="DIFF_COUNT" property="entity.diffCount" jdbcType="INTEGER" />
+    <result column="PROBABILITY" property="entity.probability" jdbcType="FLOAT" />
+    <result column="CREATE_DATETIME" property="entity.createDatetime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_PERSON" property="entity.createPerson" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="entity.updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_PERSON" property="entity.updatePerson" jdbcType="VARCHAR" />
+    <result column="DELETE_FLAG" property="entity.deleteFlag" jdbcType="VARCHAR" />
+    <result column="DELETE_DATETIME" property="entity.deleteDatetime" jdbcType="TIMESTAMP" />
+    <result column="DELETE_PERSON" property="entity.deletePerson" jdbcType="VARCHAR" />
+    <result column="MATCH_STRING" property="entity.matchString" jdbcType="VARCHAR" />
+    <result column="PROBABILITY_M" property="entity.probabilityM" jdbcType="FLOAT" />
+    <result column="MATCH_STRING_M" property="entity.matchStringM" jdbcType="VARCHAR" />
+    <result column="PROBABILITY_F" property="entity.probabilityF" jdbcType="FLOAT" />
+    <result column="MATCH_STRING_F" property="entity.matchStringF" jdbcType="VARCHAR" />
+
+    <result column="delegatea_org_name" property="delegateaOrgName" jdbcType="VARCHAR" />
+    <result column="delegateb_org_name" property="delegatebOrgName" jdbcType="VARCHAR" />
+    <result column="delegatec_org_name" property="delegatecOrgName" jdbcType="VARCHAR" />
+    <result column="instoreda_type" property="instoredaType" jdbcType="VARCHAR" />
+    <result column="instoredb_type" property="instoredbType" jdbcType="VARCHAR" />
+    <result column="instoredc_type" property="instoredcType" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from MATCH_RELATIVE_RESULT
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.clims.model.po.MatchRelativeResult" >
+    insert into MATCH_RELATIVE_RESULT (ID, GROUP_ID, MATCH_TYPE, 
+      SAMPLEA_ID, SAMPLEB_ID, SAMPLEC_ID, 
+      SAMPLEA_NO, SAMPLEB_NO, SAMPLEC_NO, 
+      SAMPLEA_NAME, SAMPLEB_NAME, SAMPLEC_NAME, 
+      CASEA_ID, CASEB_ID, CASEA_NAME, 
+      CASEB_NAME, SAME_COUNT, DIFF_COUNT, 
+      PROBABILITY, CREATE_DATETIME, CREATE_PERSON, 
+      UPDATE_DATETIME, UPDATE_PERSON, DELETE_FLAG, 
+      DELETE_DATETIME, DELETE_PERSON, MATCH_STRING,
+      PROBABILITY_M, MATCH_STRING_M, PROBABILITY_F, MATCH_STRING_F, COMPARE_STATUS)
+    values (#{id,jdbcType=VARCHAR}, #{groupId,jdbcType=VARCHAR}, #{matchType,jdbcType=VARCHAR}, 
+      #{sampleaId,jdbcType=VARCHAR}, #{samplebId,jdbcType=VARCHAR}, #{samplecId,jdbcType=VARCHAR}, 
+      #{sampleaNo,jdbcType=VARCHAR}, #{samplebNo,jdbcType=VARCHAR}, #{samplecNo,jdbcType=VARCHAR}, 
+      #{sampleaName,jdbcType=VARCHAR}, #{samplebName,jdbcType=VARCHAR}, #{samplecName,jdbcType=VARCHAR}, 
+      #{caseaId,jdbcType=VARCHAR}, #{casebId,jdbcType=VARCHAR}, #{caseaName,jdbcType=VARCHAR}, 
+      #{casebName,jdbcType=VARCHAR}, #{sameCount,jdbcType=INTEGER}, #{diffCount,jdbcType=INTEGER},
+      #{probability,jdbcType=FLOAT}, #{createDatetime,jdbcType=TIMESTAMP}, #{createPerson,jdbcType=VARCHAR}, 
+      #{updateDatetime,jdbcType=TIMESTAMP}, #{updatePerson,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=VARCHAR},
+      #{deleteDatetime,jdbcType=TIMESTAMP}, #{deletePerson,jdbcType=VARCHAR},
+      #{matchString,jdbcType=VARCHAR}, #{probabilityM,jdbcType=FLOAT}, #{matchStringM,jdbcType=VARCHAR},
+      #{probabilityF,jdbcType=TIMESTAMP}, #{matchStringF,jdbcType=FLOAT}, #{compareStatus,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.clims.model.po.MatchRelativeResult" >
+    update MATCH_RELATIVE_RESULT
+    set GROUP_ID = #{groupId,jdbcType=VARCHAR},
+      MATCH_TYPE = #{matchType,jdbcType=VARCHAR},
+      SAMPLEA_ID = #{sampleaId,jdbcType=VARCHAR},
+      SAMPLEB_ID = #{samplebId,jdbcType=VARCHAR},
+      SAMPLEC_ID = #{samplecId,jdbcType=VARCHAR},
+      SAMPLEA_NO = #{sampleaNo,jdbcType=VARCHAR},
+      SAMPLEB_NO = #{samplebNo,jdbcType=VARCHAR},
+      SAMPLEC_NO = #{samplecNo,jdbcType=VARCHAR},
+      SAMPLEA_NAME = #{sampleaName,jdbcType=VARCHAR},
+      SAMPLEB_NAME = #{samplebName,jdbcType=VARCHAR},
+      SAMPLEC_NAME = #{samplecName,jdbcType=VARCHAR},
+      CASEA_ID = #{caseaId,jdbcType=VARCHAR},
+      CASEB_ID = #{casebId,jdbcType=VARCHAR},
+      CASEA_NAME = #{caseaName,jdbcType=VARCHAR},
+      CASEB_NAME = #{casebName,jdbcType=VARCHAR},
+      SAME_COUNT = #{sameCount,jdbcType=INTEGER},
+      DIFF_COUNT = #{diffCount,jdbcType=INTEGER},
+      PROBABILITY = #{probability,jdbcType=FLOAT},
+      CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+      CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP},
+      UPDATE_PERSON = #{updatePerson,jdbcType=VARCHAR},
+      DELETE_FLAG = #{deleteFlag,jdbcType=VARCHAR},
+      DELETE_DATETIME = #{deleteDatetime,jdbcType=TIMESTAMP},
+      DELETE_PERSON = #{deletePerson,jdbcType=VARCHAR},
+      MATCH_STRING = #{matchString,jdbcType=VARCHAR},
+      PROBABILITY_M = #{probabilityM,jdbcType=FLOAT},
+      MATCH_STRING_M = #{matchStringM,jdbcType=VARCHAR},
+      PROBABILITY_F = #{probabilityF,jdbcType=TIMESTAMP},
+      MATCH_STRING_F = #{matchStringF,jdbcType=FLOAT},
+      COMPARE_STATUS = #{compareStatus,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select ID, GROUP_ID, MATCH_TYPE, SAMPLEA_ID, SAMPLEB_ID, SAMPLEC_ID, SAMPLEA_NO, 
+    SAMPLEB_NO, SAMPLEC_NO, SAMPLEA_NAME, SAMPLEB_NAME, SAMPLEC_NAME, CASEA_ID, CASEB_ID, 
+    CASEA_NAME, CASEB_NAME, SAME_COUNT, DIFF_COUNT, PROBABILITY, CREATE_DATETIME, CREATE_PERSON, 
+    UPDATE_DATETIME, UPDATE_PERSON, DELETE_FLAG, DELETE_DATETIME, DELETE_PERSON, MATCH_STRING,
+    PROBABILITY_M, MATCH_STRING_M, PROBABILITY_F, MATCH_STRING_F
+    from MATCH_RELATIVE_RESULT
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectList" resultMap="BaseResultMap" parameterType="com.bazl.clims.model.po.MatchRelativeResult">
+    select  *
+    from MATCH_RELATIVE_RESULT
+    where  1 = 1
+    <if test="caseaId != null">
+      and CASEA_ID = #{caseaId, jdbcType=VARCHAR}
+    </if>
+    <if test="casebId != null">
+      and CASEB_ID = #{casebId, jdbcType=VARCHAR}
+    </if>
+    <if test="groupId != null">
+      and GROUP_ID = #{groupId, jdbcType=VARCHAR}
+    </if>
+    order by CREATE_DATETIME desc
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select ID, GROUP_ID, MATCH_TYPE, SAMPLEA_ID, SAMPLEB_ID, SAMPLEC_ID, SAMPLEA_NO, 
+    SAMPLEB_NO, SAMPLEC_NO, SAMPLEA_NAME, SAMPLEB_NAME, SAMPLEC_NAME, CASEA_ID, CASEB_ID, 
+    CASEA_NAME, CASEB_NAME, SAME_COUNT, DIFF_COUNT, PROBABILITY, CREATE_DATETIME, CREATE_PERSON, 
+    UPDATE_DATETIME, UPDATE_PERSON, DELETE_FLAG, DELETE_DATETIME, DELETE_PERSON, MATCH_STRING,
+    PROBABILITY_M, MATCH_STRING_M, PROBABILITY_F, MATCH_STRING_F
+    from MATCH_RELATIVE_RESULT
+  </select>
+
+  <select id="selectBySampleId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select ID, GROUP_ID, MATCH_TYPE, SAMPLEA_ID, SAMPLEB_ID, SAMPLEC_ID, SAMPLEA_NO,
+    SAMPLEB_NO, SAMPLEC_NO, SAMPLEA_NAME, SAMPLEB_NAME, SAMPLEC_NAME, CASEA_ID, CASEB_ID,
+    CASEA_NAME, CASEB_NAME, SAME_COUNT, DIFF_COUNT, PROBABILITY, CREATE_DATETIME, CREATE_PERSON,
+    UPDATE_DATETIME, UPDATE_PERSON, DELETE_FLAG, DELETE_DATETIME, DELETE_PERSON, MATCH_STRING,
+    PROBABILITY_M, MATCH_STRING_M, PROBABILITY_F, MATCH_STRING_F
+    from MATCH_RELATIVE_RESULT
+    where SAMPLEA_ID = #{sampleaid,jdbcType=VARCHAR} and SAMPLEB_ID = #{samplebid,jdbcType=VARCHAR} and SAMPLEC_ID = #{samplecid,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectMatchRelativeResultList" resultMap="VOBaseResultMap" parameterType="com.bazl.clims.model.vo.MatchRelativeResultVo">
+    select * from (
+    select rownum as rn, t.* from (
+    select lci_1.delegate_org_name as delegatea_org_name,
+    lci_2.delegate_org_name as delegateb_org_name,
+    lci_3.delegate_org_name as delegatec_org_name,
+    lsid_1.instored_type        as instoreda_type,
+    lsid_2.instored_type        as instoredb_type,
+    lsid_3.instored_type        as instoredc_type,
+    mrr.samplea_id as samplea_id,
+    mrr.sampleb_id as sampleb_id,
+    mrr.samplec_id as samplec_id,
+    mrr.samplea_no as samplea_no,
+    mrr.sampleb_no as sampleb_no,
+    mrr.samplec_no as samplec_no,
+    mrr.samplea_name as samplea_name,
+    mrr.sampleb_name as sampleb_name,
+    mrr.samplec_name as samplec_name,
+    mrr.id as id,
+    mrr.group_id as group_id,
+    mrr.match_type as match_type,
+    mrr.casea_id as casea_id,
+    mrr.caseb_id as caseb_id,
+    mrr.casea_name as casea_name,
+    mrr.caseb_name as caseb_name,
+    mrr.same_count as same_count,
+    mrr.diff_count as diff_count,
+    mrr.probability as probability,
+    mrr.create_datetime as create_datetime,
+    mrr.create_person as create_person,
+    mrr.update_datetime as update_datetime,
+    mrr.update_person as update_person,
+    mrr.delete_flag as delete_flag,
+    mrr.delete_datetime as delete_datetime,
+    mrr.delete_person as delete_person,
+    mrr.match_string as match_string,
+    mrr.probability_m as probability_m,
+    mrr.match_string_m as match_string_m,
+    mrr.probability_f as probability_f,
+    mrr.match_string_f as match_string_f
+    from MATCH_RELATIVE_RESULT mrr
+    left join lims_sample_info_dna lsid_1
+    on mrr.samplea_id = lsid_1.sample_id
+    left join lims_sample_info_dna lsid_2
+    on mrr.sampleb_id = lsid_2.sample_id
+    left join lims_sample_info_dna lsid_3
+    on mrr.samplec_id = lsid_3.sample_id
+    left join lims_consignment_info lci_1
+    on lci_1.consignment_id = lsid_1.consignment_id
+    left join lims_consignment_info lci_2
+    on lci_2.consignment_id = lsid_2.consignment_id
+    left join lims_consignment_info lci_3
+    on lci_3.consignment_id = lsid_3.consignment_id
+    left join lims_case_info lc_1
+    on lc_1.case_id = lsid_1.case_id
+    left join lims_case_info lc_2
+    on lc_1.case_id = lsid_2.consignment_id
+    left join lims_case_info lc_3
+    on lc_1.case_id = lsid_3.consignment_id
+    where mrr.delete_flag = '0'
+    <if test="_parameter != null">
+      <include refid="VO_Query_Where_Clause"/>
+
+      <if test="caseId != null">
+        and lci_1.CASE_ID = #{caseId,jdbcType=VARCHAR}
+      </if>
+
+    </if>
+    ) t where rownum &lt;=#{rows}
+    ) where rn &gt;#{offset}
+  </select>
+
+  <select id="selectMatchRelativeResultCount" resultType="int" parameterType="com.bazl.clims.model.vo.MatchRelativeResultVo">
+    select count(*)
+    from MATCH_RELATIVE_RESULT mrr
+    left join lims_sample_info_dna lsid_1
+    on mrr.samplea_id = lsid_1.sample_id
+    left join lims_sample_info_dna lsid_2
+    on mrr.sampleb_id = lsid_2.sample_id
+    left join lims_sample_info_dna lsid_3
+    on mrr.samplec_id = lsid_3.sample_id
+    left join lims_consignment_info lci_1
+    on lci_1.consignment_id = lsid_1.consignment_id
+    left join lims_consignment_info lci_2
+    on lci_2.consignment_id = lsid_2.consignment_id
+    left join lims_consignment_info lci_3
+    on lci_3.consignment_id = lsid_3.consignment_id
+    left join lims_case_info lc_1
+    on lc_1.case_id = lsid_1.case_id
+    left join lims_case_info lc_2
+    on lc_1.case_id = lsid_2.consignment_id
+    left join lims_case_info lc_3
+    on lc_1.case_id = lsid_3.consignment_id
+    where mrr.delete_flag = '0'
+    <if test="_parameter != null">
+      <include refid="VO_Query_Where_Clause"/>
+
+      <if test="caseId != null">
+        and lci_1.CASE_ID = #{caseId,jdbcType=VARCHAR}
+      </if>
+
+    </if>
+  </select>
+
+  <sql id="VO_Query_Where_Clause">
+    <if test="caseName != null">
+      and (lc_1.CASE_NAME like '%'||#{caseName,jdbcType=VARCHAR}||'%'
+      or lc_2.CASE_NAME like '%'||#{caseName,jdbcType=VARCHAR}||'%')
+    </if>
+    <if test="caseNo != null">
+      and (lc_1.CASE_NO like '%'||#{caseNo,jdbcType=VARCHAR}||'%'
+      or lc_2.CASE_NO like '%'||#{caseNo,jdbcType=VARCHAR}||'%')
+    </if>
+    <if test="sampleName != null">
+      and (lsid_1.SAMPLE_NAME like '%'||#{sampleName,jdbcType=VARCHAR}||'%'
+      or lsid_2.SAMPLE_NAME like '%'||#{sampleName,jdbcType=VARCHAR}||'%'
+      or lsid_3.SAMPLE_NAME like '%'||#{sampleName,jdbcType=VARCHAR}||'%')
+    </if>
+    <if test="sampleNo != null">
+      and (lsid_1.SAMPLE_NO like '%'||#{sampleNo,jdbcType=VARCHAR}||'%'
+      or lsid_2.SAMPLE_NO like '%'||#{sampleNo,jdbcType=VARCHAR}||'%'
+      or lsid_3.SAMPLE_NO like '%'||#{sampleNo,jdbcType=VARCHAR}||'%')
+    </if>
+    <if test="instoredType != null">
+      and (lsid_1.INSTORED_TYPE like '%'||#{instoredType,jdbcType=VARCHAR}||'%'
+      or lsid_2.INSTORED_TYPE like '%'||#{instoredType,jdbcType=VARCHAR}||'%'
+      or lsid_3.INSTORED_TYPE like '%'||#{instoredType,jdbcType=VARCHAR}||'%')
+    </if>
+    <if test="delegateOrgName != null">
+      and (lci_1.DELEGATE_ORG_NAME like '%'||#{delegateOrgName,jdbcType=VARCHAR}||'%'
+      or lci_2.DELEGATE_ORG_NAME like '%'||#{delegateOrgName,jdbcType=VARCHAR}||'%'
+      or lci_3.DELEGATE_ORG_NAME like '%'||#{delegateOrgName,jdbcType=VARCHAR}||'%')
+    </if>
+    <if test="delegateOrgCode != null">
+      and (lci_1.DELEGATE_ORG_CODE like '%'||#{delegateOrgCode,jdbcType=VARCHAR}||'%'
+      or lci_2.DELEGATE_ORG_CODE like '%'||#{delegateOrgCode,jdbcType=VARCHAR}||'%'
+      or lci_3.DELEGATE_ORG_CODE like '%'||#{delegateOrgCode,jdbcType=VARCHAR}||'%')
+    </if>
+    <if test="createStartDatetime != null">
+      and mrr.CREATE_DATETIME &gt;= #{createStartDatetime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="createEndDatetime != null">
+      and mrr.CREATE_DATETIME &lt;= #{createEndDatetime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="entity.sameCount != null">
+      and mrr.SAME_COUNT &gt;= #{entity.sameCount,jdbcType=VARCHAR}
+    </if>
+    <if test="entity.compareStatus != null">
+      and mrr.COMPARE_STATUS = #{entity.compareStatus,jdbcType=VARCHAR}
+    </if>
+    <if test="userOrdId != null">
+      and (lci_1.ACCEPT_ORG_ID like '%'||#{userOrdId,jdbcType=VARCHAR}||'%'
+      or lci_2.ACCEPT_ORG_ID like '%'||#{userOrdId,jdbcType=VARCHAR}||'%'
+      or lci_3.ACCEPT_ORG_ID like '%'||#{userOrdId,jdbcType=VARCHAR}||'%')
+    </if>
+  </sql>
+
+  <select id="selectListByGroupId" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select mrr.*
+    from MATCH_RELATIVE_RESULT mrr
+    where mrr.group_id = #{groupId,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByGroupId" resultMap="BaseResultMap" parameterType="com.bazl.clims.model.po.MatchRelativeResult">
+    select mrr.*, di_1.dict_name as INSTORED_TYPE, lc.FIRST_CHECKER as FIRST_CHECKER
+    from MATCH_RELATIVE_RESULT mrr
+    left join lims_sample_info_dna lsid on mrr.samplec_id = lsid.sample_id
+    left join dict_item di_1 on lsid.INSTORED_TYPE = di_1.dict_code and di_1.DICT_TYPE_CODE = 'INSTORED_TYPE'
+    left join lims_case_info lc on mrr.casea_id = lc.case_id
+    where mrr.group_id = #{groupId,jdbcType=VARCHAR} and mrr.id = #{id,jdbcType=VARCHAR} and mrr.delete_flag = '0'
+    <if test="caseaName != null">
+      and mrr.CASEA_NAME like '%'||#{caseaName,jdbcType=VARCHAR}||'%'
+    </if>
+    <if test="sampleaName != null">
+      and mrr.SAMPLEA_NAME like '%'||#{sampleaName,jdbcType=VARCHAR}||'%'
+    </if>
+    <if test="firstChecker != null">
+      and lc.FIRST_CHECKER like '%'||#{firstChecker,jdbcType=VARCHAR}||'%'
+    </if>
+  </select>
+
+  <update id="relieveRelativeGroupRelevance" parameterType="com.bazl.clims.model.po.MatchRelativeResult">
+    update MATCH_RELATIVE_RESULT mrr set mrr.COMPARE_STATUS = '3',
+    mrr.update_datetime =  #{updateDatetime,jdbcType=TIMESTAMP}, mrr.update_person = #{updatePerson,jdbcType=VARCHAR}
+     where mrr.group_id = #{groupId,jdbcType=VARCHAR}
+  </update>
+
+  <update id="relieveRelativeRelevance" parameterType="com.bazl.clims.model.po.MatchRelativeResult">
+    update MATCH_RELATIVE_RESULT mrr set mrr.COMPARE_STATUS = '3',
+    mrr.update_datetime =  #{updateDatetime,jdbcType=TIMESTAMP}, mrr.update_person = #{updatePerson,jdbcType=VARCHAR}
+    where mrr.id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <update id="confirmRelativeCompareGroup" parameterType="com.bazl.clims.model.po.MatchRelativeResult">
+    update MATCH_RELATIVE_RESULT mrr set mrr.COMPARE_STATUS = '2',
+    mrr.update_datetime =  #{updateDatetime,jdbcType=TIMESTAMP}, mrr.update_person = #{updatePerson,jdbcType=VARCHAR}
+     where mrr.group_id = #{groupId,jdbcType=VARCHAR}
+  </update>
+
+  <update id="confirmRelativeCompare" parameterType="com.bazl.clims.model.po.MatchRelativeResult">
+    update MATCH_RELATIVE_RESULT mrr set mrr.COMPARE_STATUS = '2',
+    mrr.update_datetime =  #{updateDatetime,jdbcType=TIMESTAMP}, mrr.update_person = #{updatePerson,jdbcType=VARCHAR}
+      where mrr.id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select mrr.ID, mrr.GROUP_ID, mrr.MATCH_TYPE, mrr.SAMPLEA_ID, mrr.SAMPLEB_ID, mrr.SAMPLEC_ID, mrr.SAMPLEA_NO,
+    mrr.SAMPLEB_NO, mrr.SAMPLEC_NO, mrr.SAMPLEA_NAME, mrr.SAMPLEB_NAME, mrr.SAMPLEC_NAME, mrr.CASEA_ID, mrr.CASEB_ID,
+    mrr.CASEA_NAME, mrr.CASEB_NAME, mrr.SAME_COUNT, mrr.DIFF_COUNT, mrr.PROBABILITY, mrr.CREATE_DATETIME, mrr.CREATE_PERSON,
+    mrr.UPDATE_DATETIME, mrr.UPDATE_PERSON, mrr.DELETE_FLAG, mrr.DELETE_DATETIME, mrr.DELETE_PERSON, mrr.MATCH_STRING,
+    mrr.PROBABILITY_M, mrr.MATCH_STRING_M, mrr.PROBABILITY_F, mrr.MATCH_STRING_F, di_1.dict_name as samplea_type, di_2.dict_name as sampleb_type, mrr.COMPARE_STATUS as COMPARE_STATUS
+    from MATCH_RELATIVE_RESULT mrr
+    left join lims_sample_info_dna lsid_1 on mrr.SAMPLEA_ID = lsid_1.SAMPLE_ID
+    left join lims_sample_info_dna lsid_2 on mrr.SAMPLEC_ID = lsid_2.SAMPLE_ID
+    left join dict_item di_1 on lsid_1.sample_type = di_1.dict_code and di_1.DICT_TYPE_CODE='SAMPLE_TYPE'
+    left join dict_item di_2 on lsid_2.sample_type = di_2.dict_code and di_2.DICT_TYPE_CODE='SAMPLE_TYPE'
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+</mapper>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.XckyAddressInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.XckyAddressInfo" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="ORG_ID" property="orgId" jdbcType="VARCHAR" />
+    <result column="XCKY_ADDRESS" property="xckyAddress" jdbcType="VARCHAR" />
+    <result column="XCKY_SYS_NAME" property="xckySysName" jdbcType="VARCHAR" />
+    <result column="DEFAULT_WHEN_NULL" property="defaultWhenNull" jdbcType="CHAR" />
+    <result column="INVOKER_IPADDR" property="invokerIpaddr" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from XCKY_ADDRESS_INFO
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.clims.model.po.XckyAddressInfo" >
+    insert into XCKY_ADDRESS_INFO (ID, ORG_ID, XCKY_ADDRESS, 
+      XCKY_SYS_NAME, DEFAULT_WHEN_NULL, INVOKER_IPADDR
+      )
+    values (#{id,jdbcType=VARCHAR}, #{orgId,jdbcType=VARCHAR}, #{xckyAddress,jdbcType=VARCHAR}, 
+      #{xckySysName,jdbcType=VARCHAR}, #{defaultWhenNull,jdbcType=CHAR}, #{invokerIpaddr,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.clims.model.po.XckyAddressInfo" >
+    update XCKY_ADDRESS_INFO
+    set ORG_ID = #{orgId,jdbcType=VARCHAR},
+      XCKY_ADDRESS = #{xckyAddress,jdbcType=VARCHAR},
+      XCKY_SYS_NAME = #{xckySysName,jdbcType=VARCHAR},
+      DEFAULT_WHEN_NULL = #{defaultWhenNull,jdbcType=CHAR},
+      INVOKER_IPADDR = #{invokerIpaddr,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select ID, ORG_ID, XCKY_ADDRESS, XCKY_SYS_NAME, DEFAULT_WHEN_NULL, INVOKER_IPADDR
+    from XCKY_ADDRESS_INFO
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select ID, ORG_ID, XCKY_ADDRESS, XCKY_SYS_NAME, DEFAULT_WHEN_NULL, INVOKER_IPADDR
+    from XCKY_ADDRESS_INFO
+  </select>
+</mapper>

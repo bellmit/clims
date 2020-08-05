@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bazl.clims.dao.QueueSampleMapper">
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.QueueSample">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="FOREIGN_ID" jdbcType="VARCHAR" property="foreignId" />
+    <result column="STATUS" jdbcType="INTEGER" property="status" />
+    <result column="CREATE_DATETIME" jdbcType="TIMESTAMP" property="createDatetime" />
+    <result column="UPDATE_DATETIME" jdbcType="TIMESTAMP" property="updateDatetime" />
+    <result column="QUEUE_TYPE" jdbcType="VARCHAR" property="queueType" />
+    <result column="FILENAME" jdbcType="VARCHAR" property="filename" />
+
+    <!--业务字段-->
+    <!--<result column="CASE_NAME" jdbcType="VARCHAR" property="caseName" />-->
+    <!--<result column="CASE_NO" jdbcType="VARCHAR" property="caseNo" />-->
+    <!--<result column="SAMPLE_NAME" jdbcType="VARCHAR" property="sampleName" />-->
+    <!--<result column="SAMPLE_NO" jdbcType="VARCHAR" property="sampleNo" />-->
+    <!--<result column="BOARD_NO" jdbcType="VARCHAR" property="boardNo" />-->
+
+    <result column="SERVER_NO" jdbcType="VARCHAR" property="serverNo" />
+  </resultMap>
+
+
+  <resultMap id="VOBaseResultMap" type="com.bazl.clims.model.vo.QueueSampleVo">
+    <id column="ID" property="entity.id" jdbcType="VARCHAR"/>
+    <id column="FOREIGN_ID" property="entity.foreignId" jdbcType="VARCHAR"/>
+    <id column="STATUS" property="entity.status" jdbcType="VARCHAR"/>
+    <id column="CREATE_DATETIME" property="entity.createDatetime" jdbcType="TIMESTAMP"/>
+    <id column="UPDATE_DATETIME" property="entity.updateDatetime" jdbcType="TIMESTAMP"/>
+    <id column="QUEUE_TYPE" property="entity.queueType" jdbcType="VARCHAR"/>
+    <id column="FILENAME" property="entity.filename" jdbcType="VARCHAR"/>
+    <result column="SERVER_NO" jdbcType="VARCHAR" property="entity.serverNo" />
+    <!--业务字段-->
+    <result column="CASE_NAME" jdbcType="VARCHAR" property="caseName" />
+    <result column="CASE_NO" jdbcType="VARCHAR" property="caseNo" />
+    <result column="SAMPLE_NAME" jdbcType="VARCHAR" property="sampleName" />
+    <result column="SAMPLE_NO" jdbcType="VARCHAR" property="sampleNo" />
+    <result column="BOARD_NO" jdbcType="VARCHAR" property="boardNo" />
+    <result column="SAMPLE_ID" jdbcType="VARCHAR" property="sampleId" />
+
+  </resultMap>
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from QUEUE_SAMPLE
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.clims.model.po.QueueSample">
+    insert into QUEUE_SAMPLE (ID, FOREIGN_ID, STATUS,
+      CREATE_DATETIME, UPDATE_DATETIME, QUEUE_TYPE, 
+      FILENAME, SERVER_NO)
+    values (#{id,jdbcType=VARCHAR}, #{foreignId,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER},
+      #{createDatetime,jdbcType=TIMESTAMP}, #{updateDatetime,jdbcType=TIMESTAMP}, #{queueType,jdbcType=VARCHAR}, 
+      #{filename,jdbcType=VARCHAR}, #{serverNo,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.clims.model.po.QueueSample">
+    update QUEUE_SAMPLE
+    set FOREIGN_ID = #{foreignId,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=INTEGER},
+      CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP},
+      QUEUE_TYPE = #{queueType,jdbcType=VARCHAR},
+      FILENAME = #{filename,jdbcType=VARCHAR},
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateStatusByPrimaryKey" parameterType="com.bazl.clims.model.po.QueueSample">
+    update QUEUE_SAMPLE
+    set STATUS = #{status,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select ID, FOREIGN_ID, STATUS, CREATE_DATETIME, UPDATE_DATETIME, QUEUE_TYPE,
+    FILENAME, SERVER_NO
+    from QUEUE_SAMPLE
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select ID, FOREIGN_ID, STATUS, CREATE_DATETIME, UPDATE_DATETIME, QUEUE_TYPE,
+    FILENAME, SERVER_NO
+    from QUEUE_SAMPLE
+  </select>
+  <select id="selectBySize" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select ID, FOREIGN_ID, STATUS, CREATE_DATETIME, UPDATE_DATETIME, QUEUE_TYPE,
+    FILENAME, SERVER_NO
+    from QUEUE_SAMPLE where STATUS=${status} and QUEUE_TYPE=#{queueType,jdbcType=VARCHAR} and rownum &lt;= ${size}
+  </select>
+
+  <sql id="VO_Query_Where_Clause">
+    <if test="caseName != null">
+      and lc.case_name like '%'||#{caseName,jdbcType=VARCHAR}||'%'
+    </if>
+    <if test="caseNo != null">
+      and lc.case_no  like '%'||#{caseNo,jdbcType=VARCHAR}||'%'
+    </if>
+  </sql>
+
+
+  <!--查询入本地库数据-->
+  <select id="selectFindAll"  resultType="com.bazl.clims.model.vo.QueueSampleVo" resultMap="VOBaseResultMap">
+    select * from (
+    select rownum as rn, t.* from (
+    select distinct qs.id,qs.foreign_id ,qs.status,qs.queue_type,qs.CREATE_DATETIME,qs.SERVER_NO,
+    qs.UPDATE_DATETIME ,qd.sample_no as sample_no,
+    lc.case_name as case_name,lc.case_no as case_no,lsg.board_no as board_no,lsi.sample_name as sample_name
+    from queue_sample qs left join queue_detail qd on qs.id=qd.queue_id
+    left join lims_consignment_info lci on qd.consignment_id=lci.consignment_id
+    left join lims_case_info lc on lc.case_id = lci.case_id
+    left join lims_sample_gene lsg on qd.sample_id=lsg.sample_id
+    left join lims_sample_info_dna lsi on lsi.sample_id=qd.sample_id
+    where qs.queue_type='1'
+    <if test="_parameter != null">
+      <include refid="VO_Query_Where_Clause"/>
+    </if>
+    ) t where rownum &lt;=#{rows}
+    ) where rn &gt;#{offset}
+  </select>
+
+
+  <select id="selectVOCount" resultType="java.lang.Integer">
+    select count(qs.id)
+    from queue_sample qs left join queue_detail qd on qs.id=qd.queue_id
+    left join lims_consignment_info lci on qd.consignment_id=lci.consignment_id
+    left join lims_case_info lc on lc.case_id = lci.case_id
+    left join lims_sample_gene lsg on qd.sample_id=lsg.sample_id
+    left join lims_sample_info_dna lsi on lsi.sample_id=qd.sample_id
+    where qs.queue_type='1'
+    <if test="_parameter != null">
+      <include refid="VO_Query_Where_Clause"/>
+    </if>
+  </select>
+
+  <!--查询入库样本总数-->
+  <select id="selectBsckUpByCaseId" resultType="java.lang.Integer">
+    select count(distinct qd.sample_id)
+    from QUEUE_SAMPLE qs,queue_detail qd
+    where qs.id = qd.queue_id and qs.QUEUE_TYPE = '15'
+    <if test="consignmentId != null">
+      and qs.FOREIGN_ID  = #{consignmentId,jdbcType=VARCHAR}
+    </if>
+    <if test="userOrgId != null">
+      and qs.SERVER_NO = #{userOrgId,jdbcType=VARCHAR}
+    </if>
+  </select>
+
+  <!--查询入库样本总数-->
+  <select id="selectNewBsckUpCount" resultType="java.lang.Integer">
+    select count(distinct qs.foreign_id)
+    from QUEUE_SAMPLE qs
+    left join lims_sample_info_dna lsid on lsid.sample_no = qs.FOREIGN_ID
+    where qs.QUEUE_TYPE = '16'
+    and lsid.instored_flag='1'
+    <if test="caseId != null">
+      and lsid.case_id = #{caseId,jdbcType=VARCHAR}
+    </if>
+    <if test="userOrgId != null">
+      and qs.SERVER_NO = #{userOrgId,jdbcType=VARCHAR}
+    </if>
+  </select>
+
+  <!--入库样本成功数-->
+  <select id="selectBackSuccess" resultType="java.lang.Integer">
+    select count(distinct qd.sample_id)
+    from QUEUE_SAMPLE qs,queue_detail qd
+    where qs.id = qd.queue_id and qs.STATUS= '2' and qs.QUEUE_TYPE = '15'
+    <if test="consignmentId != null">
+      and qs.FOREIGN_ID = #{consignmentId,jdbcType=VARCHAR}
+    </if>
+    <if test="userOrgId != null">
+      and qs.SERVER_NO = #{userOrgId,jdbcType=VARCHAR}
+    </if>
+  </select>
+
+  <!--入库样本成功数-->
+  <select id="selectNewBackSuccess" resultType="java.lang.Integer">
+    select count(distinct qs.foreign_id)
+    from QUEUE_SAMPLE qs
+    left join lims_sample_info_dna lsid on lsid.sample_no = qs.FOREIGN_ID
+    where qs.STATUS= '2' and qs.QUEUE_TYPE = '16'
+    and lsid.instored_flag='1'
+    <if test="caseId != null">
+      and lsid.case_id = #{caseId,jdbcType=VARCHAR}
+    </if>
+    <if test="userOrgId != null">
+      and qs.SERVER_NO = #{userOrgId,jdbcType=VARCHAR}
+    </if>
+  </select>
+
+  <!--入库样本失败数-->
+  <select id="selectBackFailCount" resultType="java.lang.Integer">
+    select count(distinct qd.sample_id)
+    from QUEUE_SAMPLE qs,queue_detail qd
+    where qs.id = qd.queue_id and qs.STATUS= '3' and qs.QUEUE_TYPE = '15'
+    <if test="consignmentId != null">
+      and qs.FOREIGN_ID = #{consignmentId,jdbcType=VARCHAR}
+    </if>
+    <if test="userOrgId != null">
+      and qs.SERVER_NO = #{userOrgId,jdbcType=VARCHAR}
+    </if>
+  </select>
+
+  <!--入库样本失败数-->
+  <select id="selectNewBackFailCount" resultType="java.lang.Integer">
+    select count(distinct qs.foreign_id)
+    from QUEUE_SAMPLE qs
+    left join lims_sample_info_dna lsid on lsid.sample_no = qs.FOREIGN_ID
+    where qs.STATUS= '3' and qs.QUEUE_TYPE = '16'
+    and lsid.instored_flag='1'
+    <if test="caseId != null">
+      and lsid.case_id = #{caseId,jdbcType=VARCHAR}
+    </if>
+    <if test="userOrgId != null">
+      and qs.SERVER_NO = #{userOrgId,jdbcType=VARCHAR}
+    </if>
+  </select>
+
+  <!--受理时插入队列数据-->
+  <insert id="insertQueueSample" parameterType="com.bazl.clims.model.po.QueueSample" >
+    insert into QUEUE_SAMPLE (ID, FOREIGN_ID, STATUS,
+    CREATE_DATETIME, UPDATE_DATETIME, QUEUE_TYPE,
+    FILENAME, SERVER_NO)
+    values (#{id,jdbcType=VARCHAR}, #{foreignId,jdbcType=VARCHAR}, #{status,jdbcType=DECIMAL},
+    #{createDatetime,jdbcType=TIMESTAMP}, #{updateDatetime,jdbcType=TIMESTAMP}, #{queueType,jdbcType=VARCHAR},
+    #{filename,jdbcType=VARCHAR}, #{serverNo,jdbcType=VARCHAR})
+  </insert>
+
+  <!--查询入库操作插入队列15检材数据-->
+  <select id="selectByConsignmentId"  resultMap="VOBaseResultMap">
+     select qs.ID, qs.FOREIGN_ID, qs.STATUS, qs.CREATE_DATETIME, qs.UPDATE_DATETIME, qs.QUEUE_TYPE,
+    qs.FILENAME, qs.SERVER_NO,qd.sample_id,qd.sample_no
+    from QUEUE_SAMPLE qs left join queue_detail qd on qs.id= qd.queue_id
+    where FOREIGN_ID = #{consignmentId,jdbcType=VARCHAR} and  qs.STATUS= '3' and qs.QUEUE_TYPE='15'
+  </select>
+
+  <!--查询入库操作插入队列16检材数据-->
+  <select id="selectBySampleNo"  resultMap="VOBaseResultMap">
+    select qs.ID, qs.FOREIGN_ID, qs.STATUS, qs.CREATE_DATETIME, qs.UPDATE_DATETIME, qs.QUEUE_TYPE,
+    qs.FILENAME, qs.SERVER_NO,qd.sample_id,qd.sample_no
+    from QUEUE_SAMPLE qs left join queue_detail qd on qs.id= qd.queue_id
+    where FOREIGN_ID = #{sampleNo,jdbcType=VARCHAR} and  qs.STATUS= '3' and qs.QUEUE_TYPE='16'
+  </select>
+
+  <select id="selectByCaseId" resultType="com.bazl.clims.model.po.QueueSample">
+    select qs.ID, qs.FOREIGN_ID, qs.STATUS, qs.CREATE_DATETIME, qs.UPDATE_DATETIME, qs.QUEUE_TYPE,
+    qs.FILENAME, qs.SERVER_NO
+    from QUEUE_SAMPLE qs
+    where FOREIGN_ID = #{caseId,jdbcType=VARCHAR} and  qs.STATUS= '0' and qs.QUEUE_TYPE='22'
+  </select>
+
+
+  <select id="selectAccepttanceQueue" resultMap="BaseResultMap">
+    select qs.ID, qs.FOREIGN_ID, qs.STATUS, qs.CREATE_DATETIME, qs.UPDATE_DATETIME, qs.QUEUE_TYPE,
+    qs.FILENAME, qs.SERVER_NO
+    from QUEUE_SAMPLE qs
+    where qs.FOREIGN_ID = #{foreignId,jdbcType=VARCHAR} and qs.QUEUE_TYPE= #{queueType,jdbcType=VARCHAR} and qs.STATUS in (0,1,2,-2)
+  </select>
+
+  <select id="selectQueueByCaseId" resultMap="BaseResultMap">
+    select qs.ID, qs.FOREIGN_ID, qs.STATUS, qs.CREATE_DATETIME, qs.UPDATE_DATETIME, qs.QUEUE_TYPE,
+    qs.FILENAME, qs.SERVER_NO
+    from QUEUE_SAMPLE qs
+    where FOREIGN_ID = #{caseId,jdbcType=VARCHAR} and  qs.STATUS &lt;&gt; 2 and qs.QUEUE_TYPE='15' order by qs.CREATE_DATETIME desc
+  </select>
+  <select id="selectQueueBySampleNo" resultMap="BaseResultMap">
+    select qs.ID, qs.FOREIGN_ID, qs.STATUS, qs.CREATE_DATETIME, qs.UPDATE_DATETIME, qs.QUEUE_TYPE,
+    qs.FILENAME, qs.SERVER_NO
+    from QUEUE_SAMPLE qs
+    where FOREIGN_ID = #{sampleNo,jdbcType=VARCHAR} and  qs.STATUS &lt;&gt; 2 and qs.QUEUE_TYPE='16' order by qs.CREATE_DATETIME desc
+  </select>
+
+
+</mapper>

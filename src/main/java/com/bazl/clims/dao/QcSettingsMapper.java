@@ -1,0 +1,16 @@
+package com.bazl.clims.dao;
+
+import com.bazl.clims.model.po.QcNoSettings;
+
+import java.util.List;
+
+/**
+ * Created by Liuchang on 2020/7/6.
+ */
+public interface QcSettingsMapper {
+
+    /**
+     * 根据实验室编码查询信息
+     */
+   public List<QcNoSettings> selectByLab(String labServerNo);
+}

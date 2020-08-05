@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.LabExtractSampleMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.LabExtractSample" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="EXTRACT_ID" property="extractId" jdbcType="VARCHAR" />
+    <result column="SAMPLE_ID" property="sampleId" jdbcType="VARCHAR" />
+    <result column="TRANSFER_METHOD" property="transferMethod" jdbcType="VARCHAR" />
+    <result column="EXTRACT_METHOD" property="extractMethod" jdbcType="VARCHAR" />
+    <result column="PRETEST_METHOD" property="pretestMethod" jdbcType="VARCHAR" />
+    <result column="CONTEST_METHOD" property="contestMethod" jdbcType="VARCHAR" />
+    <result column="EXTRACT_STRING" property="extractString" jdbcType="VARCHAR" />
+    <result column="EXTRACT_PART" property="extractPart" jdbcType="VARCHAR" />
+    <result column="CONTEST_RESULT" property="contestResult" jdbcType="VARCHAR" />
+    <result column="PRETEST_RESULT" property="pretestResult" jdbcType="VARCHAR" />
+    <result column="EXTRACT_REAGENT" property="extractReagent" jdbcType="VARCHAR" />
+    <result column="REAGENT_DOSAGE" property="reagentDosage" jdbcType="VARCHAR" />
+    <result column="SAMPLE_POSTION" property="samplePostion" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_PEROSN" property="updatePerosn" jdbcType="VARCHAR" />
+    <result column="LEAVE" property="leave" jdbcType="VARCHAR" />
+    <result column="BATH" property="bath" jdbcType="VARCHAR" />
+    <result column="DRY" property="dry" jdbcType="VARCHAR" />
+    <result column="SHAKE" property="shake" jdbcType="VARCHAR" />
+    <result column="EARTHQUAKE" property="earthquake" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="extractSampleAndInfoDna" type="com.bazl.clims.model.po.LabExtractSample">
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="EXTRACT_ID" property="extractId" jdbcType="VARCHAR" />
+    <result column="SAMPLE_ID" property="sampleId" jdbcType="VARCHAR" />
+    <result column="TRANSFER_METHOD" property="transferMethod" jdbcType="VARCHAR" />
+    <result column="EXTRACT_METHOD" property="extractMethod" jdbcType="VARCHAR" />
+    <result column="PRETEST_METHOD" property="pretestMethod" jdbcType="VARCHAR" />
+    <result column="CONTEST_METHOD" property="contestMethod" jdbcType="VARCHAR" />
+    <result column="EXTRACT_STRING" property="extractString" jdbcType="VARCHAR" />
+    <result column="EXTRACT_PART" property="extractPart" jdbcType="VARCHAR" />
+    <result column="CONTEST_RESULT" property="contestResult" jdbcType="VARCHAR" />
+    <result column="PRETEST_RESULT" property="pretestResult" jdbcType="VARCHAR" />
+    <result column="EXTRACT_REAGENT" property="extractReagent" jdbcType="VARCHAR" />
+    <result column="REAGENT_DOSAGE" property="reagentDosage" jdbcType="VARCHAR" />
+    <result column="SAMPLE_POSTION" property="samplePostion" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_PEROSN" property="updatePerosn" jdbcType="VARCHAR" />
+    <result column="LEAVE" property="leave" jdbcType="VARCHAR" />
+    <result column="BATH" property="bath" jdbcType="VARCHAR" />
+    <result column="DRY" property="dry" jdbcType="VARCHAR" />
+    <result column="SHAKE" property="shake" jdbcType="VARCHAR" />
+    <result column="EARTHQUAKE" property="earthquake" jdbcType="VARCHAR" />
+    <collection property="limsSampleInfoDna" ofType="com.bazl.clims.model.po.LimsSampleInfoDna">
+      <id column="SAMPLE_ID" property="sampleId" jdbcType="VARCHAR" />
+      <result column="CONSIGNMENT_ID" property="consignmentId" jdbcType="VARCHAR" />
+      <result column="CASE_ID" property="caseId" jdbcType="VARCHAR" />
+      <result column="EVIDENCE_ID" property="evidenceId" jdbcType="VARCHAR" />
+      <result column="SAMPLE_NO" property="sampleNo" jdbcType="VARCHAR" />
+      <result column="SAMPLE_NAME" property="sampleName" jdbcType="VARCHAR" />
+      <result column="SAMPLE_TYPE" property="sampleType" jdbcType="VARCHAR" />
+      <result column="SAMPLE_DESC" property="sampleDesc" jdbcType="VARCHAR" />
+      <result column="SAMPLE_PACKING" property="samplePacking" jdbcType="VARCHAR" />
+      <result column="SAMPLE_CARRIER" property="sampleCarrier" jdbcType="VARCHAR" />
+      <result column="EXTRACT_DATETIME" property="extractDatetime" jdbcType="TIMESTAMP" />
+      <result column="EXTRACT_PERSON" property="extractPerson" jdbcType="VARCHAR" />
+      <result column="EXTRACT_METHOD" property="extractMethod" jdbcType="VARCHAR" />
+      <result column="EXTRACT_PART" property="extractPart" jdbcType="VARCHAR" />
+      <result column="SAMPLE_FLAG" property="sampleFlag" jdbcType="VARCHAR" />
+      <result column="LINK_ID" property="linkId" jdbcType="VARCHAR" />
+      <result column="SAMPLE_PURPOSE" property="samplePurpose" jdbcType="VARCHAR" />
+      <result column="SAMPLE_STATUS" property="sampleStatus" jdbcType="VARCHAR" />
+      <result column="INSTORED_FLAG" property="instoredFlag" jdbcType="VARCHAR" />
+      <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+      <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+      <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+      <result column="UPDATE_PERSON" property="updatePerson" jdbcType="VARCHAR" />
+      <result column="DELETE_FLAG" property="deleteFlag" jdbcType="VARCHAR" />
+      <result column="DELETE_DATETIME" property="deleteDatetime" jdbcType="TIMESTAMP" />
+      <result column="DELETE_PERSON" property="deletePerson" jdbcType="VARCHAR" />
+      <result column="DELETE_REASON" property="deleteReason" jdbcType="VARCHAR" />
+      <result column="SAMPLE_REMARK" property="sampleRemark" jdbcType="VARCHAR" />
+      <result column="SAMPLE_DNA_PICTURE" property="sampleDnaPicture" jdbcType="VARCHAR" />
+      <result column="SAMPLE_DNA_PICTURE_PATH" property="sampleDnaPicturePath" jdbcType="VARCHAR" />
+      <result column="SAMPLE_TYPE_NAME" property="sampleTypeName" jdbcType="VARCHAR" />
+      <result column="EXTRACT_METHOD_NAME" property="extractMethodName" jdbcType="VARCHAR" />
+      <result column="SAMPLE_PACKING_NAME" property="samplePackingName" jdbcType="VARCHAR" />
+      <result column="PRE_METHOD1_RESULT" property="preMethod1Result" jdbcType="VARCHAR" />
+      <result column="PRE_METHOD2_RESULT" property="preMethod2Result" jdbcType="VARCHAR" />
+      <result column="PRE_METHOD3_RESULT" property="preMethod3Result" jdbcType="VARCHAR" />
+      <result column="IS_RETAIN" property="isRetain" jdbcType="VARCHAR" />
+      <result column="REFUSE_REASON" property="refuseReason" jdbcType="VARCHAR" />
+      <result column="SAMPLE_MATERIAL_PICTURE" property="sampleMaterialPicture" jdbcType="VARCHAR" />
+      <result column="SAMPLE_MATERIAL_PICTURE_PATH" property="sampleMaterialPicturePath" jdbcType="VARCHAR" />
+      <result column="INSTORED_TYPE" property="instoredType" jdbcType="VARCHAR" />
+    </collection>
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from LAB_EXTRACT_SAMPLE
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.clims.model.po.LabExtractSample" >
+    insert into LAB_EXTRACT_SAMPLE (ID, EXTRACT_ID, SAMPLE_ID,  TRANSFER_METHOD,
+      EXTRACT_METHOD, PRETEST_METHOD, CONTEST_METHOD, 
+      EXTRACT_STRING, EXTRACT_PART, CONTEST_RESULT, 
+      PRETEST_RESULT, EXTRACT_REAGENT, REAGENT_DOSAGE, 
+      SAMPLE_POSTION, CREATE_DATETIME, CREATE_PERSON, 
+      UPDATE_DATETIME, UPDATE_PEROSN, LEAVE, BATH, DRY, SHAKE, EARTHQUAKE)
+    values (#{id,jdbcType=VARCHAR}, #{extractId,jdbcType=VARCHAR}, #{sampleId,jdbcType=VARCHAR},  #{transferMethod,jdbcType=VARCHAR},
+      #{extractMethod,jdbcType=VARCHAR}, #{pretestMethod,jdbcType=VARCHAR}, #{contestMethod,jdbcType=VARCHAR}, 
+      #{extractString,jdbcType=VARCHAR}, #{extractPart,jdbcType=VARCHAR}, #{contestResult,jdbcType=VARCHAR}, 
+      #{pretestResult,jdbcType=VARCHAR}, #{extractReagent,jdbcType=VARCHAR}, #{reagentDosage,jdbcType=VARCHAR}, 
+      #{samplePostion,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP}, #{createPerson,jdbcType=VARCHAR}, 
+      #{updateDatetime,jdbcType=TIMESTAMP}, #{updatePerosn,jdbcType=VARCHAR}, #{leave,jdbcType=VARCHAR}, #{bath,jdbcType=VARCHAR},
+      #{dry,jdbcType=VARCHAR}, #{shake,jdbcType=VARCHAR}, #{earthquake,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.clims.model.po.LabExtractSample" >
+    update LAB_EXTRACT_SAMPLE
+    set EXTRACT_ID = #{extractId,jdbcType=VARCHAR},
+      SAMPLE_ID = #{sampleId,jdbcType=VARCHAR},
+      TRANSFER_METHOD = #{transferMethod,jdbcType=VARCHAR},
+      EXTRACT_METHOD = #{extractMethod,jdbcType=VARCHAR},
+      PRETEST_METHOD = #{pretestMethod,jdbcType=VARCHAR},
+      CONTEST_METHOD = #{contestMethod,jdbcType=VARCHAR},
+      EXTRACT_STRING = #{extractString,jdbcType=VARCHAR},
+      EXTRACT_PART = #{extractPart,jdbcType=VARCHAR},
+      CONTEST_RESULT = #{contestResult,jdbcType=VARCHAR},
+      PRETEST_RESULT = #{pretestResult,jdbcType=VARCHAR},
+      EXTRACT_REAGENT = #{extractReagent,jdbcType=VARCHAR},
+      REAGENT_DOSAGE = #{reagentDosage,jdbcType=VARCHAR},
+      SAMPLE_POSTION = #{samplePostion,jdbcType=VARCHAR},
+      CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+      CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP},
+      UPDATE_PEROSN = #{updatePerosn,jdbcType=VARCHAR},
+      LEAVE = #{leave,jdbcType=VARCHAR},
+      BATH = #{bath,jdbcType=VARCHAR},
+      DRY = #{dry,jdbcType=VARCHAR},
+      SHAKE = #{shake,jdbcType=VARCHAR},
+      EARTHQUAKE = #{earthquake,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select *
+    from LAB_EXTRACT_SAMPLE
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectList" parameterType="com.bazl.clims.model.po.LabExtractSample" resultMap="BaseResultMap" >
+    select les.*
+    from LAB_EXTRACT_SAMPLE les
+    left join LIMS_SAMPLE_INFO_DNA lsid on lsid.SAMPLE_ID = les.SAMPLE_ID
+    where 1=1 and lsid.delete_flag = '0'
+    <if test="_parameter != null">
+      <include refid="Query_Where_Clause"/>
+    </if>
+  </select>
+
+  <sql id="Query_Where_Clause">
+    <if test="caseId != null">
+      and lsid.CASE_ID = #{caseId,jdbcType=VARCHAR}
+    </if>
+    <if test="extractId != null">
+      and les.EXTRACT_ID = #{extractId,jdbcType=VARCHAR}
+    </if>
+  </sql>
+
+  <select id="selectByExtractId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select les.*,
+    lsid.CASE_ID as caseId,
+    lsid.SAMPLE_NO as sampleNo,
+    lsid.SAMPLE_NAME as sampleName,
+    lsid.SAMPLE_TYPE as sampleType
+    from LAB_EXTRACT_SAMPLE les
+    left join LIMS_SAMPLE_INFO_DNA lsid on lsid.SAMPLE_ID = les.SAMPLE_ID
+    where les.EXTRACT_ID = #{extractId,jdbcType=VARCHAR} and lsid.delete_flag = '0'
+    and (lsid.SAMPLE_STATUS = '02' or lsid.SAMPLE_STATUS = '03')
+    order by lsid.SAMPLE_FLAG asc, lsid.SAMPLE_NO asc
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select *
+    from LAB_EXTRACT_SAMPLE
+  </select>
+
+  <select id="selectByExtractIdAndInfoDna" resultMap="extractSampleAndInfoDna" parameterType="java.lang.String">
+    select *
+    from LAB_EXTRACT_SAMPLE les
+    left join LIMS_SAMPLE_INFO_DNA lsid on les.sample_id = lsid.sample_id
+    where les.extract_id = #{extractId,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectLabExtractSampleBySampleId" parameterType="java.lang.String" resultMap="extractSampleAndInfoDna">
+    select *
+    from LAB_EXTRACT_SAMPLE les
+    left join LIMS_SAMPLE_INFO_DNA lsid on les.sample_id = lsid.sample_id
+    WHERE les.SAMPLE_ID = #{sampleId,jdbcType=VARCHAR} ORDER  BY les.UPDATE_DATETIME DESC
+  </select>
+</mapper>

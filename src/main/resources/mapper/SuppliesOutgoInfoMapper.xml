@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.SuppliesOutgoInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.SuppliesOutgoInfo" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="SUPPLIES_ID" property="suppliesId" jdbcType="VARCHAR" />
+    <result column="RECORD_TYPE" property="recordType" jdbcType="VARCHAR" />
+    <result column="STORAGE_NUM" property="storageNum" jdbcType="VARCHAR" />
+    <result column="STORAGE_PERSON" property="storagePerson" jdbcType="VARCHAR" />
+    <result column="STORAGE_DATETIME" property="storageDatetime" jdbcType="TIMESTAMP" />
+    <result column="EFFECTIVE_DATETIME" property="effectiveDatetime" jdbcType="TIMESTAMP" />
+    <result column="STORAGE_REMARK" property="storageRemark" jdbcType="VARCHAR" />
+    <result column="ORG_ID" property="orgId" jdbcType="VARCHAR" />
+    <!--业务字段-->
+    <result column="SUPPLIES_NAME" property="suppliesName" jdbcType="VARCHAR" />
+    <result column="SUPPLIES_NO" property="suppliesNo" jdbcType="VARCHAR" />
+    <result column="EXPERIMENTAL_STAGE" property="experimentalStage" jdbcType="VARCHAR" />
+    <result column="SUPPLIES_BRAND" property="suppliesBrand" jdbcType="VARCHAR" />
+    <result column="SUPPLIES_MODEL" property="suppliesModel" jdbcType="VARCHAR" />
+    <result column="SUPPLIES_PRICE" property="suppliesPrice" jdbcType="VARCHAR" />
+    <result column="SUPPLIES_FIRM" property="suppliesFirm" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from SUPPLIES_OUTGO_INFO
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.clims.model.po.SuppliesOutgoInfo" >
+    insert into SUPPLIES_OUTGO_INFO (ID, SUPPLIES_ID, RECORD_TYPE,
+      STORAGE_NUM, STORAGE_PERSON, STORAGE_DATETIME, 
+      EFFECTIVE_DATETIME, STORAGE_REMARK, ORG_ID
+      )
+    values (#{id,jdbcType=VARCHAR}, #{suppliesId,jdbcType=VARCHAR}, #{recordType,jdbcType=VARCHAR}, 
+      #{storageNum,jdbcType=VARCHAR}, #{storagePerson,jdbcType=VARCHAR}, #{storageDatetime,jdbcType=TIMESTAMP}, 
+      #{effectiveDatetime,jdbcType=TIMESTAMP}, #{storageRemark,jdbcType=VARCHAR}, #{orgId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.clims.model.po.SuppliesOutgoInfo" >
+    update SUPPLIES_OUTGO_INFO
+    set SUPPLIES_ID = #{suppliesId,jdbcType=VARCHAR},
+      RECORD_TYPE = #{recordType,jdbcType=VARCHAR},
+      STORAGE_NUM = #{storageNum,jdbcType=VARCHAR},
+      STORAGE_PERSON = #{storagePerson,jdbcType=VARCHAR},
+      STORAGE_DATETIME = #{storageDatetime,jdbcType=TIMESTAMP},
+      EFFECTIVE_DATETIME = #{effectiveDatetime,jdbcType=TIMESTAMP},
+      STORAGE_REMARK = #{storageRemark,jdbcType=VARCHAR},
+      ORG_ID = #{orgId,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select ID, SUPPLIES_ID, RECORD_TYPE, STORAGE_NUM, STORAGE_PERSON, STORAGE_DATETIME,
+    EFFECTIVE_DATETIME, STORAGE_REMARK, ORG_ID
+    from SUPPLIES_OUTGO_INFO
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select ID, SUPPLIES_ID, RECORD_TYPE, STORAGE_NUM, STORAGE_PERSON, STORAGE_DATETIME,
+    EFFECTIVE_DATETIME, STORAGE_REMARK, ORG_ID
+    from SUPPLIES_OUTGO_INFO
+  </select>
+
+  <select id="selectByRecordType" resultMap="BaseResultMap" parameterType="com.bazl.clims.model.po.SuppliesOutgoInfo" >
+    select sup.*,pd.SUPPLIES_NAME as SUPPLIES_NAME, pd.SUPPLIES_NO as SUPPLIES_NO,
+    pd.EXPERIMENTAL_STAGE as EXPERIMENTAL_STAGE,pd.SUPPLIES_BRAND as SUPPLIES_BRAND,
+    pd.SUPPLIES_MODEL as SUPPLIES_MODEL,pd.SUPPLIES_PRICE as SUPPLIES_PRICE,pd.SUPPLIES_FIRM as SUPPLIES_FIRM
+    from SUPPLIES_OUTGO_INFO sup
+    left join SUPPLIES_INFO pd
+    on sup.SUPPLIES_ID = pd.id
+    <where>
+      <if test="orgId == null " >
+        sup.ORG_ID is null
+      </if>
+      <if test="orgId != null">
+        and sup.ORG_ID = #{orgId,jdbcType=VARCHAR}
+      </if>
+      <if test="recordType != null">
+        and sup.RECORD_TYPE = #{recordType,jdbcType=VARCHAR}
+      </if>
+      <if test="suppliesName != null">
+        and pd.SUPPLIES_NAME like '%'||#{suppliesName,jdbcType=VARCHAR}||'%'
+      </if>
+      <if test="storagePerson != null">
+        and sup.STORAGE_PERSON like '%'||#{storagePerson,jdbcType=VARCHAR}||'%'
+      </if>
+      <if test="storageDatetimeStart != null">
+        and sup.STORAGE_DATETIME &gt;=#{storageDatetimeStart, jdbcType=TIMESTAMP}
+      </if>
+      <if test="storageDatetimeEnd != null">
+        and sup.STORAGE_DATETIME &lt;=#{storageDatetimeEnd, jdbcType=TIMESTAMP}
+      </if>
+    </where>
+    order by pd.SUPPLIES_NAME asc
+  </select>
+
+  <select id="selectByStorageNum" resultMap="BaseResultMap" parameterType="com.bazl.clims.model.po.SuppliesOutgoInfo" >
+    select sup.STORAGE_NUM as STORAGE_NUM, pd.SUPPLIES_NAME as SUPPLIES_NAME, pd.SUPPLIES_NO as SUPPLIES_NO,
+    pd.EXPERIMENTAL_STAGE as EXPERIMENTAL_STAGE,pd.SUPPLIES_BRAND as SUPPLIES_BRAND,
+    pd.SUPPLIES_MODEL as SUPPLIES_MODEL,pd.SUPPLIES_PRICE as SUPPLIES_PRICE,pd.SUPPLIES_FIRM as SUPPLIES_FIRM
+    from SUPPLIES_OUTGO_INFO sup
+    left join SUPPLIES_INFO pd on sup.SUPPLIES_ID = pd.id
+    <where>
+      sup.RECORD_TYPE = '0'
+      <if test="orgId == null " >
+        and sup.ORG_ID is null
+      </if>
+      <if test="orgId != null">
+        and sup.ORG_ID = #{orgId,jdbcType=VARCHAR}
+      </if>
+      <if test="suppliesName != null">
+        and pd.SUPPLIES_NAME like '%'||#{suppliesName,jdbcType=VARCHAR}||'%'
+      </if>
+      <if test="suppliesNo != null">
+        and pd.SUPPLIES_NO like '%'||#{suppliesNo,jdbcType=VARCHAR}||'%'
+      </if>
+      <if test="suppliesModel != null">
+        and pd.SUPPLIES_MODEL like '%'||#{suppliesModel,jdbcType=VARCHAR}||'%'
+      </if>
+      <if test="experimentalStage != null">
+        and pd.EXPERIMENTAL_STAGE =#{experimentalStage, jdbcType=TIMESTAMP}
+      </if>
+    </where>
+  </select>
+</mapper>

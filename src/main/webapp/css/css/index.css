@@ -1,0 +1,185 @@
+/*.layui-layout-admin .layui-header {*/
+    /*background-color: #00b39b;*/
+/*}*/
+
+.layui-layout-admin .layui-logo {
+    background: #23262E;
+}
+
+.layui-layout-left {
+    height: 100%;
+    line-height: 60px;
+    padding-left: 30px;
+    font-size: 20px;
+    color: #fff;
+}
+
+.layui-header .layui-nav .layui-nav-item a {
+    color: #fff;
+    padding-left: 0px;
+}
+
+.layui-header .layui-nav .layui-nav-item a i {
+    margin-right: 5px;
+}
+
+.layui-header .layui-nav .layui-nav-item+.layui-nav-item a i {
+    border-left: 1px solid #fff;
+    padding-left: 10px;
+    line-height: 15px;
+}
+
+.layui-nav-tree .layui-nav-more {
+    display: none;
+}
+
+.layui-nav-tree .move {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    margin-top: -12px;
+    font-size: 24px;
+}
+
+.layui-nav .layui-badge {
+    position: absolute;
+    top: 50%;
+    margin: -22px -16px 0;
+    border-radius: 50%;
+}
+
+.layui-layout-admin .layui-side {
+    background: url("../../img/left-bg.png") no-repeat center;
+    background-size: cover;
+}
+
+.layui-nav {
+    background: transparent;
+}
+/* 一级样式 */
+
+.layui-side-scroll>.layui-nav-tree>.layui-nav-item>a:hover,
+.layui-side-scroll>.layui-nav-tree>.layui-nav-itemed>a,
+.layui-side-scroll>.layui-nav-tree>.layui-this,
+.layui-side-scroll>.layui-nav-tree>.layui-this>a {
+    background-color: #1ab39a;
+}
+
+.layui-side-scroll .layui-nav-tree .layui-nav-bar {
+    width: 5px;
+    height: 0;
+    background-color: #1ab39a;
+}
+/* 二级样式 */
+
+.layui-nav-tree .layui-nav-child dd.layui-this,
+.layui-nav-tree .layui-nav-child>.layui-nav-itemed>a,
+.layui-side-scroll .layui-nav-child>dd>a:hover {
+    color: #2effdf !important;
+    background: RGBA(46, 255, 223, .2)
+}
+
+.layui-nav-tree .layui-nav-child dd.layui-this a {
+    color: #2effdf !important;
+    background: transparent
+}
+
+.layui-side-scroll .layui-nav-child>dd>a {
+    padding-left: 30px
+}
+
+.layui-side-scroll .layui-nav-child>dd>a>i {
+    color: #fff !important;
+}
+/* 三级样式 */
+
+.layui-nav-tree .layui-nav-child dd>.layui-nav-child dd.layui-this,
+.layui-nav-tree .layui-nav-child dd>.layui-nav-child dd>a:hover {
+    color: #2effdf !important;
+    background: transparent;
+}
+
+.layui-nav-tree .layui-nav-child dd>.layui-nav-child dd.layui-this .radio,
+.layui-nav-tree .layui-nav-child dd>.layui-nav-child dd>a:hover .radio {
+    background: #2effdf;
+}
+
+.layui-nav-tree .layui-nav-child dd>.layui-nav-child dd>a {
+    padding-left: 40px
+}
+
+.layui-nav-bar {
+    background: transparent;
+}
+
+.radio {
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    border: 1px solid #2effdf;
+    border-radius: 50%;
+    margin-right: 10px;
+    margin-bottom: 2px;
+}
+
+.layadmin-iframe {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.tips {
+    padding: 20px 10px;
+    position: absolute;
+    background: #fff;
+    width: 460px;
+    left: -134px;
+    /*bottom: -300px;*/
+    box-shadow: 0px 6px 10px 3px #f3f3f3;
+    display: none;
+}
+
+.tips .triangle {
+    top: -30px;
+    position: absolute;
+    border: none;
+    font-size: 60px;
+    transform: rotate(180deg);
+    left: 32%;
+    z-index: 1;
+}
+
+.layui-timeline-axis {
+    background: #ccc;
+    width: 16px;
+    height: 15px;
+    left: -2px;
+}
+
+.layui-timeline .layui-timeline-item:nth-child(4n-1) i {
+    background: #ff7a77;
+}
+
+.layui-timeline .layui-timeline-item:nth-child(4n-2) i {
+    background: #3ea9eb;
+}
+
+.layui-timeline .layui-timeline-item:nth-child(4n-3) i {
+    background: #49c1af;
+}
+
+.layui-timeline .layui-timeline-item:nth-child(4n-4) i {
+    background: #ffc556;
+}
+
+.layui-timeline {
+    overflow: hidden;
+}
+
+.layui-timeline .layui-text {
+    position: relative;
+}

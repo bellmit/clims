@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.AmTopicPersonMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.AmTopicPerson" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="TOPIC_RECORD_ID" property="topicRecordId" jdbcType="VARCHAR" />
+    <result column="PERSON_NAME" property="personName" jdbcType="VARCHAR" />
+    <result column="PERSON_RANKING" property="personRanking" jdbcType="DECIMAL" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from AM_TOPIC_PERSON
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.clims.model.po.AmTopicPerson" >
+    insert into AM_TOPIC_PERSON (ID, TOPIC_RECORD_ID, PERSON_NAME, 
+      PERSON_RANKING, CREATE_DATETIME, CREATE_PERSON
+      )
+    values (#{id,jdbcType=VARCHAR}, #{topicRecordId,jdbcType=VARCHAR}, #{personName,jdbcType=VARCHAR}, 
+      #{personRanking,jdbcType=DECIMAL}, #{createDatetime,jdbcType=TIMESTAMP}, #{createPerson,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.clims.model.po.AmTopicPerson" >
+    update AM_TOPIC_PERSON
+    set TOPIC_RECORD_ID = #{topicRecordId,jdbcType=VARCHAR},
+      PERSON_NAME = #{personName,jdbcType=VARCHAR},
+      PERSON_RANKING = #{personRanking,jdbcType=DECIMAL},
+      CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+      CREATE_PERSON = #{createPerson,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select ID, TOPIC_RECORD_ID, PERSON_NAME, PERSON_RANKING, CREATE_DATETIME, CREATE_PERSON
+    from AM_TOPIC_PERSON
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select ID, TOPIC_RECORD_ID, PERSON_NAME, PERSON_RANKING, CREATE_DATETIME, CREATE_PERSON
+    from AM_TOPIC_PERSON
+  </select>
+</mapper>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.CompetencePostMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.CompetencePost" >
+    <result column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="PERSONAL_ID" property="personalId" jdbcType="VARCHAR" />
+    <result column="POSITIONAL_TITLE" property="positionalTitle" jdbcType="VARCHAR" />
+    <result column="ACQUISITION_TIME" property="acquisitionTime" jdbcType="TIMESTAMP" />
+    <result column="PERIOD_VALIDITY" property="periodValidity" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <insert id="insert" parameterType="com.bazl.clims.model.po.CompetencePost" >
+    insert into COMPETENCE_POST (ID, PERSONAL_ID, POSITIONAL_TITLE, 
+      ACQUISITION_TIME, PERIOD_VALIDITY)
+    values (#{id,jdbcType=VARCHAR}, #{personalId,jdbcType=VARCHAR}, #{positionalTitle,jdbcType=VARCHAR}, 
+      #{acquisitionTime,jdbcType=TIMESTAMP}, #{periodValidity,jdbcType=TIMESTAMP})
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select ID, PERSONAL_ID, POSITIONAL_TITLE, ACQUISITION_TIME, PERIOD_VALIDITY
+    from COMPETENCE_POST
+  </select>
+</mapper>

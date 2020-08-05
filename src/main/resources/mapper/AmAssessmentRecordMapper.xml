@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.AmAssessmentRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.AmAssessmentRecord" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="ORG_ID" property="orgId" jdbcType="VARCHAR" />
+    <result column="ASSESSMENT_NAME" property="assessmentName" jdbcType="VARCHAR" />
+    <result column="ASSESSMENT_CONTENT" property="assessmentContent" jdbcType="VARCHAR" />
+    <result column="ASSESSMENT_RESULT" property="assessmentResult" jdbcType="VARCHAR" />
+    <result column="ASSESSMENT_STANDARD" property="assessmentStandard" jdbcType="VARCHAR" />
+    <result column="ASSESSMENT_DEDUCTION" property="assessmentDeduction" jdbcType="VARCHAR" />
+    <result column="ASSESSMENT_DATETIME" property="assessmentDatetime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_PERSON" property="updatePerson" jdbcType="VARCHAR" />
+    <result column="DELETE_FLAG" property="deleteFlag" jdbcType="VARCHAR" />
+    <result column="DELETE_DATETIME" property="deleteDatetime" jdbcType="TIMESTAMP" />
+    <result column="DELETE_PERSON" property="deletePerson" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from AM_ASSESSMENT_RECORD
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.clims.model.po.AmAssessmentRecord" >
+    insert into AM_ASSESSMENT_RECORD (ID, ORG_ID, ASSESSMENT_NAME, 
+      ASSESSMENT_CONTENT, ASSESSMENT_RESULT, ASSESSMENT_STANDARD, 
+      ASSESSMENT_DEDUCTION, ASSESSMENT_DATETIME, 
+      CREATE_DATETIME, CREATE_PERSON, UPDATE_DATETIME, 
+      UPDATE_PERSON, DELETE_FLAG, DELETE_DATETIME, 
+      DELETE_PERSON)
+    values (#{id,jdbcType=VARCHAR}, #{orgId,jdbcType=VARCHAR}, #{assessmentName,jdbcType=VARCHAR}, 
+      #{assessmentContent,jdbcType=VARCHAR}, #{assessmentResult,jdbcType=VARCHAR}, #{assessmentStandard,jdbcType=VARCHAR}, 
+      #{assessmentDeduction,jdbcType=VARCHAR}, #{assessmentDatetime,jdbcType=TIMESTAMP}, 
+      #{createDatetime,jdbcType=TIMESTAMP}, #{createPerson,jdbcType=VARCHAR}, #{updateDatetime,jdbcType=TIMESTAMP}, 
+      #{updatePerson,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=VARCHAR}, #{deleteDatetime,jdbcType=TIMESTAMP}, 
+      #{deletePerson,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.clims.model.po.AmAssessmentRecord" >
+    update AM_ASSESSMENT_RECORD
+    set ORG_ID = #{orgId,jdbcType=VARCHAR},
+      ASSESSMENT_NAME = #{assessmentName,jdbcType=VARCHAR},
+      ASSESSMENT_CONTENT = #{assessmentContent,jdbcType=VARCHAR},
+      ASSESSMENT_RESULT = #{assessmentResult,jdbcType=VARCHAR},
+      ASSESSMENT_STANDARD = #{assessmentStandard,jdbcType=VARCHAR},
+      ASSESSMENT_DEDUCTION = #{assessmentDeduction,jdbcType=VARCHAR},
+      ASSESSMENT_DATETIME = #{assessmentDatetime,jdbcType=TIMESTAMP},
+      CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+      CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP},
+      UPDATE_PERSON = #{updatePerson,jdbcType=VARCHAR},
+      DELETE_FLAG = #{deleteFlag,jdbcType=VARCHAR},
+      DELETE_DATETIME = #{deleteDatetime,jdbcType=TIMESTAMP},
+      DELETE_PERSON = #{deletePerson,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select ID, ORG_ID, ASSESSMENT_NAME, ASSESSMENT_CONTENT, ASSESSMENT_RESULT, ASSESSMENT_STANDARD, 
+    ASSESSMENT_DEDUCTION, ASSESSMENT_DATETIME, CREATE_DATETIME, CREATE_PERSON, UPDATE_DATETIME, 
+    UPDATE_PERSON, DELETE_FLAG, DELETE_DATETIME, DELETE_PERSON
+    from AM_ASSESSMENT_RECORD
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select ID, ORG_ID, ASSESSMENT_NAME, ASSESSMENT_CONTENT, ASSESSMENT_RESULT, ASSESSMENT_STANDARD, 
+    ASSESSMENT_DEDUCTION, ASSESSMENT_DATETIME, CREATE_DATETIME, CREATE_PERSON, UPDATE_DATETIME, 
+    UPDATE_PERSON, DELETE_FLAG, DELETE_DATETIME, DELETE_PERSON
+    from AM_ASSESSMENT_RECORD
+  </select>
+</mapper>

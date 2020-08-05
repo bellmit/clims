@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.LimsConsignmentInfoMapper" >
+<resultMap id="BaseResultMap" type="com.bazl.clims.model.po.LimsConsignmentInfo" >
+  <id column="CONSIGNMENT_ID" property="consignmentId" jdbcType="VARCHAR" />
+  <result column="CASE_ID" property="caseId" jdbcType="VARCHAR" />
+  <result column="SERVER_NO" property="serverNo" jdbcType="VARCHAR" />
+  <result column="CONSIGNMENT_NO" property="consignmentNo" jdbcType="VARCHAR" />
+  <result column="APPEND_FLAG" property="appendFlag" jdbcType="VARCHAR" />
+  <result column="DELEGATE_ORG_CODE" property="delegateOrgCode" jdbcType="VARCHAR" />
+  <result column="DELEGATE_ORG_NAME" property="delegateOrgName" jdbcType="VARCHAR" />
+  <result column="DELEGATOR1_ID" property="delegator1Id" jdbcType="VARCHAR" />
+  <result column="DELEGATOR2_ID" property="delegator2Id" jdbcType="VARCHAR" />
+  <result column="DELEGATOR1_NAME" property="delegator1Name" jdbcType="VARCHAR" />
+  <result column="DELEGATOR2_NAME" property="delegator2Name" jdbcType="VARCHAR" />
+  <result column="DELEGATOR1_POSITION" property="delegator1Position" jdbcType="VARCHAR" />
+  <result column="DELEGATOR2_POSITION" property="delegator2Position" jdbcType="VARCHAR" />
+  <result column="DELEGATOR1_PAPERWORK_TYPE" property="delegator1PaperworkType" jdbcType="VARCHAR" />
+  <result column="DELEGATOR2_PAPERWORK_TYPE" property="delegator2PaperworkType" jdbcType="VARCHAR" />
+  <result column="DELEGATOR1_PAPERWORK_NO" property="delegator1PaperworkNo" jdbcType="VARCHAR" />
+  <result column="DELEGATOR2_PAPERWORK_NO" property="delegator2PaperworkNo" jdbcType="VARCHAR" />
+  <result column="DELEGATOR1_PHONE_NUMBER" property="delegator1PhoneNumber" jdbcType="VARCHAR" />
+  <result column="DELEGATOR2_PHONE_NUMBER" property="delegator2PhoneNumber" jdbcType="VARCHAR" />
+  <result column="DELEGATE_DATETIME" property="delegateDatetime" jdbcType="TIMESTAMP" />
+  <result column="DELEGATE_ORG_ADDRESS" property="delegateOrgAddress" jdbcType="VARCHAR" />
+  <result column="DELEGATE_ORG_ZIP_CODE" property="delegateOrgZipCode" jdbcType="VARCHAR" />
+  <result column="DELEGATE_ORG_FAX_NO" property="delegateOrgFaxNo" jdbcType="VARCHAR" />
+  <result column="IDENTIFY_REQUIREMENT" property="identifyRequirement" jdbcType="VARCHAR" />
+  <result column="PRE_IDENTIFY_DESC" property="preIdentifyDesc" jdbcType="VARCHAR" />
+  <result column="REIDENTIFY_REASON" property="reidentifyReason" jdbcType="VARCHAR" />
+  <result column="REIDENTIFY_COUNT" property="reidentifyCount" jdbcType="DECIMAL" />
+  <result column="STATUS" property="status" jdbcType="VARCHAR" />
+  <result column="ACCEPT_ORG_ID" property="acceptOrgId" jdbcType="VARCHAR" />
+  <result column="IDENTIFY_TYPE" property="identifyType" jdbcType="VARCHAR" />
+  <result column="IDENTIFY_ITEM" property="identifyItem" jdbcType="VARCHAR" />
+  <result column="ACCEPTOR_ID" property="acceptorId" jdbcType="VARCHAR" />
+  <result column="ACCEPT_DATETIME" property="acceptDatetime" jdbcType="TIMESTAMP" />
+  <result column="REFUSE_REASON" property="refuseReason" jdbcType="VARCHAR" />
+  <result column="REFUSE_DATETIME" property="refuseDatetime" jdbcType="TIMESTAMP" />
+  <result column="REFUSE_PERSON" property="refusePerson" jdbcType="VARCHAR" />
+  <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+  <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+  <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+  <result column="UPDATE_PERSON" property="updatePerson" jdbcType="VARCHAR" />
+  <result column="DELETE_FLAG" property="deleteFlag" jdbcType="VARCHAR" />
+  <result column="DELETE_DATETIME" property="deleteDatetime" jdbcType="TIMESTAMP" />
+  <result column="DELETE_PERSON" property="deletePerson" jdbcType="VARCHAR" />
+  <result column="DELETE_REASON" property="deleteReason" jdbcType="VARCHAR" />
+  <result column="TRANSFER_FLAG" property="transferFlag" jdbcType="VARCHAR" />
+  <result column="TRANSFER_BASE_ID" property="transferBaseId" jdbcType="VARCHAR" />
+  <result column="AREA_ORG_CODE" property="areaOrgCode" jdbcType="VARCHAR" />
+
+  <result column="AREA_OEG_NAME" property="areaOrgName" jdbcType="VARCHAR" />
+
+  <result column="AUTOGRAPH_PICTURE" property="autographPicture" jdbcType="VARCHAR" />
+  <result column="AUTOGRAPH_PICTURE_PATH" property="autographPicturePath" jdbcType="VARCHAR" />
+</resultMap>
+
+
+  <sql id="Base_Column_List">
+    lci.CONSIGNMENT_ID, lci.CASE_ID, lci.SERVER_NO, lci.CONSIGNMENT_NO, lci.APPEND_FLAG, lci.DELEGATE_ORG_CODE, lci.DELEGATE_ORG_NAME, lci.DELEGATOR1_ID, lci.DELEGATOR2_ID, lci.DELEGATOR1_NAME, lci.DELEGATOR2_NAME, lci.DELEGATOR1_POSITION,
+    lci.DELEGATOR2_POSITION, lci.DELEGATOR1_PAPERWORK_TYPE, lci.DELEGATOR2_PAPERWORK_TYPE, lci.DELEGATOR1_PAPERWORK_NO, lci.DELEGATOR2_PAPERWORK_NO, lci.DELEGATOR1_PHONE_NUMBER, lci.DELEGATOR2_PHONE_NUMBER, lci.DELEGATE_DATETIME,
+    lci.DELEGATE_ORG_ADDRESS, lci.DELEGATE_ORG_ZIP_CODE, lci.DELEGATE_ORG_FAX_NO, lci.IDENTIFY_REQUIREMENT, lci.IDENTIFY_REQUIREMENT, lci.PRE_IDENTIFY_DESC, lci.REIDENTIFY_REASON, lci.REIDENTIFY_COUNT, lci.STATUS, lci.ACCEPT_ORG_ID, lci.IDENTIFY_TYPE,
+    lci.IDENTIFY_ITEM, lci.ACCEPTOR_ID, lci.ACCEPT_DATETIME, lci.REFUSE_REASON, lci.CREATE_DATETIME, lci.CREATE_PERSON, lci.UPDATE_DATETIME, lci.UPDATE_PERSON, lci.DELETE_FLAG, lci.DELETE_DATETIME,
+    lci.DELETE_PERSON, lci.DELETE_REASON, lci.TRANSFER_FLAG, lci.TRANSFER_BASE_ID, lci.AREA_ORG_CODE, AUTOGRAPH_PICTURE, AUTOGRAPH_PICTURE_PATH
+  </sql>
+
+  <insert id="insertConsignatioInfo" parameterType="com.bazl.clims.model.po.LimsConsignmentInfo" >
+    insert into LIMS_CONSIGNMENT_INFO (CONSIGNMENT_ID, CASE_ID, SERVER_NO,
+      CONSIGNMENT_NO, APPEND_FLAG, DELEGATE_ORG_CODE,
+      DELEGATE_ORG_NAME, DELEGATOR1_ID, DELEGATOR2_ID,
+      DELEGATOR1_NAME, DELEGATOR2_NAME, DELEGATOR1_POSITION,
+      DELEGATOR2_POSITION, DELEGATOR1_PAPERWORK_TYPE,
+      DELEGATOR2_PAPERWORK_TYPE, DELEGATOR1_PAPERWORK_NO,
+      DELEGATOR2_PAPERWORK_NO, DELEGATOR1_PHONE_NUMBER,
+      DELEGATOR2_PHONE_NUMBER, DELEGATE_DATETIME,
+      DELEGATE_ORG_ADDRESS, DELEGATE_ORG_ZIP_CODE,
+      DELEGATE_ORG_FAX_NO, IDENTIFY_REQUIREMENT,
+      PRE_IDENTIFY_DESC, REIDENTIFY_REASON, REIDENTIFY_COUNT,
+      STATUS, ACCEPT_ORG_ID, IDENTIFY_TYPE,
+      IDENTIFY_ITEM, ACCEPTOR_ID, ACCEPT_DATETIME,
+      REFUSE_REASON, REFUSE_DATETIME, REFUSE_PERSON,
+      CREATE_DATETIME, CREATE_PERSON, UPDATE_DATETIME,
+      UPDATE_PERSON, DELETE_FLAG, DELETE_DATETIME,
+      DELETE_PERSON, DELETE_REASON, TRANSFER_FLAG,
+      TRANSFER_BASE_ID, AREA_ORG_CODE)
+    values (#{consignmentId,jdbcType=VARCHAR}, #{caseId,jdbcType=VARCHAR}, #{serverNo,jdbcType=VARCHAR},
+      #{consignmentNo,jdbcType=VARCHAR}, #{appendFlag,jdbcType=VARCHAR}, #{delegateOrgCode,jdbcType=VARCHAR},
+      #{delegateOrgName,jdbcType=VARCHAR}, #{delegator1Id,jdbcType=VARCHAR}, #{delegator2Id,jdbcType=VARCHAR},
+      #{delegator1Name,jdbcType=VARCHAR}, #{delegator2Name,jdbcType=VARCHAR}, #{delegator1Position,jdbcType=VARCHAR},
+      #{delegator2Position,jdbcType=VARCHAR}, #{delegator1PaperworkType,jdbcType=VARCHAR},
+      #{delegator2PaperworkType,jdbcType=VARCHAR}, #{delegator1PaperworkNo,jdbcType=VARCHAR},
+      #{delegator2PaperworkNo,jdbcType=VARCHAR}, #{delegator1PhoneNumber,jdbcType=VARCHAR},
+      #{delegator2PhoneNumber,jdbcType=VARCHAR}, #{delegateDatetime,jdbcType=TIMESTAMP},
+      #{delegateOrgAddress,jdbcType=VARCHAR}, #{delegateOrgZipCode,jdbcType=VARCHAR},
+      #{delegateOrgFaxNo,jdbcType=VARCHAR}, #{identifyRequirement,jdbcType=VARCHAR},
+      #{preIdentifyDesc,jdbcType=VARCHAR}, #{reidentifyReason,jdbcType=VARCHAR}, #{reidentifyCount,jdbcType=DECIMAL},
+      #{status,jdbcType=VARCHAR}, #{acceptOrgId,jdbcType=VARCHAR}, #{identifyType,jdbcType=VARCHAR},
+      #{identifyItem,jdbcType=VARCHAR}, #{acceptorId,jdbcType=VARCHAR}, #{acceptDatetime,jdbcType=TIMESTAMP},
+      #{refuseReason,jdbcType=VARCHAR}, #{refuseDatetime,jdbcType=TIMESTAMP}, #{refusePerson,jdbcType=VARCHAR},
+      #{createDatetime,jdbcType=TIMESTAMP}, #{createPerson,jdbcType=VARCHAR}, #{updateDatetime,jdbcType=TIMESTAMP},
+      #{updatePerson,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=VARCHAR}, #{deleteDatetime,jdbcType=TIMESTAMP},
+      #{deletePerson,jdbcType=VARCHAR}, #{deleteReason,jdbcType=VARCHAR}, #{transferFlag,jdbcType=VARCHAR},
+      #{transferBaseId,jdbcType=VARCHAR}, #{areaOrgCode,jdbcType=VARCHAR})
+  </insert>
+
+
+  <update id="deleteConsignationInfo" parameterType="com.bazl.clims.model.po.LimsConsignmentInfo">
+    update LIMS_CONSIGNMENT_INFO lci set lci.DELETE_FLAG = #{deleteFlag,jdbcType=VARCHAR},
+     lci.DELETE_DATETIME = #{deleteDatetime,jdbcType=TIMESTAMP},
+     lci.DELETE_PERSON = #{deletePerson,jdbcType=VARCHAR} where lci.consignment_id = #{consignmentId,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectByConsignmentId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select lci.* from  LIMS_CONSIGNMENT_INFO lci where lci.CONSIGNMENT_ID = #{consignmentId,jdbcType=VARCHAR} and lci.delete_flag = '0'
+  </select>
+
+  <select id="selectByCaseId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from  LIMS_CONSIGNMENT_INFO lci
+    where lci.CASE_ID = #{caseId,jdbcType=VARCHAR} and lci.delete_flag = '0'
+    order by lci.accept_datetime asc
+  </select>
+
+
+  <update id="updateConsignatioInfo" parameterType="com.bazl.clims.model.po.LimsConsignmentInfo" >
+    update LIMS_CONSIGNMENT_INFO
+    set CASE_ID = #{caseId,jdbcType=VARCHAR},
+    SERVER_NO = #{serverNo,jdbcType=VARCHAR},
+    CONSIGNMENT_NO = #{consignmentNo,jdbcType=VARCHAR},
+    APPEND_FLAG = #{appendFlag,jdbcType=VARCHAR},
+    DELEGATE_ORG_CODE = #{delegateOrgCode,jdbcType=VARCHAR},
+    DELEGATE_ORG_NAME = #{delegateOrgName,jdbcType=VARCHAR},
+    DELEGATOR1_ID = #{delegator1Id,jdbcType=VARCHAR},
+    DELEGATOR2_ID = #{delegator2Id,jdbcType=VARCHAR},
+    DELEGATOR1_NAME = #{delegator1Name,jdbcType=VARCHAR},
+    DELEGATOR2_NAME = #{delegator2Name,jdbcType=VARCHAR},
+    DELEGATOR1_POSITION = #{delegator1Position,jdbcType=VARCHAR},
+    DELEGATOR2_POSITION = #{delegator2Position,jdbcType=VARCHAR},
+    DELEGATOR1_PAPERWORK_TYPE = #{delegator1PaperworkType,jdbcType=VARCHAR},
+    DELEGATOR2_PAPERWORK_TYPE = #{delegator2PaperworkType,jdbcType=VARCHAR},
+    DELEGATOR1_PAPERWORK_NO = #{delegator1PaperworkNo,jdbcType=VARCHAR},
+    DELEGATOR2_PAPERWORK_NO = #{delegator2PaperworkNo,jdbcType=VARCHAR},
+    DELEGATOR1_PHONE_NUMBER = #{delegator1PhoneNumber,jdbcType=VARCHAR},
+    DELEGATOR2_PHONE_NUMBER = #{delegator2PhoneNumber,jdbcType=VARCHAR},
+    DELEGATE_DATETIME = #{delegateDatetime,jdbcType=TIMESTAMP},
+    DELEGATE_ORG_ADDRESS = #{delegateOrgAddress,jdbcType=VARCHAR},
+    DELEGATE_ORG_ZIP_CODE = #{delegateOrgZipCode,jdbcType=VARCHAR},
+    DELEGATE_ORG_FAX_NO = #{delegateOrgFaxNo,jdbcType=VARCHAR},
+    IDENTIFY_REQUIREMENT = #{identifyRequirement,jdbcType=VARCHAR},
+    PRE_IDENTIFY_DESC = #{preIdentifyDesc,jdbcType=VARCHAR},
+    REIDENTIFY_REASON = #{reidentifyReason,jdbcType=VARCHAR},
+    REIDENTIFY_COUNT = #{reidentifyCount,jdbcType=DECIMAL},
+    STATUS = #{status,jdbcType=VARCHAR},
+    ACCEPT_ORG_ID = #{acceptOrgId,jdbcType=VARCHAR},
+    IDENTIFY_TYPE = #{identifyType,jdbcType=VARCHAR},
+    IDENTIFY_ITEM = #{identifyItem,jdbcType=VARCHAR},
+    ACCEPTOR_ID = #{acceptorId,jdbcType=VARCHAR},
+    ACCEPT_DATETIME = #{acceptDatetime,jdbcType=TIMESTAMP},
+    REFUSE_REASON = #{refuseReason,jdbcType=VARCHAR},
+    REFUSE_DATETIME = #{refuseDatetime,jdbcType=TIMESTAMP},
+    REFUSE_PERSON = #{refusePerson,jdbcType=VARCHAR},
+    CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+    CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+    UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP},
+    UPDATE_PERSON = #{updatePerson,jdbcType=VARCHAR},
+    DELETE_FLAG = #{deleteFlag,jdbcType=VARCHAR},
+    DELETE_DATETIME = #{deleteDatetime,jdbcType=TIMESTAMP},
+    DELETE_PERSON = #{deletePerson,jdbcType=VARCHAR},
+    DELETE_REASON = #{deleteReason,jdbcType=VARCHAR},
+    TRANSFER_FLAG = #{transferFlag,jdbcType=VARCHAR},
+    TRANSFER_BASE_ID = #{transferBaseId,jdbcType=VARCHAR},
+    AREA_ORG_CODE = #{areaOrgCode,jdbcType=VARCHAR},
+    AUTOGRAPH_PICTURE = #{autographPicture,jdbcType=VARCHAR},
+    AUTOGRAPH_PICTURE_PATH = #{autographPicturePath,jdbcType=VARCHAR},
+    TAKE_PERSON=#{takePerson,jdbcType=VARCHAR}
+    where CONSIGNMENT_ID = #{consignmentId,jdbcType=VARCHAR}
+  </update>
+<!--根据委托编号查重-->
+  <select id="selectByConsignmentNo" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select *
+    from (select lci.*
+    from LIMS_CONSIGNMENT_INFO lci
+    where lci.CONSIGNMENT_NO =  #{consignmentNo,jdbcType=VARCHAR}
+    ) t1
+    where rownum = 1
+  </select>
+
+  <select id="getCaseidByAppendflag" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select lci.* from  LIMS_CONSIGNMENT_INFO lci where lci.CASE_ID = #{caseId,jdbcType=VARCHAR} and lci.APPEND_FLAG = '0'
+  </select>
+
+  <select id="selectByCaseNo"  parameterType="java.lang.String" resultMap="BaseResultMap">
+  select lci.*
+  from LIMS_CONSIGNMENT_INFO lci
+  left join lims_case_info ci on lci.case_id = ci.case_id
+   where ci.case_no = #{caseNo,jdbcType=VARCHAR}
+   and lci.APPEND_FLAG = '0' and ci.delete_flag = '0' and lci.delete_flag = '0'
+  </select>
+
+</mapper>

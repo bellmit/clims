@@ -1,0 +1,72 @@
+body {
+    padding: 10px 0;
+    background: #f4f4f4
+}
+
+header {
+    background: #fff;
+    margin-bottom: 10px;
+}
+
+header .layui-col-md3 {
+    height: 190px;
+    padding: 45px 15px;
+}
+
+header .layui-col-md3>div {
+    height: 100%;
+    text-align: center;
+    line-height: 100px;
+}
+
+header .layui-col-md3>div>span:nth-child(1),
+header .layui-col-md3>div>span:nth-child(3) {
+    font-size: 20px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+header .layui-col-md3>div>span:nth-child(2) {
+    font-size: 30px;
+    margin-left: 5px;
+    display: inline-block;
+    vertical-align: middle;
+    font-weight: 600;
+}
+
+main {
+    background: #fff;
+    padding: 0 40px;
+}
+
+main .title {
+    padding: 10px 15px;
+}
+
+main .title>h4 {
+    position: relative;
+    height: 30px;
+    padding-left: 14px;
+    border-left: 5px solid #00b39b;
+    line-height: 30px;
+    display: inline-block;
+    color: #00b39b;
+    font-weight: 600;
+}
+
+main .title .layui-unselect {
+    border: none;
+    width: 85px;
+    color: #e79800;
+    font-weight: 600;
+}
+
+main .layui-row {
+    border: 1px solid #f2f2f2;
+    box-shadow: 0px 0px 10px 5px #f3f3f3;
+    border-radius: 10px;
+}
+
+main .layui-row+.layui-row {
+    margin-top: 20px
+}

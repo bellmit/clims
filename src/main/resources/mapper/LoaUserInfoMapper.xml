@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.LoaUserInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.LoaUserInfo" >
+    <id column="USER_ID" property="userId" jdbcType="VARCHAR" />
+    <result column="PERSONAL_ID" property="personalId" jdbcType="VARCHAR" />
+    <result column="LOGIN_NAME" property="loginName" jdbcType="VARCHAR" />
+    <result column="LOGIN_PASSWORD" property="loginPassword" jdbcType="VARCHAR" />
+    <result column="USER_TYPE" property="userType" jdbcType="VARCHAR" />
+    <result column="USER_LEVEL" property="userLevel" jdbcType="VARCHAR" />
+    <result column="ORG_ID" property="orgId" jdbcType="VARCHAR" />
+    <result column="ACTIVE_FLAG" property="activeFlag" jdbcType="VARCHAR" />
+    <result column="FULL_NAME" property="amPersonalInfo.fullName" jdbcType="VARCHAR" />
+    <result column="POLICE_NO" property="amPersonalInfo.policeNo" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select USER_ID, PERSONAL_ID, LOGIN_NAME, LOGIN_PASSWORD, USER_TYPE, USER_LEVEL, ORG_ID
+    from LOA_USER_INFO
+  </select>
+
+  <insert id="addLoaUserInfo" parameterType="com.bazl.clims.model.LoaUserInfo" >
+    insert into LOA_USER_INFO (USER_ID, PERSONAL_ID, LOGIN_NAME,
+    LOGIN_PASSWORD,ACTIVE_FLAG)
+    values (#{userId,jdbcType=VARCHAR}, #{personalId,jdbcType=VARCHAR}, #{loginName,jdbcType=VARCHAR},
+    #{loginPassword,jdbcType=VARCHAR},#{activeFlag,jdbcType=VARCHAR})
+  </insert>
+  <select id="selectByUserName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select u.USER_ID, u.PERSONAL_ID, u.LOGIN_NAME, u.LOGIN_PASSWORD, u.USER_TYPE, u.USER_LEVEL, u.ORG_ID, u.ACTIVE_FLAG,
+    p.FULL_NAME, p.POLICE_NO
+    from LOA_USER_INFO u left join Am_Personal_Info p on u.personal_id=p.personal_id
+    where 1=1
+    <if test="loginName !=null and loginName != '' ">
+      and LOGIN_NAME = #{loginName,jdbcType=VARCHAR}
+    </if>
+    <if test="loginName !='admin'">
+      and u.ORG_ID=#{areaCode,jdbcType=VARCHAR}
+    </if>
+  </select>
+
+  <select id="selectByUserName2" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select u.USER_ID, u.PERSONAL_ID, u.LOGIN_NAME, u.LOGIN_PASSWORD, u.USER_TYPE, u.USER_LEVEL, u.ORG_ID, u.ACTIVE_FLAG,
+    p.FULL_NAME, p.POLICE_NO
+    from LOA_USER_INFO u left join Am_Personal_Info p on u.personal_id=p.personal_id
+    where 1=1
+      <if test="loginName !=null and loginName != '' ">
+        and LOGIN_NAME = #{loginName,jdbcType=VARCHAR}
+      </if>
+      <!--<if test="loginName !='admin'">
+        and u.ORG_ID=#{areaCode,jdbcType=VARCHAR}
+      </if>-->
+  </select>
+  <select id="queryloaUserInfoByPersonalId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select USER_ID, PERSONAL_ID, LOGIN_NAME, LOGIN_PASSWORD, USER_TYPE, USER_LEVEL, ORG_ID
+    from LOA_USER_INFO
+    where PERSONAL_ID = #{personalId,jdbcType=VARCHAR}
+  </select>
+  <select id="queryloaUserInfoByuserId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select USER_ID, PERSONAL_ID, LOGIN_NAME, LOGIN_PASSWORD, USER_TYPE, USER_LEVEL, ORG_ID
+    from LOA_USER_INFO
+    where USER_ID = #{userid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteloaUserInfoByUserId" parameterType="java.lang.String" >
+    delete from LOA_USER_INFO
+    where USER_ID = #{userId,jdbcType=VARCHAR}
+  </delete>
+  <update id="updateloaUserInfoByUserId" parameterType="com.bazl.clims.model.LoaUserInfo" >
+    update LOA_USER_INFO
+    set
+    LOGIN_NAME = #{loginName,jdbcType=VARCHAR},
+    LOGIN_PASSWORD = #{loginPassword,jdbcType=VARCHAR}
+    where PERSONAL_ID = #{personalId,jdbcType=VARCHAR}
+  </update>
+  <update id="forbiddenLoaUserInfo">
+    update LOA_USER_INFO
+    set
+    ACTIVE_FLAG = #{useractiveflase,jdbcType=VARCHAR}
+    where PERSONAL_ID = #{personalId,jdbcType=VARCHAR}
+  </update>
+  <update id="startusingLoaUserInfo">
+    update LOA_USER_INFO
+    set
+    ACTIVE_FLAG = #{useractiveflase,jdbcType=VARCHAR}
+    where PERSONAL_ID = #{personalId,jdbcType=VARCHAR}
+  </update>
+</mapper>

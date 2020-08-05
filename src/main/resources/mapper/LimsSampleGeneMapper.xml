@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.LimsSampleGeneMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.LimsSampleGene" >
+    <id column="GENE_ID" property="geneId" jdbcType="VARCHAR" />
+    <result column="CASE_ID" property="caseId" jdbcType="VARCHAR" />
+    <result column="CONSIGNMENT_ID" property="consignmentId" jdbcType="VARCHAR" />
+    <result column="SAMPLE_ID" property="sampleId" jdbcType="VARCHAR" />
+    <result column="BOARD_NO" property="boardNo" jdbcType="VARCHAR" />
+    <result column="PANEL_ID" property="panelId" jdbcType="VARCHAR" />
+    <result column="PANEL_NAME" property="panelName" jdbcType="VARCHAR" />
+    <result column="GENE_TYPE" property="geneType" jdbcType="VARCHAR" />
+    <result column="GENE_INFO" property="geneInfo" jdbcType="CLOB" />
+    <result column="IMAGE_PATH" property="imagePath" jdbcType="VARCHAR" />
+    <result column="BOARD_POSITION" property="boardPosition" jdbcType="VARCHAR" />
+    <result column="AUDIT_STATUS" property="auditStatus" jdbcType="VARCHAR" />
+    <result column="AUDITOR" property="auditor" jdbcType="VARCHAR" />
+    <result column="AUDIT_DATETIME" property="auditDatetime" jdbcType="TIMESTAMP" />
+    <result column="AUDITED_GENE_ID" property="auditedGeneId" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_PERSON" property="updatePerson" jdbcType="VARCHAR" />
+    <result column="DELETE_FLAG" property="deleteFlag" jdbcType="VARCHAR" />
+    <result column="DELETE_DATETIME" property="deleteDatetime" jdbcType="TIMESTAMP" />
+    <result column="DELETE_PERSON" property="deletePerson" jdbcType="VARCHAR" />
+    <result column="REVIEW_STATUS" property="reviewStatus" jdbcType="VARCHAR" />
+    <result column="LAB_ANALYSIS_INFO_ID" property="labAnalysisInfoId" jdbcType="VARCHAR" />
+    <result column="PANEL_NAME" property="panelName" jdbcType="VARCHAR" />
+    <result column="IS_MIX" property="isMix" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <resultMap id="VOBaseResultMap" type="com.bazl.clims.model.vo.LimsSampleGeneVo" >
+    <id column="GENE_ID" property="entity.geneId" jdbcType="VARCHAR" />
+    <result column="CASE_ID" property="entity.caseId" jdbcType="VARCHAR" />
+    <result column="CONSIGNMENT_ID" property="entity.consignmentId" jdbcType="VARCHAR" />
+    <result column="SAMPLE_ID" property="entity.sampleId" jdbcType="VARCHAR" />
+    <result column="BOARD_NO" property="entity.boardNo" jdbcType="VARCHAR" />
+    <result column="PANEL_ID" property="entity.panelId" jdbcType="VARCHAR" />
+    <result column="PANEL_NAME" property="entity.panelName" jdbcType="VARCHAR" />
+    <result column="GENE_TYPE" property="entity.geneType" jdbcType="VARCHAR" />
+    <result column="GENE_INFO" property="entity.geneInfo" jdbcType="CLOB" />
+    <result column="IMAGE_PATH" property="entity.imagePath" jdbcType="VARCHAR" />
+    <result column="BOARD_POSITION" property="entity.boardPosition" jdbcType="VARCHAR" />
+    <result column="AUDIT_STATUS" property="entity.auditStatus" jdbcType="VARCHAR" />
+    <result column="AUDITOR" property="entity.auditor" jdbcType="VARCHAR" />
+    <result column="AUDIT_DATETIME" property="entity.auditDatetime" jdbcType="TIMESTAMP" />
+    <result column="AUDITED_GENE_ID" property="entity.auditedGeneId" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="entity.createDatetime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_PERSON" property="entity.createPerson" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="entity.updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_PERSON" property="entity.updatePerson" jdbcType="VARCHAR" />
+    <result column="DELETE_FLAG" property="entity.deleteFlag" jdbcType="VARCHAR" />
+    <result column="DELETE_DATETIME" property="entity.deleteDatetime" jdbcType="TIMESTAMP" />
+    <result column="DELETE_PERSON" property="entity.deletePerson" jdbcType="VARCHAR" />
+    <result column="REVIEW_STATUS" property="entity.reviewStatus" jdbcType="VARCHAR" />
+    <result column="LAB_ANALYSIS_INFO_ID" property="entity.labAnalysisInfoId" jdbcType="VARCHAR" />
+    <result column="PANEL_NAME" property="entity.panelName" jdbcType="VARCHAR" />
+    <result column="IS_MIX" property="entity.isMix" jdbcType="VARCHAR" />
+
+    <result column="SAMPLE_NO" property="sampleNo" jdbcType="VARCHAR" />
+    <result column="SAMPLE_NAME" property="sampleName" jdbcType="VARCHAR" />
+    <result column="SAMPLE_TYPE_NAME" property="sampleTypeName" jdbcType="VARCHAR" />
+    <result column="RELATION_SAMPLE_NO" property="relationSampleNo" jdbcType="VARCHAR" />
+    <result column="IS_RELATION" property="isRelation" jdbcType="VARCHAR" />
+    <result column="SAMPLE_SOURCE" property="sampleSource" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    GENE_ID, CASE_ID, CONSIGNMENT_ID, SAMPLE_ID, BOARD_NO, PANEL_ID, PANEL_NAME,GENE_TYPE,
+    GENE_INFO, IMAGE_PATH, BOARD_POSITION, AUDIT_STATUS, AUDITOR, AUDIT_DATETIME, AUDITED_GENE_ID,
+    CREATE_DATETIME, CREATE_PERSON, UPDATE_DATETIME, UPDATE_PERSON, DELETE_FLAG, DELETE_DATETIME,
+    DELETE_PERSON, REVIEW_STATUS,LAB_ANALYSIS_INFO_ID,PANEL_NAME,IS_MIX
+    </sql>
+
+  <sql id="VO_Query_Where_Clause">
+    <where>
+        <if test="entity.boardNo != null and ''!= entity.boardNo">
+            and lsg.BOARD_NO = #{entity.boardNo,jdbcType=VARCHAR}
+        </if>
+      <if test="entity.caseId != null and ''!= entity.caseId">
+        and lsg.CASE_ID = #{entity.caseId,jdbcType=VARCHAR}
+      </if>
+      <if test="entity.labAnalysisInfoId != null and ''!= entity.labAnalysisInfoId">
+        and lsg.LAB_ANALYSIS_INFO_ID = #{entity.labAnalysisInfoId,jdbcType=VARCHAR}
+      </if>
+      <if test="entity.deleteFlag != null and ''!= entity.deleteFlag">
+        and lsg.DELETE_FLAG = #{entity.deleteFlag,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </sql>
+
+  <select id="selecVOtList" parameterType="com.bazl.clims.model.vo.LimsSampleGeneVo" resultMap="VOBaseResultMap">
+    select lsg.*,
+    lsid.SAMPLE_NO as SAMPLE_NO,
+    lsid.SAMPLE_NAME as SAMPLE_NAME,
+    di_1.DICT_NAME as SAMPLE_TYPE_NAME,
+    lsid.RELATION_SAMPLE_NO as RELATION_SAMPLE_NO,
+    lsid.IS_RELATION as IS_RELATION,
+    lsid.SAMPLE_SOURCE as SAMPLE_SOURCE
+    from LIMS_SAMPLE_GENE lsg
+    left join LIMS_SAMPLE_INFO_DNA lsid on lsid.SAMPLE_ID = lsg.SAMPLE_ID
+    left join dict_item di_1 on di_1.dict_code = lsid.SAMPLE_TYPE and di_1.DICT_TYPE_CODE='SAMPLE_TYPE'
+    <if test="_parameter != null">
+      <include refid="VO_Query_Where_Clause"/>
+    </if>
+    <!--ORDER BY to_number(translate(lsg.board_position, '0123456789' || lsg.board_position, '0123456789')),NLSSORT(lsg.board_position,'NLS_SORT = SCHINESE_PINYIN_M'), lsg.create_datetime ASC-->
+    ORDER BY lsid.SAMPLE_NO,NLSSORT(lsg.board_position,'NLS_SORT = SCHINESE_PINYIN_M'), lsg.create_datetime ASC
+  </select>
+
+  <select id="selectListByAnalysisInfoId" parameterType="java.lang.String" resultMap="BaseResultMap" >
+    select lsg.*,
+    lsid.SAMPLE_NO as SAMPLE_NO,
+    lsid.SAMPLE_NAME as SAMPLE_NAME,
+    di_1.DICT_NAME as SAMPLE_TYPE_NAME
+    from LIMS_SAMPLE_GENE lsg
+    left join LIMS_SAMPLE_INFO_DNA lsid on lsid.SAMPLE_ID = lsg.SAMPLE_ID
+    left join dict_item di_1 on di_1.dict_code = lsid.SAMPLE_TYPE and di_1.DICT_TYPE_CODE='SAMPLE_TYPE'
+    where lsg.LAB_ANALYSIS_INFO_ID = #{labAnalysisInfoId,jdbcType=VARCHAR} and lsg.delete_flag = '0'
+  </select>
+
+  <select id="selectListByCaseId" parameterType="java.lang.String" resultMap="BaseResultMap" >
+    select lsg.*
+    from LIMS_SAMPLE_GENE lsg
+    where lsg.case_id = #{caseId,jdbcType=VARCHAR} and lsg.delete_flag = '0' and lsg.audit_status='1'
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from LIMS_SAMPLE_GENE
+    where GENE_ID = #{geneId,jdbcType=VARCHAR}
+  </delete>
+
+  <insert id="insert" parameterType="com.bazl.clims.model.po.LimsSampleGene" >
+    insert into LIMS_SAMPLE_GENE (GENE_ID, CASE_ID, CONSIGNMENT_ID, 
+      SAMPLE_ID, BOARD_NO, PANEL_ID, PANEL_NAME,
+      GENE_TYPE, GENE_INFO, IMAGE_PATH, 
+      BOARD_POSITION, AUDIT_STATUS, AUDITOR, 
+      AUDIT_DATETIME, AUDITED_GENE_ID, CREATE_DATETIME, 
+      CREATE_PERSON, UPDATE_DATETIME, UPDATE_PERSON, 
+      DELETE_FLAG, DELETE_DATETIME, DELETE_PERSON, REVIEW_STATUS,LAB_ANALYSIS_INFO_ID,IS_MIX
+      )
+    values (#{geneId,jdbcType=VARCHAR}, #{caseId,jdbcType=VARCHAR}, #{consignmentId,jdbcType=VARCHAR}, 
+      #{sampleId,jdbcType=VARCHAR}, #{boardNo,jdbcType=VARCHAR}, #{panelId,jdbcType=VARCHAR}, #{panelName,jdbcType=VARCHAR},
+      #{geneType,jdbcType=VARCHAR}, #{geneInfo,jdbcType=CLOB}, #{imagePath,jdbcType=VARCHAR},
+      #{boardPosition,jdbcType=VARCHAR}, #{auditStatus,jdbcType=VARCHAR}, #{auditor,jdbcType=VARCHAR}, 
+      #{auditDatetime,jdbcType=TIMESTAMP}, #{auditedGeneId,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP}, 
+      #{createPerson,jdbcType=VARCHAR}, #{updateDatetime,jdbcType=TIMESTAMP}, #{updatePerson,jdbcType=VARCHAR}, 
+      #{deleteFlag,jdbcType=VARCHAR}, #{deleteDatetime,jdbcType=TIMESTAMP}, #{deletePerson,jdbcType=VARCHAR},
+      #{reviewStatus,jdbcType=VARCHAR},#{labAnalysisInfoId,jdbcType=VARCHAR}, #{isMix,jdbcType=VARCHAR}
+      )
+  </insert>
+
+  <update id="updateByPrimaryKey" parameterType="com.bazl.clims.model.po.LimsSampleGene" >
+    update LIMS_SAMPLE_GENE
+    set CASE_ID = #{caseId,jdbcType=VARCHAR},
+      CONSIGNMENT_ID = #{consignmentId,jdbcType=VARCHAR},
+      SAMPLE_ID = #{sampleId,jdbcType=VARCHAR},
+      BOARD_NO = #{boardNo,jdbcType=VARCHAR},
+      PANEL_ID = #{panelId,jdbcType=VARCHAR},
+      PANEL_NAME = #{panelName,jdbcType=VARCHAR},
+      GENE_TYPE = #{geneType,jdbcType=VARCHAR},
+      GENE_INFO = #{geneInfo,jdbcType=CLOB},
+      IMAGE_PATH = #{imagePath,jdbcType=VARCHAR},
+      BOARD_POSITION = #{boardPosition,jdbcType=VARCHAR},
+      AUDIT_STATUS = #{auditStatus,jdbcType=VARCHAR},
+      AUDITOR = #{auditor,jdbcType=VARCHAR},
+      AUDIT_DATETIME = #{auditDatetime,jdbcType=TIMESTAMP},
+      AUDITED_GENE_ID = #{auditedGeneId,jdbcType=VARCHAR},
+      CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+      CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP},
+      UPDATE_PERSON = #{updatePerson,jdbcType=VARCHAR},
+      DELETE_FLAG = #{deleteFlag,jdbcType=VARCHAR},
+      DELETE_DATETIME = #{deleteDatetime,jdbcType=TIMESTAMP},
+      DELETE_PERSON = #{deletePerson,jdbcType=VARCHAR},
+      REVIEW_STATUS = #{reviewStatus,jdbcType=VARCHAR},
+      LAB_ANALYSIS_INFO_ID = #{labAnalysisInfoId,jdbcType=VARCHAR},
+
+      IS_MIX = #{isMix,jdbcType=VARCHAR}
+    where GENE_ID = #{geneId,jdbcType=VARCHAR}
+  </update>
+
+  <update id="updateBySampleId" parameterType="java.lang.String">
+    update lims_sample_gene
+    set AUDIT_STATUS ='0'
+    where SAMPLE_ID = #{sampleId,jdbcType=VARCHAR}
+  </update>
+
+  <update id="updateAuditStatus" parameterType="com.bazl.clims.model.po.LimsSampleGene" >
+    update LIMS_SAMPLE_GENE
+    set AUDIT_STATUS = #{auditStatus,jdbcType=VARCHAR},
+      AUDITOR = #{auditor,jdbcType=VARCHAR},
+      AUDIT_DATETIME = #{auditDatetime,jdbcType=TIMESTAMP},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP},
+      UPDATE_PERSON = #{updatePerson,jdbcType=VARCHAR}
+    where GENE_ID = #{geneId,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select *
+    from LIMS_SAMPLE_GENE
+    where GENE_ID = #{geneId,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select *
+    from LIMS_SAMPLE_GENE
+  </select>
+
+  <update id="updateDeleteFlag" parameterType="com.bazl.clims.model.po.LimsSampleGene" >
+    update LIMS_SAMPLE_GENE
+    set
+      AUDIT_STATUS = #{auditStatus,jdbcType=VARCHAR}
+    where GENE_ID = #{geneId,jdbcType=VARCHAR}
+  </update>
+
+  <update id="updateReviewStatus" parameterType="com.bazl.clims.model.po.LimsSampleGene" >
+    update LIMS_SAMPLE_GENE
+    set UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP},
+    UPDATE_PERSON = #{updatePerson,jdbcType=VARCHAR},
+    REVIEW_STATUS = #{reviewStatus,jdbcType=VARCHAR}
+    where GENE_ID = #{geneId,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectAuditedBySampleId" parameterType="java.lang.String" resultMap="BaseResultMap" >
+    select lsg.*
+    from LIMS_SAMPLE_GENE lsg
+    where lsg.sample_id = #{sampleId,jdbcType=VARCHAR} and lsg.delete_flag = '0' and lsg.AUDIT_STATUS = '1'
+  </select>
+
+  <select id="selectListBySampleId" parameterType="java.lang.String" resultMap="BaseResultMap" >
+    select lsg.*
+    from LIMS_SAMPLE_GENE lsg
+    where lsg.sample_id = #{sampleId,jdbcType=VARCHAR} and lsg.delete_flag = '0'
+  </select>
+
+  <select id="selectByGeneList" resultMap="BaseResultMap" parameterType="com.bazl.clims.model.po.LimsSampleGene" >
+    select lsg.*,
+    lsg.BOARD_NO as boardNo,
+    lsid.SAMPLE_NO as sampleNo,
+    lsid.SAMPLE_FLAG as sampleFlag,
+    lsid.SAMPLE_NAME as sampleName
+    from LIMS_SAMPLE_GENE lsg
+    left join LIMS_SAMPLE_INFO_DNA lsid on lsid.SAMPLE_ID = lsg.SAMPLE_ID
+    where lsid.DELETE_FLAG='0' and lsg.audit_status='1'
+    <if test="geneType != null and geneType!='' ">
+      and lsg.GENE_TYPE = #{geneType,jdbcType=VARCHAR}
+    </if>
+    <if test="caseId != null and caseId!='' ">
+      and lsid.CASE_ID = #{caseId,jdbcType=VARCHAR}
+    </if>
+    order by lsid.SAMPLE_NO asc
+  </select>
+</mapper>

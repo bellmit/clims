@@ -1,0 +1,314 @@
+--样本板
+CREATE TABLE sample_table (
+  ID VARCHAR2(50),
+  EXTRACT_PLATE_ID VARCHAR2(50),
+  BOARD_NO VARCHAR2(64),
+  STATE VARCHAR2(2),
+  IS_CREATE VARCHAR2(2) DEFAULT 0,
+  HOLE_NUM VARCHAR2(64),
+  ELUTION_DEFAULT VARCHAR2(64),
+  EXTRACT_PLATE_NAME VARCHAR2(64),
+  INDEX_VALUE VARCHAR2(64),
+  DELETE_FLAG VARCHAR2(2) DEFAULT 0,
+  DELETE_DATETIME TIMESTAMP ,
+  CREATE_PERSON VARCHAR2(64),
+  CREATE_DATETIME TIMESTAMP ,
+  OPERATION_PERSON VARCHAR2(64),
+  OPERATION_DATETIME TIMESTAMP
+)
+-- 增加检材预处理标签
+INSERT INTO LOA_PERMISSION VALUES(sys_guid(),'检材预处理','center/sample/sampleTableList.html','0','B72010574E3642BCB02024D1514E6F5C','0','','','0','3','41');
+
+--增加权限
+--内网实验员
+INSERT INTO LOA_PERMISSION_RELATION (sys_guid(),'F0311747612C46A28F9BE5E83A5DD063','6777B645296945E0ADD698ED5CAF2ED7');
+--内网管理员
+INSERT INTO LOA_PERMISSION_RELATION (sys_guid(),'CDE2C56F172F48ADAFFD2ED73A02CEC9','6777B645296945E0ADD698ED5CAF2ED7');
+
+--创建存样本表主键的表
+CREATE TABLE dna_no_seq (
+	code VARCHAR2(50) NOT NULL,
+	current_val VARCHAR2(11) NOT NULL,
+	num_increment VARCHAR2(11) DEFAULT 1 ,
+	PRIMARY KEY (code)
+)
+
+
+
+--字典
+INSERT INTO dict_info (DICT_INFO_ID, DICT_TYPE_CODE, DICT_TYPE_NAME, CREATE_DATETIME, CREATE_PERSON) VALUES
+  (23, 'ELUTION_DEFAULT', '默认洗脱体积',SYSDATE, '管理员');
+INSERT INTO dict_info (DICT_INFO_ID, DICT_TYPE_CODE, DICT_TYPE_NAME, CREATE_DATETIME, CREATE_PERSON) VALUES
+  (24, 'SAMPLE_PROPERTY', '检材属性',SYSDATE, '管理员');
+INSERT INTO dict_info (DICT_INFO_ID, DICT_TYPE_CODE, DICT_TYPE_NAME, CREATE_DATETIME, CREATE_PERSON) VALUES
+  (25, 'DEVICE_TYPE', '设备类型',SYSDATE, '管理员');
+INSERT INTO dict_info (DICT_INFO_ID, DICT_TYPE_CODE, DICT_TYPE_NAME, CREATE_DATETIME, CREATE_PERSON) VALUES
+  (26, 'CONFIRMATORY_METHOD', '确证方法',SYSDATE, '管理员');
+INSERT INTO dict_info (DICT_INFO_ID, DICT_TYPE_CODE, DICT_TYPE_NAME, CREATE_DATETIME, CREATE_PERSON) VALUES
+  (27, 'SAMPLE_TRANSFER_METHOD', '检材转移方法',SYSDATE, '管理员');
+INSERT INTO dict_info (DICT_INFO_ID, DICT_TYPE_CODE, DICT_TYPE_NAME, CREATE_DATETIME, CREATE_PERSON) VALUES
+  (28, 'PRE_EXPERIMENTAL_METHOD', '预实验方法', SYSDATE, '管理员');
+INSERT INTO dict_info (DICT_INFO_ID, DICT_TYPE_CODE, DICT_TYPE_NAME, CREATE_DATETIME, CREATE_PERSON) VALUES
+  (29, 'PROGRAM_NAME', '程序名称',SYSDATE, '管理员');
+--字典
+INSERT INTO dict_item (dict_item_id, DICT_TYPE_CODE, DICT_code, DICT_NAME, DICT_DESC, CREATE_DATETIME, CREATE_PERSON) VALUES
+  (294, 'ELUTION_DEFAULT', '01', '30', NULL, SYSDATE, '管理员');
+   INSERT INTO dict_item (dict_item_id, DICT_TYPE_CODE, DICT_code, DICT_NAME, DICT_DESC, CREATE_DATETIME, CREATE_PERSON) VALUES
+  (295, 'ELUTION_DEFAULT', '02', '40', NULL,SYSDATE, '管理员');
+   INSERT INTO dict_item (dict_item_id, DICT_TYPE_CODE, DICT_code, DICT_NAME, DICT_DESC, CREATE_DATETIME, CREATE_PERSON) VALUES
+  (296, 'ELUTION_DEFAULT', '03', '50', NULL,SYSDATE, '管理员');
+   INSERT INTO dict_item (dict_item_id, DICT_TYPE_CODE, DICT_code, DICT_NAME, DICT_DESC, CREATE_DATETIME, CREATE_PERSON) VALUES
+  (297, 'ELUTION_DEFAULT', '04', '80', NULL, SYSDATE, '管理员');
+   INSERT INTO dict_item (dict_item_id, DICT_TYPE_CODE, DICT_code, DICT_NAME, DICT_DESC, CREATE_DATETIME, CREATE_PERSON) VALUES
+  (298, 'ELUTION_DEFAULT', '05', '100', NULL,SYSDATE, '管理员');
+   INSERT INTO dict_item (dict_item_id, DICT_TYPE_CODE, DICT_code, DICT_NAME, DICT_DESC, CREATE_DATETIME, CREATE_PERSON) VALUES
+  (299, 'SAMPLE_PROPERTY', '01', '无', NULL,SYSDATE, '管理员');
+   INSERT INTO dict_item (dict_item_id, DICT_TYPE_CODE, DICT_code, DICT_NAME, DICT_DESC, CREATE_DATETIME, CREATE_PERSON) VALUES
+  (300, 'SAMPLE_PROPERTY', '02', '微量检材', NULL,SYSDATE, '管理员');
+   INSERT INTO dict_item (dict_item_id, DICT_TYPE_CODE, DICT_code, DICT_NAME, DICT_DESC, CREATE_DATETIME, CREATE_PERSON) VALUES
+  (301, 'DEVICE_TYPE', '01', '24道', NULL,SYSDATE, '管理员');
+   INSERT INTO dict_item (dict_item_id, DICT_TYPE_CODE, DICT_code, DICT_NAME, DICT_DESC, CREATE_DATETIME, CREATE_PERSON) VALUES
+  (302, 'DEVICE_TYPE', '02', '96道', NULL,SYSDATE, '管理员');
+   INSERT INTO dict_item (dict_item_id, DICT_TYPE_CODE, DICT_code, DICT_NAME, DICT_DESC, CREATE_DATETIME, CREATE_PERSON) VALUES
+  (303, 'SAMPLE_PROPERTY', '03', '常量检材', NULL,SYSDATE, '管理员');
+   INSERT INTO dict_item (dict_item_id, DICT_TYPE_CODE, DICT_code, DICT_NAME, DICT_DESC, CREATE_DATETIME, CREATE_PERSON) VALUES
+  (304, 'CONFIRMATORY_METHOD', '01', '无', NULL,SYSDATE, '管理员');
+   INSERT INTO dict_item (dict_item_id, DICT_TYPE_CODE, DICT_code, DICT_NAME, DICT_DESC, CREATE_DATETIME, CREATE_PERSON) VALUES
+  (305, 'CONFIRMATORY_METHOD', '02', 'PSA(+)', NULL, SYSDATE, '管理员');
+   INSERT INTO dict_item (dict_item_id, DICT_TYPE_CODE, DICT_code, DICT_NAME, DICT_DESC, CREATE_DATETIME, CREATE_PERSON) VALUES
+  (306, 'CONFIRMATORY_METHOD', '03', 'PSA(-)', NULL,SYSDATE, '管理员');
+   INSERT INTO dict_item (dict_item_id, DICT_TYPE_CODE, DICT_code, DICT_NAME, DICT_DESC, CREATE_DATETIME, CREATE_PERSON) VALUES
+  (307, 'CONFIRMATORY_METHOD', '04', 'FOB(+)', NULL,SYSDATE, '管理员');
+   INSERT INTO dict_item (dict_item_id, DICT_TYPE_CODE, DICT_code, DICT_NAME, DICT_DESC, CREATE_DATETIME, CREATE_PERSON) VALUES
+  (308, 'CONFIRMATORY_METHOD', '05', 'FOB(-)', NULL,SYSDATE, '管理员');
+   INSERT INTO dict_item (dict_item_id, DICT_TYPE_CODE, DICT_code, DICT_NAME, DICT_DESC, CREATE_DATETIME, CREATE_PERSON) VALUES
+  (309, 'SAMPLE_TRANSFER_METHOD', '01', '无', NULL,SYSDATE, '管理员');
+   INSERT INTO dict_item (dict_item_id, DICT_TYPE_CODE, DICT_code, DICT_NAME, DICT_DESC, CREATE_DATETIME, CREATE_PERSON) VALUES
+  (310, 'SAMPLE_TRANSFER_METHOD', '02', '直接剪取', NULL,SYSDATE, '管理员');
+   INSERT INTO dict_item (dict_item_id, DICT_TYPE_CODE, DICT_code, DICT_NAME, DICT_DESC, CREATE_DATETIME, CREATE_PERSON) VALUES
+  (311, 'SAMPLE_TRANSFER_METHOD', '03', '棉签擦拭', NULL,SYSDATE, '管理员');
+   INSERT INTO dict_item (dict_item_id, DICT_TYPE_CODE, DICT_code, DICT_NAME, DICT_DESC, CREATE_DATETIME, CREATE_PERSON) VALUES
+  (312, 'SAMPLE_TRANSFER_METHOD', '04', '粘取', NULL,SYSDATE, '管理员');
+   INSERT INTO dict_item (dict_item_id, DICT_TYPE_CODE, DICT_code, DICT_NAME, DICT_DESC, CREATE_DATETIME, CREATE_PERSON) VALUES
+  (313, 'SAMPLE_TRANSFER_METHOD', '05', '吸取', NULL,SYSDATE, '管理员');
+   INSERT INTO dict_item (dict_item_id, DICT_TYPE_CODE, DICT_code, DICT_NAME, DICT_DESC, CREATE_DATETIME, CREATE_PERSON) VALUES
+  (314, 'SAMPLE_TRANSFER_METHOD', '06', '其他', NULL, SYSDATE, '管理员');
+   INSERT INTO dict_item (dict_item_id, DICT_TYPE_CODE, DICT_code, DICT_NAME, DICT_DESC, CREATE_DATETIME, CREATE_PERSON) VALUES
+  (315, 'PRE_EXPERIMENTAL_METHOD', '01', '无', NULL,SYSDATE, '管理员');
+   INSERT INTO dict_item (dict_item_id, DICT_TYPE_CODE, DICT_code, DICT_NAME, DICT_DESC, CREATE_DATETIME, CREATE_PERSON) VALUES
+  (316, 'PRE_EXPERIMENTAL_METHOD', '02', '联苯胺试验(+)', NULL,SYSDATE, '管理员');
+   INSERT INTO dict_item (dict_item_id, DICT_TYPE_CODE, DICT_code, DICT_NAME, DICT_DESC, CREATE_DATETIME, CREATE_PERSON) VALUES
+  (317, 'PRE_EXPERIMENTAL_METHOD', '03', '联苯胺试验(-)', NULL,SYSDATE, '管理员');
+   INSERT INTO dict_item (dict_item_id, DICT_TYPE_CODE, DICT_code, DICT_NAME, DICT_DESC, CREATE_DATETIME, CREATE_PERSON) VALUES
+  (318, 'PRE_EXPERIMENTAL_METHOD', '04', '鲁米诺(+)', NULL,SYSDATE, '管理员');
+   INSERT INTO dict_item (dict_item_id, DICT_TYPE_CODE, DICT_code, DICT_NAME, DICT_DESC, CREATE_DATETIME, CREATE_PERSON) VALUES
+  (319, 'PRE_EXPERIMENTAL_METHOD', '05', '鲁米诺(-)', NULL,SYSDATE, '管理员');
+   INSERT INTO dict_item (dict_item_id, DICT_TYPE_CODE, DICT_code, DICT_NAME, DICT_DESC, CREATE_DATETIME, CREATE_PERSON) VALUES
+  (320, 'PRE_EXPERIMENTAL_METHOD', '06', '酸性磷酸酶试验(+)', NULL, SYSDATE, '管理员');
+   INSERT INTO dict_item (dict_item_id, DICT_TYPE_CODE, DICT_code, DICT_NAME, DICT_DESC, CREATE_DATETIME, CREATE_PERSON) VALUES
+  (321, 'PRE_EXPERIMENTAL_METHOD', '07', '酸性磷酸酶试验(-)', NULL,SYSDATE, '管理员');
+  INSERT INTO dict_item (dict_item_id, DICT_TYPE_CODE, DICT_code, DICT_NAME, DICT_DESC, CREATE_DATETIME, CREATE_PERSON) VALUES
+  (322, 'PROGRAM_NAME', '01', 'WD-24人份程序', NULL,SYSDATE, '管理员');
+   INSERT INTO dict_item (dict_item_id, DICT_TYPE_CODE, DICT_code, DICT_NAME, DICT_DESC, CREATE_DATETIME, CREATE_PERSON) VALUES
+  (323, 'PROGRAM_NAME', '02', 'WD-48人份程序', NULL, SYSDATE, '管理员');
+   INSERT INTO dict_item (dict_item_id, DICT_TYPE_CODE, DICT_code, DICT_NAME, DICT_DESC, CREATE_DATETIME, CREATE_PERSON) VALUES
+  (324, 'PROGRAM_NAME', '03', 'WD-96人份程序', NULL,SYSDATE, '管理员');
+   INSERT INTO dict_item (dict_item_id, DICT_TYPE_CODE, DICT_code, DICT_NAME, DICT_DESC, CREATE_DATETIME, CREATE_PERSON) VALUES
+  (325, 'ELUTION_DEFAULT', '06', '200', NULL,SYSDATE, '管理员');
+
+--程序信息表
+
+CREATE TABLE  program_record (
+  ID VARCHAR2(50) NOT NULL,
+  PROGRAM_TYPE VARCHAR2(128) DEFAULT NULL ,
+  PROGRAM_NAME VARCHAR2(128) DEFAULT NULL,
+  PROGRAM_DESC VARCHAR2(256) DEFAULT NULL ,
+  DEVICE_TYPE VARCHAR2(128) DEFAULT '96道' ,
+  CREATE_PERSON VARCHAR2(64) DEFAULT NULL,
+  CREATE_DATETIME TIMESTAMP  DEFAULT SYSDATE,
+  OPERATION_PERSON VARCHAR2(64) DEFAULT NULL,
+  OPERATION_DATETIME TIMESTAMP  DEFAULT NULL ,
+  PRIMARY KEY (ID)
+) ;
+--程序信息数据
+INSERT INTO program_record (ID, PROGRAM_TYPE, PROGRAM_NAME, PROGRAM_DESC, DEVICE_TYPE, CREATE_PERSON, CREATE_DATETIME, OPERATION_PERSON, OPERATION_DATETIME) VALUES
+	('1', '24', 'WD-24人份程序', 'WD试剂盒', '24道', 'admin',Sysdate, NULL, NULL);
+  INSERT INTO program_record (ID, PROGRAM_TYPE, PROGRAM_NAME, PROGRAM_DESC, DEVICE_TYPE, CREATE_PERSON, CREATE_DATETIME, OPERATION_PERSON, OPERATION_DATETIME) VALUES
+	('4', '96', 'WD-96人份程序', 'WD试剂盒', '96道', 'admin', Sysdate, NULL, NULL);
+
+
+
+--创建提取信息表
+CREATE TABLE  extract_plate (
+  ID varchar2(50) NOT NULL ,
+  PCR_PLATE_ID varchar2(50) DEFAULT NULL ,
+  EXTRACT_METHOD varchar2(128) DEFAULT NULL ,
+  EXTRACT_DATETIME TIMESTAMP  DEFAULT NULL,
+  INDEX_VALUE varchar2(64) DEFAULT NULL,
+  STATE varchar2(2) DEFAULT '0',
+  IS_CREATE varchar2(2) DEFAULT '0' ,
+  BOARD_NO varchar2(64) DEFAULT NULL,
+  HOLE_NUM varchar2(64) DEFAULT NULL,
+  KIT_NAME varchar2(128) DEFAULT NULL,
+  DEVICE_TYPE varchar2(128) DEFAULT '96道' ,
+  PCR_PLATE_NAME varchar2(128) DEFAULT NULL,
+  DELETE_FLAG varchar2(2) DEFAULT '0' ,
+  DELETE_DATETIME TIMESTAMP  DEFAULT NULL ,
+  CREATE_PERSON varchar2(64) DEFAULT NULL ,
+  CREATE_DATETIME TIMESTAMP  DEFAULT sysdate ,
+  OPERATION_PERSON varchar2(64) DEFAULT NULL ,
+  OPERATION_DATETIME TIMESTAMP  DEFAULT NULL,
+  PRIMARY KEY (ID)
+)
+
+--提取信息表增加数据
+INSERT INTO extract_plate (ID, PCR_PLATE_ID, EXTRACT_METHOD, EXTRACT_DATETIME, INDEX_VALUE, STATE, IS_CREATE, BOARD_NO, HOLE_NUM, KIT_NAME, DEVICE_TYPE, PCR_PLATE_NAME, DELETE_FLAG, DELETE_DATETIME, CREATE_PERSON, CREATE_DATETIME, OPERATION_PERSON, OPERATION_DATETIME) VALUES
+  ('0ecc3ded-0395-44fa-84c0-dffacec04d48', 'b638ee22-46af-4b3b-8b3a-1f656107e42b', '磁珠法',SYSDATE, NULL, '0', '1', '2020-03-12-admin1', '48', 'WD试剂盒', '96道', '2020-03-12-admin-kz1[1]', '0', NULL, 'shy',SYSDATE, NULL, NULL);
+  INSERT INTO extract_plate (ID, PCR_PLATE_ID, EXTRACT_METHOD, EXTRACT_DATETIME, INDEX_VALUE, STATE, IS_CREATE, BOARD_NO, HOLE_NUM, KIT_NAME, DEVICE_TYPE, PCR_PLATE_NAME, DELETE_FLAG, DELETE_DATETIME, CREATE_PERSON, CREATE_DATETIME, OPERATION_PERSON, OPERATION_DATETIME) VALUES
+
+  ('29f727ae-3901-46a3-820d-de699dee6c50', 'd8816d67-1d94-4481-aed2-cb99799dbe27', '磁珠法', SYSDATE, NULL, '0', '1', '2020-03-23-admin7', '48', 'WD试剂盒', '96道', '2020-03-24-admin-kz4[1]', '0', NULL, 'shy', SYSDATE, NULL, NULL);
+  INSERT INTO extract_plate (ID, PCR_PLATE_ID, EXTRACT_METHOD, EXTRACT_DATETIME, INDEX_VALUE, STATE, IS_CREATE, BOARD_NO, HOLE_NUM, KIT_NAME, DEVICE_TYPE, PCR_PLATE_NAME, DELETE_FLAG, DELETE_DATETIME, CREATE_PERSON, CREATE_DATETIME, OPERATION_PERSON, OPERATION_DATETIME) VALUES
+
+  ('3114705d-b8f4-4716-8477-b322109849a1', 'f51bbf7c-7dd8-4747-bdfd-6fc94df840a0', '磁珠法', SYSDATE, NULL, '0', '1', '2020-03-23-admin4', '24', 'BK试剂盒', '24道', '2020-03-23-admin-kz4[2]', '0', NULL, 'shy',SYSDATE, NULL, NULL);
+  INSERT INTO extract_plate (ID, PCR_PLATE_ID, EXTRACT_METHOD, EXTRACT_DATETIME, INDEX_VALUE, STATE, IS_CREATE, BOARD_NO, HOLE_NUM, KIT_NAME, DEVICE_TYPE, PCR_PLATE_NAME, DELETE_FLAG, DELETE_DATETIME, CREATE_PERSON, CREATE_DATETIME, OPERATION_PERSON, OPERATION_DATETIME) VALUES
+
+  ('36d0e3a9-94a3-4f19-bb02-7980a2ea29b5', NULL, '磁珠法',SYSDATE, NULL, '0', '0', '2020-03-18-admin3', '48', 'WD试剂盒', '96道', NULL, '0', NULL, 'shy',SYSDATE, NULL, NULL);
+  INSERT INTO extract_plate (ID, PCR_PLATE_ID, EXTRACT_METHOD, EXTRACT_DATETIME, INDEX_VALUE, STATE, IS_CREATE, BOARD_NO, HOLE_NUM, KIT_NAME, DEVICE_TYPE, PCR_PLATE_NAME, DELETE_FLAG, DELETE_DATETIME, CREATE_PERSON, CREATE_DATETIME, OPERATION_PERSON, OPERATION_DATETIME) VALUES
+
+  ('3815bda2-a5f9-44b8-ae0d-0f8b21a83ac8', '0b3c5bbb-3a72-473c-84a9-6498f0fd2e2e', '磁珠法',SYSDATE, NULL, '0', '1', '2020-03-13-admin1', '48', 'WD试剂盒', '96道', '2020-03-13-admin-kz3[2]', '0', NULL, 'shy',SYSDATE, NULL, NULL);
+
+
+
+--样本表
+create table SAMPLE_INFO
+(
+  id                      VARCHAR2(50) not null,
+  sample_table_id         VARCHAR2(50),
+  extract_plate_id        VARCHAR2(50),
+  pcr_plate_id            VARCHAR2(50),
+  sy_plate_id             VARCHAR2(50),
+  sample_plate_sort       VARCHAR2(128),
+  extract_plate_sort      VARCHAR2(128),
+  pcr_plate_sort          VARCHAR2(128),
+  sy_plate_sort           VARCHAR2(128),
+  sample_location_sort    VARCHAR2(128),
+  extract_location_sort   VARCHAR2(128),
+  pcr_location_sort       VARCHAR2(128),
+  sy_location_sort        VARCHAR2(128),
+  sample_plate_location   VARCHAR2(128),
+  extract_plate_location  VARCHAR2(128),
+  pcr_plate_location      VARCHAR2(128),
+  sy_plate_location       VARCHAR2(128),
+  confirmatory_method     VARCHAR2(128),
+  pre_experimental_method VARCHAR2(128),
+  sample_transfer_method  VARCHAR2(128),
+  elution                 VARCHAR2(128),
+  board_no                VARCHAR2(64),
+  delete_flag             VARCHAR2(2) default '0',
+  delete_datetime         TIMESTAMP(6),
+  create_person           VARCHAR2(64),
+  create_datetime         TIMESTAMP(6),
+  operation_person        VARCHAR2(64),
+  operation_datetime      TIMESTAMP(6),
+  sample_property         VARCHAR2(128),
+  sample_no               VARCHAR2(128)
+)
+
+
+--样本表注释
+comment on TABLE sample_info  is '样本信息表';
+comment on column sample_info.id  is '主键id';
+comment on column sample_info.sample_table_id  is '样本表主键id';
+comment on column sample_info.extract_plate_id  is '提取表主键id';
+comment on column sample_info.pcr_plate_id  is '扩增表主键id';
+comment on column sample_info.sy_plate_id  is '电泳表主键id';
+comment on column sample_info.sample_plate_sort  is '样本板序号';
+comment on column sample_info.extract_plate_sort  is '提取板序号';
+comment on column sample_info.pcr_plate_sort  is '扩增板序号';
+comment on column sample_info.sy_plate_sort  is '电泳板序号';
+comment on column sample_info.sample_location_sort  is '样本板孔位序号';
+comment on column sample_info.extract_location_sort  is '提取板孔位序号';
+comment on column sample_info.pcr_location_sort  is '扩增板孔位序号';
+comment on column sample_info.sy_location_sort  is '电泳板孔位序号';
+comment on column sample_info.sample_plate_location  is '样本板孔位';
+comment on column sample_info.extract_plate_location  is '提取板孔位';
+comment on column sample_info.pcr_plate_location  is '扩增板孔位';
+comment on column sample_info.sy_plate_location  is '电泳板孔位';
+comment on column sample_info.confirmatory_method  is '确证方法';
+comment on column sample_info.pre_experimental_method  is '预实验方法';
+comment on column sample_info.sample_transfer_method  is '检材转移方法';
+comment on column sample_info.elution  is '洗脱体积';
+comment on column sample_info.board_no  is '板号';
+comment on column sample_info.delete_flag  is '删除标记，0：未删除；1：已删除';
+comment on column sample_info.delete_datetime  is '删除时间';
+comment on column sample_info.create_person  is '创建人';
+comment on column sample_info.create_datetime  is '创建时间';
+comment on column sample_info.operation_person  is '操作人';
+comment on column sample_info.operation_datetime  is '操作时间';
+comment on column sample_info.sample_property  is '检材性质';
+comment on column sample_info.sample_no  is '检材编号';
+
+--样本板表注释
+
+comment on TABLE Sample_Table  is '样本板表';
+comment on column Sample_Table.Id is '主键id';
+comment on column Sample_Table.Extract_Plate_Id is '提取表主键id';
+comment on column Sample_Table.Board_No is '板号';
+comment on column Sample_Table.State is '状态，0：未开始，1：已开始，2：已完成';
+comment on column Sample_Table.Is_Create is '是否创建：0：未创建，1：已创建';
+comment on column Sample_Table.Hole_Num is '孔数量';
+comment on column Sample_Table.Elution_Default is '默认洗脱体积';
+comment on column Sample_Table.Extract_Plate_Name is '提取表名称';
+comment on column Sample_Table.Index_Value is '';
+comment on column Sample_Table.Delete_Flag is '删除标记，0：未删除；1：已删除';
+comment on column Sample_Table.Delete_Datetime is '删除时间';
+comment on column Sample_Table.Create_Person is '创建人';
+comment on column Sample_Table.Create_Datetime is '创建时间';
+comment on column Sample_Table.Operation_Person is '操作人';
+comment on column Sample_Table.Operation_Datetime is '操作时间';
+
+--dna_no_seq 表注释
+
+comment on TABLE dna_no_seq  is '编号表';
+comment on column dna_no_seq.code is '编号';
+comment on column dna_no_seq.current_val is '当前值';
+comment on column dna_no_seq.num_increment is '增长数';
+
+--程序信息表注释
+comment on TABLE program_record  is '程序信息表';
+comment on column program_record.id is '主键id';
+comment on column program_record.program_type is '程序类型';
+comment on column program_record.program_name is '程序名称';
+comment on column program_record.program_desc is '程序描述';
+comment on column program_record.device_type is '设备类型';
+comment on column program_record.create_person is '创建人';
+comment on column program_record.create_datetime is '创建时间';
+comment on column program_record.operation_person is '操作人';
+comment on column program_record.operation_datetime is '操作时间';
+
+--提取信息表注释
+
+comment on TABLE extract_plate  is '提取信息表';
+comment on column extract_plate.id is '主键id';
+comment on column extract_plate.pcr_plate_id is '扩增表主键id';
+comment on column extract_plate.extract_method is '提取方法';
+comment on column extract_plate.extract_datetime is '提取时间';
+comment on column extract_plate.index_value is '';
+comment on column extract_plate.state is '状态，0：未开始，1：已开始，2：已完成';
+comment on column extract_plate.is_create is '是否创建：0：未创建，1：已创建';
+comment on column extract_plate.board_no is '板号';
+comment on column extract_plate.hole_num is '孔数量';
+comment on column extract_plate.kit_name is '试剂盒名称';
+comment on column extract_plate.device_type is '设备类型';
+comment on column extract_plate.pcr_plate_name is '扩增板名称';
+comment on column extract_plate.delete_flag is '删除标记，0：未删除；1：已删除';
+comment on column extract_plate.delete_datetime is '删除时间';
+comment on column extract_plate.create_person is '创建人';
+comment on column extract_plate.create_datetime is '创建时间';
+comment on column extract_plate.operation_person is '操作人';
+comment on column extract_plate.operation_datetime is '操作时间';
+
+
+
+
+

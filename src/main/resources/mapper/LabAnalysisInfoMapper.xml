@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.LabAnalysisInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.LabAnalysisInfo" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="BOARD_NO" property="boardNo" jdbcType="VARCHAR" />
+    <result column="ANALYSIS_PERSON" property="analysisPerson" jdbcType="VARCHAR" />
+    <result column="ANALYSIS_DATETIME" property="analysisDatetime" jdbcType="TIMESTAMP" />
+    <result column="END_DATETIME" property="endDatetime" jdbcType="TIMESTAMP" />
+    <result column="MACHINE_NO" property="machineNo" jdbcType="VARCHAR" />
+    <result column="RUN_MODULE" property="runModule" jdbcType="VARCHAR" />
+    <result column="POWER" property="power" jdbcType="VARCHAR" />
+    <result column="KIT_NAME" property="kitName" jdbcType="VARCHAR" />
+    <result column="DATA_FILE_PATH" property="dataFilePath" jdbcType="VARCHAR" />
+    <result column="SAMPLE_COUNT" property="sampleCount" jdbcType="VARCHAR" />
+    <result column="REVIEW_COUNT" property="reviewCount" jdbcType="VARCHAR" />
+    <result column="ERROR_COUNT" property="errorCount" jdbcType="VARCHAR" />
+    <result column="WARNING_COUNT" property="warningCount" jdbcType="VARCHAR" />
+    <result column="LADDER_STATUS" property="ladderStatus" jdbcType="VARCHAR" />
+    <result column="POSITIVE_STATUS" property="positiveStatus" jdbcType="VARCHAR" />
+    <result column="NEGATIVE_STATUS" property="negativeStatus" jdbcType="VARCHAR" />
+    <result column="LAST_UPDATOR" property="lastUpdator" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="AUDIT_STATUS" property="auditStatus" jdbcType="VARCHAR" />
+    <result column="AUDITOR" property="auditor" jdbcType="VARCHAR" />
+    <result column="AUDIT_DATETIME" property="auditDatetime" jdbcType="TIMESTAMP" />
+    <result column="COMMENTS" property="comments" jdbcType="VARCHAR" />
+    <result column="CURRENT_STR" property="currentStr" jdbcType="VARCHAR" />
+    <result column="IS_LIMS" property="isLims" jdbcType="VARCHAR" />
+    <result column="IS_LOCK" property="isLock" jdbcType="VARCHAR" />
+    <result column="DATA_FROM" property="dataFrom" jdbcType="VARCHAR" />
+    <result column="DELEGATE_ORG_CODE" property="delegateOrgCode" jdbcType="VARCHAR" />
+    <result column="DELEGATE_ORG_NAME" property="delegateOrgName" jdbcType="VARCHAR" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+  <resultMap id="VOBaseResultMap" type="com.bazl.clims.model.vo.LabAnalysisInfoVo">
+    <id column="ID" property="entity.id" jdbcType="VARCHAR" />
+    <result column="BOARD_NO" property="entity.boardNo" jdbcType="VARCHAR" />
+    <result column="ANALYSIS_PERSON" property="entity.analysisPerson" jdbcType="VARCHAR" />
+    <result column="ANALYSIS_DATETIME" property="entity.analysisDatetime" jdbcType="TIMESTAMP" />
+    <result column="END_DATETIME" property="entity.endDatetime" jdbcType="TIMESTAMP" />
+    <result column="MACHINE_NO" property="entity.machineNo" jdbcType="VARCHAR" />
+    <result column="RUN_MODULE" property="entity.runModule" jdbcType="VARCHAR" />
+    <result column="POWER" property="entity.power" jdbcType="VARCHAR" />
+    <result column="KIT_NAME" property="entity.kitName" jdbcType="VARCHAR" />
+    <result column="DATA_FILE_PATH" property="entity.dataFilePath" jdbcType="VARCHAR" />
+    <result column="SAMPLE_COUNT" property="entity.sampleCount" jdbcType="VARCHAR" />
+    <result column="REVIEW_COUNT" property="entity.reviewCount" jdbcType="VARCHAR" />
+    <result column="ERROR_COUNT" property="entity.errorCount" jdbcType="VARCHAR" />
+    <result column="WARNING_COUNT" property="entity.warningCount" jdbcType="VARCHAR" />
+    <result column="LADDER_STATUS" property="entity.ladderStatus" jdbcType="VARCHAR" />
+    <result column="POSITIVE_STATUS" property="entity.positiveStatus" jdbcType="VARCHAR" />
+    <result column="NEGATIVE_STATUS" property="entity.negativeStatus" jdbcType="VARCHAR" />
+    <result column="LAST_UPDATOR" property="entity.lastUpdator" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="entity.updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="AUDIT_STATUS" property="entity.auditStatus" jdbcType="VARCHAR" />
+    <result column="AUDITOR" property="entity.auditor" jdbcType="VARCHAR" />
+    <result column="AUDIT_DATETIME" property="entity.auditDatetime" jdbcType="TIMESTAMP" />
+    <result column="COMMENTS" property="entity.comments" jdbcType="VARCHAR" />
+    <result column="CURRENT_STR" property="entity.currentStr" jdbcType="VARCHAR" />
+    <result column="IS_LIMS" property="entity.isLims" jdbcType="VARCHAR" />
+    <result column="IS_LOCK" property="entity.isLock" jdbcType="VARCHAR" />
+    <result column="DATA_FROM" property="entity.dataFrom" jdbcType="VARCHAR" />
+    <result column="DELEGATE_ORG_CODE" property="entity.delegateOrgCode" jdbcType="VARCHAR" />
+    <result column="DELEGATE_ORG_NAME" property="entity.delegateOrgName" jdbcType="VARCHAR" />
+    <result column="CREATE_PERSON" property="entity.createPerson" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="entity.createDatetime" jdbcType="TIMESTAMP" />
+    <!-- 业务字段 -->
+    <result column="SampleNo" property="sampleNo" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from LAB_ANALYSIS_INFO
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.clims.model.po.LabAnalysisInfo" >
+    insert into LAB_ANALYSIS_INFO (ID, BOARD_NO, ANALYSIS_PERSON, 
+      ANALYSIS_DATETIME, END_DATETIME, MACHINE_NO, 
+      RUN_MODULE, POWER, KIT_NAME, 
+      DATA_FILE_PATH, SAMPLE_COUNT, REVIEW_COUNT, 
+      ERROR_COUNT, WARNING_COUNT, LADDER_STATUS, 
+      POSITIVE_STATUS, NEGATIVE_STATUS, LAST_UPDATOR, 
+      UPDATE_DATETIME, AUDIT_STATUS, AUDITOR, 
+      AUDIT_DATETIME, COMMENTS, CURRENT_STR, 
+      IS_LIMS, IS_LOCK, DATA_FROM,DELEGATE_ORG_CODE,
+      DELEGATE_ORG_NAME,CREATE_PERSON,CREATE_DATETIME
+      )
+    values (#{id,jdbcType=VARCHAR}, #{boardNo,jdbcType=VARCHAR}, #{analysisPerson,jdbcType=VARCHAR}, 
+      #{analysisDatetime,jdbcType=TIMESTAMP}, #{endDatetime,jdbcType=TIMESTAMP}, #{machineNo,jdbcType=VARCHAR}, 
+      #{runModule,jdbcType=VARCHAR}, #{power,jdbcType=VARCHAR}, #{kitName,jdbcType=VARCHAR}, 
+      #{dataFilePath,jdbcType=VARCHAR}, #{sampleCount,jdbcType=VARCHAR}, #{reviewCount,jdbcType=VARCHAR}, 
+      #{errorCount,jdbcType=VARCHAR}, #{warningCount,jdbcType=VARCHAR}, #{ladderStatus,jdbcType=VARCHAR}, 
+      #{positiveStatus,jdbcType=VARCHAR}, #{negativeStatus,jdbcType=VARCHAR}, #{lastUpdator,jdbcType=VARCHAR}, 
+      #{updateDatetime,jdbcType=TIMESTAMP}, #{auditStatus,jdbcType=VARCHAR}, #{auditor,jdbcType=VARCHAR}, 
+      #{auditDatetime,jdbcType=TIMESTAMP}, #{comments,jdbcType=VARCHAR}, #{currentStr,jdbcType=VARCHAR}, 
+      #{isLims,jdbcType=VARCHAR}, #{isLock,jdbcType=VARCHAR}, #{dataFrom,jdbcType=VARCHAR},#{delegateOrgCode,jdbcType=VARCHAR},
+      #{delegateOrgName,jdbcType=VARCHAR},#{createPerson,jdbcType=VARCHAR},#{createDatetime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.clims.model.po.LabAnalysisInfo" >
+    update LAB_ANALYSIS_INFO
+    set BOARD_NO = #{boardNo,jdbcType=VARCHAR},
+      ANALYSIS_PERSON = #{analysisPerson,jdbcType=VARCHAR},
+      ANALYSIS_DATETIME = #{analysisDatetime,jdbcType=TIMESTAMP},
+      END_DATETIME = #{endDatetime,jdbcType=TIMESTAMP},
+      MACHINE_NO = #{machineNo,jdbcType=VARCHAR},
+      RUN_MODULE = #{runModule,jdbcType=VARCHAR},
+      POWER = #{power,jdbcType=VARCHAR},
+      KIT_NAME = #{kitName,jdbcType=VARCHAR},
+      DATA_FILE_PATH = #{dataFilePath,jdbcType=VARCHAR},
+      SAMPLE_COUNT = #{sampleCount,jdbcType=VARCHAR},
+      REVIEW_COUNT = #{reviewCount,jdbcType=VARCHAR},
+      ERROR_COUNT = #{errorCount,jdbcType=VARCHAR},
+      WARNING_COUNT = #{warningCount,jdbcType=VARCHAR},
+      LADDER_STATUS = #{ladderStatus,jdbcType=VARCHAR},
+      POSITIVE_STATUS = #{positiveStatus,jdbcType=VARCHAR},
+      NEGATIVE_STATUS = #{negativeStatus,jdbcType=VARCHAR},
+      LAST_UPDATOR = #{lastUpdator,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP},
+      AUDIT_STATUS = #{auditStatus,jdbcType=VARCHAR},
+      AUDITOR = #{auditor,jdbcType=VARCHAR},
+      AUDIT_DATETIME = #{auditDatetime,jdbcType=TIMESTAMP},
+      COMMENTS = #{comments,jdbcType=VARCHAR},
+      CURRENT_STR = #{currentStr,jdbcType=VARCHAR},
+      IS_LIMS = #{isLims,jdbcType=VARCHAR},
+      IS_LOCK = #{isLock,jdbcType=VARCHAR},
+      DATA_FROM = #{dataFrom,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select *
+    from LAB_ANALYSIS_INFO
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select *
+    from LAB_ANALYSIS_INFO
+  </select>
+
+  <select id="selectVOPaginationList" parameterType="com.bazl.clims.model.vo.LabAnalysisInfoVo"
+          resultMap="VOBaseResultMap">
+    select * from (
+    select rownum as rn, t.* from (
+      select distinct lai.* from LAB_ANALYSIS_INFO lai
+      left join LIMS_SAMPLE_GENE lsg on lsg.lab_analysis_info_id = lai.id
+      left join LIMS_SAMPLE_INFO_DNA lsid on lsid.sample_id = lsg.sample_id
+    WHERE 1 = 1  
+    <if test="auditStartDatetime != null">
+      and lai.CREATE_DATETIME &gt;= #{auditStartDatetime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="auditEndDatetime != null">
+      and lai.CREATE_DATETIME &lt;= #{auditEndDatetime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="entity.auditStatus != null">
+      and lai.AUDIT_STATUS = #{entity.auditStatus,jdbcType=VARCHAR}
+    </if>
+    <if test="entity.auditor != null">
+      and lai.AUDITOR = #{entity.auditor,jdbcType=VARCHAR}
+    </if>
+    <if test="entity.boardNo != null">
+      and lai.board_no like '%'||#{entity.boardNo,jdbcType=VARCHAR}||'%'
+    </if>
+    <if test="sampleNo != null">
+      and lsid.sample_no = #{sampleNo,jdbcType=VARCHAR}
+    </if>
+    <if test="entity.reviewCount != null">
+      and lai.REVIEW_COUNT = #{entity.reviewCount,jdbcType=VARCHAR}
+    </if>
+    <if test="entity.analysisPerson != null">
+      and lai.ANALYSIS_PERSON = #{entity.analysisPerson,jdbcType=VARCHAR}
+    </if>
+    <if test="userOrdId != null">
+      and lai.DELEGATE_ORG_CODE = #{userOrdId,jdbcType=VARCHAR}
+    </if>
+    <if test='entity.dataFilePath == "1"'>
+      and lai.DATA_FILE_PATH is not null
+    </if>
+    order by lai.CREATE_DATETIME desc
+    ) t where rownum &lt;=#{rows}
+    ) where rn &gt;#{offset}
+  </select>
+
+  <select id="selectLabAnalysisInfoCount" parameterType="com.bazl.clims.model.vo.LabAnalysisInfoVo" resultType="int">
+    select count(distinct lai.id)
+    from LAB_ANALYSIS_INFO lai
+    left join LIMS_SAMPLE_GENE lsg on lsg.lab_analysis_info_id = lai.id
+    left join LIMS_SAMPLE_INFO_DNA lsid on lsid.sample_id = lsg.sample_id
+    <where>
+      <if test="_parameter != null">
+        <include refid="VO_Query_Where_Clause"/>
+      </if>
+    </where>
+   order by lai.UPDATE_DATETIME desc
+  </select>
+
+  <update id="updateuSatus" parameterType="com.bazl.clims.model.po.LabAnalysisInfo" >
+    update LAB_ANALYSIS_INFO
+    set
+      AUDIT_STATUS = #{auditStatus,jdbcType=VARCHAR},
+      AUDITOR = #{auditor,jdbcType=VARCHAR},
+      AUDIT_DATETIME = #{auditDatetime,jdbcType=TIMESTAMP},
+      LAST_UPDATOR = #{lastUpdator,jdbcType=VARCHAR},
+      REVIEW_COUNT = #{reviewCount,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectVOByBoardNo" parameterType="com.bazl.clims.model.vo.LabAnalysisInfoVo" resultMap="VOBaseResultMap">
+    select lai.* from LAB_ANALYSIS_INFO lai
+    <where>
+      <if test="_parameter != null">
+        AND 1=1
+        <if test="entity.boardNo != null">
+          AND lai.BOARD_NO = #{entity.boardNo,jdbcType=VARCHAR}
+        </if>
+        <if test="userOrdId != null">
+          AND lai.DELEGATE_ORG_CODE = #{userOrdId,jdbcType=VARCHAR}
+        </if>
+      </if>
+    </where>
+  </select>
+
+  <sql id="VO_Query_Where_Clause">
+    <if test="auditStartDatetime != null">
+      and lai.CREATE_DATETIME &gt;= #{auditStartDatetime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="auditEndDatetime != null">
+      and lai.CREATE_DATETIME &lt;= #{auditEndDatetime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="entity.auditStatus != null">
+      and lai.AUDIT_STATUS = #{entity.auditStatus,jdbcType=VARCHAR}
+    </if>
+    <if test="entity.auditor != null">
+      and lai.AUDITOR = #{entity.auditor,jdbcType=VARCHAR}
+    </if>
+    <if test="entity.boardNo != null">
+      and lai.board_no like '%'||#{entity.boardNo,jdbcType=VARCHAR}||'%'
+    </if>
+    <if test="sampleNo != null">
+      and lsid.sample_no = #{sampleNo,jdbcType=VARCHAR}
+    </if>
+    <if test="entity.reviewCount != null">
+      and lai.REVIEW_COUNT = #{entity.reviewCount,jdbcType=VARCHAR}
+    </if>
+    <if test="entity.analysisPerson != null">
+      and lai.ANALYSIS_PERSON = #{entity.analysisPerson,jdbcType=VARCHAR}
+    </if>
+    <if test="userOrdId != null">
+      and lai.DELEGATE_ORG_CODE = #{userOrdId,jdbcType=VARCHAR}
+    </if>
+    <if test='entity.dataFilePath == "1"'>
+      and lai.DATA_FILE_PATH is not null
+    </if>
+  </sql>
+</mapper>

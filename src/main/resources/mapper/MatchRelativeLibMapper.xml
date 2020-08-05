@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bazl.clims.dao.MatchRelativeLibMapper">
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.MatchRelativeLib">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="SAMPLEA_ID" jdbcType="VARCHAR" property="sampleaId" />
+    <result column="SAMPLEB_ID" jdbcType="VARCHAR" property="samplebId" />
+    <result column="INSTORED_TYPE" jdbcType="VARCHAR" property="instoredType" />
+    <result column="SAMPLEA_ROLE" jdbcType="VARCHAR" property="sampleaRole" />
+    <result column="SAMPLEB_ROLE" jdbcType="VARCHAR" property="samplebRole" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from MATCH_RELATIVE_LIB
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.clims.model.po.MatchRelativeLib">
+    insert into MATCH_RELATIVE_LIB (ID, SAMPLEA_ID, SAMPLEB_ID, 
+      INSTORED_TYPE, SAMPLEA_ROLE, SAMPLEB_ROLE
+      )
+    values (#{id,jdbcType=VARCHAR}, #{sampleaId,jdbcType=VARCHAR}, #{samplebId,jdbcType=VARCHAR}, 
+      #{instoredType,jdbcType=VARCHAR}, #{sampleaRole,jdbcType=VARCHAR}, #{samplebRole,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.clims.model.po.MatchRelativeLib">
+    update MATCH_RELATIVE_LIB
+    set SAMPLEA_ID = #{sampleaId,jdbcType=VARCHAR},
+      SAMPLEB_ID = #{samplebId,jdbcType=VARCHAR},
+      INSTORED_TYPE = #{instoredType,jdbcType=VARCHAR},
+      SAMPLEA_ROLE = #{sampleaRole,jdbcType=VARCHAR},
+      SAMPLEB_ROLE = #{samplebRole,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateBySampleaId" parameterType="com.bazl.clims.model.po.MatchRelativeLib">
+    update MATCH_RELATIVE_LIB
+    set SAMPLEA_ID = #{sampleaId,jdbcType=VARCHAR},
+    SAMPLEB_ID = #{samplebId,jdbcType=VARCHAR},
+    INSTORED_TYPE = #{instoredType,jdbcType=VARCHAR},
+    SAMPLEA_ROLE = #{sampleaRole,jdbcType=VARCHAR},
+    SAMPLEB_ROLE = #{samplebRole,jdbcType=VARCHAR}
+    where SAMPLEA_ID = #{sampleAid,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select ID, SAMPLEA_ID, SAMPLEB_ID, INSTORED_TYPE, SAMPLEA_ROLE, SAMPLEB_ROLE
+    from MATCH_RELATIVE_LIB
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select ID, SAMPLEA_ID, SAMPLEB_ID, INSTORED_TYPE, SAMPLEA_ROLE, SAMPLEB_ROLE
+    from MATCH_RELATIVE_LIB
+  </select>
+  <select id="selectBySampleaId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select ID, SAMPLEA_ID, SAMPLEB_ID, INSTORED_TYPE, SAMPLEA_ROLE, SAMPLEB_ROLE
+    from MATCH_RELATIVE_LIB
+    where SAMPLEA_ID = #{sampleAid,jdbcType=VARCHAR}
+  </select>
+  <select id="selectBySampleId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select ID, SAMPLEA_ID, SAMPLEB_ID, INSTORED_TYPE, SAMPLEA_ROLE, SAMPLEB_ROLE
+    from MATCH_RELATIVE_LIB
+    where SAMPLEA_ID = #{sampleid,jdbcType=VARCHAR} or SAMPLEB_ID = #{sampleid,jdbcType=VARCHAR}
+  </select>
+  <!--根据条件查询信息-->
+  <select id="selectLibByPage" resultMap="BaseResultMap" parameterType="int" >
+    SELECT t2.*
+    FROM (SELECT t1.*, ROWNUM AS rn
+    FROM (SELECT l.ID, l.SAMPLEA_ID, l.SAMPLEB_ID, l.INSTORED_TYPE, l.SAMPLEA_ROLE, l.SAMPLEB_ROLE
+    FROM MATCH_RELATIVE_LIB l
+    ORDER BY l.ID) t1
+    WHERE ROWNUM &lt;= ${endRum}) t2
+    WHERE rn &gt;= ${startRum}
+  </select>
+</mapper>

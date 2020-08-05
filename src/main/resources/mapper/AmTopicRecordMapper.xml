@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.AmTopicRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.AmTopicRecord" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="PERSONAL_ID" property="personalId" jdbcType="VARCHAR" />
+    <result column="TOPIC_START_DATETIME" property="topicStartDatetime" jdbcType="TIMESTAMP" />
+    <result column="TOPIC_END_DATETIME" property="topicEndDatetime" jdbcType="TIMESTAMP" />
+    <result column="TOPIC_LEVEL" property="topicLevel" jdbcType="VARCHAR" />
+    <result column="TOPIC_CHARGE" property="topicCharge" jdbcType="VARCHAR" />
+    <result column="RANKING" property="ranking" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_PERSON" property="updatePerson" jdbcType="VARCHAR" />
+    <result column="DELETE_FLAG" property="deleteFlag" jdbcType="VARCHAR" />
+    <result column="DELETE_DATETIME" property="deleteDatetime" jdbcType="TIMESTAMP" />
+    <result column="DELETE_PERSON" property="deletePerson" jdbcType="VARCHAR" />
+    <result column="TOPIC_NAME" property="topicName" jdbcType="VARCHAR" />
+    <result column="AWARDS_RANK" property="awardsRank" jdbcType="VARCHAR" />
+    <result column="AWARDS" property="awards" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from AM_TOPIC_RECORD
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.clims.model.po.AmTopicRecord" >
+    insert into AM_TOPIC_RECORD (ID, PERSONAL_ID, TOPIC_START_DATETIME, 
+      TOPIC_END_DATETIME, TOPIC_LEVEL, TOPIC_CHARGE, 
+      RANKING, CREATE_DATETIME, CREATE_PERSON, 
+      UPDATE_DATETIME, UPDATE_PERSON, DELETE_FLAG, 
+      DELETE_DATETIME, DELETE_PERSON, TOPIC_NAME, 
+      AWARDS_RANK, AWARDS)
+    values (#{id,jdbcType=VARCHAR}, #{personalId,jdbcType=VARCHAR}, #{topicStartDatetime,jdbcType=TIMESTAMP}, 
+      #{topicEndDatetime,jdbcType=TIMESTAMP}, #{topicLevel,jdbcType=VARCHAR}, #{topicCharge,jdbcType=VARCHAR}, 
+      #{ranking,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP}, #{createPerson,jdbcType=VARCHAR}, 
+      #{updateDatetime,jdbcType=TIMESTAMP}, #{updatePerson,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=VARCHAR}, 
+      #{deleteDatetime,jdbcType=TIMESTAMP}, #{deletePerson,jdbcType=VARCHAR}, #{topicName,jdbcType=VARCHAR}, 
+      #{awardsRank,jdbcType=VARCHAR}, #{awards,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.clims.model.po.AmTopicRecord" >
+    update AM_TOPIC_RECORD
+    set PERSONAL_ID = #{personalId,jdbcType=VARCHAR},
+      TOPIC_START_DATETIME = #{topicStartDatetime,jdbcType=TIMESTAMP},
+      TOPIC_END_DATETIME = #{topicEndDatetime,jdbcType=TIMESTAMP},
+      TOPIC_LEVEL = #{topicLevel,jdbcType=VARCHAR},
+      TOPIC_CHARGE = #{topicCharge,jdbcType=VARCHAR},
+      RANKING = #{ranking,jdbcType=VARCHAR},
+      CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+      CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP},
+      UPDATE_PERSON = #{updatePerson,jdbcType=VARCHAR},
+      DELETE_FLAG = #{deleteFlag,jdbcType=VARCHAR},
+      DELETE_DATETIME = #{deleteDatetime,jdbcType=TIMESTAMP},
+      DELETE_PERSON = #{deletePerson,jdbcType=VARCHAR},
+      TOPIC_NAME = #{topicName,jdbcType=VARCHAR},
+      AWARDS_RANK = #{awardsRank,jdbcType=VARCHAR},
+      AWARDS = #{awards,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select ID, PERSONAL_ID, TOPIC_START_DATETIME, TOPIC_END_DATETIME, TOPIC_LEVEL, TOPIC_CHARGE, 
+    RANKING, CREATE_DATETIME, CREATE_PERSON, UPDATE_DATETIME, UPDATE_PERSON, DELETE_FLAG, 
+    DELETE_DATETIME, DELETE_PERSON, TOPIC_NAME, AWARDS_RANK, AWARDS
+    from AM_TOPIC_RECORD
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select ID, PERSONAL_ID, TOPIC_START_DATETIME, TOPIC_END_DATETIME, TOPIC_LEVEL, TOPIC_CHARGE, 
+    RANKING, CREATE_DATETIME, CREATE_PERSON, UPDATE_DATETIME, UPDATE_PERSON, DELETE_FLAG, 
+    DELETE_DATETIME, DELETE_PERSON, TOPIC_NAME, AWARDS_RANK, AWARDS
+    from AM_TOPIC_RECORD
+  </select>
+</mapper>

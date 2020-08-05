@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bazl.clims.dao.QueueDetailMapper">
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.QueueDetail">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="QUEUE_ID" jdbcType="VARCHAR" property="queueId" />
+    <result column="SAMPLE_ID" jdbcType="VARCHAR" property="sampleId" />
+    <result column="SAMPLE_NO" jdbcType="VARCHAR" property="sampleNo" />
+    <result column="CONSIGNMENT_ID" jdbcType="VARCHAR" property="consignmentId" />
+    <result column="CREATE_DATETIME" jdbcType="TIMESTAMP" property="createDatetime" />
+    <result column="UPDATE_DATETIME" jdbcType="TIMESTAMP" property="updateDatetime" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from QUEUE_DETAIL
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.clims.model.po.QueueDetail">
+    insert into QUEUE_DETAIL (ID, QUEUE_ID, SAMPLE_ID, 
+      SAMPLE_NO, CONSIGNMENT_ID, CREATE_DATETIME, UPDATE_DATETIME)
+    values (#{id,jdbcType=VARCHAR}, #{queueId,jdbcType=VARCHAR}, #{sampleId,jdbcType=VARCHAR}, 
+      #{sampleNo,jdbcType=VARCHAR}, #{consignmentId,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP},
+      #{updateDatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.clims.model.po.QueueDetail">
+    update QUEUE_DETAIL
+    set QUEUE_ID = #{queueId,jdbcType=VARCHAR},
+      SAMPLE_ID = #{sampleId,jdbcType=VARCHAR},
+      SAMPLE_NO = #{sampleNo,jdbcType=VARCHAR},
+      CONSIGNMENT_ID = #{consignmentId,jdbcType=VARCHAR},
+      CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select ID, QUEUE_ID, SAMPLE_ID, SAMPLE_NO, CONSIGNMENT_ID, CREATE_DATETIME, UPDATE_DATETIME
+    from QUEUE_DETAIL
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select ID, QUEUE_ID, SAMPLE_ID, SAMPLE_NO, CONSIGNMENT_ID, CREATE_DATETIME, UPDATE_DATETIME
+    from QUEUE_DETAIL
+  </select>
+</mapper>

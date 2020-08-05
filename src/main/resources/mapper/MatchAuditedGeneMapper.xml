@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bazl.clims.dao.MatchAuditedGeneMapper" >
+  <resultMap id="BaseResultMap" type="com.bazl.clims.model.po.MatchAuditedGene" >
+    <id column="AUDITED_GENE_ID" property="auditedGeneId" jdbcType="VARCHAR" />
+    <result column="SAMPLE_ID" property="sampleId" jdbcType="VARCHAR" />
+    <result column="PANEL_ID" property="panelId" jdbcType="VARCHAR" />
+    <result column="GENE_TYPE" property="geneType" jdbcType="VARCHAR" />
+    <result column="GENE_INFO" property="geneInfo" jdbcType="CLOB" />
+    <result column="GENE_COUNT" property="geneCount" jdbcType="DECIMAL" />
+    <result column="IMAGE_PATH" property="imagePath" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_PERSON" property="createPerson" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_PERSON" property="updatePerson" jdbcType="VARCHAR" />
+    <result column="INVALID_STATUS" property="invalidStatus" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <resultMap id="VOBaseResultMap" type="com.bazl.clims.model.vo.MatchAuditedGeneVo">
+    <id column="AUDITED_GENE_ID" property="entity.auditedGeneId" jdbcType="VARCHAR" />
+    <result column="SAMPLE_ID" property="entity.sampleId" jdbcType="VARCHAR" />
+    <result column="PANEL_ID" property="entity.panelId" jdbcType="VARCHAR" />
+    <result column="GENE_TYPE" property="entity.geneType" jdbcType="VARCHAR" />
+    <result column="GENE_INFO" property="entity.geneInfo" jdbcType="CLOB" />
+    <result column="GENE_COUNT" property="entity.geneCount" jdbcType="DECIMAL" />
+    <result column="IMAGE_PATH" property="entity.imagePath" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="entity.createDatetime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_PERSON" property="entity.createPerson" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="entity.updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_PERSON" property="entity.updatePerson" jdbcType="VARCHAR" />
+    <result column="INVALID_STATUS" property="entity.invalidStatus" jdbcType="VARCHAR" />
+  </resultMap>
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from MATCH_AUDITED_GENE
+    where AUDITED_GENE_ID = #{auditedGeneId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bazl.clims.model.po.MatchAuditedGene" >
+    insert into MATCH_AUDITED_GENE (AUDITED_GENE_ID, SAMPLE_ID, PANEL_ID, 
+      GENE_TYPE, GENE_INFO, GENE_COUNT, 
+      IMAGE_PATH, CREATE_DATETIME, CREATE_PERSON, 
+      UPDATE_DATETIME, UPDATE_PERSON)
+    values (#{auditedGeneId,jdbcType=VARCHAR}, #{sampleId,jdbcType=VARCHAR}, #{panelId,jdbcType=VARCHAR}, 
+      #{geneType,jdbcType=VARCHAR}, #{geneInfo,jdbcType=CLOB}, #{geneCount,jdbcType=DECIMAL},
+      #{imagePath,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP}, #{createPerson,jdbcType=VARCHAR}, 
+      #{updateDatetime,jdbcType=TIMESTAMP}, #{updatePerson,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bazl.clims.model.po.MatchAuditedGene" >
+    update MATCH_AUDITED_GENE
+    set SAMPLE_ID = #{sampleId,jdbcType=VARCHAR},
+      PANEL_ID = #{panelId,jdbcType=VARCHAR},
+      GENE_TYPE = #{geneType,jdbcType=VARCHAR},
+      GENE_INFO = #{geneInfo,jdbcType=CLOB},
+      GENE_COUNT = #{geneCount,jdbcType=DECIMAL},
+      IMAGE_PATH = #{imagePath,jdbcType=VARCHAR},
+      INVALID_STATUS = #{invalidStatus,jdbcType=VARCHAR},
+      CREATE_DATETIME = #{createDatetime,jdbcType=TIMESTAMP},
+      CREATE_PERSON = #{createPerson,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP},
+      UPDATE_PERSON = #{updatePerson,jdbcType=VARCHAR}
+    where AUDITED_GENE_ID = #{auditedGeneId,jdbcType=VARCHAR}
+  </update>
+
+  <update id="updateBySampleId" parameterType="com.bazl.clims.model.po.MatchAuditedGene" >
+    update MATCH_AUDITED_GENE
+    set AUDITED_GENE_ID = #{auditedGeneId,jdbcType=VARCHAR},
+      PANEL_ID = #{panelId,jdbcType=VARCHAR},
+      GENE_TYPE = #{geneType,jdbcType=VARCHAR},
+      GENE_INFO = #{geneInfo,jdbcType=CLOB},
+      GENE_COUNT = #{geneCount,jdbcType=DECIMAL},
+      IMAGE_PATH = #{imagePath,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=TIMESTAMP},
+      UPDATE_PERSON = #{updatePerson,jdbcType=VARCHAR}
+    where SAMPLE_ID = #{sampleId,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select *
+    from MATCH_AUDITED_GENE
+    where AUDITED_GENE_ID = #{auditedGeneId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select AUDITED_GENE_ID, SAMPLE_ID, PANEL_ID, GENE_TYPE, GENE_INFO, GENE_COUNT, IMAGE_PATH, 
+    CREATE_DATETIME, CREATE_PERSON, UPDATE_DATETIME, UPDATE_PERSON
+    from MATCH_AUDITED_GENE
+  </select>
+  <!--根据检材编号id查询-->
+  <select id="selectBySampleId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select *
+    from MATCH_AUDITED_GENE
+    where SAMPLE_ID = #{sampleId,jdbcType=VARCHAR}
+  </select>
+  <!--根据案件id查询-->
+  <select id="selectByCaseId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select mag.*
+    from MATCH_AUDITED_GENE mag
+    left join LIMS_SAMPLE_INFO_DNA lsid on lsid.SAMPLE_ID = mag.SAMPLE_ID
+    where lsid.CASE_ID = #{caseId,jdbcType=VARCHAR}  and lsid.DELETE_FLAG='0'
+  </select>
+  <!--根据条件查询信息-->
+  <select id="selectByMatchAuditedGene" resultMap="BaseResultMap" parameterType="com.bazl.clims.model.po.MatchAuditedGene" >
+    select mag.*,
+    lsg.PANEL_NAME as panelName,
+    lsg.BOARD_NO as boardNo,
+    lpi.PERSON_TYPE as personType,
+    lsid.SAMPLE_NO as sampleNo,
+    lsid.SAMPLE_FLAG as sampleFlag,
+    di.dict_name as sampleTypeName,
+    lsid.SAMPLE_NAME as sampleName
+    from MATCH_AUDITED_GENE mag
+    left join LIMS_SAMPLE_GENE lsg on mag.AUDITED_GENE_ID = lsg.GENE_ID
+    left join LIMS_SAMPLE_INFO_DNA lsid on lsid.SAMPLE_ID = mag.SAMPLE_ID
+    left join dict_item di on di.dict_code = lsid.SAMPLE_TYPE and di.DICT_TYPE_CODE='SAMPLE_TYPE'
+    left join LIMS_PERSON_INFO lpi on lpi.PERSON_ID = lsid.LINK_ID
+    where lsid.DELETE_FLAG='0'
+    <if test="geneType != null and geneType!='' ">
+      and mag.GENE_TYPE = #{geneType,jdbcType=VARCHAR}
+    </if>
+    <if test="sampleId != null and sampleId!='' ">
+      and mag.SAMPLE_ID = #{sampleId,jdbcType=VARCHAR}
+    </if>
+    <if test="caseId != null and caseId!='' ">
+      and lsid.CASE_ID = #{caseId,jdbcType=VARCHAR}
+    </if>
+    <if test="sampleFlag != null and sampleFlag!='' ">
+      and lsid.SAMPLE_FLAG=#{sampleFlag,jdbcType=VARCHAR}
+    </if>
+    <if test="personType != null and personType!='' ">
+      and lpi.PERSON_TYPE=#{personType,jdbcType=VARCHAR}
+    </if>
+
+    <if test="groupId != null and groupId!='' ">
+      and
+      exists(select 1 from MATCH_SAME_RESULT msr
+      where (mag.sample_id = msr.samplea_id or mag.sample_id = msr.sampleb_id)
+      and msr.group_id = #{groupId,jdbcType=VARCHAR} )
+    </if>
+
+    <if test="geneTypeList != null">
+      and mag.GENE_TYPE in
+      <foreach collection="geneTypeList" item="list" open="(" close=")" separator=",">
+        #{list,jdbcType=VARCHAR}
+      </foreach>
+    </if>
+    order by lsid.SAMPLE_FLAG, lsid.SAMPLE_NO asc
+  </select>
+
+  <select id="selectListBySampleNo"  resultMap="BaseResultMap" parameterType="java.lang.String">
+    select mag.*,
+    lsg.BOARD_NO as boardNo,
+    lsg.PANEL_NAME as panelName,
+    lsid.SAMPLE_NO as sampleNo,
+    lsid.SAMPLE_FLAG as sampleFlag,
+    lsid.SAMPLE_NAME as sampleName
+    from MATCH_AUDITED_GENE mag
+    left join LIMS_SAMPLE_GENE lsg on mag.AUDITED_GENE_ID = lsg.GENE_ID
+    left join LIMS_SAMPLE_INFO_DNA lsid on lsid.SAMPLE_ID = mag.SAMPLE_ID
+    where lsid.DELETE_FLAG='0' and lsid.SAMPLE_NO = #{sampleNo,jdbcType=VARCHAR}
+  </select>
+
+  <!--根据条件查询信息-->
+  <select id="selectGeneByPage" resultMap="BaseResultMap" parameterType="int" >
+    SELECT t2.*
+      FROM (SELECT t1.*, ROWNUM AS rn
+              FROM (SELECT ag.audited_gene_id, ag.sample_id, ag.gene_info, lsid.SAMPLE_NO as sampleNo
+                      FROM Match_Audited_Gene ag
+                      left join lims_sample_info_dna lsid on lsid.sample_id = ag.sample_id
+                      where lsid.delete_flag='0' and lsid.instored_flag='1'
+                      <if test="sampleFlag != null and sampleFlag!='' ">
+                         and lsid.SAMPLE_FLAG=#{sampleFlag}
+                      </if>
+                     ) t1
+             WHERE ROWNUM &lt;= ${endRum}) t2
+     WHERE rn &gt;= ${startRum}
+  </select>
+
+  <!--查询已检出基因型-->
+  <select id="selectDetectedMatchAuditedGene" resultMap="BaseResultMap" parameterType="com.bazl.clims.model.po.MatchAuditedGene" >
+    select mag.audited_gene_id,mag.sample_id,mag.sample_id,mag.panel_id,mag.gene_type,mag.gene_count,mag.image_path,mag.create_datetime,
+    mag.create_person,mag.update_datetime,mag.update_person,lsid.consignment_id,lsid.case_id as caseId,lsid.sample_no as sampleNo,lsid.sample_name as sampleName,lsid.evidence_no as evidenceNo,lci.accept_org_id as orgCode
+    from MATCH_AUDITED_GENE mag
+    left join lims_sample_info_dna lsid  on mag.sample_id = lsid.sample_id
+    left join lims_consignment_info lci on lci.consignment_id = lsid.consignment_id
+  </select>
+
+  <select id="selectByMatchAuditedGeneList" resultMap="BaseResultMap" parameterType="com.bazl.clims.model.vo.MatchAuditedGeneVo" >
+   select * from (
+      select rownum as rn, t.* from (
+        select lsg.AUDITED_GENE_ID,lsg.SAMPLE_ID, lsg.PANEL_ID, lsg.GENE_TYPE, lsg.IMAGE_PATH, lsg.CREATE_DATETIME, lsg.CREATE_PERSON, lsg.UPDATE_DATETIME, lsg.UPDATE_PERSON ,lsg.BOARD_NO as boardNo,
+        to_char(sdg.gene_info) as gene_info
+        from G_LIMS_SAMPLE_GENE lsg
+        left join SAMPLE_DNA_GENE@GDNA2 sdg on sdg.id = lsg.gene_id
+    <where>
+          <if test="entity.geneType != null and entity.geneType!='' ">
+            lsg.GENE_TYPE = #{entity.geneType,jdbcType=VARCHAR}
+          </if>
+          and lsg.audit_status='1'
+        </where>
+      ) t where rownum &lt;=#{rows}
+    ) where rn &gt;#{offset}
+  </select>
+</mapper>
